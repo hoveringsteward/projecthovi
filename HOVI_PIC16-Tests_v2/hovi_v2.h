@@ -24,6 +24,12 @@
 #define WIDTH_MAX 320
 #define HEIGHT_MAX 200
 
+#define LEDup
+#define LEDdown
+#define LEDleft
+#define LEDright
+
+
 
 #endif	/* HOVI_H */
 

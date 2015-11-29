@@ -45,20 +45,10 @@ void init() {
     ANSELA = 0;
     ANSELB = 0;
     OSCCON = 0b01101011;
-    APFCON0bits.RXDTSEL = 1;
 //////SPI
     SSP1STAT = 0b00000000;      //Rising edge;
     SSP1CON1 = 0b00000001;      //FOSC/16
 //    SSP1CON3 = 0b00000000;    //Only Bit 4 in slave mode
-//////UART
-    SPBRGH = 0;
-    SPBRGL = 25;
-    BRGH = 1;
-    BRG16 = 0;
-    TXSTAbits.SYNC = 0;
-    RCSTAbits.SPEN = 1;
-    TXSTAbits.TXEN = 1;
-    RCSTAbits.CREN = 1;
 }
 
 void main(void) {

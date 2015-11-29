@@ -20,7 +20,7 @@ unsigned char exchange_SPI_char(unsigned char data) {
 unsigned char exchange_SPI_2char(unsigned char data, unsigned char data2) {
 
     unsigned char SPI_word = 0;
-
+    // BF = Buffer Full
     SSP1CON1bits.WCOL = 0;
     SSP1BUF = data;
     NOP();
