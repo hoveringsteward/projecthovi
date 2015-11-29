@@ -9424,9 +9424,9 @@ void main(void) {
 init();
 while(1) {
 PORTBbits.RB2 = 1;
-
-
-
+_delay((unsigned long)((300)*(1000000/4000.0)));
+PORTBbits.RB2 = 0;
+_delay((unsigned long)((300)*(1000000/4000.0)));
 }
 return;
 }
