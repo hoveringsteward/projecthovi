@@ -44,7 +44,7 @@ void init() {
     TRISB = 0b00000110;
     ANSELA = 0;
     ANSELB = 0;
-    OSCCON = 0b01101011;
+    OSCCON = 0b01101011;        //4MHz, INTOSC
 //////SPI
     SSP1STAT = 0b00000000;      //Rising edge;
     SSP1CON1 = 0b00000001;      //FOSC/16

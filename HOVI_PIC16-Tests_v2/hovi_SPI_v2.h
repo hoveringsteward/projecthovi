@@ -11,11 +11,11 @@
 #define	HOVI_SPI_H
 
     
-void send_SPI_char(unsigned char data);
+void SendSpiChar(unsigned char data);
     
-unsigned char exchange_SPI_char(unsigned char data);
+unsigned char ExchangeSpiChar(unsigned char data);
 
-unsigned char exchange_SPI_2char(unsigned char data, unsigned char data2);
+unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2);
 
 
 #endif	/* HOVI_SPI_H */

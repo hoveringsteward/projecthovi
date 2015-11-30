@@ -16,10 +16,18 @@ void getObject(void){
         
     };
     
-    colorobject farben1;
-    colorobject farben2;
+    typedef struct colorobject farben1;
+    typedef struct colorobject farben2;
     
+    unsigned char frame = 0;
     
+    while(!frame) {
+        ExchangeSpi2char(PIXY_SYNC, DUMMY);
+        
+        if(ExchangeSpi2char() == 0xaa55) {
+            frame = 1;
+        }
+    }
     proofObject();
     
 }

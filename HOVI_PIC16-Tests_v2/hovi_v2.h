@@ -10,7 +10,7 @@
 
 #include <xc.h>
 
-//eigene Header files
+//own header files
 #include "hovi_SPI_v2.h"
 #include "hovi_UART_v2.h"
 #include "hovi_LED_v2.h"
@@ -21,14 +21,20 @@
 /* User defined Variables                                                    */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
-#define _XTAL_FREQ 1000000
-#define DUMMY 0
-#define PIXY_SYNC 0x5A
-#define PIXY_SYNC_DATA 0x5B
-#define X_MAX 319
-#define Y_MAX 199
-#define WIDTH_MAX 320
-#define HEIGHT_MAX 200
+/*Constants                                                                  */
+/*---------------------------------------------------------------------------*/
+#define _XTAL_FREQ      4000000
+#define DUMMY           0
+#define PIXY_SYNC       0x5A
+#define PIXY_SYNC_DATA  0x5B
+#define X_MAX           319
+#define Y_MAX           199
+#define WIDTH_MAX       320
+#define HEIGHT_MAX      200
+
+/*Global variables                                                           */
+/*---------------------------------------------------------------------------*/
+
 // </editor-fold>
 
 /*---------------------------------------------------------------------------*/
