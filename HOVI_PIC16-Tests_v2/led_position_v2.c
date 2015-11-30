@@ -2,7 +2,7 @@
 #include "hovi_LED_v2.h"
 
 
-void getObject(){
+void getObject(void){
     
     unsigned int start, objcc;
     
@@ -24,7 +24,7 @@ void getObject(){
     
 }
 
-void proofObject(){
+void proofObject(void){
     
     unsigned int posX, posY, objnum;
     
@@ -38,7 +38,7 @@ void proofObject(){
 
 
 
-void xxx(unsigned int posX, unsigned int posY){
+void LedSignalling(unsigned int posX, unsigned int posY){
     
     
      if(posX > 170){
