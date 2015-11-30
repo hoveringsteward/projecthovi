@@ -14,8 +14,14 @@
 #include "hovi_SPI_v2.h"
 #include "hovi_UART_v2.h"
 #include "hovi_LED_v2.h"
+#include "hovi_Pixy_v2.h"
 
 
+/*---------------------------------------------------------------------------*/
+/* User defined Variables                                                    */
+/*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Variables">
+#define _XTAL_FREQ 1000000
 #define DUMMY 0
 #define PIXY_SYNC 0x5A
 #define PIXY_SYNC_DATA 0x5B
@@ -23,13 +29,17 @@
 #define Y_MAX 199
 #define WIDTH_MAX 320
 #define HEIGHT_MAX 200
+// </editor-fold>
 
-#define LEDup
-#define LEDdown
-#define LEDleft
-#define LEDright
-
-
+/*---------------------------------------------------------------------------*/
+/* Namedefinitions of Pinouts                                                */
+/*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Pinouts">
+#define LEDup       RA2
+#define LEDdown     RA3
+#define LEDleft     RA4
+#define LEDright    RA5
+// </editor-fold>
 
 #endif	/* HOVI_H */
 

@@ -54,9 +54,6 @@ void init() {
 void main(void) {
     init();
     while (1) {
-        get_frame();
-        send_UART_word(exchange_SPI_2char(PIXY_SYNC, DUMMY));
-        set_LED();
         
     }
     return;
