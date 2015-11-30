@@ -1,7 +1,7 @@
 #include <pic16f1827.h>
 #include "hovi_SPI_v2.h"
 
-void send_SPI_char(unsigned char data) {
+void SendSpiChar(unsigned char data) {
     SSP1CON1bits.WCOL = 0;
     SSP1BUF = data;
     NOP();
@@ -9,7 +9,7 @@ void send_SPI_char(unsigned char data) {
 }
 
 
-unsigned char exchange_SPI_char(unsigned char data) {
+unsigned char ExchangeSpiChar(unsigned char data) {
     SSP1CON1bits.WCOL = 0;
     SSP1BUF = data;
     NOP();
@@ -17,7 +17,7 @@ unsigned char exchange_SPI_char(unsigned char data) {
     return (SSP1BUF);
 }
 
-unsigned char exchange_SPI_2char(unsigned char data, unsigned char data2) {
+unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
 
     unsigned char SPI_word = 0;
     // BF = Buffer Full
