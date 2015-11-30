@@ -41,21 +41,24 @@ void proofObject(){
 void xxx(unsigned int posX, unsigned int posY){
     
     
-     if(posX >= 170){
+     if(posX > 170){
          LEDleft = 0;
          LEDright = 1;
-     }else if(posX <= 150){
+     }else if(posX < 150){
          LEDleft = 1;
          LEDright = 0;   
      }else if(posX >= 150 && posX <= 170){
          LEDleft = 0;
          LEDright = 0;  
+     }else{
+         LEDleft = 1;
+         LEDright = 1; 
      }
      
-     if(posY <= 90){
+     if(posY < 90){
          LEDup = 1;
          LEDdown = 0;
-     }else if(posY >= 110){
+     }else if(posY > 110){
          LEDup = 0;
          LEDdown = 1;
      }else if(posY >= 90 && posY <= 110){
