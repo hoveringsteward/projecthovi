@@ -31,6 +31,8 @@
 #define Y_MAX           199
 #define WIDTH_MAX       320
 #define HEIGHT_MAX      200
+#define PIXY_FRAME_OBJ  0xAA55
+#define PIXY_COLOURCODE 0xAA56
 
 /*Global variables                                                           */
 /*---------------------------------------------------------------------------*/

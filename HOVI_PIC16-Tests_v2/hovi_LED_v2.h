@@ -10,9 +10,9 @@
 #ifndef HOVI_LED_H
 #define	HOVI_LED_H
 
-void getObject(void);
-void proofObject(void);
-void LedSignalling(unsigned int posX, unsigned int posY);
+unsigned char GetObject(bit des_obj_type, unsigned int des_obj);
+void ProofObject(unsigned int des_obj);
+void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 
 #endif	/* HOVI_LED_H */
 
