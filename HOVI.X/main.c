@@ -16,9 +16,9 @@ void main(void) {
     init();
     while(1) {
         LED = 1;
-//        __delay_ms(300);
-//        LED = 0;
-//        __delay_ms(300);
+        __delay_ms(300);
+        LED = 0;
+        __delay_ms(300);
     }
     return;
 }
