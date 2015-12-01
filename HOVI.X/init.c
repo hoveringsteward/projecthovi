@@ -75,17 +75,17 @@
 
 /* Calls all needed inits                                                    */
 /*---------------------------------------------------------------------------*/
-void init(void) {
-    init_PORT();
-    init_TRIS();
-    init_ANSEL();
-    init_UART();
-    init_SPI();
-    init_TMR();
-    init_OSC();
+void Fkt_Init(void) {
+    Fkt_InitPort();
+    Fkt_InitTris();
+    Fkt_InitAnsel();
+    Fkt_InitOsc();
+    Fkt_InitUart();
+    Fkt_InitSpi();
+    Fkt_InitTimer();
 }
 
-void init_PORT(void) {
+void Fkt_InitPort(void) {
     PORTA = 0b00010000;
     PORTB = 0b00001000;
     PORTC = 0b00000000;
@@ -93,7 +93,7 @@ void init_PORT(void) {
     PORTE = 0b00000000;
 }
 
-void init_TRIS(void) {
+void Fkt_InitTris(void) {
     TRISA = 0b00000000;
     TRISB = 0b00010000;
     TRISC = 0b10010001;
@@ -101,7 +101,7 @@ void init_TRIS(void) {
     TRISE = 0b00000000;
 }
 
-void init_ANSEL(void) {
+void Fkt_InitAnsel(void) {
     ANSELA = 0b00000000;
     ANSELB = 0b00000000;
     ANSELC = 0b00000000;
@@ -109,20 +109,30 @@ void init_ANSEL(void) {
     ANSELE = 0b00000000;
 }
 
-void init_UART(void) {
+void Fkt_InitOsc(void) {
+    OSCCON = 0b01110111;    // 16MHz, INTOSC, stable HFOSC, Internal osc-block
+}
+
+void Fkt_InitUart(void) {
     
 }
 
-void init_SPI(void) {
+void Fkt_InitSpi(void) {
     
 }
 
-void init_TMR(void) {
-    T3CON = 0b000000101;    //source fosc/4, 1:1, sync, TMR3 on
+void Fkt_InitTimer(void) {
+    /* Timer 3, used to measure time of gaer signal                          */
+    /*-----------------------------------------------------------------------*/
+    T3CON = 0b000000101;    // source fosc/4, 1:1, sync, TMR3 on
     T3GCON = 0b110000000;   // high active, no toggle, no single pulse, gatepin
 }
 
-void init_OSC(void) {
-    OSCCON = 0b01110111;    //16MHz, INTOSC, stable HFOSC, Internal osc-block
+void Fkt_InitInterrupt(void) {
+    GIE = 1;
+    PEIE = 1;
+    /* Enabling interrupt for Timer 3 gate                                   */
+    TMR3GIE = 1;        // Direct access due to conflicts with PIE3bits.TMR3GIE
+    
 }
 // </editor-fold>

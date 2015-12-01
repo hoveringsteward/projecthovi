@@ -9,16 +9,12 @@
 #include <xc.h>
 
 #include "main.h"
-#include "init.h"
-
+    
 
 void main(void) {
-    init();
+    Fkt_Init();
     while(1) {
-        LED = 1;
-        __delay_ms(300);
-        LED = 0;
-        __delay_ms(300);
+        NOP();
     }
     return;
 }

@@ -10,12 +10,23 @@
 
 #include <stdlib.h>
 #include "init.h"
+#include "gear.h"
+
+/*****************************************************************************/
+/* Prototypes of userroutines.                                               */ 
+/*****************************************************************************/
+// <editor-fold defaultstate="collapsed" desc="Userrroutines">
+interrupt void Fkt_Isr(void);
+// </editor-fold>
+
+
 
 /*---------------------------------------------------------------------------*/
 /* User defined Variables                                                    */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
 #define _XTAL_FREQ 16000000
+#define GEAR_TIME  6800         /* 1700 µs / 0.25 µs = 6800 pulses on TMR3
 // </editor-fold>
 
 /*---------------------------------------------------------------------------*/
