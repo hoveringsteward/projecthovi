@@ -7,6 +7,7 @@
       <itemPath>init.h</itemPath>
       <itemPath>main.h</itemPath>
       <itemPath>gear.h</itemPath>
+      <itemPath>led.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -19,6 +20,7 @@
       <itemPath>init.c</itemPath>
       <itemPath>gear.c</itemPath>
       <itemPath>interrupt.c</itemPath>
+      <itemPath>led.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

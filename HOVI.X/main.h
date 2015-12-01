@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include "init.h"
 #include "gear.h"
+#include "led.h"
 
 /*****************************************************************************/
 /* Prototypes of userroutines.                                               */ 

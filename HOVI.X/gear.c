@@ -19,9 +19,10 @@ unsigned int Fkt_CalcTime(void) {
 bit Fkt_ModeCheck(void) {
     unsigned int time = Fkt_CalcTime();
     if(time < GEAR_TIME){
+        Fkt_SwitchLed();
         return 0;
     }else {
+        LED = 1;
         return 1;
     }
 }
-
