@@ -15,7 +15,7 @@
 /* User defined Variables                                                    */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
-#define _XTAL_FREQ 1000000
+#define _XTAL_FREQ 16000000
 // </editor-fold>
 
 /*---------------------------------------------------------------------------*/
