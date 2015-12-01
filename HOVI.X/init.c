@@ -4,7 +4,7 @@
 /*---------------------------------------------------------------------------*/
 /* Beginning of ConfigurationBits.                                           */
 /*---------------------------------------------------------------------------*/
-// <editor-fold defaultstate="collapsed" desc="CondigurationBits">
+// <editor-fold defaultstate="collapsed" desc="ConfigurationBits">
 // Configuration bits: selected in the GUI
 // CONFIG1H
 #pragma config IESO = OFF    // Internal/External Oscillator Switchover bit->Oscillator Switchover mode disabled
@@ -118,10 +118,11 @@ void init_SPI(void) {
 }
 
 void init_TMR(void) {
-    
+    T3CON = 0b000000101;    //source fosc/4, 1:1, sync, TMR3 on
+    T3GCON = 0b110000000;   // high active, no toggle, no single pulse, gatepin
 }
 
 void init_OSC(void) {
-    OSCCON = 0b00110111;
+    OSCCON = 0b01110111;    //16MHz, INTOSC, stable HFOSC, Internal osc-block
 }
 // </editor-fold>
