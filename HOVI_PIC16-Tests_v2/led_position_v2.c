@@ -5,13 +5,14 @@
 /*---------------------------------------------------------------------------*/
 /* Retrieves Object from Pixy                                                */
 /* Maximum tries for getting startcondition c = 10, retuns 0 if overrun      */
-/* Returns a found Object in struct colorobject                             */
+/* Returns a found Object in struct colorobject                              */
 /* Searches for desired object des_obj by controlling with ProofObject()     */
 /* Searches for specific objecttype by des_obj_type, desired object type     */
 /*      des_obj_type = 0 => searches for normal objects                      */
-/*      des_obj_type = 1 => searches for colorcodeobjects                   */
+/*      des_obj_type = 1 => searches for colorcodeobjects                    */
+/* Maximum Objectss to dedect declared by max_obj                            */
 /*---------------------------------------------------------------------------*/
-unsigned char GetObject(bit des_obj_type, unsigned int des_obj){
+unsigned char GetObject(bit des_obj_type, unsigned int des_obj, unsigned char max_obj){
     
     unsigned int start, objcc;
     bit obj_type;       /* declares type of detected object
@@ -29,55 +30,57 @@ unsigned char GetObject(bit des_obj_type, unsigned int des_obj){
         
     };
     
-    typedef struct colorobject farben1;
-    typedef struct colorobject farben2;
+    typedef struct colorobject farben;
+    farben afarben[];
     
     bit frame = 0;
     unsigned char c = 0;    // Counter for following do, while loop
     
-    /* Routine for getting startcondition                                    */
-    /* Returns 0 after 10 cycles without detecting an object                 */
-    /*-----------------------------------------------------------------------*/
-    do {
-        if(ExchangeSpi2char(PIXY_SYNC, DUMMY) == PIXY_FRAME_OBJ) {
-            frame = 1;
+    
+    for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
+        /* Routine for getting startcondition                                    */
+        /* Returns 0 after 10 cycles without detecting an object                 */
+        /*-----------------------------------------------------------------------*/
+        do {
             if(ExchangeSpi2char(PIXY_SYNC, DUMMY) == PIXY_FRAME_OBJ) {
-                obj_type = 0;
-            }else if(ExchangeSpi2char(PIXY_SYNC, DUMMY) == PIXY_COLOURCODE) {
-                obj_type = 1;
+                frame = 1;
+                if(ExchangeSpi2char(PIXY_SYNC, DUMMY) == PIXY_FRAME_OBJ) {
+                    obj_type = 0;
+                }else if(ExchangeSpi2char(PIXY_SYNC, DUMMY) == PIXY_COLOURCODE) {
+                    obj_type = 1;
+                }
+            }else {
+                frame = 0;
             }
-        }else {
-            frame = 0;
+            c++;
+            if(c > 10) {
+                return 0;
+            }
+        } while(!frame && c <= 10);
+
+        unsigned int checksum = ExchangeSpi2char(PIXY_SYNC, DUMMY);
+
+
+        afarben[c_obj].num =    ExchangeSpi2char(PIXY_SYNC, DUMMY);
+        afarben[c_obj].pos_x =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
+        afarben[c_obj].pos_y =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
+        afarben[c_obj].width =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
+        afarben[c_obj].height = ExchangeSpi2char(PIXY_SYNC, DUMMY);
+        afarben[c_obj].angle =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
+
+        if(ProofObject(des_obj, afarben[c_obj].num)) {
+            LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
         }
-        c++;
-        if(c > 10) {
-            return 0;
-        }
-    } while(!frame && c <= 10);
-    
-    unsigned int checksum = ExchangeSpi2char(PIXY_SYNC, DUMMY);
-    
-    farben1.num =    ExchangeSpi2char(PIXY_SYNC, DUMMY);
-    farben1.pos_x =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-    farben1.pos_y =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-    farben1.width =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-    farben1.height = ExchangeSpi2char(PIXY_SYNC, DUMMY);
-    farben1.angle =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-        
-    ProofObject(des_obj);
-    
+    }
 }
 
-void ProofObject(unsigned int des_obj){
+void ProofObject(unsigned int des_obj, unsigned int num){
     
-    unsigned int pos_x, pos_y, obj_num;
-    
-    if(){
-        
+    if(num == des_obj) {
+        return 1;
+    }else {
+        return 0;
     }
-    
-    xxx(pos_x, pos_y);
-    
 }
 
 
@@ -119,7 +122,6 @@ void LedSignalling(unsigned int pos_x, unsigned int pos_y){
          LEDup = 1;
          LEDdown = 1;
      }
-     
 }
 
 
