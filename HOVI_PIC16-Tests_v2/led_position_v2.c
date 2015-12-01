@@ -23,8 +23,8 @@ unsigned char GetObject(bit des_obj_type, unsigned int des_obj){
                            * -> color 3, color 7, num = 37*/
         unsigned int pos_x; // X center of object
         unsigned int pos_y; // Y center of object
-        unsigned int width; 
-        unsigned int height;
+        unsigned int width; // width of object
+        unsigned int height; // height of object
         unsigned int angle; // Rotation
         
     };
