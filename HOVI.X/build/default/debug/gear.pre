@@ -1,5 +1,5 @@
 
-# 1 "init.c"
+# 1 "gear.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9409,16 +9409,6 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 17 "gear.h"
-unsigned int Fkt_CalcTime(void);
-bit Fkt_ModeCheck(void);
-
-# 14 "led.h"
-void Fkt_SwitchLed(void);
-
-# 20 "main.h"
-interrupt void Fkt_Isr(void);
-
 # 17 "init.h"
 void Fkt_Init(void);
 void Fkt_InitPort(void);
@@ -9430,128 +9420,34 @@ void Fkt_InitSpi(void);
 void Fkt_InitTimer(void);
 void Fkt_InitInterrupt(void);
 
+# 14 "led.h"
+void Fkt_SwitchLed(void);
 
-# 10 "init.c"
-#pragma config IESO = OFF
-#pragma config PLLCFG = OFF
-#pragma config PRICLKEN = OFF
-#pragma config FOSC = INTIO67
-#pragma config FCMEN = OFF
+# 20 "main.h"
+interrupt void Fkt_Isr(void);
 
+# 17 "gear.h"
+unsigned int Fkt_CalcTime(void);
+bit Fkt_ModeCheck(void);
 
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 190
-#pragma config PWRTEN = OFF
-
-
-#pragma config WDTPS = 32768
-#pragma config WDTEN = OFF
-
-
-#pragma config CCP2MX = PORTC1
-#pragma config P2BMX = PORTD2
-#pragma config HFOFST = ON
-#pragma config PBADEN = ON
-#pragma config CCP3MX = PORTB5
-#pragma config MCLRE = EXTMCLR
-#pragma config T3CMX = PORTC0
-
-
-#pragma config LVP = OFF
-#pragma config STVREN = ON
-#pragma config XINST = OFF
-#pragma config DEBUG = OFF
-
-
-#pragma config CP2 = OFF
-#pragma config CP1 = OFF
-#pragma config CP3 = OFF
-#pragma config CP0 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTD = OFF
-#pragma config WRTB = OFF
-
-
-#pragma config EBTR3 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR0 = OFF
-
-
-#pragma config EBTRB = OFF
-
-# 78
-void Fkt_Init(void) {
-Fkt_InitPort();
-Fkt_InitTris();
-Fkt_InitAnsel();
-Fkt_InitOsc();
-Fkt_InitUart();
-Fkt_InitSpi();
-Fkt_InitTimer();
-Fkt_InitInterrupt();
+# 6 "gear.c"
+unsigned int Fkt_CalcTime(void) {
+unsigned int time_pulse = TMR3H;
+time_pulse <<= 8;
+time_pulse |= TMR3L;
+TMR3H = 0;
+TMR3L = 0;
+return time_pulse;
 }
 
-void Fkt_InitPort(void) {
-PORTA = 0b00010000;
-PORTB = 0b00001000;
-PORTC = 0b00000000;
-PORTD = 0b00001000;
-PORTE = 0b00000000;
+# 20
+bit Fkt_ModeCheck(void) {
+unsigned int time = Fkt_CalcTime();
+if(time < 6800){
+PORTBbits.RB2 = 0;
+return 0;
+}else if(time >= 6800) {
+PORTBbits.RB2 = 1;
+return 1;
 }
-
-void Fkt_InitTris(void) {
-TRISA = 0b00000000;
-TRISB = 0b00010000;
-TRISC = 0b10010001;
-TRISD = 0b01010000;
-TRISE = 0b00000000;
 }
-
-void Fkt_InitAnsel(void) {
-ANSELA = 0b00000000;
-ANSELB = 0b00000000;
-ANSELC = 0b00000000;
-ANSELD = 0b00000000;
-ANSELE = 0b00000000;
-}
-
-void Fkt_InitOsc(void) {
-OSCCON = 0b01110111;
-}
-
-void Fkt_InitUart(void) {
-
-}
-
-void Fkt_InitSpi(void) {
-
-}
-
-void Fkt_InitTimer(void) {
-
-
-T3CON = 0b000000101;
-T3GCON = 0b110000000;
-}
-
-void Fkt_InitInterrupt(void) {
-GIE = 1;
-PEIE = 1;
-
-TMR3GIE = 1;
-
-}
-

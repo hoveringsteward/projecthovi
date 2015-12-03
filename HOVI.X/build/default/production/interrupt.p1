@@ -1,62 +1,8 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"18 init.h
-[v _Fkt_InitPort `(v ~T0 @X0 0 ef ]
-"19
-[v _Fkt_InitTris `(v ~T0 @X0 0 ef ]
-"20
-[v _Fkt_InitAnsel `(v ~T0 @X0 0 ef ]
-"21
-[v _Fkt_InitOsc `(v ~T0 @X0 0 ef ]
-"22
-[v _Fkt_InitUart `(v ~T0 @X0 0 ef ]
-"23
-[v _Fkt_InitSpi `(v ~T0 @X0 0 ef ]
-"24
-[v _Fkt_InitTimer `(v ~T0 @X0 0 ef ]
-"25
-[v _Fkt_InitInterrupt `(v ~T0 @X0 0 ef ]
-"6370 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
-"6656
-[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
-"6925
-[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
-"7234
-[v _PORTD `Vuc ~T0 @X0 0 e@3971 ]
-"7476
-[v _PORTE `Vuc ~T0 @X0 0 e@3972 ]
-"8406
-[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
-"8627
-[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
-"8848
-[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
-"9069
-[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
-"9290
-[v _TRISE `Vuc ~T0 @X0 0 e@3990 ]
-"49
-[v _ANSELA `Vuc ~T0 @X0 0 e@3896 ]
-"93
-[v _ANSELB `Vuc ~T0 @X0 0 e@3897 ]
-"142
-[v _ANSELC `Vuc ~T0 @X0 0 e@3898 ]
-"192
-[v _ANSELD `Vuc ~T0 @X0 0 e@3899 ]
-"253
-[v _ANSELE `Vuc ~T0 @X0 0 e@3900 ]
-"16782
-[v _OSCCON `Vuc ~T0 @X0 0 e@4051 ]
-"11871
-[v _T3CON `Vuc ~T0 @X0 0 e@4017 ]
-"12024
-[v _T3GCON `Vuc ~T0 @X0 0 e@4020 ]
-"18846
-[v _GIE `Vb ~T0 @X0 0 e@32663 ]
-"19430
-[v _PEIE `Vb ~T0 @X0 0 e@32662 ]
-"20104
-[v _TMR3GIE `Vb ~T0 @X0 0 e@32025 ]
+"20106 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _TMR3GIF `Vb ~T0 @X0 0 e@32033 ]
+"18 gear.h
+[v _Fkt_ModeCheck `(b ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7550,10 +7496,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;gear.h: 17: unsigned int Fkt_CalcTime(void);
-[; ;gear.h: 18: bit Fkt_ModeCheck(void);
-[; ;led.h: 14: void Fkt_SwitchLed(void);
-[; ;main.h: 20: interrupt void Fkt_Isr(void);
 [; ;init.h: 17: void Fkt_Init(void);
 [; ;init.h: 18: void Fkt_InitPort(void);
 [; ;init.h: 19: void Fkt_InitTris(void);
@@ -7563,258 +7505,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 23: void Fkt_InitSpi(void);
 [; ;init.h: 24: void Fkt_InitTimer(void);
 [; ;init.h: 25: void Fkt_InitInterrupt(void);
-"10 init.c
-[p x IESO=OFF ]
+[; ;gear.h: 17: unsigned int Fkt_CalcTime(void);
+[; ;gear.h: 18: bit Fkt_ModeCheck(void);
+[; ;led.h: 14: void Fkt_SwitchLed(void);
+[; ;main.h: 20: interrupt void Fkt_Isr(void);
+[v F7986 `(v ~T0 @X0 1 tf ]
+"6 interrupt.c
+[v _Fkt_Isr `IF7986 ~T0 @X0 1 e ]
+{
+[; ;interrupt.c: 6: interrupt void Fkt_Isr() {
+[e :U _Fkt_Isr ]
+[f ]
+[; ;interrupt.c: 7: if(TMR3GIF == 1) {
+"7
+[e $ ! == -> _TMR3GIF `i -> 1 `i 1148  ]
+{
+[; ;interrupt.c: 8: TMR3GIF = 0;
+"8
+[e = _TMR3GIF -> -> 0 `i `b ]
+[; ;interrupt.c: 9: Fkt_ModeCheck();
+"9
+[e ( _Fkt_ModeCheck ..  ]
+"10
+}
+[e :U 1148 ]
+[; ;interrupt.c: 10: }
+[; ;interrupt.c: 11: }
 "11
-[p x PLLCFG=OFF ]
-"12
-[p x PRICLKEN=OFF ]
-"13
-[p x FOSC=INTIO67 ]
-"14
-[p x FCMEN=OFF ]
-"17
-[p x BOREN=SBORDIS ]
-"18
-[p x BORV=190 ]
-"19
-[p x PWRTEN=OFF ]
-"22
-[p x WDTPS=32768 ]
-"23
-[p x WDTEN=OFF ]
-"26
-[p x CCP2MX=PORTC1 ]
-"27
-[p x P2BMX=PORTD2 ]
-"28
-[p x HFOFST=ON ]
-"29
-[p x PBADEN=ON ]
-"30
-[p x CCP3MX=PORTB5 ]
-"31
-[p x MCLRE=EXTMCLR ]
-"32
-[p x T3CMX=PORTC0 ]
-"35
-[p x LVP=OFF ]
-"36
-[p x STVREN=ON ]
-"37
-[p x XINST=OFF ]
-"38
-[p x DEBUG=OFF ]
-"41
-[p x CP2=OFF ]
-"42
-[p x CP1=OFF ]
-"43
-[p x CP3=OFF ]
-"44
-[p x CP0=OFF ]
-"47
-[p x CPB=OFF ]
-"48
-[p x CPD=OFF ]
-"51
-[p x WRT0=OFF ]
-"52
-[p x WRT1=OFF ]
-"53
-[p x WRT2=OFF ]
-"54
-[p x WRT3=OFF ]
-"57
-[p x WRTC=OFF ]
-"58
-[p x WRTD=OFF ]
-"59
-[p x WRTB=OFF ]
-"62
-[p x EBTR3=OFF ]
-"63
-[p x EBTR1=OFF ]
-"64
-[p x EBTR2=OFF ]
-"65
-[p x EBTR0=OFF ]
-"68
-[p x EBTRB=OFF ]
-"78
-[v _Fkt_Init `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 78: void Fkt_Init(void) {
-[e :U _Fkt_Init ]
-[f ]
-[; ;init.c: 79: Fkt_InitPort();
-"79
-[e ( _Fkt_InitPort ..  ]
-[; ;init.c: 80: Fkt_InitTris();
-"80
-[e ( _Fkt_InitTris ..  ]
-[; ;init.c: 81: Fkt_InitAnsel();
-"81
-[e ( _Fkt_InitAnsel ..  ]
-[; ;init.c: 82: Fkt_InitOsc();
-"82
-[e ( _Fkt_InitOsc ..  ]
-[; ;init.c: 83: Fkt_InitUart();
-"83
-[e ( _Fkt_InitUart ..  ]
-[; ;init.c: 84: Fkt_InitSpi();
-"84
-[e ( _Fkt_InitSpi ..  ]
-[; ;init.c: 85: Fkt_InitTimer();
-"85
-[e ( _Fkt_InitTimer ..  ]
-[; ;init.c: 86: Fkt_InitInterrupt();
-"86
-[e ( _Fkt_InitInterrupt ..  ]
-[; ;init.c: 87: }
-"87
 [e :UE 1147 ]
-}
-"89
-[v _Fkt_InitPort `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 89: void Fkt_InitPort(void) {
-[e :U _Fkt_InitPort ]
-[f ]
-[; ;init.c: 90: PORTA = 0b00010000;
-"90
-[e = _PORTA -> -> 16 `i `uc ]
-[; ;init.c: 91: PORTB = 0b00001000;
-"91
-[e = _PORTB -> -> 8 `i `uc ]
-[; ;init.c: 92: PORTC = 0b00000000;
-"92
-[e = _PORTC -> -> 0 `i `uc ]
-[; ;init.c: 93: PORTD = 0b00001000;
-"93
-[e = _PORTD -> -> 8 `i `uc ]
-[; ;init.c: 94: PORTE = 0b00000000;
-"94
-[e = _PORTE -> -> 0 `i `uc ]
-[; ;init.c: 95: }
-"95
-[e :UE 1148 ]
-}
-"97
-[v _Fkt_InitTris `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 97: void Fkt_InitTris(void) {
-[e :U _Fkt_InitTris ]
-[f ]
-[; ;init.c: 98: TRISA = 0b00000000;
-"98
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;init.c: 99: TRISB = 0b00010000;
-"99
-[e = _TRISB -> -> 16 `i `uc ]
-[; ;init.c: 100: TRISC = 0b10010001;
-"100
-[e = _TRISC -> -> 145 `i `uc ]
-[; ;init.c: 101: TRISD = 0b01010000;
-"101
-[e = _TRISD -> -> 80 `i `uc ]
-[; ;init.c: 102: TRISE = 0b00000000;
-"102
-[e = _TRISE -> -> 0 `i `uc ]
-[; ;init.c: 103: }
-"103
-[e :UE 1149 ]
-}
-"105
-[v _Fkt_InitAnsel `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 105: void Fkt_InitAnsel(void) {
-[e :U _Fkt_InitAnsel ]
-[f ]
-[; ;init.c: 106: ANSELA = 0b00000000;
-"106
-[e = _ANSELA -> -> 0 `i `uc ]
-[; ;init.c: 107: ANSELB = 0b00000000;
-"107
-[e = _ANSELB -> -> 0 `i `uc ]
-[; ;init.c: 108: ANSELC = 0b00000000;
-"108
-[e = _ANSELC -> -> 0 `i `uc ]
-[; ;init.c: 109: ANSELD = 0b00000000;
-"109
-[e = _ANSELD -> -> 0 `i `uc ]
-[; ;init.c: 110: ANSELE = 0b00000000;
-"110
-[e = _ANSELE -> -> 0 `i `uc ]
-[; ;init.c: 111: }
-"111
-[e :UE 1150 ]
-}
-"113
-[v _Fkt_InitOsc `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 113: void Fkt_InitOsc(void) {
-[e :U _Fkt_InitOsc ]
-[f ]
-[; ;init.c: 114: OSCCON = 0b01110111;
-"114
-[e = _OSCCON -> -> 119 `i `uc ]
-[; ;init.c: 115: }
-"115
-[e :UE 1151 ]
-}
-"117
-[v _Fkt_InitUart `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 117: void Fkt_InitUart(void) {
-[e :U _Fkt_InitUart ]
-[f ]
-[; ;init.c: 119: }
-"119
-[e :UE 1152 ]
-}
-"121
-[v _Fkt_InitSpi `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 121: void Fkt_InitSpi(void) {
-[e :U _Fkt_InitSpi ]
-[f ]
-[; ;init.c: 123: }
-"123
-[e :UE 1153 ]
-}
-"125
-[v _Fkt_InitTimer `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 125: void Fkt_InitTimer(void) {
-[e :U _Fkt_InitTimer ]
-[f ]
-[; ;init.c: 128: T3CON = 0b000000101;
-"128
-[e = _T3CON -> -> 5 `i `uc ]
-[; ;init.c: 129: T3GCON = 0b110000000;
-"129
-[e = _T3GCON -> -> 384 `i `uc ]
-[; ;init.c: 130: }
-"130
-[e :UE 1154 ]
-}
-"132
-[v _Fkt_InitInterrupt `(v ~T0 @X0 1 ef ]
-{
-[; ;init.c: 132: void Fkt_InitInterrupt(void) {
-[e :U _Fkt_InitInterrupt ]
-[f ]
-[; ;init.c: 133: GIE = 1;
-"133
-[e = _GIE -> -> 1 `i `b ]
-[; ;init.c: 134: PEIE = 1;
-"134
-[e = _PEIE -> -> 1 `i `b ]
-[; ;init.c: 136: TMR3GIE = 1;
-"136
-[e = _TMR3GIE -> -> 1 `i `b ]
-[; ;init.c: 138: }
-"138
-[e :UE 1155 ]
 }

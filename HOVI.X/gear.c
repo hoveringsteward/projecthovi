@@ -7,7 +7,8 @@ unsigned int Fkt_CalcTime(void) {
     unsigned int time_pulse = TMR3H;
     time_pulse <<= 8;
     time_pulse |= TMR3L;
-    TMR3H, TMR3L = 0;
+    TMR3H = 0;
+    TMR3L = 0;
     return time_pulse;
 }
 
@@ -19,9 +20,9 @@ unsigned int Fkt_CalcTime(void) {
 bit Fkt_ModeCheck(void) {
     unsigned int time = Fkt_CalcTime();
     if(time < GEAR_TIME){
-        Fkt_SwitchLed();
+        LED = 0;
         return 0;
-    }else {
+    }else if(time >= GEAR_TIME) {
         LED = 1;
         return 1;
     }

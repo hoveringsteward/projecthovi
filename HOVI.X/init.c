@@ -83,6 +83,7 @@ void Fkt_Init(void) {
     Fkt_InitUart();
     Fkt_InitSpi();
     Fkt_InitTimer();
+    Fkt_InitInterrupt();
 }
 
 void Fkt_InitPort(void) {

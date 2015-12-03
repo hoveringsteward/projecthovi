@@ -3,11 +3,11 @@ Microchip MPLAB XC8 Compiler V1.35 ()
 Linker command line:
 
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.35\dat\en_msgs.txt -cs \
-  -h+dist/default/debug\HOVI.X.debug.sym \
-  --cmf=dist/default/debug\HOVI.X.debug.cmf -z -Q18F46K22 \
-  -oC:\Users\Lucas\AppData\Local\Temp\s6b0.2 \
-  -Mdist/default/debug/HOVI.X.debug.map -E1 -ver=XC8 -ASTACK=060h-0f37h \
-  -pstack=STACK -ACODE=00h-0FFFFh -ACONST=00h-0FFFFh \
+  -h+dist/default/production\HOVI.X.production.sym \
+  --cmf=dist/default/production\HOVI.X.production.cmf -z -Q18F46K22 \
+  -oC:\Users\Lucas\AppData\Local\Temp\s644.2 \
+  -Mdist/default/production/HOVI.X.production.map -E1 -ver=XC8 \
+  -ASTACK=060h-0f37h -pstack=STACK -ACODE=00h-0FFFFh -ACONST=00h-0FFFFh \
   -ASMALLCONST=01000h-010FFhx240 -AMEDIUMCONST=01000h-0FFFFh \
   -ACOMRAM=01h-05Fh -AABS1=00h-0F37h -ABIGRAM=01h-0F37h \
   -ARAM=060h-0FFh,0100h-01FFhx14,0F00h-0F37h -ABANK0=060h-0FFh \
@@ -16,7 +16,7 @@ Linker command line:
   -ABANK7=0700h-07FFh -ABANK8=0800h-08FFh -ABANK9=0900h-09FFh \
   -ABANK10=0A00h-0AFFh -ABANK11=0B00h-0BFFh -ABANK12=0C00h-0CFFh \
   -ABANK13=0D00h-0DFFh -ABANK14=0E00h-0EFFh -ABANK15=0F00h-0F37h \
-  -ASFR=0F38h-0F5Fh,0F60h-0FFCh \
+  -ASFR=0F38h-0F5Fh,0F60h-0FFFh \
   -preset_vec=00h,intcode=08h,intcodelo,powerup,init,end_init \
   -pramtop=01000h -psmallconst=SMALLCONST -pmediumconst=MEDIUMCONST \
   -pconst=CONST -AFARRAM=00h-00h -ACONFIG=0300000h-030000Dh -pconfig=CONFIG \
@@ -26,8 +26,8 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Lucas\AppData\Local\Temp\s6b0.obj \
-  dist/default/debug\HOVI.X.debug.obj 
+  C:\Users\Lucas\AppData\Local\Temp\s644.obj \
+  dist/default/production\HOVI.X.production.obj 
 
 Object code version is 3.11
 
@@ -39,12 +39,12 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Lucas\AppData\Local\Temp\s6b0.obj
+C:\Users\Lucas\AppData\Local\Temp\s644.obj
                 end_init                             88       88        4        4       0
-                reset_vec                             0        0        6        0       0
+                reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
-dist/default/debug\HOVI.X.debug.obj
+dist/default/production\HOVI.X.production.obj
                 intcode                               8        8       80        4       0
                 temp                                 15       15        1        1       1
                 text12                               DA       DA       22        4       0
@@ -68,7 +68,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   CODE           
                 end_init                             88       88        4         0
                 intcode                               8        8       80         0
-                reset_vec                             0        0        6         0
+                reset_vec                             0        0        4         0
                 text12                               DA       DA       22         0
                 text11                               8C       8C       2C         0
                 text9                                FC       FC       20         0
@@ -147,7 +147,7 @@ TOTAL           Name                               Link     Load   Length     Sp
 
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
-                reset_vec                      000000  000006  000006         0       0  CODE    
+                reset_vec                      000000  000004  000004         0       0  CODE    
                 cstackCOMRAM                   000001  000015  000016         1       1  COMRAM  
                 intcode                        000008  000170  000178         4       0  CODE    
                 idloc                          200000  000008  200008    200000       0  IDLOC   
@@ -174,15 +174,15 @@ UNUSED ADDRESS RANGES
         BANK8            000800-0008FF              100
         BANK9            000900-0009FF              100
         BIGRAM           000016-000F37              F22
-        CODE             000006-000007                2
+        CODE             000004-000007                4
                          000178-00FFFF             FE88
         COMRAM           000016-00005F               4A
-        CONST            000006-000007                2
+        CONST            000004-000007                4
                          000178-00FFFF             FE88
         EEDATA           F00000-F003FF              400
         MEDIUMCONST      001000-00FFFF             F000
         RAM              000060-000F37              100
-        SFR              000F38-000FFC               28
+        SFR              000F38-000FFF               28
         SMALLCONST       001000-00FFFF              100
         STACK            000060-000F37              ED8
 
@@ -323,7 +323,7 @@ __Hramtop                   ramtop       001000
 __Hrbit                     rbit         000000
 __Hrbss                     rbss         000000
 __Hrdata                    rdata        000000
-__Hreset_vec                reset_vec    000006
+__Hreset_vec                reset_vec    000004
 __Hrparam                   rparam       000000
 __Hsfr                      sfr          000000
 __Hsmallconst               smallconst   000000

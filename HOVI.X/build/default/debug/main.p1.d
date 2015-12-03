@@ -2,4 +2,6 @@
  build/default/debug/main.p1:  \
  main.c  \
 init.h  \
-main.h 
+main.h  \
+led.h  \
+gear.h 
