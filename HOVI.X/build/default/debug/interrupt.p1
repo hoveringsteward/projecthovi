@@ -3,6 +3,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3GIF `Vb ~T0 @X0 0 e@32033 ]
 "18 gear.h
 [v _Fkt_ModeCheck `(b ~T0 @X0 0 ef ]
+"20112 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _TMR3IF `Vb ~T0 @X0 0 e@32009 ]
+"43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
+[v ___nop `(v ~T0 @X0 0 ef ]
+[p i ___nop ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7528,9 +7533,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _Fkt_ModeCheck ..  ]
 "10
 }
+[; ;interrupt.c: 10: }else if (TMR3IF == 1) {
+[e $U 1149  ]
 [e :U 1148 ]
-[; ;interrupt.c: 10: }
-[; ;interrupt.c: 11: }
+[e $ ! == -> _TMR3IF `i -> 1 `i 1150  ]
+{
+[; ;interrupt.c: 11: TMR3IF = 0;
 "11
+[e = _TMR3IF -> -> 0 `i `b ]
+[; ;interrupt.c: 12: __nop();
+"12
+[e ( ___nop ..  ]
+[; ;interrupt.c: 13: __nop();
+"13
+[e ( ___nop ..  ]
+"14
+}
+[e :U 1150 ]
+"15
+[e :U 1149 ]
+[; ;interrupt.c: 14: }
+[; ;interrupt.c: 15: }
 [e :UE 1147 ]
 }

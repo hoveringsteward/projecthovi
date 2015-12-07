@@ -27,7 +27,7 @@ interrupt void Fkt_Isr(void);
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
 #define _XTAL_FREQ 16000000
-#define GEAR_TIME  6800         /* 1700 탎 / 0.25 탎 = 6800 pulses on TMR3
+#define GEAR_TIME  6800         /* 1700 탎 / 0.25 탎 = 6800 pulses on TMR3*/
 // </editor-fold>
 
 /*---------------------------------------------------------------------------*/

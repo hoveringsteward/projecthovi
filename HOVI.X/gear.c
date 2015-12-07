@@ -9,6 +9,7 @@ unsigned int Fkt_CalcTime(void) {
     time_pulse |= TMR3L;
     TMR3H = 0;
     TMR3L = 0;
+    NOP();
     return time_pulse;
 }
 

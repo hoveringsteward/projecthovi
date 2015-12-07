@@ -25,29 +25,29 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "6 C:\projecthovi\HOVI.X\gear.c
 [v _Fkt_CalcTime Fkt_CalcTime `(ui  1 e 2 0 ]
-"20
+"21
 [v _Fkt_ModeCheck Fkt_ModeCheck `(b  1 e 0 0 ]
-"78 C:\projecthovi\HOVI.X\init.c
+"12 C:\projecthovi\HOVI.X\init.c
 [v _Fkt_Init Fkt_Init `(v  1 e 0 0 ]
-"89
+"23
 [v _Fkt_InitPort Fkt_InitPort `(v  1 e 0 0 ]
-"97
+"31
 [v _Fkt_InitTris Fkt_InitTris `(v  1 e 0 0 ]
-"105
+"39
 [v _Fkt_InitAnsel Fkt_InitAnsel `(v  1 e 0 0 ]
-"113
+"47
 [v _Fkt_InitOsc Fkt_InitOsc `(v  1 e 0 0 ]
-"117
+"51
 [v _Fkt_InitUart Fkt_InitUart `(v  1 e 0 0 ]
-"121
+"55
 [v _Fkt_InitSpi Fkt_InitSpi `(v  1 e 0 0 ]
-"125
+"59
 [v _Fkt_InitTimer Fkt_InitTimer `(v  1 e 0 0 ]
-"132
+"66
 [v _Fkt_InitInterrupt Fkt_InitInterrupt `(v  1 e 0 0 ]
 "6 C:\projecthovi\HOVI.X\interrupt.c
 [v _Fkt_Isr Fkt_Isr `II(v  1 e 0 0 ]
-"14 C:\projecthovi\HOVI.X\main.c
+"81 C:\projecthovi\HOVI.X\main.c
 [v _main main `(v  1 e 0 0 ]
 "49 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
@@ -155,72 +155,76 @@
 [v _TMR3GIE TMR3GIE `VEb  1 e 0 @32025 ]
 "20106
 [v _TMR3GIF TMR3GIF `VEb  1 e 0 @32033 ]
-"14 C:\projecthovi\HOVI.X\main.c
+"20110
+[v _TMR3IE TMR3IE `VEb  1 e 0 @32001 ]
+"20112
+[v _TMR3IF TMR3IF `VEb  1 e 0 @32009 ]
+"81 C:\projecthovi\HOVI.X\main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"22
+"89
 } 0
-"78 C:\projecthovi\HOVI.X\init.c
+"12 C:\projecthovi\HOVI.X\init.c
 [v _Fkt_Init Fkt_Init `(v  1 e 0 0 ]
 {
-"87
+"21
 } 0
-"117
+"51
 [v _Fkt_InitUart Fkt_InitUart `(v  1 e 0 0 ]
 {
-"119
+"53
 } 0
-"97
+"31
 [v _Fkt_InitTris Fkt_InitTris `(v  1 e 0 0 ]
 {
-"103
+"37
 } 0
-"125
+"59
 [v _Fkt_InitTimer Fkt_InitTimer `(v  1 e 0 0 ]
 {
-"130
+"64
 } 0
-"121
+"55
 [v _Fkt_InitSpi Fkt_InitSpi `(v  1 e 0 0 ]
 {
-"123
+"57
 } 0
-"89
+"23
 [v _Fkt_InitPort Fkt_InitPort `(v  1 e 0 0 ]
 {
-"95
+"29
 } 0
-"113
+"47
 [v _Fkt_InitOsc Fkt_InitOsc `(v  1 e 0 0 ]
 {
-"115
+"49
 } 0
-"132
+"66
 [v _Fkt_InitInterrupt Fkt_InitInterrupt `(v  1 e 0 0 ]
 {
-"138
+"73
 } 0
-"105
+"39
 [v _Fkt_InitAnsel Fkt_InitAnsel `(v  1 e 0 0 ]
 {
-"111
+"45
 } 0
 "6 C:\projecthovi\HOVI.X\interrupt.c
 [v _Fkt_Isr Fkt_Isr `II(v  1 e 0 0 ]
 {
-"11
+"15
 } 0
-"20 C:\projecthovi\HOVI.X\gear.c
+"21 C:\projecthovi\HOVI.X\gear.c
 [v _Fkt_ModeCheck Fkt_ModeCheck `(b  1 e 0 0 ]
 {
-"21
+"22
 [v Fkt_ModeCheck@time time `ui  1 a 2 4 ]
-"29
+"30
 } 0
 "6
 [v _Fkt_CalcTime Fkt_CalcTime `(ui  1 e 2 0 ]
 {
 "7
 [v Fkt_CalcTime@time_pulse time_pulse `ui  1 a 2 2 ]
-"13
+"14
 } 0

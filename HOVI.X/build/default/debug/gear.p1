@@ -3,7 +3,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
 "11986
 [v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
-"6662
+"43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
+[v ___nop `(v ~T0 @X0 0 ef ]
+[p i ___nop ]
+"6662 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [s S416 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S416 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
 "6672
@@ -7560,55 +7563,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 11: TMR3L = 0;
 "11
 [e = _TMR3L -> -> 0 `i `uc ]
-[; ;gear.c: 12: return time_pulse;
+[; ;gear.c: 12: __nop();
 "12
+[e ( ___nop ..  ]
+[; ;gear.c: 13: return time_pulse;
+"13
 [e ) _time_pulse ]
 [e $UE 1147  ]
-[; ;gear.c: 13: }
-"13
+[; ;gear.c: 14: }
+"14
 [e :UE 1147 ]
 }
-"20
+"21
 [v _Fkt_ModeCheck `(b ~T0 @X0 1 ef ]
 {
-[; ;gear.c: 20: bit Fkt_ModeCheck(void) {
+[; ;gear.c: 21: bit Fkt_ModeCheck(void) {
 [e :U _Fkt_ModeCheck ]
 [f ]
-"21
-[v _time `ui ~T0 @X0 1 a ]
-[; ;gear.c: 21: unsigned int time = Fkt_CalcTime();
-[e = _time ( _Fkt_CalcTime ..  ]
-[; ;gear.c: 22: if(time < 6800){
 "22
+[v _time `ui ~T0 @X0 1 a ]
+[; ;gear.c: 22: unsigned int time = Fkt_CalcTime();
+[e = _time ( _Fkt_CalcTime ..  ]
+[; ;gear.c: 23: if(time < 6800){
+"23
 [e $ ! < _time -> -> 6800 `i `ui 1149  ]
 {
-[; ;gear.c: 23: PORTBbits.RB2 = 0;
-"23
-[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
-[; ;gear.c: 24: return 0;
+[; ;gear.c: 24: PORTBbits.RB2 = 0;
 "24
+[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
+[; ;gear.c: 25: return 0;
+"25
 [e ) -> -> 0 `i `b ]
 [e $UE 1148  ]
-"25
+"26
 }
-[; ;gear.c: 25: }else if(time >= 6800) {
+[; ;gear.c: 26: }else if(time >= 6800) {
 [e $U 1150  ]
 [e :U 1149 ]
 [e $ ! >= _time -> -> 6800 `i `ui 1151  ]
 {
-[; ;gear.c: 26: PORTBbits.RB2 = 1;
-"26
-[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
-[; ;gear.c: 27: return 1;
+[; ;gear.c: 27: PORTBbits.RB2 = 1;
 "27
+[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
+[; ;gear.c: 28: return 1;
+"28
 [e ) -> -> 1 `i `b ]
 [e $UE 1148  ]
-"28
+"29
 }
 [e :U 1151 ]
-"29
+"30
 [e :U 1150 ]
-[; ;gear.c: 28: }
 [; ;gear.c: 29: }
+[; ;gear.c: 30: }
 [e :UE 1148 ]
 }
