@@ -9451,4 +9451,5 @@ return 0;
 PORTBbits.RB2 = 1;
 return 1;
 }
+__nop();
 }

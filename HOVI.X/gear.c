@@ -27,4 +27,5 @@ bit Fkt_ModeCheck(void) {
         LED = 1;
         return 1;
     }
+    NOP();
 }

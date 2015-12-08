@@ -9480,9 +9480,17 @@ void Fkt_InitSpi(void) {
 
 void Fkt_InitTimer(void) {
 
+# 65
+T3GCONbits.TMR3GE = 1;
+T3GCONbits.T3GSPM = 0;
+T3GCONbits.T3GTM = 0;
+T3GCONbits.T3GPOL = 1;
+T3GCONbits.T3GSS = 0b00;
 
-T3CON = 0b000000111;
-T3GCON = 0b110000000;
+T3CONbits.TMR3CS = 0b00;
+T3CONbits.T3CKPS = 0b00;
+T3CONbits.nT3SYNC = 1;
+T3CONbits.TMR3ON = 1;
 }
 
 void Fkt_InitInterrupt(void) {

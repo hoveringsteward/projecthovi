@@ -4,6 +4,7 @@
 #include "main.h"
 
 interrupt void Fkt_Isr() {
+    NOP();
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
         Fkt_ModeCheck();

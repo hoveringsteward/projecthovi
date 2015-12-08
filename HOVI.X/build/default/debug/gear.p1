@@ -7615,6 +7615,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "30
 [e :U 1150 ]
 [; ;gear.c: 29: }
-[; ;gear.c: 30: }
+[; ;gear.c: 30: __nop();
+[e ( ___nop ..  ]
+[; ;gear.c: 31: }
+"31
 [e :UE 1148 ]
 }
