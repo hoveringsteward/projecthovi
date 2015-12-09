@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Tue Dec 08 18:37:27 2015
+                                                                                               Wed Dec 09 12:57:21 2015
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	18F46K22
@@ -70,7 +70,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
     64  000176  9015               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
     65  000178  9215               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
     66  00017A  0100               	movlb	0
-    67  00017C  EFC0  F000         	goto	_main	;jump to C main() function
+    67  00017C  EFC5  F000         	goto	_main	;jump to C main() function
     68                           
     69                           	psect	cstackCOMRAM
     70  000001                     __pcstackCOMRAM:
@@ -134,952 +134,949 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    123 ;;
    124                           
    125                           	psect	text0
-   126  000180                     __ptext0:
+   126  00018A                     __ptext0:
    127                           	opt stack 0
-   128  000180                     _main:
+   128  00018A                     _main:
    129                           	opt stack 26
    130                           
    131                           ;main.c: 82: Fkt_Init();
    132                           
    133                           ;incstack = 0
-   134  000180  EC77  F000         	call	_Fkt_Init	;wreg free
-   135                           
-   136                           ;main.c: 83: PORTBbits.RB2 = 1;
-   137  000184  8481               	bsf	3969,2,c	;volatile
-   138  000186                     l789:
-   139                           
-   140                           ;main.c: 86: __nop();
-   141  000186  F000               	nop	
-   142  000188  D7FE               	goto	l789
-   143  00018A                     __end_of_main:
-   144                           	opt stack 0
-   145                           
-   146 ;; *************** function _Fkt_Init *****************
-   147 ;; Defined at:
-   148 ;;		line 12 in file "init.c"
-   149 ;; Parameters:    Size  Location     Type
-   150 ;;		None
-   151 ;; Auto vars:     Size  Location     Type
-   152 ;;		None
-   153 ;; Return value:  Size  Location     Type
-   154 ;;		None               void
-   155 ;; Registers used:
-   156 ;;		wreg, status,2, cstack
-   157 ;; Tracked objects:
-   158 ;;		On entry : 0/0
-   159 ;;		On exit  : 0/0
-   160 ;;		Unchanged: 0/0
-   161 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   134  00018A  EC77  F000         	call	_Fkt_Init	;wreg free
+   135  00018E                     l785:
+   136                           
+   137                           ;main.c: 85: __nop();
+   138  00018E  F000               	nop	
+   139  000190  D7FE               	goto	l785
+   140  000192                     __end_of_main:
+   141                           	opt stack 0
+   142                           
+   143 ;; *************** function _Fkt_Init *****************
+   144 ;; Defined at:
+   145 ;;		line 12 in file "init.c"
+   146 ;; Parameters:    Size  Location     Type
+   147 ;;		None
+   148 ;; Auto vars:     Size  Location     Type
+   149 ;;		None
+   150 ;; Return value:  Size  Location     Type
+   151 ;;		None               void
+   152 ;; Registers used:
+   153 ;;		wreg, status,2, cstack
+   154 ;; Tracked objects:
+   155 ;;		On entry : 0/0
+   156 ;;		On exit  : 0/0
+   157 ;;		Unchanged: 0/0
+   158 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   162 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   159 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   163 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   160 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   164 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   161 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   165 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   162 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   166 ;;Total ram usage:        0 bytes
-   167 ;; Hardware stack levels used:    1
-   168 ;; Hardware stack levels required when called:    4
-   169 ;; This function calls:
-   170 ;;		_Fkt_InitAnsel
-   171 ;;		_Fkt_InitInterrupt
-   172 ;;		_Fkt_InitOsc
-   173 ;;		_Fkt_InitPort
-   174 ;;		_Fkt_InitSpi
-   175 ;;		_Fkt_InitTimer
-   176 ;;		_Fkt_InitTris
-   177 ;;		_Fkt_InitUart
-   178 ;; This function is called by:
-   179 ;;		_main
-   180 ;; This function uses a non-reentrant model
-   181 ;;
-   182                           
-   183                           	psect	text1
-   184  0000EE                     __ptext1:
-   185                           	opt stack 0
-   186  0000EE                     _Fkt_Init:
-   187                           	opt stack 26
-   188                           
-   189                           ;init.c: 13: Fkt_InitPort();
+   163 ;;Total ram usage:        0 bytes
+   164 ;; Hardware stack levels used:    1
+   165 ;; Hardware stack levels required when called:    4
+   166 ;; This function calls:
+   167 ;;		_Fkt_InitAnsel
+   168 ;;		_Fkt_InitInterrupt
+   169 ;;		_Fkt_InitOsc
+   170 ;;		_Fkt_InitPort
+   171 ;;		_Fkt_InitSpi
+   172 ;;		_Fkt_InitTimer
+   173 ;;		_Fkt_InitTris
+   174 ;;		_Fkt_InitUart
+   175 ;; This function is called by:
+   176 ;;		_main
+   177 ;; This function uses a non-reentrant model
+   178 ;;
+   179                           
+   180                           	psect	text1
+   181  0000EE                     __ptext1:
+   182                           	opt stack 0
+   183  0000EE                     _Fkt_Init:
+   184                           	opt stack 26
+   185                           
+   186                           ;init.c: 13: Fkt_InitPort();
+   187                           
+   188                           ;incstack = 0
+   189  0000EE  ECB0  F000         	call	_Fkt_InitPort	;wreg free
    190                           
-   191                           ;incstack = 0
-   192  0000EE  ECB0  F000         	call	_Fkt_InitPort	;wreg free
+   191                           ;init.c: 14: Fkt_InitTris();
+   192  0000F2  ECA5  F000         	call	_Fkt_InitTris	;wreg free
    193                           
-   194                           ;init.c: 14: Fkt_InitTris();
-   195  0000F2  ECA5  F000         	call	_Fkt_InitTris	;wreg free
+   194                           ;init.c: 15: Fkt_InitAnsel();
+   195  0000F6  EC88  F000         	call	_Fkt_InitAnsel	;wreg free
    196                           
-   197                           ;init.c: 15: Fkt_InitAnsel();
-   198  0000F6  EC88  F000         	call	_Fkt_InitAnsel	;wreg free
+   197                           ;init.c: 16: Fkt_InitOsc();
+   198  0000FA  ECC9  F000         	call	_Fkt_InitOsc	;wreg free
    199                           
-   200                           ;init.c: 16: Fkt_InitOsc();
-   201  0000FA  ECCA  F000         	call	_Fkt_InitOsc	;wreg free
+   200                           ;init.c: 17: Fkt_InitUart();
+   201  0000FE  ECCC  F000         	call	_Fkt_InitUart	;wreg free
    202                           
-   203                           ;init.c: 17: Fkt_InitUart();
-   204  0000FE  ECCD  F000         	call	_Fkt_InitUart	;wreg free
+   203                           ;init.c: 18: Fkt_InitSpi();
+   204  000102  ECCD  F000         	call	_Fkt_InitSpi	;wreg free
    205                           
-   206                           ;init.c: 18: Fkt_InitSpi();
-   207  000102  ECCE  F000         	call	_Fkt_InitSpi	;wreg free
+   206                           ;init.c: 19: Fkt_InitTimer();
+   207  000106  EC98  F000         	call	_Fkt_InitTimer	;wreg free
    208                           
-   209                           ;init.c: 19: Fkt_InitTimer();
-   210  000106  EC98  F000         	call	_Fkt_InitTimer	;wreg free
-   211                           
-   212                           ;init.c: 20: Fkt_InitInterrupt();
-   213  00010A  ECC5  F000         	call	_Fkt_InitInterrupt	;wreg free
-   214  00010E  0012               	return		;funcret
-   215  000110                     __end_of_Fkt_Init:
-   216                           	opt stack 0
-   217                           
-   218 ;; *************** function _Fkt_InitUart *****************
-   219 ;; Defined at:
-   220 ;;		line 51 in file "init.c"
-   221 ;; Parameters:    Size  Location     Type
-   222 ;;		None
-   223 ;; Auto vars:     Size  Location     Type
-   224 ;;		None
-   225 ;; Return value:  Size  Location     Type
-   226 ;;		None               void
-   227 ;; Registers used:
-   228 ;;		None
-   229 ;; Tracked objects:
-   230 ;;		On entry : 0/0
-   231 ;;		On exit  : 0/0
-   232 ;;		Unchanged: 0/0
-   233 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   209                           ;init.c: 20: Fkt_InitInterrupt();
+   210  00010A  ECC0  F000         	call	_Fkt_InitInterrupt	;wreg free
+   211  00010E  0012               	return		;funcret
+   212  000110                     __end_of_Fkt_Init:
+   213                           	opt stack 0
+   214                           
+   215 ;; *************** function _Fkt_InitUart *****************
+   216 ;; Defined at:
+   217 ;;		line 51 in file "init.c"
+   218 ;; Parameters:    Size  Location     Type
+   219 ;;		None
+   220 ;; Auto vars:     Size  Location     Type
+   221 ;;		None
+   222 ;; Return value:  Size  Location     Type
+   223 ;;		None               void
+   224 ;; Registers used:
+   225 ;;		None
+   226 ;; Tracked objects:
+   227 ;;		On entry : 0/0
+   228 ;;		On exit  : 0/0
+   229 ;;		Unchanged: 0/0
+   230 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   234 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   231 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   235 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   232 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   236 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   233 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   237 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   234 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   238 ;;Total ram usage:        0 bytes
-   239 ;; Hardware stack levels used:    1
-   240 ;; Hardware stack levels required when called:    3
-   241 ;; This function calls:
-   242 ;;		Nothing
-   243 ;; This function is called by:
-   244 ;;		_Fkt_Init
-   245 ;; This function uses a non-reentrant model
-   246 ;;
-   247                           
-   248                           	psect	text2
-   249  00019A                     __ptext2:
-   250                           	opt stack 0
-   251  00019A                     _Fkt_InitUart:
-   252                           	opt stack 26
-   253                           
-   254                           ;incstack = 0
-   255  00019A  0012               	return		;funcret
-   256  00019C                     __end_of_Fkt_InitUart:
-   257                           	opt stack 0
-   258                           
-   259 ;; *************** function _Fkt_InitTris *****************
-   260 ;; Defined at:
-   261 ;;		line 31 in file "init.c"
-   262 ;; Parameters:    Size  Location     Type
-   263 ;;		None
-   264 ;; Auto vars:     Size  Location     Type
-   265 ;;		None
-   266 ;; Return value:  Size  Location     Type
-   267 ;;		None               void
-   268 ;; Registers used:
-   269 ;;		wreg, status,2
-   270 ;; Tracked objects:
-   271 ;;		On entry : 0/0
-   272 ;;		On exit  : 0/0
-   273 ;;		Unchanged: 0/0
-   274 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   235 ;;Total ram usage:        0 bytes
+   236 ;; Hardware stack levels used:    1
+   237 ;; Hardware stack levels required when called:    3
+   238 ;; This function calls:
+   239 ;;		Nothing
+   240 ;; This function is called by:
+   241 ;;		_Fkt_Init
+   242 ;; This function uses a non-reentrant model
+   243 ;;
+   244                           
+   245                           	psect	text2
+   246  000198                     __ptext2:
+   247                           	opt stack 0
+   248  000198                     _Fkt_InitUart:
+   249                           	opt stack 26
+   250                           
+   251                           ;incstack = 0
+   252  000198  0012               	return		;funcret
+   253  00019A                     __end_of_Fkt_InitUart:
+   254                           	opt stack 0
+   255                           
+   256 ;; *************** function _Fkt_InitTris *****************
+   257 ;; Defined at:
+   258 ;;		line 31 in file "init.c"
+   259 ;; Parameters:    Size  Location     Type
+   260 ;;		None
+   261 ;; Auto vars:     Size  Location     Type
+   262 ;;		None
+   263 ;; Return value:  Size  Location     Type
+   264 ;;		None               void
+   265 ;; Registers used:
+   266 ;;		wreg, status,2
+   267 ;; Tracked objects:
+   268 ;;		On entry : 0/0
+   269 ;;		On exit  : 0/0
+   270 ;;		Unchanged: 0/0
+   271 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   275 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   272 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   276 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   273 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   277 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   274 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   278 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   275 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   279 ;;Total ram usage:        0 bytes
-   280 ;; Hardware stack levels used:    1
-   281 ;; Hardware stack levels required when called:    3
-   282 ;; This function calls:
-   283 ;;		Nothing
-   284 ;; This function is called by:
-   285 ;;		_Fkt_Init
-   286 ;; This function uses a non-reentrant model
-   287 ;;
-   288                           
-   289                           	psect	text3
-   290  00014A                     __ptext3:
-   291                           	opt stack 0
-   292  00014A                     _Fkt_InitTris:
-   293                           	opt stack 26
-   294                           
-   295                           ;init.c: 32: TRISA = 0b00000000;
-   296                           
-   297                           ;incstack = 0
-   298  00014A  0E00               	movlw	0
-   299  00014C  6E92               	movwf	3986,c	;volatile
-   300                           
-   301                           ;init.c: 33: TRISB = 0b00010000;
-   302  00014E  0E10               	movlw	16
-   303  000150  6E93               	movwf	3987,c	;volatile
-   304                           
-   305                           ;init.c: 34: TRISC = 0b10010001;
-   306  000152  0E91               	movlw	145
-   307  000154  6E94               	movwf	3988,c	;volatile
-   308                           
-   309                           ;init.c: 35: TRISD = 0b01010000;
-   310  000156  0E50               	movlw	80
-   311  000158  6E95               	movwf	3989,c	;volatile
-   312                           
-   313                           ;init.c: 36: TRISE = 0b00000000;
-   314  00015A  0E00               	movlw	0
-   315  00015C  6E96               	movwf	3990,c	;volatile
-   316  00015E  0012               	return		;funcret
-   317  000160                     __end_of_Fkt_InitTris:
-   318                           	opt stack 0
-   319                           
-   320 ;; *************** function _Fkt_InitTimer *****************
-   321 ;; Defined at:
-   322 ;;		line 59 in file "init.c"
-   323 ;; Parameters:    Size  Location     Type
-   324 ;;		None
-   325 ;; Auto vars:     Size  Location     Type
-   326 ;;		None
-   327 ;; Return value:  Size  Location     Type
-   328 ;;		None               void
-   329 ;; Registers used:
-   330 ;;		wreg, status,2
-   331 ;; Tracked objects:
-   332 ;;		On entry : 0/0
-   333 ;;		On exit  : 0/0
-   334 ;;		Unchanged: 0/0
-   335 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   276 ;;Total ram usage:        0 bytes
+   277 ;; Hardware stack levels used:    1
+   278 ;; Hardware stack levels required when called:    3
+   279 ;; This function calls:
+   280 ;;		Nothing
+   281 ;; This function is called by:
+   282 ;;		_Fkt_Init
+   283 ;; This function uses a non-reentrant model
+   284 ;;
+   285                           
+   286                           	psect	text3
+   287  00014A                     __ptext3:
+   288                           	opt stack 0
+   289  00014A                     _Fkt_InitTris:
+   290                           	opt stack 26
+   291                           
+   292                           ;init.c: 32: TRISA = 0b00000000;
+   293                           
+   294                           ;incstack = 0
+   295  00014A  0E00               	movlw	0
+   296  00014C  6E92               	movwf	3986,c	;volatile
+   297                           
+   298                           ;init.c: 33: TRISB = 0b00010000;
+   299  00014E  0E10               	movlw	16
+   300  000150  6E93               	movwf	3987,c	;volatile
+   301                           
+   302                           ;init.c: 34: TRISC = 0b10010001;
+   303  000152  0E91               	movlw	145
+   304  000154  6E94               	movwf	3988,c	;volatile
+   305                           
+   306                           ;init.c: 35: TRISD = 0b01010000;
+   307  000156  0E50               	movlw	80
+   308  000158  6E95               	movwf	3989,c	;volatile
+   309                           
+   310                           ;init.c: 36: TRISE = 0b00000000;
+   311  00015A  0E00               	movlw	0
+   312  00015C  6E96               	movwf	3990,c	;volatile
+   313  00015E  0012               	return		;funcret
+   314  000160                     __end_of_Fkt_InitTris:
+   315                           	opt stack 0
+   316                           
+   317 ;; *************** function _Fkt_InitTimer *****************
+   318 ;; Defined at:
+   319 ;;		line 59 in file "init.c"
+   320 ;; Parameters:    Size  Location     Type
+   321 ;;		None
+   322 ;; Auto vars:     Size  Location     Type
+   323 ;;		None
+   324 ;; Return value:  Size  Location     Type
+   325 ;;		None               void
+   326 ;; Registers used:
+   327 ;;		wreg, status,2
+   328 ;; Tracked objects:
+   329 ;;		On entry : 0/0
+   330 ;;		On exit  : 0/0
+   331 ;;		Unchanged: 0/0
+   332 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   336 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   333 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   337 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   334 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   338 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   335 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   339 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   336 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   340 ;;Total ram usage:        0 bytes
-   341 ;; Hardware stack levels used:    1
-   342 ;; Hardware stack levels required when called:    3
-   343 ;; This function calls:
-   344 ;;		Nothing
-   345 ;; This function is called by:
-   346 ;;		_Fkt_Init
-   347 ;; This function uses a non-reentrant model
-   348 ;;
-   349                           
-   350                           	psect	text4
-   351  000130                     __ptext4:
-   352                           	opt stack 0
-   353  000130                     _Fkt_InitTimer:
-   354                           	opt stack 26
-   355                           
-   356                           ;init.c: 65: T3GCONbits.TMR3GE = 1;
+   337 ;;Total ram usage:        0 bytes
+   338 ;; Hardware stack levels used:    1
+   339 ;; Hardware stack levels required when called:    3
+   340 ;; This function calls:
+   341 ;;		Nothing
+   342 ;; This function is called by:
+   343 ;;		_Fkt_Init
+   344 ;; This function uses a non-reentrant model
+   345 ;;
+   346                           
+   347                           	psect	text4
+   348  000130                     __ptext4:
+   349                           	opt stack 0
+   350  000130                     _Fkt_InitTimer:
+   351                           	opt stack 26
+   352                           
+   353                           ;init.c: 65: T3GCONbits.TMR3GE = 1;
+   354                           
+   355                           ;incstack = 0
+   356  000130  8EB4               	bsf	4020,7,c	;volatile
    357                           
-   358                           ;incstack = 0
-   359  000130  8EB4               	bsf	4020,7,c	;volatile
+   358                           ;init.c: 66: T3GCONbits.T3GSPM = 0;
+   359  000132  98B4               	bcf	4020,4,c	;volatile
    360                           
-   361                           ;init.c: 66: T3GCONbits.T3GSPM = 0;
-   362  000132  98B4               	bcf	4020,4,c	;volatile
+   361                           ;init.c: 67: T3GCONbits.T3GTM = 0;
+   362  000134  9AB4               	bcf	4020,5,c	;volatile
    363                           
-   364                           ;init.c: 67: T3GCONbits.T3GTM = 0;
-   365  000134  9AB4               	bcf	4020,5,c	;volatile
+   364                           ;init.c: 68: T3GCONbits.T3GPOL = 1;
+   365  000136  8CB4               	bsf	4020,6,c	;volatile
    366                           
-   367                           ;init.c: 68: T3GCONbits.T3GPOL = 1;
-   368  000136  8CB4               	bsf	4020,6,c	;volatile
-   369                           
-   370                           ;init.c: 69: T3GCONbits.T3GSS = 0b00;
-   371  000138  0EFC               	movlw	-4
-   372  00013A  16B4               	andwf	4020,f,c	;volatile
-   373                           
-   374                           ;init.c: 71: T3CONbits.TMR3CS = 0b00;
-   375  00013C  0E3F               	movlw	-193
-   376  00013E  16B1               	andwf	4017,f,c	;volatile
-   377                           
-   378                           ;init.c: 72: T3CONbits.T3CKPS = 0b00;
-   379  000140  0ECF               	movlw	-49
-   380  000142  16B1               	andwf	4017,f,c	;volatile
+   367                           ;init.c: 69: T3GCONbits.T3GSS = 0b00;
+   368  000138  0EFC               	movlw	-4
+   369  00013A  16B4               	andwf	4020,f,c	;volatile
+   370                           
+   371                           ;init.c: 71: T3CONbits.TMR3CS = 0b00;
+   372  00013C  0E3F               	movlw	-193
+   373  00013E  16B1               	andwf	4017,f,c	;volatile
+   374                           
+   375                           ;init.c: 72: T3CONbits.T3CKPS = 0b00;
+   376  000140  0ECF               	movlw	-49
+   377  000142  16B1               	andwf	4017,f,c	;volatile
+   378                           
+   379                           ;init.c: 73: T3CONbits.nT3SYNC = 1;
+   380  000144  84B1               	bsf	4017,2,c	;volatile
    381                           
-   382                           ;init.c: 73: T3CONbits.nT3SYNC = 1;
-   383  000144  84B1               	bsf	4017,2,c	;volatile
-   384                           
-   385                           ;init.c: 74: T3CONbits.TMR3ON = 1;
-   386  000146  80B1               	bsf	4017,0,c	;volatile
-   387  000148  0012               	return		;funcret
-   388  00014A                     __end_of_Fkt_InitTimer:
-   389                           	opt stack 0
-   390                           
-   391 ;; *************** function _Fkt_InitSpi *****************
-   392 ;; Defined at:
-   393 ;;		line 55 in file "init.c"
-   394 ;; Parameters:    Size  Location     Type
-   395 ;;		None
-   396 ;; Auto vars:     Size  Location     Type
-   397 ;;		None
-   398 ;; Return value:  Size  Location     Type
-   399 ;;		None               void
-   400 ;; Registers used:
-   401 ;;		None
-   402 ;; Tracked objects:
-   403 ;;		On entry : 0/0
-   404 ;;		On exit  : 0/0
-   405 ;;		Unchanged: 0/0
-   406 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   382                           ;init.c: 74: T3CONbits.TMR3ON = 1;
+   383  000146  80B1               	bsf	4017,0,c	;volatile
+   384  000148  0012               	return		;funcret
+   385  00014A                     __end_of_Fkt_InitTimer:
+   386                           	opt stack 0
+   387                           
+   388 ;; *************** function _Fkt_InitSpi *****************
+   389 ;; Defined at:
+   390 ;;		line 55 in file "init.c"
+   391 ;; Parameters:    Size  Location     Type
+   392 ;;		None
+   393 ;; Auto vars:     Size  Location     Type
+   394 ;;		None
+   395 ;; Return value:  Size  Location     Type
+   396 ;;		None               void
+   397 ;; Registers used:
+   398 ;;		None
+   399 ;; Tracked objects:
+   400 ;;		On entry : 0/0
+   401 ;;		On exit  : 0/0
+   402 ;;		Unchanged: 0/0
+   403 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   407 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   404 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   408 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   405 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   409 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   406 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   410 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   407 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   411 ;;Total ram usage:        0 bytes
-   412 ;; Hardware stack levels used:    1
-   413 ;; Hardware stack levels required when called:    3
-   414 ;; This function calls:
-   415 ;;		Nothing
-   416 ;; This function is called by:
-   417 ;;		_Fkt_Init
-   418 ;; This function uses a non-reentrant model
-   419 ;;
-   420                           
-   421                           	psect	text5
-   422  00019C                     __ptext5:
-   423                           	opt stack 0
-   424  00019C                     _Fkt_InitSpi:
-   425                           	opt stack 26
-   426                           
-   427                           ;incstack = 0
-   428  00019C  0012               	return		;funcret
-   429  00019E                     __end_of_Fkt_InitSpi:
-   430                           	opt stack 0
-   431                           
-   432 ;; *************** function _Fkt_InitPort *****************
-   433 ;; Defined at:
-   434 ;;		line 23 in file "init.c"
-   435 ;; Parameters:    Size  Location     Type
-   436 ;;		None
-   437 ;; Auto vars:     Size  Location     Type
-   438 ;;		None
-   439 ;; Return value:  Size  Location     Type
-   440 ;;		None               void
-   441 ;; Registers used:
-   442 ;;		wreg, status,2
-   443 ;; Tracked objects:
-   444 ;;		On entry : 0/0
-   445 ;;		On exit  : 0/0
-   446 ;;		Unchanged: 0/0
-   447 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   408 ;;Total ram usage:        0 bytes
+   409 ;; Hardware stack levels used:    1
+   410 ;; Hardware stack levels required when called:    3
+   411 ;; This function calls:
+   412 ;;		Nothing
+   413 ;; This function is called by:
+   414 ;;		_Fkt_Init
+   415 ;; This function uses a non-reentrant model
+   416 ;;
+   417                           
+   418                           	psect	text5
+   419  00019A                     __ptext5:
+   420                           	opt stack 0
+   421  00019A                     _Fkt_InitSpi:
+   422                           	opt stack 26
+   423                           
+   424                           ;incstack = 0
+   425  00019A  0012               	return		;funcret
+   426  00019C                     __end_of_Fkt_InitSpi:
+   427                           	opt stack 0
+   428                           
+   429 ;; *************** function _Fkt_InitPort *****************
+   430 ;; Defined at:
+   431 ;;		line 23 in file "init.c"
+   432 ;; Parameters:    Size  Location     Type
+   433 ;;		None
+   434 ;; Auto vars:     Size  Location     Type
+   435 ;;		None
+   436 ;; Return value:  Size  Location     Type
+   437 ;;		None               void
+   438 ;; Registers used:
+   439 ;;		wreg, status,2
+   440 ;; Tracked objects:
+   441 ;;		On entry : 0/0
+   442 ;;		On exit  : 0/0
+   443 ;;		Unchanged: 0/0
+   444 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   448 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   445 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   449 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   446 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   450 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   447 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   451 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   448 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   452 ;;Total ram usage:        0 bytes
-   453 ;; Hardware stack levels used:    1
-   454 ;; Hardware stack levels required when called:    3
-   455 ;; This function calls:
-   456 ;;		Nothing
-   457 ;; This function is called by:
-   458 ;;		_Fkt_Init
-   459 ;; This function uses a non-reentrant model
-   460 ;;
-   461                           
-   462                           	psect	text6
-   463  000160                     __ptext6:
-   464                           	opt stack 0
-   465  000160                     _Fkt_InitPort:
-   466                           	opt stack 26
-   467                           
-   468                           ;init.c: 24: PORTA = 0b00010000;
-   469                           
-   470                           ;incstack = 0
-   471  000160  0E10               	movlw	16
-   472  000162  6E80               	movwf	3968,c	;volatile
-   473                           
-   474                           ;init.c: 25: PORTB = 0b00001000;
-   475  000164  0E08               	movlw	8
-   476  000166  6E81               	movwf	3969,c	;volatile
-   477                           
-   478                           ;init.c: 26: PORTC = 0b00000000;
-   479  000168  0E00               	movlw	0
-   480  00016A  6E82               	movwf	3970,c	;volatile
-   481                           
-   482                           ;init.c: 27: PORTD = 0b00001000;
-   483  00016C  0E08               	movlw	8
-   484  00016E  6E83               	movwf	3971,c	;volatile
-   485                           
-   486                           ;init.c: 28: PORTE = 0b00000000;
-   487  000170  0E00               	movlw	0
-   488  000172  6E84               	movwf	3972,c	;volatile
-   489  000174  0012               	return		;funcret
-   490  000176                     __end_of_Fkt_InitPort:
-   491                           	opt stack 0
-   492                           
-   493 ;; *************** function _Fkt_InitOsc *****************
-   494 ;; Defined at:
-   495 ;;		line 47 in file "init.c"
-   496 ;; Parameters:    Size  Location     Type
-   497 ;;		None
-   498 ;; Auto vars:     Size  Location     Type
-   499 ;;		None
-   500 ;; Return value:  Size  Location     Type
-   501 ;;		None               void
-   502 ;; Registers used:
-   503 ;;		wreg, status,2
-   504 ;; Tracked objects:
-   505 ;;		On entry : 0/0
-   506 ;;		On exit  : 0/0
-   507 ;;		Unchanged: 0/0
-   508 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   449 ;;Total ram usage:        0 bytes
+   450 ;; Hardware stack levels used:    1
+   451 ;; Hardware stack levels required when called:    3
+   452 ;; This function calls:
+   453 ;;		Nothing
+   454 ;; This function is called by:
+   455 ;;		_Fkt_Init
+   456 ;; This function uses a non-reentrant model
+   457 ;;
+   458                           
+   459                           	psect	text6
+   460  000160                     __ptext6:
+   461                           	opt stack 0
+   462  000160                     _Fkt_InitPort:
+   463                           	opt stack 26
+   464                           
+   465                           ;init.c: 24: PORTA = 0b00010000;
+   466                           
+   467                           ;incstack = 0
+   468  000160  0E10               	movlw	16
+   469  000162  6E80               	movwf	3968,c	;volatile
+   470                           
+   471                           ;init.c: 25: PORTB = 0b00001000;
+   472  000164  0E08               	movlw	8
+   473  000166  6E81               	movwf	3969,c	;volatile
+   474                           
+   475                           ;init.c: 26: PORTC = 0b00000000;
+   476  000168  0E00               	movlw	0
+   477  00016A  6E82               	movwf	3970,c	;volatile
+   478                           
+   479                           ;init.c: 27: PORTD = 0b00001000;
+   480  00016C  0E08               	movlw	8
+   481  00016E  6E83               	movwf	3971,c	;volatile
+   482                           
+   483                           ;init.c: 28: PORTE = 0b00000000;
+   484  000170  0E00               	movlw	0
+   485  000172  6E84               	movwf	3972,c	;volatile
+   486  000174  0012               	return		;funcret
+   487  000176                     __end_of_Fkt_InitPort:
+   488                           	opt stack 0
+   489                           
+   490 ;; *************** function _Fkt_InitOsc *****************
+   491 ;; Defined at:
+   492 ;;		line 47 in file "init.c"
+   493 ;; Parameters:    Size  Location     Type
+   494 ;;		None
+   495 ;; Auto vars:     Size  Location     Type
+   496 ;;		None
+   497 ;; Return value:  Size  Location     Type
+   498 ;;		None               void
+   499 ;; Registers used:
+   500 ;;		wreg, status,2
+   501 ;; Tracked objects:
+   502 ;;		On entry : 0/0
+   503 ;;		On exit  : 0/0
+   504 ;;		Unchanged: 0/0
+   505 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   509 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   506 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   510 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   507 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   511 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   508 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   512 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   509 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   513 ;;Total ram usage:        0 bytes
-   514 ;; Hardware stack levels used:    1
-   515 ;; Hardware stack levels required when called:    3
-   516 ;; This function calls:
-   517 ;;		Nothing
-   518 ;; This function is called by:
-   519 ;;		_Fkt_Init
-   520 ;; This function uses a non-reentrant model
-   521 ;;
-   522                           
-   523                           	psect	text7
-   524  000194                     __ptext7:
-   525                           	opt stack 0
-   526  000194                     _Fkt_InitOsc:
-   527                           	opt stack 26
-   528                           
-   529                           ;init.c: 48: OSCCON = 0b01110111;
-   530                           
-   531                           ;incstack = 0
-   532  000194  0E77               	movlw	119
-   533  000196  6ED3               	movwf	4051,c	;volatile
-   534  000198  0012               	return		;funcret
-   535  00019A                     __end_of_Fkt_InitOsc:
-   536                           	opt stack 0
-   537                           
-   538 ;; *************** function _Fkt_InitInterrupt *****************
-   539 ;; Defined at:
-   540 ;;		line 77 in file "init.c"
-   541 ;; Parameters:    Size  Location     Type
-   542 ;;		None
-   543 ;; Auto vars:     Size  Location     Type
-   544 ;;		None
-   545 ;; Return value:  Size  Location     Type
-   546 ;;		None               void
-   547 ;; Registers used:
-   548 ;;		None
-   549 ;; Tracked objects:
-   550 ;;		On entry : 0/0
-   551 ;;		On exit  : 0/0
-   552 ;;		Unchanged: 0/0
-   553 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   510 ;;Total ram usage:        0 bytes
+   511 ;; Hardware stack levels used:    1
+   512 ;; Hardware stack levels required when called:    3
+   513 ;; This function calls:
+   514 ;;		Nothing
+   515 ;; This function is called by:
+   516 ;;		_Fkt_Init
+   517 ;; This function uses a non-reentrant model
+   518 ;;
+   519                           
+   520                           	psect	text7
+   521  000192                     __ptext7:
+   522                           	opt stack 0
+   523  000192                     _Fkt_InitOsc:
+   524                           	opt stack 26
+   525                           
+   526                           ;init.c: 48: OSCCON = 0b01110111;
+   527                           
+   528                           ;incstack = 0
+   529  000192  0E77               	movlw	119
+   530  000194  6ED3               	movwf	4051,c	;volatile
+   531  000196  0012               	return		;funcret
+   532  000198                     __end_of_Fkt_InitOsc:
+   533                           	opt stack 0
+   534                           
+   535 ;; *************** function _Fkt_InitInterrupt *****************
+   536 ;; Defined at:
+   537 ;;		line 77 in file "init.c"
+   538 ;; Parameters:    Size  Location     Type
+   539 ;;		None
+   540 ;; Auto vars:     Size  Location     Type
+   541 ;;		None
+   542 ;; Return value:  Size  Location     Type
+   543 ;;		None               void
+   544 ;; Registers used:
+   545 ;;		None
+   546 ;; Tracked objects:
+   547 ;;		On entry : 0/0
+   548 ;;		On exit  : 0/0
+   549 ;;		Unchanged: 0/0
+   550 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   554 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   551 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   555 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   552 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   556 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   553 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   557 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   554 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   558 ;;Total ram usage:        0 bytes
-   559 ;; Hardware stack levels used:    1
-   560 ;; Hardware stack levels required when called:    3
-   561 ;; This function calls:
-   562 ;;		Nothing
-   563 ;; This function is called by:
-   564 ;;		_Fkt_Init
-   565 ;; This function uses a non-reentrant model
-   566 ;;
-   567                           
-   568                           	psect	text8
-   569  00018A                     __ptext8:
-   570                           	opt stack 0
-   571  00018A                     _Fkt_InitInterrupt:
-   572                           	opt stack 26
-   573                           
-   574                           ;init.c: 78: GIE = 1;
+   555 ;;Total ram usage:        0 bytes
+   556 ;; Hardware stack levels used:    1
+   557 ;; Hardware stack levels required when called:    3
+   558 ;; This function calls:
+   559 ;;		Nothing
+   560 ;; This function is called by:
+   561 ;;		_Fkt_Init
+   562 ;; This function uses a non-reentrant model
+   563 ;;
+   564                           
+   565                           	psect	text8
+   566  000180                     __ptext8:
+   567                           	opt stack 0
+   568  000180                     _Fkt_InitInterrupt:
+   569                           	opt stack 26
+   570                           
+   571                           ;init.c: 78: GIE = 1;
+   572                           
+   573                           ;incstack = 0
+   574  000180  8EF2               	bsf	intcon,7,c	;volatile
    575                           
-   576                           ;incstack = 0
-   577  00018A  8EF2               	bsf	intcon,7,c	;volatile
+   576                           ;init.c: 79: PEIE = 1;
+   577  000182  8CF2               	bsf	intcon,6,c	;volatile
    578                           
-   579                           ;init.c: 79: PEIE = 1;
-   580  00018C  8CF2               	bsf	intcon,6,c	;volatile
+   579                           ;init.c: 81: TMR3GIE = 1;
+   580  000184  82A3               	bsf	4003,1,c	;volatile
    581                           
-   582                           ;init.c: 81: TMR3GIE = 1;
-   583  00018E  82A3               	bsf	4003,1,c	;volatile
-   584                           
-   585                           ;init.c: 82: TMR3IE = 1;
-   586  000190  82A0               	bsf	4000,1,c	;volatile
-   587  000192  0012               	return		;funcret
-   588  000194                     __end_of_Fkt_InitInterrupt:
-   589                           	opt stack 0
-   590                           intcon	equ	0xFF2
-   591                           
-   592 ;; *************** function _Fkt_InitAnsel *****************
-   593 ;; Defined at:
-   594 ;;		line 39 in file "init.c"
-   595 ;; Parameters:    Size  Location     Type
-   596 ;;		None
-   597 ;; Auto vars:     Size  Location     Type
-   598 ;;		None
-   599 ;; Return value:  Size  Location     Type
-   600 ;;		None               void
-   601 ;; Registers used:
-   602 ;;		wreg, status,2
-   603 ;; Tracked objects:
-   604 ;;		On entry : 0/0
-   605 ;;		On exit  : 0/0
-   606 ;;		Unchanged: 0/0
-   607 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   582                           ;init.c: 82: TMR3IE = 1;
+   583  000186  82A0               	bsf	4000,1,c	;volatile
+   584  000188  0012               	return		;funcret
+   585  00018A                     __end_of_Fkt_InitInterrupt:
+   586                           	opt stack 0
+   587                           intcon	equ	0xFF2
+   588                           
+   589 ;; *************** function _Fkt_InitAnsel *****************
+   590 ;; Defined at:
+   591 ;;		line 39 in file "init.c"
+   592 ;; Parameters:    Size  Location     Type
+   593 ;;		None
+   594 ;; Auto vars:     Size  Location     Type
+   595 ;;		None
+   596 ;; Return value:  Size  Location     Type
+   597 ;;		None               void
+   598 ;; Registers used:
+   599 ;;		wreg, status,2
+   600 ;; Tracked objects:
+   601 ;;		On entry : 0/0
+   602 ;;		On exit  : 0/0
+   603 ;;		Unchanged: 0/0
+   604 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   608 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   605 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   609 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   606 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   610 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   607 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   611 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   608 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   612 ;;Total ram usage:        0 bytes
-   613 ;; Hardware stack levels used:    1
-   614 ;; Hardware stack levels required when called:    3
-   615 ;; This function calls:
-   616 ;;		Nothing
-   617 ;; This function is called by:
-   618 ;;		_Fkt_Init
-   619 ;; This function uses a non-reentrant model
-   620 ;;
-   621                           
-   622                           	psect	text9
-   623  000110                     __ptext9:
-   624                           	opt stack 0
-   625  000110                     _Fkt_InitAnsel:
-   626                           	opt stack 26
-   627                           
-   628                           ;init.c: 40: ANSELA = 0b00000000;
-   629                           
-   630                           ;incstack = 0
-   631  000110  0E00               	movlw	0
-   632  000112  010F               	movlb	15	; () banked
-   633  000114  6F38               	movwf	56,b	;volatile
-   634                           
-   635                           ;init.c: 41: ANSELB = 0b00000000;
-   636  000116  0E00               	movlw	0
-   637  000118  010F               	movlb	15	; () banked
-   638  00011A  6F39               	movwf	57,b	;volatile
-   639                           
-   640                           ;init.c: 42: ANSELC = 0b00000000;
-   641  00011C  0E00               	movlw	0
-   642  00011E  010F               	movlb	15	; () banked
-   643  000120  6F3A               	movwf	58,b	;volatile
-   644                           
-   645                           ;init.c: 43: ANSELD = 0b00000000;
-   646  000122  0E00               	movlw	0
-   647  000124  010F               	movlb	15	; () banked
-   648  000126  6F3B               	movwf	59,b	;volatile
-   649                           
-   650                           ;init.c: 44: ANSELE = 0b00000000;
-   651  000128  0E00               	movlw	0
-   652  00012A  010F               	movlb	15	; () banked
-   653  00012C  6F3C               	movwf	60,b	;volatile
-   654                           
-   655                           ; BSR set to: 15
-   656  00012E  0012               	return		;funcret
-   657  000130                     __end_of_Fkt_InitAnsel:
-   658                           	opt stack 0
-   659                           intcon	equ	0xFF2
-   660                           
-   661 ;; *************** function _Fkt_Isr *****************
-   662 ;; Defined at:
-   663 ;;		line 6 in file "interrupt.c"
-   664 ;; Parameters:    Size  Location     Type
-   665 ;;		None
-   666 ;; Auto vars:     Size  Location     Type
-   667 ;;		None
-   668 ;; Return value:  Size  Location     Type
-   669 ;;		None               void
-   670 ;; Registers used:
-   671 ;;		wreg, status,2, status,0, cstack
-   672 ;; Tracked objects:
-   673 ;;		On entry : 0/0
-   674 ;;		On exit  : 0/0
-   675 ;;		Unchanged: 0/0
-   676 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   609 ;;Total ram usage:        0 bytes
+   610 ;; Hardware stack levels used:    1
+   611 ;; Hardware stack levels required when called:    3
+   612 ;; This function calls:
+   613 ;;		Nothing
+   614 ;; This function is called by:
+   615 ;;		_Fkt_Init
+   616 ;; This function uses a non-reentrant model
+   617 ;;
+   618                           
+   619                           	psect	text9
+   620  000110                     __ptext9:
+   621                           	opt stack 0
+   622  000110                     _Fkt_InitAnsel:
+   623                           	opt stack 26
+   624                           
+   625                           ;init.c: 40: ANSELA = 0b00000000;
+   626                           
+   627                           ;incstack = 0
+   628  000110  0E00               	movlw	0
+   629  000112  010F               	movlb	15	; () banked
+   630  000114  6F38               	movwf	56,b	;volatile
+   631                           
+   632                           ;init.c: 41: ANSELB = 0b00000000;
+   633  000116  0E00               	movlw	0
+   634  000118  010F               	movlb	15	; () banked
+   635  00011A  6F39               	movwf	57,b	;volatile
+   636                           
+   637                           ;init.c: 42: ANSELC = 0b00000000;
+   638  00011C  0E00               	movlw	0
+   639  00011E  010F               	movlb	15	; () banked
+   640  000120  6F3A               	movwf	58,b	;volatile
+   641                           
+   642                           ;init.c: 43: ANSELD = 0b00000000;
+   643  000122  0E00               	movlw	0
+   644  000124  010F               	movlb	15	; () banked
+   645  000126  6F3B               	movwf	59,b	;volatile
+   646                           
+   647                           ;init.c: 44: ANSELE = 0b00000000;
+   648  000128  0E00               	movlw	0
+   649  00012A  010F               	movlb	15	; () banked
+   650  00012C  6F3C               	movwf	60,b	;volatile
+   651                           
+   652                           ; BSR set to: 15
+   653  00012E  0012               	return		;funcret
+   654  000130                     __end_of_Fkt_InitAnsel:
+   655                           	opt stack 0
+   656                           intcon	equ	0xFF2
+   657                           
+   658 ;; *************** function _Fkt_Isr *****************
+   659 ;; Defined at:
+   660 ;;		line 6 in file "interrupt.c"
+   661 ;; Parameters:    Size  Location     Type
+   662 ;;		None
+   663 ;; Auto vars:     Size  Location     Type
+   664 ;;		None
+   665 ;; Return value:  Size  Location     Type
+   666 ;;		None               void
+   667 ;; Registers used:
+   668 ;;		wreg, status,2, status,0, cstack
+   669 ;; Tracked objects:
+   670 ;;		On entry : 0/0
+   671 ;;		On exit  : 0/0
+   672 ;;		Unchanged: 0/0
+   673 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   677 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   674 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   678 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   675 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   679 ;;      Temps:         14       0       0       0       0       0       0       0       0       0       0       0       
+   676 ;;      Temps:         14       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   680 ;;      Totals:        14       0       0       0       0       0       0       0       0       0       0       0       
+   677 ;;      Totals:        14       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   681 ;;Total ram usage:       14 bytes
-   682 ;; Hardware stack levels used:    1
-   683 ;; Hardware stack levels required when called:    2
-   684 ;; This function calls:
-   685 ;;		_Fkt_ModeCheck
-   686 ;; This function is called by:
-   687 ;;		Interrupt level 2
-   688 ;; This function uses a non-reentrant model
-   689 ;;
-   690                           
-   691                           	psect	intcode
-   692  000008                     __pintcode:
-   693                           	opt stack 0
-   694  000008                     _Fkt_Isr:
-   695                           	opt stack 26
-   696                           
-   697                           ; BSR set to: 15
-   698                           ;incstack = 0
-   699  000008  8215               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
-   700  00000A  CFFA F007          	movff	pclath,??_Fkt_Isr
-   701  00000E  CFFB F008          	movff	pclatu,??_Fkt_Isr+1
-   702  000012  CFE9 F009          	movff	fsr0l,??_Fkt_Isr+2
-   703  000016  CFEA F00A          	movff	fsr0h,??_Fkt_Isr+3
-   704  00001A  CFE1 F00B          	movff	fsr1l,??_Fkt_Isr+4
-   705  00001E  CFE2 F00C          	movff	fsr1h,??_Fkt_Isr+5
-   706  000022  CFD9 F00D          	movff	fsr2l,??_Fkt_Isr+6
-   707  000026  CFDA F00E          	movff	fsr2h,??_Fkt_Isr+7
-   708  00002A  CFF3 F00F          	movff	prodl,??_Fkt_Isr+8
-   709  00002E  CFF4 F010          	movff	prodh,??_Fkt_Isr+9
-   710  000032  CFF6 F011          	movff	tblptrl,??_Fkt_Isr+10
-   711  000036  CFF7 F012          	movff	tblptrh,??_Fkt_Isr+11
-   712  00003A  CFF8 F013          	movff	tblptru,??_Fkt_Isr+12
-   713  00003E  CFF5 F014          	movff	tablat,??_Fkt_Isr+13
+   678 ;;Total ram usage:       14 bytes
+   679 ;; Hardware stack levels used:    1
+   680 ;; Hardware stack levels required when called:    2
+   681 ;; This function calls:
+   682 ;;		_Fkt_ModeCheck
+   683 ;; This function is called by:
+   684 ;;		Interrupt level 2
+   685 ;; This function uses a non-reentrant model
+   686 ;;
+   687                           
+   688                           	psect	intcode
+   689  000008                     __pintcode:
+   690                           	opt stack 0
+   691  000008                     _Fkt_Isr:
+   692                           	opt stack 26
+   693                           
+   694                           ; BSR set to: 15
+   695                           ;incstack = 0
+   696  000008  8215               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
+   697  00000A  CFFA F007          	movff	pclath,??_Fkt_Isr
+   698  00000E  CFFB F008          	movff	pclatu,??_Fkt_Isr+1
+   699  000012  CFE9 F009          	movff	fsr0l,??_Fkt_Isr+2
+   700  000016  CFEA F00A          	movff	fsr0h,??_Fkt_Isr+3
+   701  00001A  CFE1 F00B          	movff	fsr1l,??_Fkt_Isr+4
+   702  00001E  CFE2 F00C          	movff	fsr1h,??_Fkt_Isr+5
+   703  000022  CFD9 F00D          	movff	fsr2l,??_Fkt_Isr+6
+   704  000026  CFDA F00E          	movff	fsr2h,??_Fkt_Isr+7
+   705  00002A  CFF3 F00F          	movff	prodl,??_Fkt_Isr+8
+   706  00002E  CFF4 F010          	movff	prodh,??_Fkt_Isr+9
+   707  000032  CFF6 F011          	movff	tblptrl,??_Fkt_Isr+10
+   708  000036  CFF7 F012          	movff	tblptrh,??_Fkt_Isr+11
+   709  00003A  CFF8 F013          	movff	tblptru,??_Fkt_Isr+12
+   710  00003E  CFF5 F014          	movff	tablat,??_Fkt_Isr+13
+   711                           
+   712                           ;interrupt.c: 7: __nop();
+   713  000042  F000               	nop	
    714                           
-   715                           ;interrupt.c: 7: __nop();
-   716  000042  F000               	nop	
-   717                           
-   718                           ;interrupt.c: 8: if(TMR3GIF == 1) {
-   719  000044  A2A4               	btfss	4004,1,c	;volatile
-   720  000046  D004               	goto	i2l127
+   715                           ;interrupt.c: 8: if(TMR3GIF == 1) {
+   716  000044  A2A4               	btfss	4004,1,c	;volatile
+   717  000046  D004               	goto	i2l125
+   718                           
+   719                           ;interrupt.c: 9: TMR3GIF = 0;
+   720  000048  92A4               	bcf	4004,1,c	;volatile
    721                           
-   722                           ;interrupt.c: 9: TMR3GIF = 0;
-   723  000048  92A4               	bcf	4004,1,c	;volatile
+   722                           ;interrupt.c: 10: Fkt_ModeCheck();
+   723  00004A  EC4D  F000         	call	_Fkt_ModeCheck	;wreg free
    724                           
-   725                           ;interrupt.c: 10: Fkt_ModeCheck();
-   726  00004A  EC4D  F000         	call	_Fkt_ModeCheck	;wreg free
-   727                           
-   728                           ;interrupt.c: 11: }else if (TMR3IF == 1) {
-   729  00004E  D005               	goto	i2l130
-   730  000050                     i2l127:
-   731  000050  A2A1               	btfss	4001,1,c	;volatile
-   732  000052  D003               	goto	i2l130
+   725                           ;interrupt.c: 11: }else if (TMR3IF == 1) {
+   726  00004E  D005               	goto	i2l128
+   727  000050                     i2l125:
+   728  000050  A2A1               	btfss	4001,1,c	;volatile
+   729  000052  D003               	goto	i2l128
+   730                           
+   731                           ;interrupt.c: 12: TMR3IF = 0;
+   732  000054  92A1               	bcf	4001,1,c	;volatile
    733                           
-   734                           ;interrupt.c: 12: TMR3IF = 0;
-   735  000054  92A1               	bcf	4001,1,c	;volatile
+   734                           ;interrupt.c: 13: __nop();
+   735  000056  F000               	nop	
    736                           
-   737                           ;interrupt.c: 13: __nop();
-   738  000056  F000               	nop	
-   739                           
-   740                           ;interrupt.c: 14: __nop();
-   741  000058  F000               	nop	
-   742  00005A                     i2l130:
-   743  00005A  C014  FFF5         	movff	??_Fkt_Isr+13,tablat
-   744  00005E  C013  FFF8         	movff	??_Fkt_Isr+12,tblptru
-   745  000062  C012  FFF7         	movff	??_Fkt_Isr+11,tblptrh
-   746  000066  C011  FFF6         	movff	??_Fkt_Isr+10,tblptrl
-   747  00006A  C010  FFF4         	movff	??_Fkt_Isr+9,prodh
-   748  00006E  C00F  FFF3         	movff	??_Fkt_Isr+8,prodl
-   749  000072  C00E  FFDA         	movff	??_Fkt_Isr+7,fsr2h
-   750  000076  C00D  FFD9         	movff	??_Fkt_Isr+6,fsr2l
-   751  00007A  C00C  FFE2         	movff	??_Fkt_Isr+5,fsr1h
-   752  00007E  C00B  FFE1         	movff	??_Fkt_Isr+4,fsr1l
-   753  000082  C00A  FFEA         	movff	??_Fkt_Isr+3,fsr0h
-   754  000086  C009  FFE9         	movff	??_Fkt_Isr+2,fsr0l
-   755  00008A  C008  FFFB         	movff	??_Fkt_Isr+1,pclatu
-   756  00008E  C007  FFFA         	movff	??_Fkt_Isr,pclath
-   757  000092  9215               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
-   758  000094  0011               	retfie		f
-   759  000096                     __end_of_Fkt_Isr:
-   760                           	opt stack 0
-   761                           pclatu	equ	0xFFB
-   762                           pclath	equ	0xFFA
-   763                           tblptru	equ	0xFF8
-   764                           tblptrh	equ	0xFF7
-   765                           tblptrl	equ	0xFF6
-   766                           tablat	equ	0xFF5
-   767                           prodh	equ	0xFF4
-   768                           prodl	equ	0xFF3
-   769                           intcon	equ	0xFF2
-   770                           fsr0h	equ	0xFEA
-   771                           fsr0l	equ	0xFE9
-   772                           fsr1h	equ	0xFE2
-   773                           fsr1l	equ	0xFE1
-   774                           fsr2h	equ	0xFDA
-   775                           fsr2l	equ	0xFD9
-   776                           
-   777 ;; *************** function _Fkt_ModeCheck *****************
-   778 ;; Defined at:
-   779 ;;		line 21 in file "gear.c"
-   780 ;; Parameters:    Size  Location     Type
-   781 ;;		None
-   782 ;; Auto vars:     Size  Location     Type
-   783 ;;  time            2    4[COMRAM] unsigned int 
-   784 ;; Return value:  Size  Location     Type
-   785 ;;		None               void
-   786 ;; Registers used:
-   787 ;;		wreg, status,2, status,0, cstack
-   788 ;; Tracked objects:
-   789 ;;		On entry : 0/0
-   790 ;;		On exit  : 0/0
-   791 ;;		Unchanged: 0/0
-   792 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   737                           ;interrupt.c: 14: __nop();
+   738  000058  F000               	nop	
+   739  00005A                     i2l128:
+   740  00005A  C014  FFF5         	movff	??_Fkt_Isr+13,tablat
+   741  00005E  C013  FFF8         	movff	??_Fkt_Isr+12,tblptru
+   742  000062  C012  FFF7         	movff	??_Fkt_Isr+11,tblptrh
+   743  000066  C011  FFF6         	movff	??_Fkt_Isr+10,tblptrl
+   744  00006A  C010  FFF4         	movff	??_Fkt_Isr+9,prodh
+   745  00006E  C00F  FFF3         	movff	??_Fkt_Isr+8,prodl
+   746  000072  C00E  FFDA         	movff	??_Fkt_Isr+7,fsr2h
+   747  000076  C00D  FFD9         	movff	??_Fkt_Isr+6,fsr2l
+   748  00007A  C00C  FFE2         	movff	??_Fkt_Isr+5,fsr1h
+   749  00007E  C00B  FFE1         	movff	??_Fkt_Isr+4,fsr1l
+   750  000082  C00A  FFEA         	movff	??_Fkt_Isr+3,fsr0h
+   751  000086  C009  FFE9         	movff	??_Fkt_Isr+2,fsr0l
+   752  00008A  C008  FFFB         	movff	??_Fkt_Isr+1,pclatu
+   753  00008E  C007  FFFA         	movff	??_Fkt_Isr,pclath
+   754  000092  9215               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
+   755  000094  0011               	retfie		f
+   756  000096                     __end_of_Fkt_Isr:
+   757                           	opt stack 0
+   758                           pclatu	equ	0xFFB
+   759                           pclath	equ	0xFFA
+   760                           tblptru	equ	0xFF8
+   761                           tblptrh	equ	0xFF7
+   762                           tblptrl	equ	0xFF6
+   763                           tablat	equ	0xFF5
+   764                           prodh	equ	0xFF4
+   765                           prodl	equ	0xFF3
+   766                           intcon	equ	0xFF2
+   767                           fsr0h	equ	0xFEA
+   768                           fsr0l	equ	0xFE9
+   769                           fsr1h	equ	0xFE2
+   770                           fsr1l	equ	0xFE1
+   771                           fsr2h	equ	0xFDA
+   772                           fsr2l	equ	0xFD9
+   773                           
+   774 ;; *************** function _Fkt_ModeCheck *****************
+   775 ;; Defined at:
+   776 ;;		line 21 in file "gear.c"
+   777 ;; Parameters:    Size  Location     Type
+   778 ;;		None
+   779 ;; Auto vars:     Size  Location     Type
+   780 ;;  time            2    4[COMRAM] unsigned int 
+   781 ;; Return value:  Size  Location     Type
+   782 ;;		None               void
+   783 ;; Registers used:
+   784 ;;		wreg, status,2, status,0, cstack
+   785 ;; Tracked objects:
+   786 ;;		On entry : 0/0
+   787 ;;		On exit  : 0/0
+   788 ;;		Unchanged: 0/0
+   789 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   793 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   790 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   794 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   791 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   795 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   792 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   796 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   793 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   797 ;;Total ram usage:        2 bytes
-   798 ;; Hardware stack levels used:    1
-   799 ;; Hardware stack levels required when called:    1
-   800 ;; This function calls:
-   801 ;;		_Fkt_CalcTime
-   802 ;; This function is called by:
-   803 ;;		_Fkt_Isr
-   804 ;; This function uses a non-reentrant model
-   805 ;;
-   806                           
-   807                           	psect	text11
-   808  00009A                     __ptext11:
-   809                           	opt stack 0
-   810  00009A                     _Fkt_ModeCheck:
-   811                           	opt stack 26
-   812                           
-   813                           ;gear.c: 22: unsigned int time = Fkt_CalcTime();
-   814                           
-   815                           ;incstack = 0
-   816  00009A  EC65  F000         	call	_Fkt_CalcTime	;wreg free
-   817  00009E  C001  F005         	movff	?_Fkt_CalcTime,Fkt_ModeCheck@time
-   818  0000A2  C002  F006         	movff	?_Fkt_CalcTime+1,Fkt_ModeCheck@time+1
-   819                           
-   820                           ;gear.c: 23: if(time < 6800){
-   821  0000A6  0E90               	movlw	144
-   822  0000A8  5C05               	subwf	Fkt_ModeCheck@time,w,c
-   823  0000AA  0E1A               	movlw	26
-   824  0000AC  5806               	subwfb	Fkt_ModeCheck@time+1,w,c
-   825  0000AE  B0D8               	btfsc	status,0,c
-   826  0000B0  D002               	goto	i2l823
+   794 ;;Total ram usage:        2 bytes
+   795 ;; Hardware stack levels used:    1
+   796 ;; Hardware stack levels required when called:    1
+   797 ;; This function calls:
+   798 ;;		_Fkt_CalcTime
+   799 ;; This function is called by:
+   800 ;;		_Fkt_Isr
+   801 ;; This function uses a non-reentrant model
+   802 ;;
+   803                           
+   804                           	psect	text11
+   805  00009A                     __ptext11:
+   806                           	opt stack 0
+   807  00009A                     _Fkt_ModeCheck:
+   808                           	opt stack 26
+   809                           
+   810                           ;gear.c: 22: unsigned int time = Fkt_CalcTime();
+   811                           
+   812                           ;incstack = 0
+   813  00009A  EC65  F000         	call	_Fkt_CalcTime	;wreg free
+   814  00009E  C001  F005         	movff	?_Fkt_CalcTime,Fkt_ModeCheck@time
+   815  0000A2  C002  F006         	movff	?_Fkt_CalcTime+1,Fkt_ModeCheck@time+1
+   816                           
+   817                           ;gear.c: 23: if(time < 6800){
+   818  0000A6  0E90               	movlw	144
+   819  0000A8  5C05               	subwf	Fkt_ModeCheck@time,w,c
+   820  0000AA  0E1A               	movlw	26
+   821  0000AC  5806               	subwfb	Fkt_ModeCheck@time+1,w,c
+   822  0000AE  B0D8               	btfsc	status,0,c
+   823  0000B0  D002               	goto	i2l819
+   824                           
+   825                           ;gear.c: 24: PORTBbits.RB2 = 0;
+   826  0000B2  9481               	bcf	3969,2,c	;volatile
    827                           
-   828                           ;gear.c: 24: PORTBbits.RB2 = 0;
-   829  0000B2  9481               	bcf	3969,2,c	;volatile
-   830                           
-   831                           ;gear.c: 25: return 0;
-   832                           ;	Return value of _Fkt_ModeCheck is never used
-   833  0000B4  0012               	return	
-   834  0000B6                     i2l823:
-   835  0000B6  0E90               	movlw	144
-   836  0000B8  5C05               	subwf	Fkt_ModeCheck@time,w,c
-   837  0000BA  0E1A               	movlw	26
-   838  0000BC  5806               	subwfb	Fkt_ModeCheck@time+1,w,c
-   839  0000BE  A0D8               	btfss	status,0,c
-   840  0000C0  D002               	goto	i2l115
+   828                           ;gear.c: 25: return 0;
+   829                           ;	Return value of _Fkt_ModeCheck is never used
+   830  0000B4  0012               	return	
+   831  0000B6                     i2l819:
+   832  0000B6  0E90               	movlw	144
+   833  0000B8  5C05               	subwf	Fkt_ModeCheck@time,w,c
+   834  0000BA  0E1A               	movlw	26
+   835  0000BC  5806               	subwfb	Fkt_ModeCheck@time+1,w,c
+   836  0000BE  A0D8               	btfss	status,0,c
+   837  0000C0  D002               	goto	i2l113
+   838                           
+   839                           ;gear.c: 27: PORTBbits.RB2 = 1;
+   840  0000C2  8481               	bsf	3969,2,c	;volatile
    841                           
-   842                           ;gear.c: 27: PORTBbits.RB2 = 1;
-   843  0000C2  8481               	bsf	3969,2,c	;volatile
-   844                           
-   845                           ;gear.c: 28: return 1;
-   846                           ;	Return value of _Fkt_ModeCheck is never used
-   847  0000C4  0012               	return	
-   848  0000C6                     i2l115:
-   849                           
-   850                           ;gear.c: 29: }
-   851                           ;gear.c: 30: __nop();
-   852  0000C6  F000               	nop	
-   853  0000C8  0012               	return		;funcret
-   854  0000CA                     __end_of_Fkt_ModeCheck:
-   855                           	opt stack 0
-   856                           pclatu	equ	0xFFB
-   857                           pclath	equ	0xFFA
-   858                           tblptru	equ	0xFF8
-   859                           tblptrh	equ	0xFF7
-   860                           tblptrl	equ	0xFF6
-   861                           tablat	equ	0xFF5
-   862                           prodh	equ	0xFF4
-   863                           prodl	equ	0xFF3
-   864                           intcon	equ	0xFF2
-   865                           fsr0h	equ	0xFEA
-   866                           fsr0l	equ	0xFE9
-   867                           fsr1h	equ	0xFE2
-   868                           fsr1l	equ	0xFE1
-   869                           fsr2h	equ	0xFDA
-   870                           fsr2l	equ	0xFD9
-   871                           status	equ	0xFD8
-   872                           
-   873 ;; *************** function _Fkt_CalcTime *****************
-   874 ;; Defined at:
-   875 ;;		line 6 in file "gear.c"
-   876 ;; Parameters:    Size  Location     Type
-   877 ;;		None
-   878 ;; Auto vars:     Size  Location     Type
-   879 ;;  time_pulse      2    2[COMRAM] unsigned int 
-   880 ;; Return value:  Size  Location     Type
-   881 ;;                  2    0[COMRAM] unsigned int 
-   882 ;; Registers used:
-   883 ;;		wreg, status,2, status,0
-   884 ;; Tracked objects:
-   885 ;;		On entry : 0/0
-   886 ;;		On exit  : 0/0
-   887 ;;		Unchanged: 0/0
-   888 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   842                           ;gear.c: 28: return 1;
+   843                           ;	Return value of _Fkt_ModeCheck is never used
+   844  0000C4  0012               	return	
+   845  0000C6                     i2l113:
+   846                           
+   847                           ;gear.c: 29: }
+   848                           ;gear.c: 30: __nop();
+   849  0000C6  F000               	nop	
+   850  0000C8  0012               	return		;funcret
+   851  0000CA                     __end_of_Fkt_ModeCheck:
+   852                           	opt stack 0
+   853                           pclatu	equ	0xFFB
+   854                           pclath	equ	0xFFA
+   855                           tblptru	equ	0xFF8
+   856                           tblptrh	equ	0xFF7
+   857                           tblptrl	equ	0xFF6
+   858                           tablat	equ	0xFF5
+   859                           prodh	equ	0xFF4
+   860                           prodl	equ	0xFF3
+   861                           intcon	equ	0xFF2
+   862                           fsr0h	equ	0xFEA
+   863                           fsr0l	equ	0xFE9
+   864                           fsr1h	equ	0xFE2
+   865                           fsr1l	equ	0xFE1
+   866                           fsr2h	equ	0xFDA
+   867                           fsr2l	equ	0xFD9
+   868                           status	equ	0xFD8
+   869                           
+   870 ;; *************** function _Fkt_CalcTime *****************
+   871 ;; Defined at:
+   872 ;;		line 6 in file "gear.c"
+   873 ;; Parameters:    Size  Location     Type
+   874 ;;		None
+   875 ;; Auto vars:     Size  Location     Type
+   876 ;;  time_pulse      2    2[COMRAM] unsigned int 
+   877 ;; Return value:  Size  Location     Type
+   878 ;;                  2    0[COMRAM] unsigned int 
+   879 ;; Registers used:
+   880 ;;		wreg, status,2, status,0
+   881 ;; Tracked objects:
+   882 ;;		On entry : 0/0
+   883 ;;		On exit  : 0/0
+   884 ;;		Unchanged: 0/0
+   885 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   889 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
+   886 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   890 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
+   887 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   891 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   888 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   892 ;;      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       
+   889 ;;      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   893 ;;Total ram usage:        4 bytes
-   894 ;; Hardware stack levels used:    1
-   895 ;; This function calls:
-   896 ;;		Nothing
-   897 ;; This function is called by:
-   898 ;;		_Fkt_ModeCheck
-   899 ;; This function uses a non-reentrant model
-   900 ;;
-   901                           
-   902                           	psect	text12
-   903  0000CA                     __ptext12:
-   904                           	opt stack 0
-   905  0000CA                     _Fkt_CalcTime:
-   906                           	opt stack 26
-   907                           
-   908                           ;gear.c: 7: unsigned int time_pulse = TMR3H;
-   909                           
-   910                           ;incstack = 0
-   911  0000CA  CFB3 F003          	movff	4019,Fkt_CalcTime@time_pulse	;volatile
-   912  0000CE  6A04               	clrf	Fkt_CalcTime@time_pulse+1,c
-   913                           
-   914                           ;gear.c: 8: time_pulse <<= 8;
-   915  0000D0  5003               	movf	Fkt_CalcTime@time_pulse,w,c
-   916  0000D2  6E04               	movwf	Fkt_CalcTime@time_pulse+1,c
-   917  0000D4  6A03               	clrf	Fkt_CalcTime@time_pulse,c
-   918                           
-   919                           ;gear.c: 9: time_pulse |= TMR3L;
-   920  0000D6  50B2               	movf	4018,w,c	;volatile
-   921  0000D8  1203               	iorwf	Fkt_CalcTime@time_pulse,f,c
-   922                           
-   923                           ;gear.c: 10: TMR3H = 0;
-   924  0000DA  0E00               	movlw	0
-   925  0000DC  6EB3               	movwf	4019,c	;volatile
-   926                           
-   927                           ;gear.c: 11: TMR3L = 0;
-   928  0000DE  0E00               	movlw	0
-   929  0000E0  6EB2               	movwf	4018,c	;volatile
+   890 ;;Total ram usage:        4 bytes
+   891 ;; Hardware stack levels used:    1
+   892 ;; This function calls:
+   893 ;;		Nothing
+   894 ;; This function is called by:
+   895 ;;		_Fkt_ModeCheck
+   896 ;; This function uses a non-reentrant model
+   897 ;;
+   898                           
+   899                           	psect	text12
+   900  0000CA                     __ptext12:
+   901                           	opt stack 0
+   902  0000CA                     _Fkt_CalcTime:
+   903                           	opt stack 26
+   904                           
+   905                           ;gear.c: 7: unsigned int time_pulse = TMR3H;
+   906                           
+   907                           ;incstack = 0
+   908  0000CA  CFB3 F003          	movff	4019,Fkt_CalcTime@time_pulse	;volatile
+   909  0000CE  6A04               	clrf	Fkt_CalcTime@time_pulse+1,c
+   910                           
+   911                           ;gear.c: 8: time_pulse <<= 8;
+   912  0000D0  5003               	movf	Fkt_CalcTime@time_pulse,w,c
+   913  0000D2  6E04               	movwf	Fkt_CalcTime@time_pulse+1,c
+   914  0000D4  6A03               	clrf	Fkt_CalcTime@time_pulse,c
+   915                           
+   916                           ;gear.c: 9: time_pulse |= TMR3L;
+   917  0000D6  50B2               	movf	4018,w,c	;volatile
+   918  0000D8  1203               	iorwf	Fkt_CalcTime@time_pulse,f,c
+   919                           
+   920                           ;gear.c: 10: TMR3H = 0;
+   921  0000DA  0E00               	movlw	0
+   922  0000DC  6EB3               	movwf	4019,c	;volatile
+   923                           
+   924                           ;gear.c: 11: TMR3L = 0;
+   925  0000DE  0E00               	movlw	0
+   926  0000E0  6EB2               	movwf	4018,c	;volatile
+   927                           
+   928                           ;gear.c: 12: __nop();
+   929  0000E2  F000               	nop	
    930                           
-   931                           ;gear.c: 12: __nop();
-   932  0000E2  F000               	nop	
-   933                           
-   934                           ;gear.c: 13: return time_pulse;
-   935  0000E4  C003  F001         	movff	Fkt_CalcTime@time_pulse,?_Fkt_CalcTime
-   936  0000E8  C004  F002         	movff	Fkt_CalcTime@time_pulse+1,?_Fkt_CalcTime+1
-   937  0000EC  0012               	return	
-   938  0000EE                     __end_of_Fkt_CalcTime:
-   939                           	opt stack 0
-   940  0000                     pclatu	equ	0xFFB
-   941                           pclath	equ	0xFFA
-   942                           tblptru	equ	0xFF8
-   943                           tblptrh	equ	0xFF7
-   944                           tblptrl	equ	0xFF6
-   945                           tablat	equ	0xFF5
-   946                           prodh	equ	0xFF4
-   947                           prodl	equ	0xFF3
-   948                           intcon	equ	0xFF2
-   949                           fsr0h	equ	0xFEA
-   950                           fsr0l	equ	0xFE9
-   951                           fsr1h	equ	0xFE2
-   952                           fsr1l	equ	0xFE1
-   953                           fsr2h	equ	0xFDA
-   954                           fsr2l	equ	0xFD9
-   955                           status	equ	0xFD8
-   956                           pclatu	equ	0xFFB
-   957                           pclath	equ	0xFFA
-   958                           tblptru	equ	0xFF8
-   959                           tblptrh	equ	0xFF7
-   960                           tblptrl	equ	0xFF6
-   961                           tablat	equ	0xFF5
-   962                           prodh	equ	0xFF4
-   963                           prodl	equ	0xFF3
-   964                           intcon	equ	0xFF2
-   965                           fsr0h	equ	0xFEA
-   966                           fsr0l	equ	0xFE9
-   967                           fsr1h	equ	0xFE2
-   968                           fsr1l	equ	0xFE1
-   969                           fsr2h	equ	0xFDA
-   970                           fsr2l	equ	0xFD9
-   971                           status	equ	0xFD8
-   972                           
-   973                           	psect	rparam
-   974  0000                     pclatu	equ	0xFFB
-   975                           pclath	equ	0xFFA
-   976                           tblptru	equ	0xFF8
-   977                           tblptrh	equ	0xFF7
-   978                           tblptrl	equ	0xFF6
-   979                           tablat	equ	0xFF5
-   980                           prodh	equ	0xFF4
-   981                           prodl	equ	0xFF3
-   982                           intcon	equ	0xFF2
-   983                           fsr0h	equ	0xFEA
-   984                           fsr0l	equ	0xFE9
-   985                           fsr1h	equ	0xFE2
-   986                           fsr1l	equ	0xFE1
-   987                           fsr2h	equ	0xFDA
-   988                           fsr2l	equ	0xFD9
-   989                           status	equ	0xFD8
-   990                           
-   991                           	psect	temp
-   992  000015                     btemp:
-   993                           	opt stack 0
-   994  000015                     	ds	1
-   995  0000                     int$flags	set	btemp
-   996                           pclatu	equ	0xFFB
-   997                           pclath	equ	0xFFA
-   998                           tblptru	equ	0xFF8
-   999                           tblptrh	equ	0xFF7
-  1000                           tblptrl	equ	0xFF6
-  1001                           tablat	equ	0xFF5
-  1002                           prodh	equ	0xFF4
-  1003                           prodl	equ	0xFF3
-  1004                           intcon	equ	0xFF2
-  1005                           fsr0h	equ	0xFEA
-  1006                           fsr0l	equ	0xFE9
-  1007                           fsr1h	equ	0xFE2
-  1008                           fsr1l	equ	0xFE1
-  1009                           fsr2h	equ	0xFDA
-  1010                           fsr2l	equ	0xFD9
-  1011                           status	equ	0xFD8
+   931                           ;gear.c: 13: return time_pulse;
+   932  0000E4  C003  F001         	movff	Fkt_CalcTime@time_pulse,?_Fkt_CalcTime
+   933  0000E8  C004  F002         	movff	Fkt_CalcTime@time_pulse+1,?_Fkt_CalcTime+1
+   934  0000EC  0012               	return	
+   935  0000EE                     __end_of_Fkt_CalcTime:
+   936                           	opt stack 0
+   937  0000                     pclatu	equ	0xFFB
+   938                           pclath	equ	0xFFA
+   939                           tblptru	equ	0xFF8
+   940                           tblptrh	equ	0xFF7
+   941                           tblptrl	equ	0xFF6
+   942                           tablat	equ	0xFF5
+   943                           prodh	equ	0xFF4
+   944                           prodl	equ	0xFF3
+   945                           intcon	equ	0xFF2
+   946                           fsr0h	equ	0xFEA
+   947                           fsr0l	equ	0xFE9
+   948                           fsr1h	equ	0xFE2
+   949                           fsr1l	equ	0xFE1
+   950                           fsr2h	equ	0xFDA
+   951                           fsr2l	equ	0xFD9
+   952                           status	equ	0xFD8
+   953                           pclatu	equ	0xFFB
+   954                           pclath	equ	0xFFA
+   955                           tblptru	equ	0xFF8
+   956                           tblptrh	equ	0xFF7
+   957                           tblptrl	equ	0xFF6
+   958                           tablat	equ	0xFF5
+   959                           prodh	equ	0xFF4
+   960                           prodl	equ	0xFF3
+   961                           intcon	equ	0xFF2
+   962                           fsr0h	equ	0xFEA
+   963                           fsr0l	equ	0xFE9
+   964                           fsr1h	equ	0xFE2
+   965                           fsr1l	equ	0xFE1
+   966                           fsr2h	equ	0xFDA
+   967                           fsr2l	equ	0xFD9
+   968                           status	equ	0xFD8
+   969                           
+   970                           	psect	rparam
+   971  0000                     pclatu	equ	0xFFB
+   972                           pclath	equ	0xFFA
+   973                           tblptru	equ	0xFF8
+   974                           tblptrh	equ	0xFF7
+   975                           tblptrl	equ	0xFF6
+   976                           tablat	equ	0xFF5
+   977                           prodh	equ	0xFF4
+   978                           prodl	equ	0xFF3
+   979                           intcon	equ	0xFF2
+   980                           fsr0h	equ	0xFEA
+   981                           fsr0l	equ	0xFE9
+   982                           fsr1h	equ	0xFE2
+   983                           fsr1l	equ	0xFE1
+   984                           fsr2h	equ	0xFDA
+   985                           fsr2l	equ	0xFD9
+   986                           status	equ	0xFD8
+   987                           
+   988                           	psect	temp
+   989  000015                     btemp:
+   990                           	opt stack 0
+   991  000015                     	ds	1
+   992  0000                     int$flags	set	btemp
+   993                           pclatu	equ	0xFFB
+   994                           pclath	equ	0xFFA
+   995                           tblptru	equ	0xFF8
+   996                           tblptrh	equ	0xFF7
+   997                           tblptrl	equ	0xFF6
+   998                           tablat	equ	0xFF5
+   999                           prodh	equ	0xFF4
+  1000                           prodl	equ	0xFF3
+  1001                           intcon	equ	0xFF2
+  1002                           fsr0h	equ	0xFEA
+  1003                           fsr0l	equ	0xFE9
+  1004                           fsr1h	equ	0xFE2
+  1005                           fsr1l	equ	0xFE1
+  1006                           fsr2h	equ	0xFDA
+  1007                           fsr2l	equ	0xFD9
+  1008                           status	equ	0xFD8
 
 
 Data Sizes:
@@ -1370,20 +1367,20 @@ SFR                  0      0       0      40        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Tue Dec 08 18:37:27 2015
+Symbol Table                                                                                   Wed Dec 09 12:57:21 2015
 
               __CFG_CP0$OFF 000000                __CFG_CP1$OFF 000000                __CFG_CP2$OFF 000000  
-              __CFG_CP3$OFF 000000                         l789 0186                         _GIE 007F97  
+              __CFG_CP3$OFF 000000                         l785 018E                         _GIE 007F97  
               __CFG_CPB$OFF 000000                __CFG_CPD$OFF 000000                __CFG_LVP$OFF 000000  
-                      _PEIE 007F96                        _main 0180                        fsr0h 000FEA  
+                      _PEIE 007F96                        _main 018A                        fsr0h 000FEA  
                       fsr1h 000FE2                        fsr0l 000FE9                        fsr2h 000FDA  
                       fsr1l 000FE1                        fsr2l 000FD9                        btemp 0015  
              __CFG_BORV$190 000000                        pclat 000FFA                        prodh 000FF4  
                       prodl 000FF3                        start 0096               __CFG_IESO$OFF 000000  
-           __end_of_Fkt_Isr 0096                ___param_bank 000010         __end_of_Fkt_InitOsc 019A  
-       __end_of_Fkt_InitSpi 019E                       ?_main 0001              __CFG_DEBUG$OFF 000000  
-                     i2l130 005A                       i2l115 00C6                       i2l127 0050  
-                     i2l823 00B6                       _TMR3H 000FB3                       _TMR3L 000FB2  
+           __end_of_Fkt_Isr 0096                ___param_bank 000010         __end_of_Fkt_InitOsc 0198  
+       __end_of_Fkt_InitSpi 019C                       ?_main 0001              __CFG_DEBUG$OFF 000000  
+                     i2l113 00C6                       i2l125 0050                       i2l128 005A  
+                     i2l819 00B6                       _TMR3H 000FB3                       _TMR3L 000FB2  
                      _PORTA 000F80                       _PORTB 000F81                       _PORTC 000F82  
                      _PORTD 000F83                       _PORTE 000F84                       _TRISA 000F92  
                      _TRISB 000F93                       _TRISC 000F94                       _TRISD 000F95  
@@ -1393,15 +1390,15 @@ Symbol Table                                                                    
             __CFG_EBTR3$OFF 000000               __CFG_WRTB$OFF 000000               __CFG_WRTC$OFF 000000  
              __CFG_WRTD$OFF 000000              __CFG_EBTRB$OFF 000000          __CFG_MCLRE$EXTMCLR 000000  
                      tablat 000FF5        __end_of_Fkt_CalcTime 00EE                       status 000FD8  
-            __CFG_HFOFST$ON 000000           _Fkt_InitInterrupt 018A              __CFG_PBADEN$ON 000000  
+            __CFG_HFOFST$ON 000000           _Fkt_InitInterrupt 0180              __CFG_PBADEN$ON 000000  
         ?_Fkt_InitInterrupt 0001             __initialization 0176            __end_of_Fkt_Init 0110  
-              __end_of_main 018A        __end_of_Fkt_InitUart 019C        __end_of_Fkt_InitPort 0176  
+              __end_of_main 0192        __end_of_Fkt_InitUart 019A        __end_of_Fkt_InitPort 0176  
       __end_of_Fkt_InitTris 0160         ??_Fkt_InitInterrupt 0015                      ??_main 0015  
              __activetblptr 000000                      _ANSELA 000F38                      _ANSELB 000F39  
                     _ANSELC 000F3A                      _ANSELD 000F3B                      _ANSELE 000F3C  
- __end_of_Fkt_InitInterrupt 0194              __CFG_WDTEN$OFF 000000                      _OSCCON 000FD3  
+ __end_of_Fkt_InitInterrupt 018A              __CFG_WDTEN$OFF 000000                      _OSCCON 000FD3  
                     _TMR3IE 007D01                      _TMR3IF 007D09                   ??_Fkt_Isr 0007  
-               _Fkt_InitOsc 0194                 _Fkt_InitSpi 019C              __CFG_XINST$OFF 000000  
+               _Fkt_InitOsc 0192                 _Fkt_InitSpi 019A              __CFG_XINST$OFF 000000  
             __CFG_STVREN$ON 000000                      tblptrh 000FF7                      tblptrl 000FF6  
                     tblptru 000FF8                  __accesstop 0060     __end_of__initialization 0176  
              ___rparam_used 000001              __pcstackCOMRAM 0001       __end_of_Fkt_InitAnsel 0130  
@@ -1410,13 +1407,13 @@ Symbol Table                                                                    
      __size_of_Fkt_InitUart 0002       __size_of_Fkt_InitPort 0016       __size_of_Fkt_InitTris 0016  
         __CFG_CCP2MX$PORTC1 000000          __CFG_CCP3MX$PORTB5 000000                _Fkt_CalcTime 00CA  
          __CFG_PRICLKEN$OFF 000000                     _TMR3GIE 007D19                     _TMR3GIF 007D21  
-                ??_Fkt_Init 0015                _Fkt_InitUart 019A                _Fkt_InitPort 0160  
+                ??_Fkt_Init 0015                _Fkt_InitUart 0198                _Fkt_InitPort 0160  
               _Fkt_InitTris 014A                     _Fkt_Isr 0008             __CFG_PWRTEN$OFF 000000  
                    __Hparam 0000                     __Lparam 0000                     __pcinit 0176  
-                   __ramtop 1000                     __ptext0 0180                     __ptext1 00EE  
-                   __ptext2 019A                     __ptext3 014A                     __ptext4 0130  
-                   __ptext5 019C                     __ptext6 0160                     __ptext7 0194  
-                   __ptext8 018A                     __ptext9 0110                   _T3CONbits 000FB1  
+                   __ramtop 1000                     __ptext0 018A                     __ptext1 00EE  
+                   __ptext2 0198                     __ptext3 014A                     __ptext4 0130  
+                   __ptext5 019A                     __ptext6 0160                     __ptext7 0192  
+                   __ptext8 0180                     __ptext9 0110                   _T3CONbits 000FB1  
       end_of_initialization 0176                ?_Fkt_InitOsc 0001                ?_Fkt_InitSpi 0001  
                  _PORTBbits 000F81         start_initialization 0176           __size_of_Fkt_Init 0022  
          Fkt_ModeCheck@time 0005                    ?_Fkt_Isr 0001      __size_of_Fkt_InitAnsel 0020  
@@ -1427,7 +1424,7 @@ Symbol Table                                                                    
                   __Lrparam 0000          __CFG_BOREN$SBORDIS 000000           __CFG_P2BMX$PORTD2 000000  
             ?_Fkt_InitAnsel 0001              ?_Fkt_InitTimer 0001              ?_Fkt_ModeCheck 0001  
                   __ptext11 009A                    __ptext12 00CA                  _T3GCONbits 000FB4  
-             __size_of_main 000A      Fkt_CalcTime@time_pulse 0003                    int$flags 0015  
+             __size_of_main 0008      Fkt_CalcTime@time_pulse 0003                    int$flags 0015  
              ?_Fkt_CalcTime 0001               ?_Fkt_InitUart 0001               ?_Fkt_InitPort 0001  
              ?_Fkt_InitTris 0001                    intlevel2 0000             ??_Fkt_InitAnsel 0015  
             ??_Fkt_CalcTime 0003             ??_Fkt_InitTimer 0015             ??_Fkt_ModeCheck 0005  

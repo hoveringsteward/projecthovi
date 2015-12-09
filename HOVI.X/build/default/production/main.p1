@@ -2,35 +2,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
 "17 init.h
 [v _Fkt_Init `(v ~T0 @X0 0 ef ]
-"6662 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-[s S416 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S416 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"6672
-[s S417 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S417 . INT0 INT1 INT2 CCP2 KBI0 KBI1 KBI2 KBI3 ]
-"6682
-[s S418 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S418 . AN12 AN10 AN8 AN9 AN11 AN13 PGC PGD ]
-"6692
-[s S419 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S419 . FLT0 C12IN3M . C12IN2M T5G T1G ]
-"6700
-[s S420 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S420 . SRI C12IN3N . C12IN2N . CCP3 ]
-"6708
-[s S421 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S421 . . CTED1 CTED2 . T3CKI ]
-"6715
-[s S422 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S422 . . P2A . P3A ]
-"6721
-[s S423 :3 `uc 1 :1 `uc 1 ]
-[n S423 . . CCP2_PA2 ]
-"6661
-[u S415 `S416 1 `S417 1 `S418 1 `S419 1 `S420 1 `S421 1 `S422 1 `S423 1 ]
-[n S415 . . . . . . . . . ]
-"6726
-[v _PORTBbits `VS415 ~T0 @X0 0 e@3969 ]
 "43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
@@ -7476,6 +7447,84 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 152: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 154: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 156: extern __nonreentrant void _delay3(unsigned char);
+"17 main.c
+[p x IESO=OFF ]
+"18
+[p x PLLCFG=OFF ]
+"19
+[p x PRICLKEN=OFF ]
+"20
+[p x FOSC=INTIO67 ]
+"21
+[p x FCMEN=OFF ]
+"24
+[p x BOREN=SBORDIS ]
+"25
+[p x BORV=190 ]
+"26
+[p x PWRTEN=OFF ]
+"29
+[p x WDTPS=32768 ]
+"30
+[p x WDTEN=OFF ]
+"33
+[p x CCP2MX=PORTC1 ]
+"34
+[p x P2BMX=PORTD2 ]
+"35
+[p x HFOFST=ON ]
+"36
+[p x PBADEN=ON ]
+"37
+[p x CCP3MX=PORTB5 ]
+"38
+[p x MCLRE=EXTMCLR ]
+"39
+[p x T3CMX=PORTC0 ]
+"42
+[p x LVP=OFF ]
+"43
+[p x STVREN=ON ]
+"44
+[p x XINST=OFF ]
+"45
+[p x DEBUG=OFF ]
+"48
+[p x CP2=OFF ]
+"49
+[p x CP1=OFF ]
+"50
+[p x CP3=OFF ]
+"51
+[p x CP0=OFF ]
+"54
+[p x CPB=OFF ]
+"55
+[p x CPD=OFF ]
+"58
+[p x WRT0=OFF ]
+"59
+[p x WRT1=OFF ]
+"60
+[p x WRT2=OFF ]
+"61
+[p x WRT3=OFF ]
+"64
+[p x WRTC=OFF ]
+"65
+[p x WRTD=OFF ]
+"66
+[p x WRTB=OFF ]
+"69
+[p x EBTR3=OFF ]
+"70
+[p x EBTR1=OFF ]
+"71
+[p x EBTR2=OFF ]
+"72
+[p x EBTR0=OFF ]
+"75
+[p x EBTRB=OFF ]
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stdlib.h: 7: typedef unsigned short wchar_t;
 [; ;stdlib.h: 15: typedef struct {
@@ -7540,36 +7589,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.h: 18: bit Fkt_ModeCheck(void);
 [; ;led.h: 14: void Fkt_SwitchLed(void);
 [; ;main.h: 20: interrupt void Fkt_Isr(void);
-"14 main.c
+"81
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 14: void main(void) {
+[; ;main.c: 81: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 15: Fkt_Init();
-"15
+[; ;main.c: 82: Fkt_Init();
+"82
 [e ( _Fkt_Init ..  ]
-[; ;main.c: 16: PORTBbits.RB2 = 1;
-"16
-[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
-[; ;main.c: 17: while(1) {
-"17
+[; ;main.c: 83: while(1) {
+"83
 [e :U 1149 ]
 {
-[; ;main.c: 19: __nop();
-"19
+[; ;main.c: 85: __nop();
+"85
 [e ( ___nop ..  ]
-"20
+"86
 }
 [e :U 1148 ]
-"17
+"83
 [e $U 1149  ]
 [e :U 1150 ]
-[; ;main.c: 20: }
-[; ;main.c: 21: return;
-"21
+[; ;main.c: 86: }
+[; ;main.c: 87: return;
+"87
 [e $UE 1147  ]
-[; ;main.c: 22: }
-"22
+[; ;main.c: 88: }
+"88
 [e :UE 1147 ]
 }

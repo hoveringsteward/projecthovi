@@ -9437,10 +9437,11 @@ time_pulse <<= 8;
 time_pulse |= TMR3L;
 TMR3H = 0;
 TMR3L = 0;
+__nop();
 return time_pulse;
 }
 
-# 20
+# 21
 bit Fkt_ModeCheck(void) {
 unsigned int time = Fkt_CalcTime();
 if(time < 6800){
@@ -9450,4 +9451,5 @@ return 0;
 PORTBbits.RB2 = 1;
 return 1;
 }
+__nop();
 }

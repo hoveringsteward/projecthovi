@@ -6,11 +6,11 @@ _GIE 7F97 0 ABS 0
 __Hintentry 0 0 ABS 0
 __Lintentry 0 0 ABS 0
 __CFG_PLLCFG$OFF 0 0 ABS 0
-_Fkt_InitUart 19A 0 CODE 0
+_Fkt_InitUart 198 0 CODE 0
 _PEIE 7F96 0 ABS 0
 __end_of_Fkt_InitAnsel 130 0 CODE 0
 __end_of_Fkt_InitTimer 14A 0 CODE 0
-_main 180 0 CODE 0
+_main 18A 0 CODE 0
 ___sp 0 0 STACK 2
 btemp 15 0 COMRAM 1
 start 96 0 CODE 0
@@ -110,15 +110,15 @@ __Hintcodelo 96 0 CODE 0
 _Fkt_ModeCheck 9A 0 CODE 0
 __Lintcodelo 96 0 CODE 0
 __Hrbss 0 0 COMRAM 1
-__end_of_main 18A 0 CODE 0
+__end_of_main 192 0 CODE 0
 __Lrbss 0 0 COMRAM 1
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
 _Fkt_InitTimer 130 0 CODE 0
-_Fkt_InitInterrupt 18A 0 CODE 0
+_Fkt_InitInterrupt 180 0 CODE 0
 end_of_initialization 176 0 CODE 0
 __size_of_Fkt_Init 0 0 ABS 0
-__end_of_Fkt_InitInterrupt 194 0 CODE 0
+__end_of_Fkt_InitInterrupt 18A 0 CODE 0
 _PORTBbits F81 0 ABS 0
 _T3CONbits FB1 0 ABS 0
 _TMR3GIE 7D19 0 ABS 0
@@ -155,14 +155,14 @@ __Hbank9 0 0 ABS 0
 __Lbank9 0 0 ABS 0
 __Htext1 0 0 ABS 0
 __Ltext1 0 0 ABS 0
-__ptext0 180 0 CODE 0
+__ptext0 18A 0 CODE 0
 __Htext2 0 0 ABS 0
 __Ltext2 0 0 ABS 0
 __ptext1 EE 0 CODE 0
 _Fkt_InitAnsel 110 0 CODE 0
 __Htext3 0 0 ABS 0
 __Ltext3 0 0 ABS 0
-__ptext2 19A 0 CODE 0
+__ptext2 198 0 CODE 0
 __Htext4 0 0 ABS 0
 __Ltext4 0 0 ABS 0
 __ptext3 14A 0 CODE 0
@@ -172,16 +172,16 @@ __Ltext5 0 0 ABS 0
 __ptext4 130 0 CODE 0
 __Htext6 0 0 ABS 0
 __Ltext6 0 0 ABS 0
-__ptext5 19C 0 CODE 0
+__ptext5 19A 0 CODE 0
 __Htext7 0 0 ABS 0
 __Ltext7 0 0 ABS 0
 __ptext6 160 0 CODE 0
 __Htext8 0 0 ABS 0
 __Ltext8 0 0 ABS 0
-__ptext7 194 0 CODE 0
+__ptext7 192 0 CODE 0
 __Htext9 0 0 ABS 0
 __Ltext9 0 0 ABS 0
-__ptext8 18A 0 CODE 0
+__ptext8 180 0 CODE 0
 __CFG_T3CMX$PORTC0 0 0 ABS 0
 __ptext9 110 0 CODE 0
 __Hclrtext 0 0 ABS 0
@@ -263,7 +263,7 @@ __ptext12 CA 0 CODE 0
 ___inthi_sp 0 0 STACK 2
 __CFG_WDTEN$OFF 0 0 ABS 0
 ___intlo_sp 0 0 STACK 2
-_Fkt_InitOsc 194 0 CODE 0
+_Fkt_InitOsc 192 0 CODE 0
 _T3GCONbits FB4 0 ABS 0
 __Hend_init 9A 0 CODE 0
 __Lend_init 96 0 CODE 0
@@ -271,7 +271,7 @@ __CFG_CP0$OFF 0 0 ABS 0
 __smallconst 0 0 SMALLCONST 0
 __size_of_Fkt_Isr 0 0 ABS 0
 __CFG_CP1$OFF 0 0 ABS 0
-__Hreset_vec 4 0 CODE 0
+__Hreset_vec 6 0 CODE 0
 __Lreset_vec 0 0 CODE 0
 __CFG_CP2$OFF 0 0 ABS 0
 Fkt_ModeCheck@time 5 0 COMRAM 1
@@ -296,25 +296,25 @@ __end_of_Fkt_Init 110 0 CODE 0
 __CFG_BOREN$SBORDIS 0 0 ABS 0
 __CFG_IESO$OFF 0 0 ABS 0
 _Fkt_InitTris 14A 0 CODE 0
-__end_of_Fkt_InitOsc 19A 0 CODE 0
-__end_of_Fkt_InitSpi 19E 0 CODE 0
+__end_of_Fkt_InitOsc 198 0 CODE 0
+__end_of_Fkt_InitSpi 19C 0 CODE 0
 __initialization 176 0 CODE 0
 __activetblptr 0 0 ABS 0
 __end_of_Fkt_InitTris 160 0 CODE 0
-__end_of_Fkt_InitUart 19C 0 CODE 0
+__end_of_Fkt_InitUart 19A 0 CODE 0
 __end_of_Fkt_InitPort 176 0 CODE 0
-_Fkt_InitSpi 19C 0 CODE 0
+_Fkt_InitSpi 19A 0 CODE 0
 __CFG_LVP$OFF 0 0 ABS 0
 %segments
-reset_vec 0 3 CODE 0 0
-intcode 8 19D CODE 8 0
+reset_vec 0 5 CODE 0 0
+intcode 8 19B CODE 8 0
 config 300000 30000D CONFIG 300000 0
 idloc 200000 200007 IDLOC 200000 0
 cstackCOMRAM 1 15 COMRAM 1 1
 %locals
 dist/default/debug\HOVI.X.debug.obj
 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-C:\Users\Lucas\AppData\Local\Temp\s7j8.
+C:\Users\Lucas\AppData\Local\Temp\s5kc.
 2829 176 0 CODE 0
 2831 176 0 CODE 0
 2834 176 0 CODE 0
@@ -324,11 +324,10 @@ C:\Users\Lucas\AppData\Local\Temp\s7j8.
 2844 17A 0 CODE 0
 2845 17C 0 CODE 0
 main.c
-81 180 0 CODE 0
-82 180 0 CODE 0
-83 184 0 CODE 0
-86 186 0 CODE 0
-84 188 0 CODE 0
+81 18A 0 CODE 0
+82 18A 0 CODE 0
+85 18E 0 CODE 0
+83 190 0 CODE 0
 init.c
 12 EE 0 CODE 0
 13 EE 0 CODE 0
@@ -341,8 +340,8 @@ init.c
 20 10A 0 CODE 0
 21 10E 0 CODE 0
 init.c
-51 19A 0 CODE 0
-53 19A 0 CODE 0
+51 198 0 CODE 0
+53 198 0 CODE 0
 init.c
 31 14A 0 CODE 0
 32 14A 0 CODE 0
@@ -364,8 +363,8 @@ init.c
 74 146 0 CODE 0
 75 148 0 CODE 0
 init.c
-55 19C 0 CODE 0
-57 19C 0 CODE 0
+55 19A 0 CODE 0
+57 19A 0 CODE 0
 init.c
 23 160 0 CODE 0
 24 160 0 CODE 0
@@ -375,16 +374,16 @@ init.c
 28 170 0 CODE 0
 29 174 0 CODE 0
 init.c
-47 194 0 CODE 0
-48 194 0 CODE 0
-49 198 0 CODE 0
+47 192 0 CODE 0
+48 192 0 CODE 0
+49 196 0 CODE 0
 init.c
-77 18A 0 CODE 0
-78 18A 0 CODE 0
-79 18C 0 CODE 0
-81 18E 0 CODE 0
-82 190 0 CODE 0
-84 192 0 CODE 0
+77 180 0 CODE 0
+78 180 0 CODE 0
+79 182 0 CODE 0
+81 184 0 CODE 0
+82 186 0 CODE 0
+84 188 0 CODE 0
 init.c
 39 110 0 CODE 0
 40 110 0 CODE 0

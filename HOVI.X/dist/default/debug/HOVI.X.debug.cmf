@@ -13,24 +13,24 @@
 %PSECTS
 $dist/default/debug\HOVI.X.debug.obj
 cinit CODE 0 176 176 A 1
-text0 CODE 0 180 180 A 1
+text0 CODE 0 18A 18A 8 1
 text1 CODE 0 EE EE 22 1
-text2 CODE 0 19A 19A 2 1
+text2 CODE 0 198 198 2 1
 text3 CODE 0 14A 14A 16 1
 text4 CODE 0 130 130 1A 1
-text5 CODE 0 19C 19C 2 1
+text5 CODE 0 19A 19A 2 1
 text6 CODE 0 160 160 16 1
-text7 CODE 0 194 194 6 1
-text8 CODE 0 18A 18A A 1
+text7 CODE 0 192 192 6 1
+text8 CODE 0 180 180 A 1
 text9 CODE 0 110 110 20 1
 text11 CODE 0 9A 9A 30 1
 text12 CODE 0 CA CA 24 1
 cstackCOMRAM COMRAM 1 1 1 14 1
 temp COMRAM 1 15 15 1 1
 intcode CODE 0 8 8 8E 1
-$C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+$C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 idloc IDLOC 0 200000 200000 8 1
-reset_vec CODE 0 0 0 4 1
+reset_vec CODE 0 0 0 6 1
 end_init CODE 0 96 96 4 1
 config CONFIG 0 300000 300000 E 1
 # %UNUSED Section
@@ -40,7 +40,7 @@ config CONFIG 0 300000 300000 E 1
 # Addresses given in the range are in hexadecimal and units of delta.
 %UNUSED
 RAM 60-F37 1
-SFR F38-FFF 1
+SFR F38-FFC 1
 BANK0 60-FF 1
 BANK1 100-1FF 1
 BANK2 200-2FF 1
@@ -51,12 +51,12 @@ BANK6 600-6FF 1
 BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
-CONST 4-7 1
-CONST 19E-FFFF 1
+CONST 6-7 1
+CONST 19C-FFFF 1
 STACK 60-F37 1
 SMALLCONST 1000-FFFF 1
-CODE 4-7 1
-CODE 19E-FFFF 1
+CODE 6-7 1
+CODE 19C-FFFF 1
 BANK10 A00-AFF 1
 BANK11 B00-BFF 1
 BANK12 C00-CFF 1
@@ -117,15 +117,15 @@ C8 text11 CODE >31:C:\projecthovi\HOVI.X\gear.c
 122 text9 CODE >43:C:\projecthovi\HOVI.X\init.c
 128 text9 CODE >44:C:\projecthovi\HOVI.X\init.c
 12E text9 CODE >45:C:\projecthovi\HOVI.X\init.c
-18A text8 CODE >77:C:\projecthovi\HOVI.X\init.c
-18A text8 CODE >78:C:\projecthovi\HOVI.X\init.c
-18C text8 CODE >79:C:\projecthovi\HOVI.X\init.c
-18E text8 CODE >81:C:\projecthovi\HOVI.X\init.c
-190 text8 CODE >82:C:\projecthovi\HOVI.X\init.c
-192 text8 CODE >84:C:\projecthovi\HOVI.X\init.c
-194 text7 CODE >47:C:\projecthovi\HOVI.X\init.c
-194 text7 CODE >48:C:\projecthovi\HOVI.X\init.c
-198 text7 CODE >49:C:\projecthovi\HOVI.X\init.c
+180 text8 CODE >77:C:\projecthovi\HOVI.X\init.c
+180 text8 CODE >78:C:\projecthovi\HOVI.X\init.c
+182 text8 CODE >79:C:\projecthovi\HOVI.X\init.c
+184 text8 CODE >81:C:\projecthovi\HOVI.X\init.c
+186 text8 CODE >82:C:\projecthovi\HOVI.X\init.c
+188 text8 CODE >84:C:\projecthovi\HOVI.X\init.c
+192 text7 CODE >47:C:\projecthovi\HOVI.X\init.c
+192 text7 CODE >48:C:\projecthovi\HOVI.X\init.c
+196 text7 CODE >49:C:\projecthovi\HOVI.X\init.c
 160 text6 CODE >23:C:\projecthovi\HOVI.X\init.c
 160 text6 CODE >24:C:\projecthovi\HOVI.X\init.c
 164 text6 CODE >25:C:\projecthovi\HOVI.X\init.c
@@ -133,8 +133,8 @@ C8 text11 CODE >31:C:\projecthovi\HOVI.X\gear.c
 16C text6 CODE >27:C:\projecthovi\HOVI.X\init.c
 170 text6 CODE >28:C:\projecthovi\HOVI.X\init.c
 174 text6 CODE >29:C:\projecthovi\HOVI.X\init.c
-19C text5 CODE >55:C:\projecthovi\HOVI.X\init.c
-19C text5 CODE >57:C:\projecthovi\HOVI.X\init.c
+19A text5 CODE >55:C:\projecthovi\HOVI.X\init.c
+19A text5 CODE >57:C:\projecthovi\HOVI.X\init.c
 130 text4 CODE >59:C:\projecthovi\HOVI.X\init.c
 130 text4 CODE >65:C:\projecthovi\HOVI.X\init.c
 132 text4 CODE >66:C:\projecthovi\HOVI.X\init.c
@@ -153,8 +153,8 @@ C8 text11 CODE >31:C:\projecthovi\HOVI.X\gear.c
 156 text3 CODE >35:C:\projecthovi\HOVI.X\init.c
 15A text3 CODE >36:C:\projecthovi\HOVI.X\init.c
 15E text3 CODE >37:C:\projecthovi\HOVI.X\init.c
-19A text2 CODE >51:C:\projecthovi\HOVI.X\init.c
-19A text2 CODE >53:C:\projecthovi\HOVI.X\init.c
+198 text2 CODE >51:C:\projecthovi\HOVI.X\init.c
+198 text2 CODE >53:C:\projecthovi\HOVI.X\init.c
 EE text1 CODE >12:C:\projecthovi\HOVI.X\init.c
 EE text1 CODE >13:C:\projecthovi\HOVI.X\init.c
 F2 text1 CODE >14:C:\projecthovi\HOVI.X\init.c
@@ -165,19 +165,18 @@ FE text1 CODE >17:C:\projecthovi\HOVI.X\init.c
 106 text1 CODE >19:C:\projecthovi\HOVI.X\init.c
 10A text1 CODE >20:C:\projecthovi\HOVI.X\init.c
 10E text1 CODE >21:C:\projecthovi\HOVI.X\init.c
-180 text0 CODE >81:C:\projecthovi\HOVI.X\main.c
-180 text0 CODE >82:C:\projecthovi\HOVI.X\main.c
-184 text0 CODE >83:C:\projecthovi\HOVI.X\main.c
-186 text0 CODE >86:C:\projecthovi\HOVI.X\main.c
-188 text0 CODE >84:C:\projecthovi\HOVI.X\main.c
-176 cinit CODE >2829:C:\Users\Lucas\AppData\Local\Temp\s7j8.
-176 cinit CODE >2831:C:\Users\Lucas\AppData\Local\Temp\s7j8.
-176 cinit CODE >2834:C:\Users\Lucas\AppData\Local\Temp\s7j8.
-176 cinit CODE >2840:C:\Users\Lucas\AppData\Local\Temp\s7j8.
-176 cinit CODE >2842:C:\Users\Lucas\AppData\Local\Temp\s7j8.
-178 cinit CODE >2843:C:\Users\Lucas\AppData\Local\Temp\s7j8.
-17A cinit CODE >2844:C:\Users\Lucas\AppData\Local\Temp\s7j8.
-17C cinit CODE >2845:C:\Users\Lucas\AppData\Local\Temp\s7j8.
+18A text0 CODE >81:C:\projecthovi\HOVI.X\main.c
+18A text0 CODE >82:C:\projecthovi\HOVI.X\main.c
+18E text0 CODE >85:C:\projecthovi\HOVI.X\main.c
+190 text0 CODE >83:C:\projecthovi\HOVI.X\main.c
+176 cinit CODE >2829:C:\Users\Lucas\AppData\Local\Temp\s5kc.
+176 cinit CODE >2831:C:\Users\Lucas\AppData\Local\Temp\s5kc.
+176 cinit CODE >2834:C:\Users\Lucas\AppData\Local\Temp\s5kc.
+176 cinit CODE >2840:C:\Users\Lucas\AppData\Local\Temp\s5kc.
+176 cinit CODE >2842:C:\Users\Lucas\AppData\Local\Temp\s5kc.
+178 cinit CODE >2843:C:\Users\Lucas\AppData\Local\Temp\s5kc.
+17A cinit CODE >2844:C:\Users\Lucas\AppData\Local\Temp\s5kc.
+17C cinit CODE >2845:C:\Users\Lucas\AppData\Local\Temp\s5kc.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -196,30 +195,30 @@ __Hspace_1 16 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __Hspace_2 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __CFG_IESO$OFF 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/debug\HOVI.X.debug.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 _Fkt_Init EE 0 CODE 0 text1 dist/default/debug\HOVI.X.debug.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\HOVI.X.debug.obj
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/debug\HOVI.X.debug.obj
 _PEIE 7F96 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
-_main 180 0 CODE 0 text0 dist/default/debug\HOVI.X.debug.obj
+___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
+_main 18A 0 CODE 0 text0 dist/default/debug\HOVI.X.debug.obj
 btemp 15 0 COMRAM 1 temp dist/default/debug\HOVI.X.debug.obj
 __end_of_Fkt_Init 110 0 CODE 0 text1 dist/default/debug\HOVI.X.debug.obj
-start 96 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+start 96 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 __size_of_main 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __CFG_WDTEN$OFF 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _Fkt_CalcTime CA 0 CODE 0 text12 dist/default/debug\HOVI.X.debug.obj
 __CFG_DEBUG$OFF 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __CFG_CCP2MX$PORTC1 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-_Fkt_InitOsc 194 0 CODE 0 text7 dist/default/debug\HOVI.X.debug.obj
-_Fkt_InitSpi 19C 0 CODE 0 text5 dist/default/debug\HOVI.X.debug.obj
+_Fkt_InitOsc 192 0 CODE 0 text7 dist/default/debug\HOVI.X.debug.obj
+_Fkt_InitSpi 19A 0 CODE 0 text5 dist/default/debug\HOVI.X.debug.obj
 __Hpowerup 96 0 CODE 0 powerup dist/default/debug\HOVI.X.debug.obj
 __CFG_CCP3MX$PORTB5 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__accesstop 60 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
-intlevel0 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
-intlevel1 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
-intlevel2 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
-intlevel3 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+__accesstop 60 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
+intlevel0 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
+intlevel1 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
+intlevel2 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
+intlevel3 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 _TMR3GIE 7D19 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _TMR3GIF 7D21 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/debug\HOVI.X.debug.obj
@@ -238,8 +237,8 @@ _ANSELB F39 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _ANSELC F3A 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _ANSELD F3B 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _ANSELE F3C 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 _Fkt_Isr 8 0 CODE 0 intcode dist/default/debug\HOVI.X.debug.obj
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/debug\HOVI.X.debug.obj
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/debug\HOVI.X.debug.obj
@@ -297,7 +296,7 @@ __Hbank14 0 0 ABS 0 bank14 dist/default/debug\HOVI.X.debug.obj
 __Hbank15 0 0 ABS 0 bank15 dist/default/debug\HOVI.X.debug.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/debug\HOVI.X.debug.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/debug\HOVI.X.debug.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 __Hcomram 0 0 ABS 0 comram dist/default/debug\HOVI.X.debug.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/debug\HOVI.X.debug.obj
 __Lbank0 0 0 ABS 0 bank0 dist/default/debug\HOVI.X.debug.obj
@@ -357,13 +356,13 @@ __S1 16 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __S2 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _Fkt_InitPort 160 0 CODE 0 text6 dist/default/debug\HOVI.X.debug.obj
 _Fkt_InitTris 14A 0 CODE 0 text3 dist/default/debug\HOVI.X.debug.obj
-_Fkt_InitUart 19A 0 CODE 0 text2 dist/default/debug\HOVI.X.debug.obj
-__end_of_Fkt_InitOsc 19A 0 CODE 0 text7 dist/default/debug\HOVI.X.debug.obj
-__end_of_Fkt_InitSpi 19E 0 CODE 0 text5 dist/default/debug\HOVI.X.debug.obj
+_Fkt_InitUart 198 0 CODE 0 text2 dist/default/debug\HOVI.X.debug.obj
+__end_of_Fkt_InitOsc 198 0 CODE 0 text7 dist/default/debug\HOVI.X.debug.obj
+__end_of_Fkt_InitSpi 19C 0 CODE 0 text5 dist/default/debug\HOVI.X.debug.obj
 _Fkt_InitAnsel 110 0 CODE 0 text9 dist/default/debug\HOVI.X.debug.obj
 _Fkt_InitTimer 130 0 CODE 0 text4 dist/default/debug\HOVI.X.debug.obj
 __Lbigdata 0 0 BIGRAM 1 bigdata dist/default/debug\HOVI.X.debug.obj
-__end_of_Fkt_InitInterrupt 194 0 CODE 0 text8 dist/default/debug\HOVI.X.debug.obj
+__end_of_Fkt_InitInterrupt 18A 0 CODE 0 text8 dist/default/debug\HOVI.X.debug.obj
 __Hnvrram 0 0 COMRAM 1 nvrram dist/default/debug\HOVI.X.debug.obj
 __CFG_BORV$190 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __Lintentry 0 0 ABS 0 intentry dist/default/debug\HOVI.X.debug.obj
@@ -394,11 +393,11 @@ __Lconfig 300000 0 CONFIG 0 config dist/default/debug\HOVI.X.debug.obj
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/debug\HOVI.X.debug.obj
 __end_of_Fkt_InitPort 176 0 CODE 0 text6 dist/default/debug\HOVI.X.debug.obj
 __end_of_Fkt_InitTris 160 0 CODE 0 text3 dist/default/debug\HOVI.X.debug.obj
-__end_of_Fkt_InitUart 19C 0 CODE 0 text2 dist/default/debug\HOVI.X.debug.obj
+__end_of_Fkt_InitUart 19A 0 CODE 0 text2 dist/default/debug\HOVI.X.debug.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/default/debug\HOVI.X.debug.obj
 __size_of_Fkt_Isr 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-stackhi F37 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
-stacklo 60 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+stackhi F37 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
+stacklo 60 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/debug\HOVI.X.debug.obj
 __Lintret 0 0 ABS 0 intret dist/default/debug\HOVI.X.debug.obj
 __Lirdata 0 0 CODE 0 irdata dist/default/debug\HOVI.X.debug.obj
@@ -409,33 +408,33 @@ __Lspace_2 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __size_of_Fkt_InitAnsel 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __size_of_Fkt_InitTimer 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __Lend_init 96 0 CODE 0 end_init dist/default/debug\HOVI.X.debug.obj
-_Fkt_InitInterrupt 18A 0 CODE 0 text8 dist/default/debug\HOVI.X.debug.obj
+_Fkt_InitInterrupt 180 0 CODE 0 text8 dist/default/debug\HOVI.X.debug.obj
 __LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/debug\HOVI.X.debug.obj
 end_of_initialization 176 0 CODE 0 cinit dist/default/debug\HOVI.X.debug.obj
 __Lnvrram 0 0 COMRAM 1 nvrram dist/default/debug\HOVI.X.debug.obj
 __Hintentry 0 0 ABS 0 intentry dist/default/debug\HOVI.X.debug.obj
 __CFG_STVREN$ON 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__Hreset_vec 4 0 CODE 0 reset_vec dist/default/debug\HOVI.X.debug.obj
+__Hreset_vec 6 0 CODE 0 reset_vec dist/default/debug\HOVI.X.debug.obj
 __Lramtop 1000 0 RAM 0 ramtop dist/default/debug\HOVI.X.debug.obj
 __Lrparam 0 0 COMRAM 1 rparam dist/default/debug\HOVI.X.debug.obj
 __pcinit 176 0 CODE 0 cinit dist/default/debug\HOVI.X.debug.obj
 __size_of_Fkt_InitOsc 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __size_of_Fkt_InitSpi 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__ptext0 180 0 CODE 0 text0 dist/default/debug\HOVI.X.debug.obj
+__ptext0 18A 0 CODE 0 text0 dist/default/debug\HOVI.X.debug.obj
 __ptext1 EE 0 CODE 0 text1 dist/default/debug\HOVI.X.debug.obj
-__ptext2 19A 0 CODE 0 text2 dist/default/debug\HOVI.X.debug.obj
+__ptext2 198 0 CODE 0 text2 dist/default/debug\HOVI.X.debug.obj
 __ptext3 14A 0 CODE 0 text3 dist/default/debug\HOVI.X.debug.obj
 __ptext4 130 0 CODE 0 text4 dist/default/debug\HOVI.X.debug.obj
-__ptext5 19C 0 CODE 0 text5 dist/default/debug\HOVI.X.debug.obj
+__ptext5 19A 0 CODE 0 text5 dist/default/debug\HOVI.X.debug.obj
 __ptext6 160 0 CODE 0 text6 dist/default/debug\HOVI.X.debug.obj
-__ptext7 194 0 CODE 0 text7 dist/default/debug\HOVI.X.debug.obj
-__ptext8 18A 0 CODE 0 text8 dist/default/debug\HOVI.X.debug.obj
+__ptext7 192 0 CODE 0 text7 dist/default/debug\HOVI.X.debug.obj
+__ptext8 180 0 CODE 0 text8 dist/default/debug\HOVI.X.debug.obj
 __ptext9 110 0 CODE 0 text9 dist/default/debug\HOVI.X.debug.obj
 __Lstruct 0 0 COMRAM 1 struct dist/default/debug\HOVI.X.debug.obj
 __Ltext11 0 0 ABS 0 text11 dist/default/debug\HOVI.X.debug.obj
 __Ltext12 0 0 ABS 0 text12 dist/default/debug\HOVI.X.debug.obj
 __end_of_Fkt_InitAnsel 130 0 CODE 0 text9 dist/default/debug\HOVI.X.debug.obj
-__ramtop 1000 0 RAM 0 ramtop C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+__ramtop 1000 0 RAM 0 ramtop C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
 __end_of_Fkt_InitTimer 14A 0 CODE 0 text4 dist/default/debug\HOVI.X.debug.obj
 __Lpowerup 96 0 CODE 0 powerup dist/default/debug\HOVI.X.debug.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\HOVI.X.debug.obj
@@ -459,7 +458,7 @@ _T3CONbits FB1 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __end_of_Fkt_ModeCheck CA 0 CODE 0 text11 dist/default/debug\HOVI.X.debug.obj
 __Hend_init 9A 0 CODE 0 end_init dist/default/debug\HOVI.X.debug.obj
 __CFG_BOREN$SBORDIS 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__end_of_main 18A 0 CODE 0 text0 dist/default/debug\HOVI.X.debug.obj
+__end_of_main 192 0 CODE 0 text0 dist/default/debug\HOVI.X.debug.obj
 __pintcode 8 0 CODE 0 intcode dist/default/debug\HOVI.X.debug.obj
 __size_of_Fkt_Init 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _PORTA F80 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
@@ -523,6 +522,6 @@ __Hintcode 96 0 CODE 0 intcode dist/default/debug\HOVI.X.debug.obj
 %SEGMENTS
 idloc 0 200000 200000 8 1
 cstackCOMRAM 1 1 1 15 1
-reset_vec 0 0 0 4 1
-intcode 0 8 8 196 1
+reset_vec 0 0 0 6 1
+intcode 0 8 8 194 1
 config 0 300000 300000 E 1

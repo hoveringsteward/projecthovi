@@ -9432,8 +9432,13 @@ interrupt void Fkt_Isr(void);
 
 # 6 "interrupt.c"
 interrupt void Fkt_Isr() {
+__nop();
 if(TMR3GIF == 1) {
 TMR3GIF = 0;
 Fkt_ModeCheck();
+}else if (TMR3IF == 1) {
+TMR3IF = 0;
+__nop();
+__nop();
 }
 }

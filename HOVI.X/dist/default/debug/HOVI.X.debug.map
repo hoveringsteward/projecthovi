@@ -5,7 +5,7 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.35\dat\en_msgs.txt -cs \
   -h+dist/default/debug\HOVI.X.debug.sym \
   --cmf=dist/default/debug\HOVI.X.debug.cmf -z -Q18F46K22 \
-  -oC:\Users\Lucas\AppData\Local\Temp\s7j8.2 \
+  -oC:\Users\Lucas\AppData\Local\Temp\s5kc.2 \
   -Mdist/default/debug/HOVI.X.debug.map -E1 -ver=XC8 -ASTACK=060h-0f37h \
   -pstack=STACK -ACODE=00h-0FFFFh -ACONST=00h-0FFFFh \
   -ASMALLCONST=01000h-010FFhx240 -AMEDIUMCONST=01000h-0FFFFh \
@@ -16,7 +16,7 @@ Linker command line:
   -ABANK7=0700h-07FFh -ABANK8=0800h-08FFh -ABANK9=0900h-09FFh \
   -ABANK10=0A00h-0AFFh -ABANK11=0B00h-0BFFh -ABANK12=0C00h-0CFFh \
   -ABANK13=0D00h-0DFFh -ABANK14=0E00h-0EFFh -ABANK15=0F00h-0F37h \
-  -ASFR=0F38h-0F5Fh,0F60h-0FFFh \
+  -ASFR=0F38h-0F5Fh,0F60h-0FFCh \
   -preset_vec=00h,intcode=08h,intcodelo,powerup,init,end_init \
   -pramtop=01000h -psmallconst=SMALLCONST -pmediumconst=MEDIUMCONST \
   -pconst=CONST -AFARRAM=00h-00h -ACONFIG=0300000h-030000Dh -pconfig=CONFIG \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Lucas\AppData\Local\Temp\s7j8.obj \
+  C:\Users\Lucas\AppData\Local\Temp\s5kc.obj \
   dist/default/debug\HOVI.X.debug.obj 
 
 Object code version is 3.11
@@ -39,9 +39,9 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Lucas\AppData\Local\Temp\s7j8.obj
+C:\Users\Lucas\AppData\Local\Temp\s5kc.obj
                 end_init                             96       96        4        4       0
-                reset_vec                             0        0        4        0       0
+                reset_vec                             0        0        6        0       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
 dist/default/debug\HOVI.X.debug.obj
@@ -50,15 +50,15 @@ dist/default/debug\HOVI.X.debug.obj
                 text12                               CA       CA       24        4       0
                 text11                               9A       9A       30        4       0
                 text9                               110      110       20        4       0
-                text8                               18A      18A        A        4       0
-                text7                               194      194        6        4       0
+                text8                               180      180        A        4       0
+                text7                               192      192        6        4       0
                 text6                               160      160       16        4       0
-                text5                               19C      19C        2        4       0
+                text5                               19A      19A        2        4       0
                 text4                               130      130       1A        4       0
                 text3                               14A      14A       16        4       0
-                text2                               19A      19A        2        4       0
+                text2                               198      198        2        4       0
                 text1                                EE       EE       22        4       0
-                text0                               180      180        A        4       0
+                text0                               18A      18A        8        4       0
                 cstackCOMRAM                          1        1       14        1       1
                 cinit                               176      176        A        4       0
 
@@ -68,19 +68,19 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   CODE           
                 end_init                             96       96        4         0
                 intcode                               8        8       8E         0
-                reset_vec                             0        0        4         0
+                reset_vec                             0        0        6         0
                 text12                               CA       CA       24         0
                 text11                               9A       9A       30         0
                 text9                               110      110       20         0
-                text8                               18A      18A        A         0
-                text7                               194      194        6         0
+                text8                               180      180        A         0
+                text7                               192      192        6         0
                 text6                               160      160       16         0
-                text5                               19C      19C        2         0
+                text5                               19A      19A        2         0
                 text4                               130      130       1A         0
                 text3                               14A      14A       16         0
-                text2                               19A      19A        2         0
+                text2                               198      198        2         0
                 text1                                EE       EE       22         0
-                text0                               180      180        A         0
+                text0                               18A      18A        8         0
                 cinit                               176      176        A         0
 
         CLASS   CONST          
@@ -147,9 +147,9 @@ TOTAL           Name                               Link     Load   Length     Sp
 
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
-                reset_vec                      000000  000004  000004         0       0  CODE    
+                reset_vec                      000000  000006  000006         0       0  CODE    
                 cstackCOMRAM                   000001  000015  000016         1       1  COMRAM  
-                intcode                        000008  000196  00019E         4       0  CODE    
+                intcode                        000008  000194  00019C         4       0  CODE    
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -174,15 +174,15 @@ UNUSED ADDRESS RANGES
         BANK8            000800-0008FF              100
         BANK9            000900-0009FF              100
         BIGRAM           000016-000F37              F22
-        CODE             000004-000007                4
-                         00019E-00FFFF             FE62
+        CODE             000006-000007                2
+                         00019C-00FFFF             FE64
         COMRAM           000016-00005F               4A
-        CONST            000004-000007                4
-                         00019E-00FFFF             FE62
+        CONST            000006-000007                2
+                         00019C-00FFFF             FE64
         EEDATA           F00000-F003FF              400
         MEDIUMCONST      001000-00FFFF             F000
         RAM              000060-000F37              100
-        SFR              000F38-000FFF               28
+        SFR              000F38-000FFC               28
         SMALLCONST       001000-00FFFF              100
         STACK            000060-000F37              ED8
 
@@ -199,13 +199,13 @@ _ANSELE                     (abs)        000F3C
 _Fkt_CalcTime               text12       0000CA
 _Fkt_Init                   text1        0000EE
 _Fkt_InitAnsel              text9        000110
-_Fkt_InitInterrupt          text8        00018A
-_Fkt_InitOsc                text7        000194
+_Fkt_InitInterrupt          text8        000180
+_Fkt_InitOsc                text7        000192
 _Fkt_InitPort               text6        000160
-_Fkt_InitSpi                text5        00019C
+_Fkt_InitSpi                text5        00019A
 _Fkt_InitTimer              text4        000130
 _Fkt_InitTris               text3        00014A
-_Fkt_InitUart               text2        00019A
+_Fkt_InitUart               text2        000198
 _Fkt_Isr                    intcode      000008
 _Fkt_ModeCheck              text11       00009A
 _GIE                        (abs)        007F97
@@ -325,7 +325,7 @@ __Hramtop                   ramtop       001000
 __Hrbit                     rbit         000000
 __Hrbss                     rbss         000000
 __Hrdata                    rdata        000000
-__Hreset_vec                reset_vec    000004
+__Hreset_vec                reset_vec    000006
 __Hrparam                   rparam       000000
 __Hsfr                      sfr          000000
 __Hsmallconst               smallconst   000000
@@ -440,33 +440,33 @@ __activetblptr              (abs)        000000
 __end_of_Fkt_CalcTime       text12       0000EE
 __end_of_Fkt_Init           text1        000110
 __end_of_Fkt_InitAnsel      text9        000130
-__end_of_Fkt_InitInterrupt  text8        000194
-__end_of_Fkt_InitOsc        text7        00019A
+__end_of_Fkt_InitInterrupt  text8        00018A
+__end_of_Fkt_InitOsc        text7        000198
 __end_of_Fkt_InitPort       text6        000176
-__end_of_Fkt_InitSpi        text5        00019E
+__end_of_Fkt_InitSpi        text5        00019C
 __end_of_Fkt_InitTimer      text4        00014A
 __end_of_Fkt_InitTris       text3        000160
-__end_of_Fkt_InitUart       text2        00019C
+__end_of_Fkt_InitUart       text2        00019A
 __end_of_Fkt_Isr            intcode      000096
 __end_of_Fkt_ModeCheck      text11       0000CA
 __end_of__initialization    cinit        000176
-__end_of_main               text0        00018A
+__end_of_main               text0        000192
 __initialization            cinit        000176
 __mediumconst               mediumconst  000000
 __pcinit                    cinit        000176
 __pcstackCOMRAM             cstackCOMRAM 000001
 __pintcode                  intcode      000008
-__ptext0                    text0        000180
+__ptext0                    text0        00018A
 __ptext1                    text1        0000EE
 __ptext11                   text11       00009A
 __ptext12                   text12       0000CA
-__ptext2                    text2        00019A
+__ptext2                    text2        000198
 __ptext3                    text3        00014A
 __ptext4                    text4        000130
-__ptext5                    text5        00019C
+__ptext5                    text5        00019A
 __ptext6                    text6        000160
-__ptext7                    text7        000194
-__ptext8                    text8        00018A
+__ptext7                    text7        000192
+__ptext8                    text8        000180
 __ptext9                    text9        000110
 __ramtop                    ramtop       001000
 __size_of_Fkt_CalcTime      (abs)        000000
@@ -483,7 +483,7 @@ __size_of_Fkt_Isr           (abs)        000000
 __size_of_Fkt_ModeCheck     (abs)        000000
 __size_of_main              (abs)        000000
 __smallconst                smallconst   000000
-_main                       text0        000180
+_main                       text0        00018A
 btemp                       temp         000015
 end_of_initialization       cinit        000176
 int$flags                   temp         000015
@@ -917,18 +917,18 @@ shared estimated size: 1
 init.c
 		_Fkt_InitAnsel 		CODE           	0110	0000	33
 		_Fkt_InitTimer 		CODE           	0130	0000	27
-		_Fkt_InitInterrupt		CODE           	018A	0000	11
+		_Fkt_InitInterrupt		CODE           	0180	0000	11
 		_Fkt_Init      		CODE           	00EE	0000	35
-		_Fkt_InitOsc   		CODE           	0194	0000	7
-		_Fkt_InitSpi   		CODE           	019C	0000	3
+		_Fkt_InitOsc   		CODE           	0192	0000	7
+		_Fkt_InitSpi   		CODE           	019A	0000	3
 		_Fkt_InitTris  		CODE           	014A	0000	23
-		_Fkt_InitUart  		CODE           	019A	0000	3
+		_Fkt_InitUart  		CODE           	0198	0000	3
 		_Fkt_InitPort  		CODE           	0160	0000	23
 
 init.c estimated size: 165
 
 main.c
-		_main          		CODE           	0180	0000	11
+		_main          		CODE           	018A	0000	9
 
-main.c estimated size: 11
+main.c estimated size: 9
 

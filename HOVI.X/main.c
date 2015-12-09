@@ -80,7 +80,6 @@
 
 void main(void) {
     Fkt_Init();
-    LED = 1;
     while(1) {
         
         NOP();
