@@ -2774,6 +2774,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hovi_LED_v2.h: 13: unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;hovi_LED_v2.h: 14: bit ProofObject(unsigned int des_obj, unsigned int num);
 [; ;hovi_LED_v2.h: 15: void LedSignalling(unsigned int pos_x, unsigned int pos_y);
+"38 hovi_v2.h
+[v _frame `uc ~T0 @X0 1 e ]
+[; ;hovi_v2.h: 38: unsigned char frame;
 "4 UART_com_v2.c
 [v _send_UART_char `(v ~T0 @X0 1 ef1`uc ]
 {

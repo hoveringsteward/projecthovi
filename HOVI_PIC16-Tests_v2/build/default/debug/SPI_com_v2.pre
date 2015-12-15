@@ -3735,37 +3735,51 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
 bit ProofObject(unsigned int des_obj, unsigned int num);
 void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 
+# 38 "hovi_v2.h"
+unsigned char frame;
+
 # 4 "SPI_com_v2.c"
 void SendSpiChar(unsigned char data) {
-SSP1CON1bits.WCOL = 0;
+if(SSP1IF == 1) {
+_delay((unsigned long)((2)*(4000000/4000.0)));
+SSP1IF = 0;
+}
 SSP1BUF = data;
-__nop();
-while (SSP1STATbits.BF == 1);
+while(SSP1IF == 0);
+SSP1IF = 0;
 }
 
 
 unsigned char ExchangeSpiChar(unsigned char data) {
-SSP1CON1bits.WCOL = 0;
+if(SSP1IF == 1) {
+_delay((unsigned long)((2)*(4000000/4000.0)));
+SSP1IF = 0;
+}
 SSP1BUF = data;
-__nop();
-while (SSP1STATbits.BF == 1);
+while(SSP1IF == 0);
+SSP1IF = 0;
 return (SSP1BUF);
 }
 
 unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
-
-unsigned char SPI_word = 0;
-
-SSP1CON1bits.WCOL = 0;
-SSP1BUF = data;
 __nop();
-while (SSP1STATbits.BF == 1);
+unsigned int SPI_word = 0;
+if(SSP1IF == 1) {
+_delay((unsigned long)((2)*(4000000/4000.0)));
+SSP1IF = 0;
+}
+SSP1BUF = data;
+while(SSP1IF == 0);
+SSP1IF = 0;
 SPI_word = SSP1BUF;
 SPI_word <<= 8;
-SSP1CON1bits.WCOL = 0;
 SSP1BUF = data2;
-__nop();
-while (SSP1STATbits.BF == 1);
+while(SSP1IF == 0);
+SSP1IF = 0;
 SPI_word |= SSP1BUF;
+__nop();
+if(SPI_word == 0xAA55) {
+__nop();
+}
 return (SPI_word);
 }

@@ -35,6 +35,8 @@
 #define PIXY_COLOURCODE 0xAA56
 
 
+unsigned char frame;
+
 /*Global variables                                                           */
 /*---------------------------------------------------------------------------*/
 
@@ -47,7 +49,7 @@
 #define LEDup       RA2
 #define LEDdown     RA3
 #define LEDleft     RA4
-#define LEDright    RA5
+#define LEDright    RA7
 // </editor-fold>
 
 #endif	/* HOVI_H */

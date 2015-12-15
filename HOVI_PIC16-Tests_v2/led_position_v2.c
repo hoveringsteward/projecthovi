@@ -32,7 +32,6 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
     typedef struct colorobject farben;
     farben afarben[];
     
-    unsigned char frame = 0;
     unsigned char c = 0;    // Counter for following do, while loop
     
     
@@ -52,10 +51,10 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
                 frame = 0;
             }
             c++;
-            if(c > 10) {
+            if(c > 254) {
                 return 0;
             }
-        } while(!frame && c <= 10);
+        } while(frame == 0);
 
         unsigned int checksum = ExchangeSpi2char(PIXY_SYNC, DUMMY);
 
@@ -71,6 +70,7 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
             LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
         }
     }
+    return 1;
 }
 
 bit ProofObject(unsigned int des_obj, unsigned int num){

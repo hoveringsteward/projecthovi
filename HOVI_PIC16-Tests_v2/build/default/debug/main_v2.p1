@@ -17,9 +17,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SSP1STAT `Vuc ~T0 @X0 0 e@532 ]
 "3734
 [v _SSP1CON1 `Vuc ~T0 @X0 0 e@533 ]
+"2723
+[s S138 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S138 . CCP1SEL P1CSEL P1DSEL CCP2SEL P2BSEL SS1SEL SDO1SEL RXDTSEL ]
+"2722
+[u S137 `S138 1 ]
+[n S137 . . ]
+"2734
+[v _APFCON0bits `VS137 ~T0 @X0 0 e@285 ]
 [p mainexit ]
 "13 hovi_LED_v2.h
 [v _GetObject `(uc ~T0 @X0 0 ef3`uc`ui`uc ]
+"28 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic.h
+[v ___nop `(v ~T0 @X0 0 ef ]
+[p i ___nop ]
+"481 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1827.h
+[s S32 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S32 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"480
+[u S31 `S32 1 ]
+[n S31 . . ]
+"492
+[v _PORTBbits `VS31 ~T0 @X0 0 e@13 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2782,6 +2801,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hovi_LED_v2.h: 13: unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;hovi_LED_v2.h: 14: bit ProofObject(unsigned int des_obj, unsigned int num);
 [; ;hovi_LED_v2.h: 15: void LedSignalling(unsigned int pos_x, unsigned int pos_y);
+"38 hovi_v2.h
+[v _frame `uc ~T0 @X0 1 e ]
+[; ;hovi_v2.h: 38: unsigned char frame;
 "20 main_v2.c
 [p x FOSC=INTOSC ]
 "21
@@ -2842,40 +2864,83 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main_v2.c: 49: SSP1STAT = 0b00000000;
 "49
 [e = _SSP1STAT -> -> 0 `i `uc ]
-[; ;main_v2.c: 50: SSP1CON1 = 0b00000001;
+[; ;main_v2.c: 50: SSP1CON1 = 0b00100001;
 "50
-[e = _SSP1CON1 -> -> 1 `i `uc ]
-[; ;main_v2.c: 52: }
+[e = _SSP1CON1 -> -> 33 `i `uc ]
+[; ;main_v2.c: 52: APFCON0bits.SDO1SEL = 1;
 "52
+[e = . . _APFCON0bits 0 6 -> -> 1 `i `uc ]
+[; ;main_v2.c: 53: }
+"53
 [e :UE 350 ]
 }
-"54
+"55
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main_v2.c: 54: void main(void) {
+[; ;main_v2.c: 55: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main_v2.c: 55: init();
-"55
-[e ( _init ..  ]
-[; ;main_v2.c: 56: while (1) {
+[; ;main_v2.c: 56: init();
 "56
+[e ( _init ..  ]
+[; ;main_v2.c: 57: while (1) {
+"57
 [e :U 353 ]
 {
-[; ;main_v2.c: 57: GetObject(0, 10, 3);
-"57
-[e ( _GetObject (3 , , -> -> 0 `i `uc -> -> 10 `i `ui -> -> 3 `i `uc ]
+[; ;main_v2.c: 58: if(GetObject(1, 10, 3) == 0) {
 "58
+[e $ ! == -> ( _GetObject (3 , , -> -> 1 `i `uc -> -> 10 `i `ui -> -> 3 `i `uc `i -> 0 `i 355  ]
+{
+[; ;main_v2.c: 59: __nop();
+"59
+[e ( ___nop ..  ]
+[; ;main_v2.c: 60: PORTBbits.RB3 = 1;
+"60
+[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
+"61
+}
+[; ;main_v2.c: 61: }else {
+[e $U 356  ]
+[e :U 355 ]
+{
+[; ;main_v2.c: 62: PORTBbits.RB3 = 0;
+"62
+[e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
+"63
+}
+[e :U 356 ]
+[; ;main_v2.c: 63: }
+[; ;main_v2.c: 64: if(frame == 0) {
+"64
+[e $ ! == -> _frame `i -> 0 `i 357  ]
+{
+[; ;main_v2.c: 65: PORTBbits.RB2 = 1;
+"65
+[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
+"66
+}
+[; ;main_v2.c: 66: }else {
+[e $U 358  ]
+[e :U 357 ]
+{
+[; ;main_v2.c: 67: PORTBbits.RB2 = 0;
+"67
+[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
+"68
+}
+[e :U 358 ]
+"69
 }
 [e :U 352 ]
-"56
+"57
 [e $U 353  ]
 [e :U 354 ]
-[; ;main_v2.c: 58: }
-[; ;main_v2.c: 59: return;
-"59
+[; ;main_v2.c: 68: }
+[; ;main_v2.c: 69: }
+[; ;main_v2.c: 70: return;
+"70
 [e $UE 351  ]
-[; ;main_v2.c: 60: }
-"60
+[; ;main_v2.c: 71: }
+"71
 [e :UE 351 ]
 }

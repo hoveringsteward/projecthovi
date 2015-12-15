@@ -1,28 +1,15 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"3749 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1827.h
-[s S204 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S204 . SSPM0 SSPM1 SSPM2 SSPM3 CKP SSPEN SSPOV WCOL ]
-"3759
-[s S205 :4 `uc 1 ]
-[n S205 . SSPM ]
-"3748
-[u S203 `S204 1 `S205 1 ]
-[n S203 . . . ]
-"3763
-[v _SSP1CON1bits `VS203 ~T0 @X0 0 e@533 ]
-"3502
+"7312 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1827.h
+[v _SSP1IF `Vb ~T0 @X0 0 e@139 ]
+[v F2766 `(v ~T0 @X0 1 tf1`ul ]
+"150 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic.h
+[v __delay `JF2766 ~T0 @X0 0 e ]
+[p i __delay ]
+"3502 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1827.h
 [v _SSP1BUF `Vuc ~T0 @X0 0 e@529 ]
 "28 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
-"3624 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1827.h
-[s S200 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S200 . BF UA R_nW S P D_nA CKE SMP ]
-"3623
-[u S199 `S200 1 ]
-[n S199 . . ]
-"3635
-[v _SSP1STATbits `VS199 ~T0 @X0 0 e@532 ]
 [; ;pic16f1827.h: 49: extern volatile unsigned char INDF0 @ 0x000;
 "51 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1827.h
 [; ;pic16f1827.h: 51: asm("INDF0 equ 00h");
@@ -2785,6 +2772,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hovi_LED_v2.h: 13: unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;hovi_LED_v2.h: 14: bit ProofObject(unsigned int des_obj, unsigned int num);
 [; ;hovi_LED_v2.h: 15: void LedSignalling(unsigned int pos_x, unsigned int pos_y);
+"38 hovi_v2.h
+[v _frame `uc ~T0 @X0 1 e ]
+[; ;hovi_v2.h: 38: unsigned char frame;
 "4 SPI_com_v2.c
 [v _SendSpiChar `(v ~T0 @X0 1 ef1`uc ]
 {
@@ -2792,115 +2782,162 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _SendSpiChar ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;SPI_com_v2.c: 5: SSP1CON1bits.WCOL = 0;
+[; ;SPI_com_v2.c: 5: if(SSP1IF == 1) {
 "5
-[e = . . _SSP1CON1bits 0 7 -> -> 0 `i `uc ]
-[; ;SPI_com_v2.c: 6: SSP1BUF = data;
+[e $ ! == -> _SSP1IF `i -> 1 `i 351  ]
+{
+[; ;SPI_com_v2.c: 6: _delay((unsigned long)((2)*(4000000/4000.0)));
 "6
-[e = _SSP1BUF _data ]
-[; ;SPI_com_v2.c: 7: __nop();
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;SPI_com_v2.c: 7: SSP1IF = 0;
 "7
-[e ( ___nop ..  ]
-[; ;SPI_com_v2.c: 8: while (SSP1STATbits.BF == 1);
+[e = _SSP1IF -> -> 0 `i `b ]
 "8
-[e $U 351  ]
-[e :U 352 ]
+}
 [e :U 351 ]
-[e $ == -> . . _SSP1STATbits 0 0 `i -> 1 `i 352  ]
-[e :U 353 ]
-[; ;SPI_com_v2.c: 9: }
+[; ;SPI_com_v2.c: 8: }
+[; ;SPI_com_v2.c: 9: SSP1BUF = data;
 "9
+[e = _SSP1BUF _data ]
+[; ;SPI_com_v2.c: 10: while(SSP1IF == 0);
+"10
+[e $U 352  ]
+[e :U 353 ]
+[e :U 352 ]
+[e $ == -> _SSP1IF `i -> 0 `i 353  ]
+[e :U 354 ]
+[; ;SPI_com_v2.c: 11: SSP1IF = 0;
+"11
+[e = _SSP1IF -> -> 0 `i `b ]
+[; ;SPI_com_v2.c: 12: }
+"12
 [e :UE 350 ]
 }
-"12
+"15
 [v _ExchangeSpiChar `(uc ~T0 @X0 1 ef1`uc ]
 {
-[; ;SPI_com_v2.c: 12: unsigned char ExchangeSpiChar(unsigned char data) {
+[; ;SPI_com_v2.c: 15: unsigned char ExchangeSpiChar(unsigned char data) {
 [e :U _ExchangeSpiChar ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;SPI_com_v2.c: 13: SSP1CON1bits.WCOL = 0;
-"13
-[e = . . _SSP1CON1bits 0 7 -> -> 0 `i `uc ]
-[; ;SPI_com_v2.c: 14: SSP1BUF = data;
-"14
-[e = _SSP1BUF _data ]
-[; ;SPI_com_v2.c: 15: __nop();
-"15
-[e ( ___nop ..  ]
-[; ;SPI_com_v2.c: 16: while (SSP1STATbits.BF == 1);
+[; ;SPI_com_v2.c: 16: if(SSP1IF == 1) {
 "16
-[e $U 355  ]
-[e :U 356 ]
-[e :U 355 ]
-[e $ == -> . . _SSP1STATbits 0 0 `i -> 1 `i 356  ]
-[e :U 357 ]
-[; ;SPI_com_v2.c: 17: return (SSP1BUF);
+[e $ ! == -> _SSP1IF `i -> 1 `i 356  ]
+{
+[; ;SPI_com_v2.c: 17: _delay((unsigned long)((2)*(4000000/4000.0)));
 "17
-[e ) _SSP1BUF ]
-[e $UE 354  ]
-[; ;SPI_com_v2.c: 18: }
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;SPI_com_v2.c: 18: SSP1IF = 0;
 "18
-[e :UE 354 ]
+[e = _SSP1IF -> -> 0 `i `b ]
+"19
 }
+[e :U 356 ]
+[; ;SPI_com_v2.c: 19: }
+[; ;SPI_com_v2.c: 20: SSP1BUF = data;
 "20
+[e = _SSP1BUF _data ]
+[; ;SPI_com_v2.c: 21: while(SSP1IF == 0);
+"21
+[e $U 357  ]
+[e :U 358 ]
+[e :U 357 ]
+[e $ == -> _SSP1IF `i -> 0 `i 358  ]
+[e :U 359 ]
+[; ;SPI_com_v2.c: 22: SSP1IF = 0;
+"22
+[e = _SSP1IF -> -> 0 `i `b ]
+[; ;SPI_com_v2.c: 23: return (SSP1BUF);
+"23
+[e ) _SSP1BUF ]
+[e $UE 355  ]
+[; ;SPI_com_v2.c: 24: }
+"24
+[e :UE 355 ]
+}
+"26
 [v _ExchangeSpi2char `(uc ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;SPI_com_v2.c: 20: unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
+[; ;SPI_com_v2.c: 26: unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
 [e :U _ExchangeSpi2char ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [v _data2 `uc ~T0 @X0 1 r2 ]
 [f ]
-"22
-[v _SPI_word `uc ~T0 @X0 1 a ]
-[; ;SPI_com_v2.c: 22: unsigned char SPI_word = 0;
-[e = _SPI_word -> -> 0 `i `uc ]
-[; ;SPI_com_v2.c: 24: SSP1CON1bits.WCOL = 0;
-"24
-[e = . . _SSP1CON1bits 0 7 -> -> 0 `i `uc ]
-[; ;SPI_com_v2.c: 25: SSP1BUF = data;
-"25
-[e = _SSP1BUF _data ]
-[; ;SPI_com_v2.c: 26: __nop();
-"26
-[e ( ___nop ..  ]
-[; ;SPI_com_v2.c: 27: while (SSP1STATbits.BF == 1);
+[; ;SPI_com_v2.c: 27: __nop();
 "27
-[e $U 359  ]
-[e :U 360 ]
-[e :U 359 ]
-[e $ == -> . . _SSP1STATbits 0 0 `i -> 1 `i 360  ]
-[e :U 361 ]
-[; ;SPI_com_v2.c: 28: SPI_word = SSP1BUF;
-"28
-[e = _SPI_word _SSP1BUF ]
-[; ;SPI_com_v2.c: 29: SPI_word <<= 8;
-"29
-[e =<< _SPI_word -> 8 `i ]
-[; ;SPI_com_v2.c: 30: SSP1CON1bits.WCOL = 0;
-"30
-[e = . . _SSP1CON1bits 0 7 -> -> 0 `i `uc ]
-[; ;SPI_com_v2.c: 31: SSP1BUF = data2;
-"31
-[e = _SSP1BUF _data2 ]
-[; ;SPI_com_v2.c: 32: __nop();
-"32
 [e ( ___nop ..  ]
-[; ;SPI_com_v2.c: 33: while (SSP1STATbits.BF == 1);
+"28
+[v _SPI_word `ui ~T0 @X0 1 a ]
+[; ;SPI_com_v2.c: 28: unsigned int SPI_word = 0;
+[e = _SPI_word -> -> 0 `i `ui ]
+[; ;SPI_com_v2.c: 29: if(SSP1IF == 1) {
+"29
+[e $ ! == -> _SSP1IF `i -> 1 `i 361  ]
+{
+[; ;SPI_com_v2.c: 30: _delay((unsigned long)((2)*(4000000/4000.0)));
+"30
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;SPI_com_v2.c: 31: SSP1IF = 0;
+"31
+[e = _SSP1IF -> -> 0 `i `b ]
+"32
+}
+[e :U 361 ]
+[; ;SPI_com_v2.c: 32: }
+[; ;SPI_com_v2.c: 33: SSP1BUF = data;
 "33
+[e = _SSP1BUF _data ]
+[; ;SPI_com_v2.c: 34: while(SSP1IF == 0);
+"34
 [e $U 362  ]
 [e :U 363 ]
 [e :U 362 ]
-[e $ == -> . . _SSP1STATbits 0 0 `i -> 1 `i 363  ]
+[e $ == -> _SSP1IF `i -> 0 `i 363  ]
 [e :U 364 ]
-[; ;SPI_com_v2.c: 34: SPI_word |= SSP1BUF;
-"34
-[e =| _SPI_word _SSP1BUF ]
-[; ;SPI_com_v2.c: 35: return (SPI_word);
+[; ;SPI_com_v2.c: 35: SSP1IF = 0;
 "35
-[e ) _SPI_word ]
-[e $UE 358  ]
-[; ;SPI_com_v2.c: 36: }
+[e = _SSP1IF -> -> 0 `i `b ]
+[; ;SPI_com_v2.c: 36: SPI_word = SSP1BUF;
 "36
-[e :UE 358 ]
+[e = _SPI_word -> _SSP1BUF `ui ]
+[; ;SPI_com_v2.c: 37: SPI_word <<= 8;
+"37
+[e =<< _SPI_word -> 8 `i ]
+[; ;SPI_com_v2.c: 38: SSP1BUF = data2;
+"38
+[e = _SSP1BUF _data2 ]
+[; ;SPI_com_v2.c: 39: while(SSP1IF == 0);
+"39
+[e $U 365  ]
+[e :U 366 ]
+[e :U 365 ]
+[e $ == -> _SSP1IF `i -> 0 `i 366  ]
+[e :U 367 ]
+[; ;SPI_com_v2.c: 40: SSP1IF = 0;
+"40
+[e = _SSP1IF -> -> 0 `i `b ]
+[; ;SPI_com_v2.c: 41: SPI_word |= SSP1BUF;
+"41
+[e =| _SPI_word -> _SSP1BUF `ui ]
+[; ;SPI_com_v2.c: 42: __nop();
+"42
+[e ( ___nop ..  ]
+[; ;SPI_com_v2.c: 43: if(SPI_word == 0xAA55) {
+"43
+[e $ ! == _SPI_word -> 43605 `ui 368  ]
+{
+[; ;SPI_com_v2.c: 44: __nop();
+"44
+[e ( ___nop ..  ]
+"45
+}
+[e :U 368 ]
+[; ;SPI_com_v2.c: 45: }
+[; ;SPI_com_v2.c: 46: return (SPI_word);
+"46
+[e ) -> _SPI_word `uc ]
+[e $UE 360  ]
+[; ;SPI_com_v2.c: 47: }
+"47
+[e :UE 360 ]
 }

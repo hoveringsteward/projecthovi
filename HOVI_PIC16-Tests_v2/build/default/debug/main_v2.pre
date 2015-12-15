@@ -3735,6 +3735,9 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
 bit ProofObject(unsigned int des_obj, unsigned int num);
 void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 
+# 38 "hovi_v2.h"
+unsigned char frame;
+
 
 # 20 "main_v2.c"
 #pragma config FOSC = INTOSC
@@ -3767,14 +3770,25 @@ ANSELB = 0;
 OSCCON = 0b01101011;
 
 SSP1STAT = 0b00000000;
-SSP1CON1 = 0b00000001;
+SSP1CON1 = 0b00100001;
 
+APFCON0bits.SDO1SEL = 1;
 }
 
 void main(void) {
 init();
 while (1) {
-GetObject(0, 10, 3);
+if(GetObject(1, 10, 3) == 0) {
+__nop();
+PORTBbits.RB3 = 1;
+}else {
+PORTBbits.RB3 = 0;
+}
+if(frame == 0) {
+PORTBbits.RB2 = 1;
+}else {
+PORTBbits.RB2 = 0;
+}
 }
 return;
 }

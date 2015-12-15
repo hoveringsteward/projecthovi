@@ -47,14 +47,25 @@ void init() {
     OSCCON = 0b01101011;        //4MHz, INTOSC
 //////SPI
     SSP1STAT = 0b00000000;      //Rising edge;
-    SSP1CON1 = 0b00000001;      //FOSC/16
+    SSP1CON1 = 0b00100001;      //FOSC/16
 //    SSP1CON3 = 0b00000000;    //Only Bit 4 in slave mode
+    APFCON0bits.SDO1SEL = 1;
 }
 
 void main(void) {
     init();
     while (1) {
-        GetObject(0, 10, 3);
+        if(GetObject(1, 10, 3) == 0) {
+            NOP();
+            PORTBbits.RB3 = 1;
+        }else {
+            PORTBbits.RB3 = 0;
+        }
+        if(frame == 0) {
+            PORTBbits.RB2 = 1;
+        }else {
+            PORTBbits.RB2 = 0;
+        }
     }
     return;
 }

@@ -3735,6 +3735,9 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
 bit ProofObject(unsigned int des_obj, unsigned int num);
 void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 
+# 38 "hovi_v2.h"
+unsigned char frame;
+
 # 15 "led_position_v2.c"
 unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
 unsigned int start, objcc;
@@ -3756,7 +3759,6 @@ unsigned int angle;
 typedef struct colorobject farben;
 farben afarben[];
 
-unsigned char frame = 0;
 unsigned char c = 0;
 
 
@@ -3776,10 +3778,10 @@ obj_type = 1;
 frame = 0;
 }
 c++;
-if(c > 10) {
+if(c > 254) {
 return 0;
 }
-} while(!frame && c <= 10);
+} while(frame == 0);
 
 unsigned int checksum = ExchangeSpi2char(0x5A, 0);
 
@@ -3795,6 +3797,7 @@ if(ProofObject(des_obj, afarben[c_obj].num)) {
 LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
 }
 }
+return 1;
 }
 
 bit ProofObject(unsigned int des_obj, unsigned int num){
@@ -3813,16 +3816,16 @@ void LedSignalling(unsigned int pos_x, unsigned int pos_y){
 # 93
 if(pos_x > 170){
 RA4 = 0;
-RA5 = 1;
+RA7 = 1;
 }else if(pos_x < 150){
 RA4 = 1;
-RA5 = 0;
+RA7 = 0;
 }else if(pos_x >= 150 && pos_x <= 170){
 RA4 = 0;
-RA5 = 0;
+RA7 = 0;
 }else{
 RA4 = 1;
-RA5 = 1;
+RA7 = 1;
 }
 
 # 111

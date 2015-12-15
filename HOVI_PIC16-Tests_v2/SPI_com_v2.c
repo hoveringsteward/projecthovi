@@ -2,35 +2,46 @@
 #include "hovi_SPI_v2.h"
 
 void SendSpiChar(unsigned char data) {
-    SSP1CON1bits.WCOL = 0;
+    if(SSP1IF == 1) {
+        __delay_ms(2);
+        SSP1IF = 0;
+    }
     SSP1BUF = data;
-    NOP();
-    while (SSP1STATbits.BF == 1);
+    while(SSP1IF == 0);
+    SSP1IF = 0;
 }
 
 
 unsigned char ExchangeSpiChar(unsigned char data) {
-    SSP1CON1bits.WCOL = 0;
+    if(SSP1IF == 1) {
+        __delay_ms(2);
+        SSP1IF = 0;
+    }
     SSP1BUF = data;
-    NOP();
-    while (SSP1STATbits.BF == 1);
+    while(SSP1IF == 0);
+    SSP1IF = 0;
     return (SSP1BUF);
 }
 
 unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
-
-    unsigned char SPI_word = 0;
-    // BF = Buffer Full
-    SSP1CON1bits.WCOL = 0;
-    SSP1BUF = data;
     NOP();
-    while (SSP1STATbits.BF == 1);
+    unsigned int SPI_word = 0;
+    if(SSP1IF == 1) {
+        __delay_ms(2);
+        SSP1IF = 0;
+    }
+    SSP1BUF = data;
+    while(SSP1IF == 0);
+    SSP1IF = 0;
     SPI_word = SSP1BUF;
     SPI_word <<= 8;
-    SSP1CON1bits.WCOL = 0;
     SSP1BUF = data2;
-    NOP();
-    while (SSP1STATbits.BF == 1);
+    while(SSP1IF == 0);
+    SSP1IF = 0;
     SPI_word |= SSP1BUF;
+    NOP();
+    if(SPI_word == PIXY_FRAME_OBJ) {
+        NOP();
+    }
     return (SPI_word);
 }

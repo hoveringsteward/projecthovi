@@ -7,8 +7,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LedSignalling `(v ~T0 @X0 0 ef2`ui`ui ]
 "7220 C:\Program Files (x86)\Microchip\xc8\v1.35\include\PIC16F1827.h
 [v _RA4 `Vb ~T0 @X0 0 e@100 ]
-"7222
-[v _RA5 `Vb ~T0 @X0 0 e@101 ]
+"7226
+[v _RA7 `Vb ~T0 @X0 0 e@103 ]
 "7216
 [v _RA2 `Vb ~T0 @X0 0 e@98 ]
 "7218
@@ -2775,6 +2775,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hovi_LED_v2.h: 13: unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;hovi_LED_v2.h: 14: bit ProofObject(unsigned int des_obj, unsigned int num);
 [; ;hovi_LED_v2.h: 15: void LedSignalling(unsigned int pos_x, unsigned int pos_y);
+"38 hovi_v2.h
+[v _frame `uc ~T0 @X0 1 e ]
+[; ;hovi_v2.h: 38: unsigned char frame;
 "15 led_position_v2.c
 [v _GetObject `(uc ~T0 @X0 1 ef3`uc`ui`uc ]
 {
@@ -2797,7 +2800,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "33
 [v _afarben `S350 ~T0 @X0 -> 0 `x a ]
 "35
-[v _frame `uc ~T0 @X0 1 a ]
+[v _c `uc ~T0 @X0 1 a ]
 [; ;led_position_v2.c: 16: unsigned int start, objcc;
 [; ;led_position_v2.c: 17: unsigned char obj_type;
 [; ;led_position_v2.c: 21: typedef struct colorobject{
@@ -2810,129 +2813,129 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;led_position_v2.c: 30: };
 [; ;led_position_v2.c: 32: typedef struct colorobject farben;
 [; ;led_position_v2.c: 33: farben afarben[];
-[; ;led_position_v2.c: 35: unsigned char frame = 0;
-[e = _frame -> -> 0 `i `uc ]
-"36
-[v _c `uc ~T0 @X0 1 a ]
-[; ;led_position_v2.c: 36: unsigned char c = 0;
+[; ;led_position_v2.c: 35: unsigned char c = 0;
 [e = _c -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 39: for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
-"39
+[; ;led_position_v2.c: 38: for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
+"38
 {
 [v _c_obj `uc ~T0 @X0 1 a ]
 [e = _c_obj -> -> 0 `i `uc ]
 [e $U 355  ]
 [e :U 352 ]
 {
-[; ;led_position_v2.c: 43: do {
-"43
+[; ;led_position_v2.c: 42: do {
+"42
 [e :U 358 ]
 {
-[; ;led_position_v2.c: 44: if(ExchangeSpi2char(0x5A, 0) == 0xAA55) {
-"44
+[; ;led_position_v2.c: 43: if(ExchangeSpi2char(0x5A, 0) == 0xAA55) {
+"43
 [e $ ! == -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui -> 43605 `ui 359  ]
 {
-[; ;led_position_v2.c: 45: frame = 1;
-"45
+[; ;led_position_v2.c: 44: frame = 1;
+"44
 [e = _frame -> -> 1 `i `uc ]
-[; ;led_position_v2.c: 46: if(ExchangeSpi2char(0x5A, 0) == 0xAA55) {
-"46
+[; ;led_position_v2.c: 45: if(ExchangeSpi2char(0x5A, 0) == 0xAA55) {
+"45
 [e $ ! == -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui -> 43605 `ui 360  ]
 {
-[; ;led_position_v2.c: 47: obj_type = 0;
-"47
+[; ;led_position_v2.c: 46: obj_type = 0;
+"46
 [e = _obj_type -> -> 0 `i `uc ]
-"48
+"47
 }
-[; ;led_position_v2.c: 48: }else if(ExchangeSpi2char(0x5A, 0) == 0xAA56) {
+[; ;led_position_v2.c: 47: }else if(ExchangeSpi2char(0x5A, 0) == 0xAA56) {
 [e $U 361  ]
 [e :U 360 ]
 [e $ ! == -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui -> 43606 `ui 362  ]
 {
-[; ;led_position_v2.c: 49: obj_type = 1;
-"49
+[; ;led_position_v2.c: 48: obj_type = 1;
+"48
 [e = _obj_type -> -> 1 `i `uc ]
-"50
+"49
 }
 [e :U 362 ]
-"51
+"50
 [e :U 361 ]
 }
-[; ;led_position_v2.c: 50: }
-[; ;led_position_v2.c: 51: }else {
+[; ;led_position_v2.c: 49: }
+[; ;led_position_v2.c: 50: }else {
 [e $U 363  ]
 [e :U 359 ]
 {
-[; ;led_position_v2.c: 52: frame = 0;
-"52
+[; ;led_position_v2.c: 51: frame = 0;
+"51
 [e = _frame -> -> 0 `i `uc ]
-"53
+"52
 }
 [e :U 363 ]
-[; ;led_position_v2.c: 53: }
-[; ;led_position_v2.c: 54: c++;
-"54
+[; ;led_position_v2.c: 52: }
+[; ;led_position_v2.c: 53: c++;
+"53
 [e ++ _c -> -> 1 `i `uc ]
-[; ;led_position_v2.c: 55: if(c > 10) {
-"55
-[e $ ! > -> _c `i -> 10 `i 364  ]
+[; ;led_position_v2.c: 54: if(c > 254) {
+"54
+[e $ ! > -> _c `i -> 254 `i 364  ]
 {
-[; ;led_position_v2.c: 56: return 0;
-"56
+[; ;led_position_v2.c: 55: return 0;
+"55
 [e ) -> -> 0 `i `uc ]
 [e $UE 351  ]
-"57
+"56
 }
 [e :U 364 ]
-"58
+"57
 }
-[; ;led_position_v2.c: 57: }
-[; ;led_position_v2.c: 58: } while(!frame && c <= 10);
-[e $ && ! != -> _frame `i -> -> -> 0 `i `uc `i <= -> _c `i -> 10 `i 358  ]
+[; ;led_position_v2.c: 56: }
+[; ;led_position_v2.c: 57: } while(frame == 0);
+[e $ == -> _frame `i -> 0 `i 358  ]
 [e :U 357 ]
-"60
+"59
 [v _checksum `ui ~T0 @X0 1 a ]
-[; ;led_position_v2.c: 60: unsigned int checksum = ExchangeSpi2char(0x5A, 0);
+[; ;led_position_v2.c: 59: unsigned int checksum = ExchangeSpi2char(0x5A, 0);
 [e = _checksum -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui ]
-[; ;led_position_v2.c: 63: afarben[c_obj].num = ExchangeSpi2char(0x5A, 0);
-"63
+[; ;led_position_v2.c: 62: afarben[c_obj].num = ExchangeSpi2char(0x5A, 0);
+"62
 [e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 0 -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui ]
-[; ;led_position_v2.c: 64: afarben[c_obj].pos_x = ExchangeSpi2char(0x5A, 0);
-"64
+[; ;led_position_v2.c: 63: afarben[c_obj].pos_x = ExchangeSpi2char(0x5A, 0);
+"63
 [e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 1 -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui ]
-[; ;led_position_v2.c: 65: afarben[c_obj].pos_y = ExchangeSpi2char(0x5A, 0);
-"65
+[; ;led_position_v2.c: 64: afarben[c_obj].pos_y = ExchangeSpi2char(0x5A, 0);
+"64
 [e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 2 -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui ]
-[; ;led_position_v2.c: 66: afarben[c_obj].width = ExchangeSpi2char(0x5A, 0);
-"66
+[; ;led_position_v2.c: 65: afarben[c_obj].width = ExchangeSpi2char(0x5A, 0);
+"65
 [e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 3 -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui ]
-[; ;led_position_v2.c: 67: afarben[c_obj].height = ExchangeSpi2char(0x5A, 0);
-"67
+[; ;led_position_v2.c: 66: afarben[c_obj].height = ExchangeSpi2char(0x5A, 0);
+"66
 [e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 4 -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui ]
-[; ;led_position_v2.c: 68: afarben[c_obj].angle = ExchangeSpi2char(0x5A, 0);
-"68
+[; ;led_position_v2.c: 67: afarben[c_obj].angle = ExchangeSpi2char(0x5A, 0);
+"67
 [e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 5 -> ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc `ui ]
-[; ;led_position_v2.c: 70: if(ProofObject(des_obj, afarben[c_obj].num)) {
-"70
+[; ;led_position_v2.c: 69: if(ProofObject(des_obj, afarben[c_obj].num)) {
+"69
 [e $ ! ( _ProofObject (2 , _des_obj . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 0 365  ]
 {
-[; ;led_position_v2.c: 71: LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
-"71
+[; ;led_position_v2.c: 70: LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
+"70
 [e ( _LedSignalling (2 , . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 1 . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 2 ]
-"72
+"71
 }
 [e :U 365 ]
-"73
+"72
 }
-"39
+"38
 [e ++ _c_obj -> -> 1 `i `uc ]
 [e :U 355 ]
 [e $ < -> _c_obj `i -> _max_obj `i 352  ]
 [e :U 353 ]
-"73
+"72
 }
+[; ;led_position_v2.c: 71: }
 [; ;led_position_v2.c: 72: }
-[; ;led_position_v2.c: 73: }
+[; ;led_position_v2.c: 73: return 1;
+"73
+[e ) -> -> 1 `i `uc ]
+[e $UE 351  ]
 [; ;led_position_v2.c: 74: }
 "74
 [e :UE 351 ]
@@ -2986,9 +2989,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;led_position_v2.c: 94: RA4 = 0;
 "94
 [e = _RA4 -> -> 0 `i `b ]
-[; ;led_position_v2.c: 95: RA5 = 1;
+[; ;led_position_v2.c: 95: RA7 = 1;
 "95
-[e = _RA5 -> -> 1 `i `b ]
+[e = _RA7 -> -> 1 `i `b ]
 "96
 }
 [; ;led_position_v2.c: 96: }else if(pos_x < 150){
@@ -2999,9 +3002,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;led_position_v2.c: 97: RA4 = 1;
 "97
 [e = _RA4 -> -> 1 `i `b ]
-[; ;led_position_v2.c: 98: RA5 = 0;
+[; ;led_position_v2.c: 98: RA7 = 0;
 "98
-[e = _RA5 -> -> 0 `i `b ]
+[e = _RA7 -> -> 0 `i `b ]
 "99
 }
 [; ;led_position_v2.c: 99: }else if(pos_x >= 150 && pos_x <= 170){
@@ -3012,9 +3015,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;led_position_v2.c: 100: RA4 = 0;
 "100
 [e = _RA4 -> -> 0 `i `b ]
-[; ;led_position_v2.c: 101: RA5 = 0;
+[; ;led_position_v2.c: 101: RA7 = 0;
 "101
-[e = _RA5 -> -> 0 `i `b ]
+[e = _RA7 -> -> 0 `i `b ]
 "102
 }
 [; ;led_position_v2.c: 102: }else{
@@ -3024,9 +3027,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;led_position_v2.c: 103: RA4 = 1;
 "103
 [e = _RA4 -> -> 1 `i `b ]
-[; ;led_position_v2.c: 104: RA5 = 1;
+[; ;led_position_v2.c: 104: RA7 = 1;
 "104
-[e = _RA5 -> -> 1 `i `b ]
+[e = _RA7 -> -> 1 `i `b ]
 "105
 }
 [e :U 375 ]

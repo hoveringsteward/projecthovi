@@ -3735,6 +3735,9 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
 bit ProofObject(unsigned int des_obj, unsigned int num);
 void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 
+# 38 "hovi_v2.h"
+unsigned char frame;
+
 # 4 "UART_com_v2.c"
 void send_UART_char(unsigned char data) {
 while (PIR1bits.TXIF == 0);
