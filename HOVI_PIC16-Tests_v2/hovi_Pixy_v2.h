@@ -7,8 +7,8 @@
 
 #include "hovi_v2.h"
 
-#ifndef HOVI_PIXY_H
-#define	HOVI_PIXY_H
+#ifndef HOVI_PIXY_V2_H
+#define	HOVI_PIXY_V2_H
 
 
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/debug\HOVI_PIC16-Tests.X.debug.hex">
+  <executable name="dist/default/debug\HOVI_PIC16-Tests_v2.debug.hex">
     <memory name="program">
       <units>words</units>
       <length>4096</length>
-      <used>127</used>
-      <free>3969</free>
+      <used>601</used>
+      <free>3495</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
       <length>384</length>
-      <used>11</used>
-      <free>373</free>
+      <used>34</used>
+      <free>350</free>
     </memory>
   </executable>
 </project>

@@ -54,7 +54,7 @@ void init() {
 void main(void) {
     init();
     while (1) {
-        GetObject();
+        GetObject(0, 10, 3);
     }
     return;
 }

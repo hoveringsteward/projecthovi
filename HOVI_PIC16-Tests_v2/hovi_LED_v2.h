@@ -7,10 +7,10 @@
 
 #include "hovi_v2.h"
 
-#ifndef HOVI_LED_H
-#define	HOVI_LED_H
+#ifndef HOVI_LED_V2_H
+#define	HOVI_LED_V2_H
 
-unsigned char GetObject(bit des_obj_type, unsigned int des_obj, unsigned char max_obj);
+unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 bit ProofObject(unsigned int des_obj, unsigned int num);
 void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 

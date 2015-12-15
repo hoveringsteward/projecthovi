@@ -7,8 +7,8 @@
 
 #include "hovi_v2.h"
 
-#ifndef HOVI_SPI_H
-#define	HOVI_SPI_H
+#ifndef HOVI_SPI_V2_H
+#define	HOVI_SPI_V2_H
 
     
 void SendSpiChar(unsigned char data);

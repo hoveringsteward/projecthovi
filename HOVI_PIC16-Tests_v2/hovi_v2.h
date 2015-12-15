@@ -5,8 +5,8 @@
  * Created on 7. November 2015, 14:27
  */
 
-#ifndef HOVI_H
-#define	HOVI_H
+#ifndef HOVI_V2_H
+#define	HOVI_V2_H
 
 #include <xc.h>
 
@@ -33,6 +33,7 @@
 #define HEIGHT_MAX      200
 #define PIXY_FRAME_OBJ  0xAA55
 #define PIXY_COLOURCODE 0xAA56
+
 
 /*Global variables                                                           */
 /*---------------------------------------------------------------------------*/

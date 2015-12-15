@@ -12,10 +12,9 @@
 /*      des_obj_type = 1 => searches for colorcodeobjects                    */
 /* Maximum Objectss to dedect declared by max_obj                            */
 /*---------------------------------------------------------------------------*/
-unsigned char GetObject(bit des_obj_type, unsigned int des_obj, unsigned char max_obj){
-    
+unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
     unsigned int start, objcc;
-    bit obj_type;       /* declares type of detected object
+    unsigned char obj_type;       /* declares type of detected object
                          * 0 for normal objects
                          * 1 for colorcode objects*/
     
@@ -33,7 +32,7 @@ unsigned char GetObject(bit des_obj_type, unsigned int des_obj, unsigned char ma
     typedef struct colorobject farben;
     farben afarben[];
     
-    bit frame = 0;
+    unsigned char frame = 0;
     unsigned char c = 0;    // Counter for following do, while loop
     
     
@@ -74,7 +73,7 @@ unsigned char GetObject(bit des_obj_type, unsigned int des_obj, unsigned char ma
     }
 }
 
-void ProofObject(unsigned int des_obj, unsigned int num){
+bit ProofObject(unsigned int des_obj, unsigned int num){
     
     if(num == des_obj) {
         return 1;

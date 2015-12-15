@@ -8,8 +8,8 @@
 
 #include "hovi_v2.h"
 
-#ifndef HOVI_UART_H
-#define	HOVI_UART_H
+#ifndef HOVI_UART_V2_H
+#define	HOVI_UART_V2_H
 
 void send_UART_char(unsigned char data);
 
