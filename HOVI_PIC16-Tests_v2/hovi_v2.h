@@ -25,14 +25,14 @@
 /*---------------------------------------------------------------------------*/
 #define _XTAL_FREQ      4000000
 #define DUMMY           0
-#define PIXY_SYNC       0x5A
-#define PIXY_SYNC_DATA  0x5B
+#define PIXY_SYNC       0x5a
+#define PIXY_SYNC_DATA  0x5b
 #define X_MAX           319
 #define Y_MAX           199
 #define WIDTH_MAX       320
 #define HEIGHT_MAX      200
-#define PIXY_FRAME_OBJ  0xAA55
-#define PIXY_COLOURCODE 0xAA56
+#define PIXY_FRAME_OBJ  0xaa55
+#define PIXY_COLOURCODE 0xaa56
 
 
 unsigned char frame;
