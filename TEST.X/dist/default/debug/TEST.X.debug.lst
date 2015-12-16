@@ -1,532 +1,461 @@
 
 
 Microchip Technology PIC LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Tue Dec 01 09:58:09 2015
+                                                                                               Tue Dec 15 16:20:41 2015
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	16F1827
      2                           	opt	pw 120
      3                           	opt	lm
-     4                           	psect	nvCOMMON,global,class=COMMON,space=1,delta=1
-     5                           	psect	cinit,global,class=CODE,merge=1,delta=2
-     6                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
-     7                           	psect	maintext,global,class=CODE,merge=1,split=1,delta=2
-     8                           	psect	text1,local,class=CODE,merge=1,delta=2
-     9                           	dabs	1,0x7E,2
-    10  0000                     	;# 
-    11  0001                     	;# 
-    12  0002                     	;# 
-    13  0003                     	;# 
-    14  0004                     	;# 
-    15  0005                     	;# 
-    16  0006                     	;# 
-    17  0007                     	;# 
-    18  0008                     	;# 
-    19  0009                     	;# 
-    20  000A                     	;# 
-    21  000B                     	;# 
-    22  000C                     	;# 
-    23  000D                     	;# 
-    24  0011                     	;# 
-    25  0012                     	;# 
-    26  0013                     	;# 
-    27  0014                     	;# 
-    28  0015                     	;# 
-    29  0016                     	;# 
-    30  0016                     	;# 
-    31  0017                     	;# 
-    32  0018                     	;# 
-    33  0019                     	;# 
-    34  001A                     	;# 
-    35  001B                     	;# 
-    36  001C                     	;# 
-    37  001E                     	;# 
-    38  001F                     	;# 
-    39  008C                     	;# 
-    40  008D                     	;# 
-    41  0091                     	;# 
-    42  0092                     	;# 
-    43  0093                     	;# 
-    44  0094                     	;# 
-    45  0095                     	;# 
-    46  0096                     	;# 
-    47  0097                     	;# 
-    48  0098                     	;# 
-    49  0099                     	;# 
-    50  009A                     	;# 
-    51  009B                     	;# 
-    52  009B                     	;# 
-    53  009C                     	;# 
-    54  009D                     	;# 
-    55  009E                     	;# 
-    56  010C                     	;# 
-    57  010D                     	;# 
-    58  0111                     	;# 
-    59  0112                     	;# 
-    60  0113                     	;# 
-    61  0114                     	;# 
-    62  0115                     	;# 
-    63  0116                     	;# 
-    64  0117                     	;# 
-    65  0118                     	;# 
-    66  0119                     	;# 
-    67  011A                     	;# 
-    68  011B                     	;# 
-    69  011D                     	;# 
-    70  011E                     	;# 
-    71  018C                     	;# 
-    72  018D                     	;# 
-    73  0191                     	;# 
-    74  0191                     	;# 
-    75  0192                     	;# 
-    76  0193                     	;# 
-    77  0193                     	;# 
+     4                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     5                           	psect	bitbssCOMMON,global,bit,class=COMMON,space=1,delta=1
+     6                           	psect	bssCOMMON,global,class=COMMON,space=1,delta=1
+     7                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+     8                           	psect	maintext,global,class=CODE,merge=1,split=1,delta=2
+     9                           	psect	text1,local,class=CODE,merge=1,delta=2
+    10                           	psect	text2,local,class=CODE,merge=1,delta=2
+    11                           	dabs	1,0x7E,2
+    12  0000                     	;# 
+    13  0001                     	;# 
+    14  0002                     	;# 
+    15  0003                     	;# 
+    16  0004                     	;# 
+    17  0005                     	;# 
+    18  0006                     	;# 
+    19  0007                     	;# 
+    20  0008                     	;# 
+    21  0009                     	;# 
+    22  000A                     	;# 
+    23  000B                     	;# 
+    24  000C                     	;# 
+    25  000D                     	;# 
+    26  0011                     	;# 
+    27  0012                     	;# 
+    28  0013                     	;# 
+    29  0014                     	;# 
+    30  0015                     	;# 
+    31  0016                     	;# 
+    32  0016                     	;# 
+    33  0017                     	;# 
+    34  0018                     	;# 
+    35  0019                     	;# 
+    36  001A                     	;# 
+    37  001B                     	;# 
+    38  001C                     	;# 
+    39  001E                     	;# 
+    40  001F                     	;# 
+    41  008C                     	;# 
+    42  008D                     	;# 
+    43  0091                     	;# 
+    44  0092                     	;# 
+    45  0093                     	;# 
+    46  0094                     	;# 
+    47  0095                     	;# 
+    48  0096                     	;# 
+    49  0097                     	;# 
+    50  0098                     	;# 
+    51  0099                     	;# 
+    52  009A                     	;# 
+    53  009B                     	;# 
+    54  009B                     	;# 
+    55  009C                     	;# 
+    56  009D                     	;# 
+    57  009E                     	;# 
+    58  010C                     	;# 
+    59  010D                     	;# 
+    60  0111                     	;# 
+    61  0112                     	;# 
+    62  0113                     	;# 
+    63  0114                     	;# 
+    64  0115                     	;# 
+    65  0116                     	;# 
+    66  0117                     	;# 
+    67  0118                     	;# 
+    68  0119                     	;# 
+    69  011A                     	;# 
+    70  011B                     	;# 
+    71  011D                     	;# 
+    72  011E                     	;# 
+    73  018C                     	;# 
+    74  018D                     	;# 
+    75  0191                     	;# 
+    76  0191                     	;# 
+    77  0192                     	;# 
     78  0193                     	;# 
-    79  0194                     	;# 
-    80  0195                     	;# 
-    81  0196                     	;# 
-    82  0199                     	;# 
-    83  019A                     	;# 
-    84  019B                     	;# 
-    85  019B                     	;# 
+    79  0193                     	;# 
+    80  0193                     	;# 
+    81  0194                     	;# 
+    82  0195                     	;# 
+    83  0196                     	;# 
+    84  0199                     	;# 
+    85  019A                     	;# 
     86  019B                     	;# 
     87  019B                     	;# 
-    88  019C                     	;# 
-    89  019C                     	;# 
-    90  019D                     	;# 
-    91  019E                     	;# 
-    92  019F                     	;# 
-    93  020C                     	;# 
-    94  020D                     	;# 
-    95  0211                     	;# 
-    96  0211                     	;# 
-    97  0212                     	;# 
-    98  0212                     	;# 
-    99  0213                     	;# 
-   100  0213                     	;# 
-   101  0214                     	;# 
-   102  0214                     	;# 
-   103  0215                     	;# 
-   104  0215                     	;# 
+    88  019B                     	;# 
+    89  019B                     	;# 
+    90  019C                     	;# 
+    91  019C                     	;# 
+    92  019D                     	;# 
+    93  019E                     	;# 
+    94  019F                     	;# 
+    95  020C                     	;# 
+    96  020D                     	;# 
+    97  0211                     	;# 
+    98  0211                     	;# 
+    99  0212                     	;# 
+   100  0212                     	;# 
+   101  0213                     	;# 
+   102  0213                     	;# 
+   103  0214                     	;# 
+   104  0214                     	;# 
    105  0215                     	;# 
-   106  0216                     	;# 
-   107  0216                     	;# 
-   108  0217                     	;# 
-   109  0217                     	;# 
-   110  0219                     	;# 
-   111  021A                     	;# 
-   112  021B                     	;# 
-   113  021C                     	;# 
-   114  021D                     	;# 
-   115  021E                     	;# 
-   116  021F                     	;# 
-   117  0291                     	;# 
-   118  0291                     	;# 
-   119  0292                     	;# 
-   120  0293                     	;# 
-   121  0294                     	;# 
-   122  0295                     	;# 
-   123  0295                     	;# 
-   124  0296                     	;# 
-   125  0298                     	;# 
-   126  0298                     	;# 
-   127  0299                     	;# 
-   128  029A                     	;# 
-   129  029B                     	;# 
-   130  029C                     	;# 
-   131  029C                     	;# 
-   132  029D                     	;# 
-   133  029E                     	;# 
-   134  029E                     	;# 
-   135  0311                     	;# 
-   136  0311                     	;# 
-   137  0312                     	;# 
-   138  0313                     	;# 
-   139  0318                     	;# 
-   140  0318                     	;# 
-   141  0319                     	;# 
-   142  031A                     	;# 
-   143  0394                     	;# 
-   144  0395                     	;# 
-   145  0396                     	;# 
-   146  039A                     	;# 
-   147  039C                     	;# 
-   148  039D                     	;# 
-   149  039E                     	;# 
-   150  039F                     	;# 
-   151  0415                     	;# 
-   152  0416                     	;# 
-   153  0417                     	;# 
-   154  041C                     	;# 
-   155  041D                     	;# 
-   156  041E                     	;# 
-   157  0FE4                     	;# 
-   158  0FE5                     	;# 
-   159  0FE6                     	;# 
-   160  0FE7                     	;# 
-   161  0FE8                     	;# 
-   162  0FE9                     	;# 
-   163  0FEA                     	;# 
-   164  0FEB                     	;# 
-   165  0FED                     	;# 
-   166  0FEE                     	;# 
-   167  0FEF                     	;# 
-   168                           
-   169                           	psect	nvCOMMON
-   170  007D                     __pnvCOMMON:	
-   171  007D                     _c:	
-   172  007D                     	ds	1
-   173                           
-   174                           	psect	cinit
-   175  07FD                     start_initialization:	
-   176                           ; #config settings
-   177                           
-   178  07FD                     __initialization:	
-   179  07FD                     end_of_initialization:	
-   180                           ;End of C runtime variable initialization code
-   181                           
-   182  07FD                     __end_of__initialization:	
-   183  07FD  0020               	movlb	0
-   184  07FE  3187  2F7D         	ljmp	_main	;jump to C main() function
-   185                           
-   186                           	psect	cstackCOMMON
-   187  0070                     __pcstackCOMMON:	
-   188  0070                     ?_main:	
-   189  0070                     ?___wmul:	
-   190                           ; 0 bytes @ 0x0
-   191                           
-   192  0070                     ___wmul@multiplier:	
-   193                           ; 2 bytes @ 0x0
-   194                           
-   195                           
-   196                           ; 2 bytes @ 0x0
-   197  0070                     	ds	2
-   198  0072                     ___wmul@multiplicand:	
-   199                           
-   200                           ; 2 bytes @ 0x2
-   201  0072                     	ds	2
-   202  0074                     ??___wmul:	
-   203  0074                     ___wmul@product:	
-   204                           ; 0 bytes @ 0x4
-   205                           
-   206                           
-   207                           ; 2 bytes @ 0x4
-   208  0074                     	ds	2
-   209  0076                     ??_main:	
+   106  0215                     	;# 
+   107  0215                     	;# 
+   108  0216                     	;# 
+   109  0216                     	;# 
+   110  0217                     	;# 
+   111  0217                     	;# 
+   112  0219                     	;# 
+   113  021A                     	;# 
+   114  021B                     	;# 
+   115  021C                     	;# 
+   116  021D                     	;# 
+   117  021E                     	;# 
+   118  021F                     	;# 
+   119  0291                     	;# 
+   120  0291                     	;# 
+   121  0292                     	;# 
+   122  0293                     	;# 
+   123  0294                     	;# 
+   124  0295                     	;# 
+   125  0295                     	;# 
+   126  0296                     	;# 
+   127  0298                     	;# 
+   128  0298                     	;# 
+   129  0299                     	;# 
+   130  029A                     	;# 
+   131  029B                     	;# 
+   132  029C                     	;# 
+   133  029C                     	;# 
+   134  029D                     	;# 
+   135  029E                     	;# 
+   136  029E                     	;# 
+   137  0311                     	;# 
+   138  0311                     	;# 
+   139  0312                     	;# 
+   140  0313                     	;# 
+   141  0318                     	;# 
+   142  0318                     	;# 
+   143  0319                     	;# 
+   144  031A                     	;# 
+   145  0394                     	;# 
+   146  0395                     	;# 
+   147  0396                     	;# 
+   148  039A                     	;# 
+   149  039C                     	;# 
+   150  039D                     	;# 
+   151  039E                     	;# 
+   152  039F                     	;# 
+   153  0415                     	;# 
+   154  0416                     	;# 
+   155  0417                     	;# 
+   156  041C                     	;# 
+   157  041D                     	;# 
+   158  041E                     	;# 
+   159  0FE4                     	;# 
+   160  0FE5                     	;# 
+   161  0FE6                     	;# 
+   162  0FE7                     	;# 
+   163  0FE8                     	;# 
+   164  0FE9                     	;# 
+   165  0FEA                     	;# 
+   166  0FEB                     	;# 
+   167  0FED                     	;# 
+   168  0FEE                     	;# 
+   169  0FEF                     	;# 
+   170                           
+   171                           	psect	cinit
+   172  07FB                     start_initialization:	
+   173                           ; #config settings
+   174                           
+   175  07FB                     __initialization:	
+   176                           
+   177                           ; Clear objects allocated to BITCOMMON
+   178  07FB  01F7               	clrf	(__pbitbssCOMMON/(0+8))& (0+127)
+   179                           
+   180                           ; Clear objects allocated to COMMON
+   181  07FC  01F8               	clrf	__pbssCOMMON& (0+127)
+   182  07FD                     end_of_initialization:	
+   183                           ;End of C runtime variable initialization code
+   184                           
+   185  07FD                     __end_of__initialization:	
+   186  07FD  0020               	movlb	0
+   187  07FE  3187  2FD2         	ljmp	_main	;jump to C main() function
+   188                           
+   189                           	psect	bitbssCOMMON
+   190  03B8                     __pbitbssCOMMON:	
+   191  03B8                     _status:	
+   192  03B8                     	ds	1
+   193                           
+   194                           	psect	bssCOMMON
+   195  0078                     __pbssCOMMON:	
+   196  0078                     _product:	
+   197  0078                     	ds	1
+   198                           
+   199                           	psect	cstackCOMMON
+   200  0070                     __pcstackCOMMON:	
+   201  0070                     ?_main:	
+   202  0070                     ?_Fkt_test:	
+   203                           ; 0 bytes @ 0x0
+   204                           
+   205  0070                     ?___bmul:	
+   206                           ; 1 bytes @ 0x0
+   207                           
+   208  0070                     ___bmul@multiplicand:	
+   209                           ; 1 bytes @ 0x0
    210                           
-   211                           ; 0 bytes @ 0x6
-   212  0076                     	ds	6
-   213  007C                     main@astru:	
-   214  007C                     main@i:	
-   215                           ; 0 bytes @ 0xC
-   216                           
-   217                           
-   218                           ; 1 bytes @ 0xC
-   219  007C                     	ds	1
-   220                           
-   221                           	psect	maintext
-   222  077D                     __pmaintext:	
-   223 ;;
-   224 ;;Main: autosize = 0, tempsize = 6, incstack = 0, save=0
-   225 ;;
-   226 ;; *************** function _main *****************
-   227 ;; Defined at:
-   228 ;;		line 16 in file "test_simulator.c"
-   229 ;; Parameters:    Size  Location     Type
-   230 ;;		None
-   231 ;; Auto vars:     Size  Location     Type
-   232 ;;  i               1   12[COMMON] unsigned char 
-   233 ;;  astru           0   12[COMMON] struct test[0]
-   234 ;; Return value:  Size  Location     Type
-   235 ;;		None               void
-   236 ;; Registers used:
-   237 ;;		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
-   238 ;; Tracked objects:
-   239 ;;		On entry : B1F/0
-   240 ;;		On exit  : 0/0
-   241 ;;		Unchanged: 0/0
-   242 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4
-   243 ;;      Params:         0       0       0       0       0       0
-   244 ;;      Locals:         1       0       0       0       0       0
-   245 ;;      Temps:          6       0       0       0       0       0
-   246 ;;      Totals:         7       0       0       0       0       0
-   247 ;;Total ram usage:        7 bytes
-   248 ;; Hardware stack levels required when called:    1
-   249 ;; This function calls:
-   250 ;;		___wmul
-   251 ;; This function is called by:
-   252 ;;		Startup code after reset
-   253 ;; This function uses a non-reentrant model
-   254 ;;
-   255                           
-   256                           
-   257                           ;psect for function _main
-   258  077D                     _main:	
-   259                           
-   260                           ;test_simulator.c: 18: typedef struct test{
-   261                           ;test_simulator.c: 19: unsigned char var1;
-   262                           ;test_simulator.c: 20: unsigned char var2;
-   263                           ;test_simulator.c: 21: unsigned char var3;
-   264                           ;test_simulator.c: 22: };
-   265                           ;test_simulator.c: 24: unsigned char i = 0;
-   266                           
-   267                           ;incstack = 0
-   268                           ; Regs used in _main: [wreg+fsr1l+fsr1h+status,2+status,0+pclath+cstack]
-   269  077D  01FC               	clrf	main@i
-   270  077E                     l522:	
-   271                           ;test_simulator.c: 26: typedef struct test stru;
-   272                           ;test_simulator.c: 27: stru astru[];
-   273                           ;test_simulator.c: 28: while(1) {
-   274                           
-   275                           
-   276                           ;test_simulator.c: 29: astru[i].var1 = 2;
-   277  077E  087C               	movf	main@i,w
-   278  077F  00F6               	movwf	??_main
-   279  0780  01F7               	clrf	??_main+1
-   280  0781  0876               	movf	??_main,w
-   281  0782  00F0               	movwf	___wmul@multiplier
-   282  0783  0877               	movf	??_main+1,w
-   283  0784  00F1               	movwf	___wmul@multiplier+1
-   284  0785  3003               	movlw	3
-   285  0786  00F2               	movwf	___wmul@multiplicand
-   286  0787  3000               	movlw	0
-   287  0788  00F3               	movwf	___wmul@multiplicand+1
-   288  0789  3187  2762  3187   	fcall	___wmul
-   289  078C  307C               	movlw	low main@astru
-   290  078D  00F8               	movwf	??_main+2
-   291  078E  3000               	movlw	high main@astru
-   292  078F  00F9               	movwf	??_main+3
-   293  0790  0870               	movf	?___wmul,w
-   294  0791  0778               	addwf	??_main+2,w
-   295  0792  00FA               	movwf	??_main+4
-   296  0793  0871               	movf	?___wmul+1,w
-   297  0794  3D79               	addwfc	??_main+3,w
-   298  0795  00FB               	movwf	??_main+5
-   299  0796  087A               	movf	??_main+4,w
-   300  0797  0086               	movwf	6
-   301  0798  087B               	movf	??_main+5,w
-   302  0799  0087               	movwf	7
-   303  079A  3002               	movlw	2
-   304  079B  0081               	movwf	1
-   305                           
-   306                           ;test_simulator.c: 30: c = astru[i].var1;
-   307  079C  087C               	movf	main@i,w
-   308  079D  00F6               	movwf	??_main
-   309  079E  01F7               	clrf	??_main+1
-   310  079F  0876               	movf	??_main,w
-   311  07A0  00F0               	movwf	___wmul@multiplier
-   312  07A1  0877               	movf	??_main+1,w
-   313  07A2  00F1               	movwf	___wmul@multiplier+1
-   314  07A3  3003               	movlw	3
-   315  07A4  00F2               	movwf	___wmul@multiplicand
-   316  07A5  3000               	movlw	0
-   317  07A6  00F3               	movwf	___wmul@multiplicand+1
-   318  07A7  3187  2762  3187   	fcall	___wmul
-   319  07AA  307C               	movlw	low main@astru
-   320  07AB  00F8               	movwf	??_main+2
-   321  07AC  3000               	movlw	high main@astru
-   322  07AD  00F9               	movwf	??_main+3
-   323  07AE  0870               	movf	?___wmul,w
-   324  07AF  0778               	addwf	??_main+2,w
-   325  07B0  0086               	movwf	6
-   326  07B1  0871               	movf	?___wmul+1,w
-   327  07B2  3D79               	addwfc	??_main+3,w
-   328  07B3  0087               	movwf	7
-   329  07B4  0801               	movf	1,w
-   330  07B5  00FA               	movwf	??_main+4
-   331  07B6  087A               	movf	??_main+4,w
-   332  07B7  00FD               	movwf	_c
-   333                           
-   334                           ;test_simulator.c: 31: __nop();
-   335  07B8  0000               	nop
-   336                           
-   337                           ;test_simulator.c: 32: c = 0;
-   338  07B9  01FD               	clrf	_c
-   339                           
-   340                           ;test_simulator.c: 33: __nop();
-   341  07BA  0000               	nop
-   342                           
-   343                           ;test_simulator.c: 34: i++;
-   344  07BB  3001               	movlw	1
-   345  07BC  00F6               	movwf	??_main
-   346  07BD  0876               	movf	??_main,w
-   347  07BE  07FC               	addwf	main@i,f
-   348                           
-   349                           ;test_simulator.c: 35: astru[i].var1 = 3;
-   350  07BF  087C               	movf	main@i,w
-   351  07C0  00F6               	movwf	??_main
-   352  07C1  01F7               	clrf	??_main+1
-   353  07C2  0876               	movf	??_main,w
-   354  07C3  00F0               	movwf	___wmul@multiplier
-   355  07C4  0877               	movf	??_main+1,w
-   356  07C5  00F1               	movwf	___wmul@multiplier+1
-   357  07C6  3003               	movlw	3
-   358  07C7  00F2               	movwf	___wmul@multiplicand
-   359  07C8  3000               	movlw	0
-   360  07C9  00F3               	movwf	___wmul@multiplicand+1
-   361  07CA  3187  2762  3187   	fcall	___wmul
-   362  07CD  307C               	movlw	low main@astru
-   363  07CE  00F8               	movwf	??_main+2
-   364  07CF  3000               	movlw	high main@astru
-   365  07D0  00F9               	movwf	??_main+3
-   366  07D1  0870               	movf	?___wmul,w
-   367  07D2  0778               	addwf	??_main+2,w
-   368  07D3  00FA               	movwf	??_main+4
-   369  07D4  0871               	movf	?___wmul+1,w
-   370  07D5  3D79               	addwfc	??_main+3,w
-   371  07D6  00FB               	movwf	??_main+5
-   372  07D7  087A               	movf	??_main+4,w
-   373  07D8  0086               	movwf	6
-   374  07D9  087B               	movf	??_main+5,w
-   375  07DA  0087               	movwf	7
-   376  07DB  3003               	movlw	3
-   377  07DC  0081               	movwf	1
-   378                           
-   379                           ;test_simulator.c: 36: c = astru[i].var1;
-   380  07DD  087C               	movf	main@i,w
-   381  07DE  00F6               	movwf	??_main
-   382  07DF  01F7               	clrf	??_main+1
-   383  07E0  0876               	movf	??_main,w
-   384  07E1  00F0               	movwf	___wmul@multiplier
-   385  07E2  0877               	movf	??_main+1,w
-   386  07E3  00F1               	movwf	___wmul@multiplier+1
-   387  07E4  3003               	movlw	3
-   388  07E5  00F2               	movwf	___wmul@multiplicand
-   389  07E6  3000               	movlw	0
-   390  07E7  00F3               	movwf	___wmul@multiplicand+1
-   391  07E8  3187  2762  3187   	fcall	___wmul
-   392  07EB  307C               	movlw	low main@astru
-   393  07EC  00F8               	movwf	??_main+2
-   394  07ED  3000               	movlw	high main@astru
-   395  07EE  00F9               	movwf	??_main+3
-   396  07EF  0870               	movf	?___wmul,w
-   397  07F0  0778               	addwf	??_main+2,w
-   398  07F1  0086               	movwf	6
-   399  07F2  0871               	movf	?___wmul+1,w
-   400  07F3  3D79               	addwfc	??_main+3,w
-   401  07F4  0087               	movwf	7
-   402  07F5  0801               	movf	1,w
-   403  07F6  00FA               	movwf	??_main+4
-   404  07F7  087A               	movf	??_main+4,w
-   405  07F8  00FD               	movwf	_c
-   406                           
-   407                           ;test_simulator.c: 37: __nop();
-   408  07F9  0000               	nop
-   409                           
-   410                           ;test_simulator.c: 38: c = 0;
-   411  07FA  01FD               	clrf	_c
-   412                           
-   413                           ;test_simulator.c: 39: __nop();
-   414  07FB  0000               	nop
-   415  07FC  2F7E               	goto	l522
-   416  07FD                     __end_of_main:	
-   417                           ;test_simulator.c: 40: }
-   418                           ;test_simulator.c: 41: return;
-   419                           
-   420                           
-   421                           	psect	text1
-   422  0762                     __ptext1:	
-   423 ;; *************** function ___wmul *****************
-   424 ;; Defined at:
-   425 ;;		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c"
-   426 ;; Parameters:    Size  Location     Type
-   427 ;;  multiplier      2    0[COMMON] unsigned int 
-   428 ;;  multiplicand    2    2[COMMON] unsigned int 
-   429 ;; Auto vars:     Size  Location     Type
-   430 ;;  product         2    4[COMMON] unsigned int 
-   431 ;; Return value:  Size  Location     Type
-   432 ;;                  2    0[COMMON] unsigned int 
-   433 ;; Registers used:
-   434 ;;		wreg, status,2, status,0
-   435 ;; Tracked objects:
-   436 ;;		On entry : 0/0
-   437 ;;		On exit  : 0/0
-   438 ;;		Unchanged: 0/0
-   439 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4
-   440 ;;      Params:         4       0       0       0       0       0
-   441 ;;      Locals:         2       0       0       0       0       0
-   442 ;;      Temps:          0       0       0       0       0       0
-   443 ;;      Totals:         6       0       0       0       0       0
-   444 ;;Total ram usage:        6 bytes
-   445 ;; Hardware stack levels used:    1
-   446 ;; This function calls:
-   447 ;;		Nothing
-   448 ;; This function is called by:
-   449 ;;		_main
-   450 ;; This function uses a non-reentrant model
-   451 ;;
-   452                           
-   453                           
-   454                           ;psect for function ___wmul
-   455  0762                     ___wmul:	
-   456                           
-   457                           ;incstack = 0
-   458                           ; Regs used in ___wmul: [wreg+status,2+status,0]
-   459  0762  01F4               	clrf	___wmul@product
-   460  0763  01F5               	clrf	___wmul@product+1
-   461  0764                     l508:	
-   462  0764  1C70               	btfss	___wmul@multiplier,0
-   463  0765  2F6A               	goto	l94
-   464  0766  0872               	movf	___wmul@multiplicand,w
-   465  0767  07F4               	addwf	___wmul@product,f
-   466  0768  0873               	movf	___wmul@multiplicand+1,w
-   467  0769  3DF5               	addwfc	___wmul@product+1,f
-   468  076A                     l94:	
-   469  076A  3001               	movlw	1
-   470  076B                     u65:	
-   471  076B  35F2               	lslf	___wmul@multiplicand,f
-   472  076C  0DF3               	rlf	___wmul@multiplicand+1,f
-   473  076D  0B89               	decfsz	9,f
-   474  076E  2F6B               	goto	u65
-   475  076F  3001               	movlw	1
-   476  0770                     u75:	
-   477  0770  36F1               	lsrf	___wmul@multiplier+1,f
-   478  0771  0CF0               	rrf	___wmul@multiplier,f
-   479  0772  0B89               	decfsz	9,f
-   480  0773  2F70               	goto	u75
-   481  0774  0870               	movf	___wmul@multiplier,w
-   482  0775  0471               	iorwf	___wmul@multiplier+1,w
-   483  0776  1D03               	btfss	3,2
-   484  0777  2F64               	goto	l508
-   485  0778  0875               	movf	___wmul@product+1,w
-   486  0779  00F1               	movwf	?___wmul+1
-   487  077A  0874               	movf	___wmul@product,w
-   488  077B  00F0               	movwf	?___wmul
-   489  077C  0008               	return
-   490  077D                     __end_of___wmul:	
-   491  007E                     btemp	set	126	;btemp
-   492  007E                     wtemp	set	126
-   493  007E                     wtemp0	set	126
-   494  0080                     wtemp1	set	128
-   495  0082                     wtemp2	set	130
-   496  0084                     wtemp3	set	132
-   497  0086                     wtemp4	set	134
-   498  0088                     wtemp5	set	136
-   499  007F                     wtemp6	set	127
-   500  007E                     ttemp	set	126
-   501  007E                     ttemp0	set	126
-   502  0081                     ttemp1	set	129
-   503  0084                     ttemp2	set	132
-   504  0087                     ttemp3	set	135
-   505  007F                     ttemp4	set	127
-   506  007E                     ltemp	set	126
-   507  007E                     ltemp0	set	126
-   508  0082                     ltemp1	set	130
-   509  0086                     ltemp2	set	134
-   510  0080                     ltemp3	set	128
+   211                           
+   212                           ; 1 bytes @ 0x0
+   213  0070                     	ds	1
+   214  0071                     ??___bmul:	
+   215                           
+   216                           ; 0 bytes @ 0x1
+   217  0071                     	ds	1
+   218  0072                     ___bmul@product:	
+   219                           
+   220                           ; 1 bytes @ 0x2
+   221  0072                     	ds	1
+   222  0073                     ___bmul@multiplier:	
+   223                           
+   224                           ; 1 bytes @ 0x3
+   225  0073                     	ds	1
+   226  0074                     ??_Fkt_test:	
+   227                           
+   228                           ; 0 bytes @ 0x4
+   229  0074                     	ds	2
+   230  0076                     Fkt_test@multiplier:	
+   231                           
+   232                           ; 1 bytes @ 0x6
+   233  0076                     	ds	1
+   234  0077                     ??_main:	
+   235                           
+   236                           	psect	maintext
+   237  07D2                     __pmaintext:	
+   238                           ; 0 bytes @ 0x7
+   239 ;;
+   240 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   241 ;;
+   242 ;; *************** function _main *****************
+   243 ;; Defined at:
+   244 ;;		line 20 in file "test_sim_2.c"
+   245 ;; Parameters:    Size  Location     Type
+   246 ;;		None
+   247 ;; Auto vars:     Size  Location     Type
+   248 ;;		None
+   249 ;; Return value:  Size  Location     Type
+   250 ;;		None               void
+   251 ;; Registers used:
+   252 ;;		wreg, status,2, status,0, pclath, cstack
+   253 ;; Tracked objects:
+   254 ;;		On entry : B1F/0
+   255 ;;		On exit  : 0/0
+   256 ;;		Unchanged: 0/0
+   257 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4
+   258 ;;      Params:         0       0       0       0       0       0
+   259 ;;      Locals:         0       0       0       0       0       0
+   260 ;;      Temps:          0       0       0       0       0       0
+   261 ;;      Totals:         0       0       0       0       0       0
+   262 ;;Total ram usage:        0 bytes
+   263 ;; Hardware stack levels required when called:    2
+   264 ;; This function calls:
+   265 ;;		_Fkt_test
+   266 ;; This function is called by:
+   267 ;;		Startup code after reset
+   268 ;; This function uses a non-reentrant model
+   269 ;;
+   270                           
+   271                           
+   272                           ;psect for function _main
+   273  07D2                     _main:	
+   274  07D2  2FD4               	goto	l10
+   275  07D3                     l521:	
+   276                           
+   277                           ;test_sim_2.c: 23: status = 1;
+   278  07D3  1477               	bsf	_status/(0+8),_status& (0+7)
+   279  07D4                     l10:	
+   280                           ;incstack = 0
+   281                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   282                           ;test_sim_2.c: 21: while(1) {
+   283                           
+   284                           ;test_sim_2.c: 24: }else {
+   285                           
+   286                           
+   287                           ;test_sim_2.c: 22: if(Fkt_test(3) == 10) {
+   288  07D4  3003               	movlw	3
+   289  07D5  3187  27DD  3187   	fcall	_Fkt_test
+   290  07D8  3A0A               	xorlw	10
+   291  07D9  1903               	btfsc	3,2
+   292  07DA  2FD3               	goto	l521
+   293                           
+   294                           ;test_sim_2.c: 25: status = 0;
+   295  07DB  1077               	bcf	_status/(0+8),_status& (0+7)
+   296  07DC  2FD4               	goto	l10
+   297  07DD                     __end_of_main:	
+   298                           ;test_sim_2.c: 26: }
+   299                           ;test_sim_2.c: 27: }
+   300                           ;test_sim_2.c: 28: return;
+   301                           
+   302                           
+   303                           	psect	text1
+   304  07DD                     __ptext1:	
+   305 ;; *************** function _Fkt_test *****************
+   306 ;; Defined at:
+   307 ;;		line 15 in file "test_sim_2.c"
+   308 ;; Parameters:    Size  Location     Type
+   309 ;;  multiplier      1    wreg     unsigned char 
+   310 ;; Auto vars:     Size  Location     Type
+   311 ;;  multiplier      1    6[COMMON] unsigned char 
+   312 ;; Return value:  Size  Location     Type
+   313 ;;                  1    wreg      unsigned char 
+   314 ;; Registers used:
+   315 ;;		wreg, status,2, status,0, pclath, cstack
+   316 ;; Tracked objects:
+   317 ;;		On entry : 0/0
+   318 ;;		On exit  : 0/0
+   319 ;;		Unchanged: 0/0
+   320 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4
+   321 ;;      Params:         0       0       0       0       0       0
+   322 ;;      Locals:         1       0       0       0       0       0
+   323 ;;      Temps:          2       0       0       0       0       0
+   324 ;;      Totals:         3       0       0       0       0       0
+   325 ;;Total ram usage:        3 bytes
+   326 ;; Hardware stack levels used:    1
+   327 ;; Hardware stack levels required when called:    1
+   328 ;; This function calls:
+   329 ;;		___bmul
+   330 ;; This function is called by:
+   331 ;;		_main
+   332 ;; This function uses a non-reentrant model
+   333 ;;
+   334                           
+   335                           
+   336                           ;psect for function _Fkt_test
+   337  07DD                     _Fkt_test:	
+   338                           
+   339                           ;incstack = 0
+   340                           ; Regs used in _Fkt_test: [wreg+status,2+status,0+pclath+cstack]
+   341                           ;Fkt_test@multiplier stored from wreg
+   342  07DD  00F6               	movwf	Fkt_test@multiplier
+   343                           
+   344                           ;test_sim_2.c: 16: product = 5 * multiplier;
+   345  07DE  3005               	movlw	5
+   346  07DF  00F4               	movwf	??_Fkt_test
+   347  07E0  0874               	movf	??_Fkt_test,w
+   348  07E1  00F0               	movwf	___bmul@multiplicand
+   349  07E2  0876               	movf	Fkt_test@multiplier,w
+   350  07E3  3187  27EA         	fcall	___bmul
+   351  07E5  00F5               	movwf	??_Fkt_test+1
+   352  07E6  0875               	movf	??_Fkt_test+1,w
+   353  07E7  00F8               	movwf	_product
+   354                           
+   355                           ;test_sim_2.c: 17: return product;
+   356  07E8  0878               	movf	_product,w
+   357  07E9  0008               	return
+   358  07EA                     __end_of_Fkt_test:	
+   359                           
+   360                           	psect	text2
+   361  07EA                     __ptext2:	
+   362 ;; *************** function ___bmul *****************
+   363 ;; Defined at:
+   364 ;;		line 4 in file "C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c"
+   365 ;; Parameters:    Size  Location     Type
+   366 ;;  multiplier      1    wreg     unsigned char 
+   367 ;;  multiplicand    1    0[COMMON] unsigned char 
+   368 ;; Auto vars:     Size  Location     Type
+   369 ;;  multiplier      1    3[COMMON] unsigned char 
+   370 ;;  product         1    2[COMMON] unsigned char 
+   371 ;; Return value:  Size  Location     Type
+   372 ;;                  1    wreg      unsigned char 
+   373 ;; Registers used:
+   374 ;;		wreg, status,2, status,0
+   375 ;; Tracked objects:
+   376 ;;		On entry : 0/0
+   377 ;;		On exit  : 0/0
+   378 ;;		Unchanged: 0/0
+   379 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4
+   380 ;;      Params:         1       0       0       0       0       0
+   381 ;;      Locals:         2       0       0       0       0       0
+   382 ;;      Temps:          1       0       0       0       0       0
+   383 ;;      Totals:         4       0       0       0       0       0
+   384 ;;Total ram usage:        4 bytes
+   385 ;; Hardware stack levels used:    1
+   386 ;; This function calls:
+   387 ;;		Nothing
+   388 ;; This function is called by:
+   389 ;;		_Fkt_test
+   390 ;; This function uses a non-reentrant model
+   391 ;;
+   392                           
+   393                           
+   394                           ;psect for function ___bmul
+   395  07EA                     ___bmul:	
+   396                           
+   397                           ;incstack = 0
+   398                           ; Regs used in ___bmul: [wreg+status,2+status,0]
+   399                           ;___bmul@multiplier stored from wreg
+   400  07EA  00F3               	movwf	___bmul@multiplier
+   401  07EB  01F2               	clrf	___bmul@product
+   402  07EC                     l501:	
+   403  07EC  1C73               	btfss	___bmul@multiplier,0
+   404  07ED  2FF2               	goto	l505
+   405  07EE  0870               	movf	___bmul@multiplicand,w
+   406  07EF  00F1               	movwf	??___bmul
+   407  07F0  0871               	movf	??___bmul,w
+   408  07F1  07F2               	addwf	___bmul@product,f
+   409  07F2                     l505:	
+   410  07F2  1003               	clrc
+   411  07F3  0DF0               	rlf	___bmul@multiplicand,f
+   412  07F4  1003               	clrc
+   413  07F5  0CF3               	rrf	___bmul@multiplier,f
+   414  07F6  0873               	movf	___bmul@multiplier,w
+   415  07F7  1D03               	btfss	3,2
+   416  07F8  2FEC               	goto	l501
+   417  07F9  0872               	movf	___bmul@product,w
+   418  07FA  0008               	return
+   419  07FB                     __end_of___bmul:	
+   420  007E                     btemp	set	126	;btemp
+   421  007E                     wtemp	set	126
+   422  007E                     wtemp0	set	126
+   423  0080                     wtemp1	set	128
+   424  0082                     wtemp2	set	130
+   425  0084                     wtemp3	set	132
+   426  0086                     wtemp4	set	134
+   427  0088                     wtemp5	set	136
+   428  007F                     wtemp6	set	127
+   429  007E                     ttemp	set	126
+   430  007E                     ttemp0	set	126
+   431  0081                     ttemp1	set	129
+   432  0084                     ttemp2	set	132
+   433  0087                     ttemp3	set	135
+   434  007F                     ttemp4	set	127
+   435  007E                     ltemp	set	126
+   436  007E                     ltemp0	set	126
+   437  0082                     ltemp1	set	130
+   438  0086                     ltemp2	set	134
+   439  0080                     ltemp3	set	128
 
 
 Data Sizes:
     Strings     0
     Constant    0
     Data        0
-    BSS         0
-    Persistent  1
+    BSS         1
+    Persistent  0
     Stack       0
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMMON           14     13      14
+    COMMON           14      7       9
     BANK0            80      0       0
     BANK1            80      0       0
     BANK2            80      0       0
@@ -539,7 +468,8 @@ Pointer List with Targets:
 
 Critical Paths under _main in COMMON
 
-    _main->___wmul
+    _main->_Fkt_test
+    _Fkt_test->___bmul
 
 Critical Paths under _main in BANK0
 
@@ -566,20 +496,24 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (0) _main                                                 7     7      0     700
-                                              6 COMMON     7     7      0
-                             ___wmul
+ (0) _main                                                 0     0      0     167
+                           _Fkt_test
  ---------------------------------------------------------------------------------
- (1) ___wmul                                               6     2      4     516
-                                              0 COMMON     6     2      4
+ (1) _Fkt_test                                             3     3      0     167
+                                              4 COMMON     3     3      0
+                             ___bmul
  ---------------------------------------------------------------------------------
- Estimated maximum stack depth 1
+ (2) ___bmul                                               4     3      1     145
+                                              0 COMMON     4     3      1
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
  ---------------------------------------------------------------------------------
 
  Call Graph Graphs:
 
  _main (ROOT)
-   ___wmul
+   _Fkt_test
+     ___bmul
 
  Address spaces:
 Name               Size   Autos  Total    Cost      Usage
@@ -587,10 +521,10 @@ BIGRAM             170      0       0       0        0.0%
 EEDATA             100      0       0       0        0.0%
 NULL                 0      0       0       0        0.0%
 CODE                 0      0       0       0        0.0%
-BITCOMMON            E      0       0       1        0.0%
+BITCOMMON            E      0       1       1        7.1%
 BITSFR0              0      0       0       1        0.0%
 SFR0                 0      0       0       1        0.0%
-COMMON               E      D       E       2      100.0%
+COMMON               E      7       9       2       64.3%
 BITSFR1              0      0       0       2        0.0%
 SFR1                 0      0       0       2        0.0%
 BITSFR2              0      0       0       3        0.0%
@@ -598,7 +532,7 @@ SFR2                 0      0       0       3        0.0%
 STACK                0      0       0       3        0.0%
 BITSFR3              0      0       0       4        0.0%
 SFR3                 0      0       0       4        0.0%
-ABS                  0      0       E       4        0.0%
+ABS                  0      0       9       4        0.0%
 BITBANK0            50      0       0       5        0.0%
 BITSFR4              0      0       0       5        0.0%
 SFR4                 0      0       0       5        0.0%
@@ -631,7 +565,7 @@ BITSFR13             0      0       0      14        0.0%
 SFR13                0      0       0      14        0.0%
 BITSFR14             0      0       0      15        0.0%
 SFR14                0      0       0      15        0.0%
-DATA                 0      0       E      15        0.0%
+DATA                 0      0       9      15        0.0%
 BITSFR15             0      0       0      16        0.0%
 SFR15                0      0       0      16        0.0%
 BITSFR16             0      0       0      17        0.0%
@@ -669,24 +603,25 @@ SFR31                0      0       0      32        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Tue Dec 01 09:58:09 2015
+Symbol Table                                                                                   Tue Dec 15 16:20:41 2015
 
-                      _c 007D                       l94 076A                       u65 076B  
-                     u75 0770      ___wmul@multiplicand 0072                      l522 077E  
-                    l508 0764                      wreg 0009                     _main 077D  
-                   fsr1h 0007                     indf1 0001                     fsr1l 0006  
+         ___bmul@product 0072                       l10 07D4                      l501 07EC  
+                    l505 07F2                      l521 07D3                     _main 07D2  
                    btemp 007E                     ltemp 007E                     start 0002  
-                   ttemp 007E                     wtemp 007E                    ?_main 0070  
-                  main@i 007C                    ltemp0 007E                    ltemp1 0082  
-                  ltemp2 0086                    ltemp3 0080                    ttemp0 007E  
-                  ttemp1 0081                    ttemp2 0084                    ttemp3 0087  
-                  ttemp4 007F                    status 0003                    wtemp0 007E  
-                  wtemp1 0080                    wtemp2 0082                    wtemp3 0084  
-                  wtemp4 0086                    wtemp5 0088                    wtemp6 007F  
-        __initialization 07FD             __end_of_main 07FD                   ??_main 0076  
-                 ___wmul 0762  __end_of__initialization 07FD           __pcstackCOMMON 0070  
-             __pnvCOMMON 007D               __pmaintext 077D                  ?___wmul 0070  
-        __size_of___wmul 001B                  __ptext1 0762     end_of_initialization 07FD  
-         __end_of___wmul 077D      start_initialization 07FD                 ??___wmul 0074  
-              ___latbits 0001           ___wmul@product 0074        ___wmul@multiplier 0070  
-              main@astru 007C            __size_of_main 0080  
+                   ttemp 007E                     wtemp 007E        ___bmul@multiplier 0073  
+                  ?_main 0070       Fkt_test@multiplier 0076           __pbitbssCOMMON 03B8  
+                  ltemp0 007E                    ltemp1 0082                    ltemp2 0086  
+                  ltemp3 0080                    ttemp0 007E                    ttemp1 0081  
+                  ttemp2 0084                    ttemp3 0087                    ttemp4 007F  
+                  status 0003                    wtemp0 007E                    wtemp1 0080  
+                  wtemp2 0082                    wtemp3 0084                    wtemp4 0086  
+                  wtemp5 0088                    wtemp6 007F          __initialization 07FB  
+           __end_of_main 07DD         __end_of_Fkt_test 07EA                   ??_main 0077  
+                 ___bmul 07EA                   _status 03B8  __end_of__initialization 07FD  
+    ___bmul@multiplicand 0070           __pcstackCOMMON 0070                ?_Fkt_test 0070  
+             __pmaintext 07D2                  ?___bmul 0070               ??_Fkt_test 0074  
+        __size_of___bmul 0011                  __ptext1 07DD                  __ptext2 07EA  
+                _product 0078     end_of_initialization 07FD           __end_of___bmul 07FB  
+    start_initialization 07FB        __size_of_Fkt_test 000D                 ??___bmul 0071  
+            __pbssCOMMON 0078                ___latbits 0001                 _Fkt_test 07DD  
+          __size_of_main 000B  
