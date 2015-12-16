@@ -23,7 +23,7 @@ unsigned char ExchangeSpiChar(unsigned char data) {
     return (SSP1BUF);
 }
 
-unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
+unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2) {
     NOP();
     unsigned int SPI_word = 0;
     if(SSP1IF == 1) {

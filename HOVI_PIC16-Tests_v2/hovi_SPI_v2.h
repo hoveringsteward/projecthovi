@@ -15,7 +15,7 @@ void SendSpiChar(unsigned char data);
     
 unsigned char ExchangeSpiChar(unsigned char data);
 
-unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2);
+unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
 
 
 #endif	/* HOVI_SPI_H */

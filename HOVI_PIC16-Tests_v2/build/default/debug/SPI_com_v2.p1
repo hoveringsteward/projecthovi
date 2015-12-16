@@ -2766,7 +2766,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern __bit __timeout;
 [; ;hovi_SPI_v2.h: 14: void SendSpiChar(unsigned char data);
 [; ;hovi_SPI_v2.h: 16: unsigned char ExchangeSpiChar(unsigned char data);
-[; ;hovi_SPI_v2.h: 18: unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2);
+[; ;hovi_SPI_v2.h: 18: unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
 [; ;hovi_UART_v2.h: 14: void send_UART_char(unsigned char data);
 [; ;hovi_UART_v2.h: 16: void send_UART_word(unsigned int data);
 [; ;hovi_LED_v2.h: 13: unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -2856,9 +2856,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 355 ]
 }
 "26
-[v _ExchangeSpi2char `(uc ~T0 @X0 1 ef2`uc`uc ]
+[v _ExchangeSpi2char `(ui ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;SPI_com_v2.c: 26: unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
+[; ;SPI_com_v2.c: 26: unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2) {
 [e :U _ExchangeSpi2char ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [v _data2 `uc ~T0 @X0 1 r2 ]
@@ -2922,7 +2922,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SPI_com_v2.c: 42: __nop();
 "42
 [e ( ___nop ..  ]
-[; ;SPI_com_v2.c: 43: if(SPI_word == 0xAA55) {
+[; ;SPI_com_v2.c: 43: if(SPI_word == 0xaa55) {
 "43
 [e $ ! == _SPI_word -> 43605 `ui 368  ]
 {
@@ -2935,7 +2935,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SPI_com_v2.c: 45: }
 [; ;SPI_com_v2.c: 46: return (SPI_word);
 "46
-[e ) -> _SPI_word `uc ]
+[e ) _SPI_word ]
 [e $UE 360  ]
 [; ;SPI_com_v2.c: 47: }
 "47

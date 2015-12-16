@@ -24,7 +24,7 @@
 "55
 [v _main main `(v  1 e 0 0 ]
 "26 C:\projecthovi\HOVI_PIC16-Tests_v2\SPI_com_v2.c
-[v _ExchangeSpi2char ExchangeSpi2char `(uc  1 e 1 0 ]
+[v _ExchangeSpi2char ExchangeSpi2char `(ui  1 e 2 0 ]
 "414 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic16f1827.h
 [v _PORTA PORTA `VEuc  1 e 1 @12 ]
 "475
@@ -149,14 +149,14 @@
 "124
 } 0
 "26 C:\projecthovi\HOVI_PIC16-Tests_v2\SPI_com_v2.c
-[v _ExchangeSpi2char ExchangeSpi2char `(uc  1 e 1 0 ]
+[v _ExchangeSpi2char ExchangeSpi2char `(ui  1 e 2 0 ]
 {
 [v ExchangeSpi2char@data data `uc  1 a 1 wreg ]
 "28
-[v ExchangeSpi2char@SPI_word SPI_word `ui  1 a 2 4 ]
+[v ExchangeSpi2char@SPI_word SPI_word `ui  1 a 2 5 ]
 "26
 [v ExchangeSpi2char@data data `uc  1 a 1 wreg ]
 [v ExchangeSpi2char@data2 data2 `uc  1 p 1 0 ]
-[v ExchangeSpi2char@data data `uc  1 a 1 3 ]
+[v ExchangeSpi2char@data data `uc  1 a 1 4 ]
 "47
 } 0

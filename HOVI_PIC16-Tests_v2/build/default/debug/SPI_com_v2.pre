@@ -3723,7 +3723,7 @@ void SendSpiChar(unsigned char data);
 
 unsigned char ExchangeSpiChar(unsigned char data);
 
-unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2);
+unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
 
 # 14 "hovi_UART_v2.h"
 void send_UART_char(unsigned char data);
@@ -3761,7 +3761,7 @@ SSP1IF = 0;
 return (SSP1BUF);
 }
 
-unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2) {
+unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2) {
 __nop();
 unsigned int SPI_word = 0;
 if(SSP1IF == 1) {
@@ -3778,7 +3778,7 @@ while(SSP1IF == 0);
 SSP1IF = 0;
 SPI_word |= SSP1BUF;
 __nop();
-if(SPI_word == 0xAA55) {
+if(SPI_word == 0xaa55) {
 __nop();
 }
 return (SPI_word);

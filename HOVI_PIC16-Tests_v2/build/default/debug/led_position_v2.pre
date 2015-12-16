@@ -3723,7 +3723,7 @@ void SendSpiChar(unsigned char data);
 
 unsigned char ExchangeSpiChar(unsigned char data);
 
-unsigned char ExchangeSpi2char(unsigned char data, unsigned char data2);
+unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
 
 # 14 "hovi_UART_v2.h"
 void send_UART_char(unsigned char data);
@@ -3767,11 +3767,11 @@ for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
 
 
 do {
-if(ExchangeSpi2char(0x5A, 0) == 0xAA55) {
+if(ExchangeSpi2char(0x5a, 0) == 0xaa55) {
 frame = 1;
-if(ExchangeSpi2char(0x5A, 0) == 0xAA55) {
+if(ExchangeSpi2char(0x5a, 0) == 0xaa55) {
 obj_type = 0;
-}else if(ExchangeSpi2char(0x5A, 0) == 0xAA56) {
+}else if(ExchangeSpi2char(0x5a, 0) == 0xaa56) {
 obj_type = 1;
 }
 }else {
@@ -3783,15 +3783,15 @@ return 0;
 }
 } while(frame == 0);
 
-unsigned int checksum = ExchangeSpi2char(0x5A, 0);
+unsigned int checksum = ExchangeSpi2char(0x5a, 0);
 
 
-afarben[c_obj].num = ExchangeSpi2char(0x5A, 0);
-afarben[c_obj].pos_x = ExchangeSpi2char(0x5A, 0);
-afarben[c_obj].pos_y = ExchangeSpi2char(0x5A, 0);
-afarben[c_obj].width = ExchangeSpi2char(0x5A, 0);
-afarben[c_obj].height = ExchangeSpi2char(0x5A, 0);
-afarben[c_obj].angle = ExchangeSpi2char(0x5A, 0);
+afarben[c_obj].num = ExchangeSpi2char(0x5a, 0);
+afarben[c_obj].pos_x = ExchangeSpi2char(0x5a, 0);
+afarben[c_obj].pos_y = ExchangeSpi2char(0x5a, 0);
+afarben[c_obj].width = ExchangeSpi2char(0x5a, 0);
+afarben[c_obj].height = ExchangeSpi2char(0x5a, 0);
+afarben[c_obj].angle = ExchangeSpi2char(0x5a, 0);
 
 if(ProofObject(des_obj, afarben[c_obj].num)) {
 LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
