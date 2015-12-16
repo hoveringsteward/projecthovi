@@ -55,7 +55,7 @@ void init() {
 void main(void) {
     init();
     while (1) {
-        if(GetObject(1, 10, 3) == 0) {
+        if(GetObject(1, 10, 1) == 0) {
             NOP();
             PORTBbits.RB3 = 1;
         }else {

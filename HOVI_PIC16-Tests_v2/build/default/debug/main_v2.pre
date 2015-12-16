@@ -3778,7 +3778,7 @@ APFCON0bits.SDO1SEL = 1;
 void main(void) {
 init();
 while (1) {
-if(GetObject(1, 10, 3) == 0) {
+if(GetObject(1, 10, 1) == 0) {
 __nop();
 PORTBbits.RB3 = 1;
 }else {

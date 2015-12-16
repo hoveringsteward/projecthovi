@@ -78,6 +78,7 @@ bit ProofObject(unsigned int des_obj, unsigned int num){
     if(num == des_obj) {
         return 1;
     }else {
+        NOP();
         return 0;
     }
 }

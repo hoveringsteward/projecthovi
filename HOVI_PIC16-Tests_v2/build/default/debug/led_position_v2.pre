@@ -3805,6 +3805,7 @@ bit ProofObject(unsigned int des_obj, unsigned int num){
 if(num == des_obj) {
 return 1;
 }else {
+__nop();
 return 0;
 }
 }
@@ -3813,7 +3814,7 @@ return 0;
 
 void LedSignalling(unsigned int pos_x, unsigned int pos_y){
 
-# 93
+# 94
 if(pos_x > 170){
 RA4 = 0;
 RA7 = 1;
@@ -3828,7 +3829,7 @@ RA4 = 1;
 RA7 = 1;
 }
 
-# 111
+# 112
 if(pos_y < 90){
 RA2 = 1;
 RA3 = 0;

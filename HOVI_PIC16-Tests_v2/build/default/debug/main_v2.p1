@@ -2887,9 +2887,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "57
 [e :U 353 ]
 {
-[; ;main_v2.c: 58: if(GetObject(1, 10, 3) == 0) {
+[; ;main_v2.c: 58: if(GetObject(1, 10, 1) == 0) {
 "58
-[e $ ! == -> ( _GetObject (3 , , -> -> 1 `i `uc -> -> 10 `i `ui -> -> 3 `i `uc `i -> 0 `i 355  ]
+[e $ ! == -> ( _GetObject (3 , , -> -> 1 `i `uc -> -> 10 `i `ui -> -> 1 `i `uc `i -> 0 `i 355  ]
 {
 [; ;main_v2.c: 59: __nop();
 "59
