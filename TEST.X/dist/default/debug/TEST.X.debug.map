@@ -5,7 +5,7 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.35\dat\en_msgs.txt -cs \
   -h+dist/default/debug\TEST.X.debug.sym \
   --cmf=dist/default/debug\TEST.X.debug.cmf -z -Q16F1827 \
-  -oC:\Users\Lucas\AppData\Local\Temp\s7l4.2 \
+  -oC:\Users\Lucas\AppData\Local\Temp\s63k.2 \
   -Mdist/default/debug/TEST.X.debug.map -E1 -ver=XC8 -ASTACK=02000h-0216fh \
   -pstack=STACK -ACODE=00h-07FFhx2 -ASTRCODE=00h-0FFFh -ASTRING=00h-0FFhx16 \
   -ACONST=00h-0FFhx16 -AENTRY=00h-0FFhx16 -ACOMMON=070h-07Fh \
@@ -28,7 +28,7 @@ Linker command line:
   -DCONFIG=2 -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 \
   -AEEDATA=00h-0FFh/0F000h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 -k \
-  C:\Users\Lucas\AppData\Local\Temp\s7l4.obj \
+  C:\Users\Lucas\AppData\Local\Temp\s63k.obj \
   dist/default/debug\TEST.X.debug.obj 
 
 Object code version is 3.11
@@ -38,14 +38,14 @@ Machine type is 16F1827
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
+C:\Users\Lucas\AppData\Local\Temp\s63k.obj
                 end_init                              2        2        2        0       0
                 reset_vec                             0        0        2        0       0
 dist/default/debug\TEST.X.debug.obj
                 cinit                               7FB      7FB        5      FF6       0
-                text2                               7EA      7EA       11      FD4       0
-                text1                               7DD      7DD        D      FBA       0
-                maintext                            7D2      7D2        B      FA4       0
+                text2                               7D8      7D8       11      FB0       0
+                text1                               7CB      7CB        D      F96       0
+                maintext                            7E9      7E9       12      FD2       0
                 cstackCOMMON                         70       70        7       70       1
                 bssCOMMON                            78       78        1       70       1
                 bitbssCOMMON                        3B8       77        1       70       1     8
@@ -57,9 +57,9 @@ TOTAL           Name                               Link     Load   Length     Sp
                 end_init                              2        2        2         0
                 cinit                               7FB      7FB        5         0
                 reset_vec                             0        0        2         0
-                text2                               7EA      7EA       11         0
-                text1                               7DD      7DD        D         0
-                maintext                            7D2      7D2        B         0
+                text2                               7D8      7D8       11         0
+                text1                               7CB      7CB        D         0
+                maintext                            7E9      7E9       12         0
 
         CLASS   STRCODE        
 
@@ -221,9 +221,9 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 reset_vec                      000000  000004  000004         0       0  CODE        2
                 cstackCOMMON                   000070  000009  000079        70       1  COMMON      1
-                maintext                       0007D2  00000B  0007DD       FA4       0  CODE        2
-                text1                          0007DD  00000D  0007EA       FBA       0  CODE        2
-                text2                          0007EA  000011  0007FB       FD4       0  CODE        2
+                text1                          0007CB  00000D  0007D8       F96       0  CODE        2
+                text2                          0007D8  000011  0007E9       FB0       0  CODE        2
+                maintext                       0007E9  000012  0007FB       FD2       0  CODE        2
                 cinit                          0007FB  000005  000800       FF6       0  CODE        2
 
 
@@ -236,14 +236,14 @@ UNUSED ADDRESS RANGES
         BANK3            01A0-01EF             50           1
         BANK4            0220-024F             30           1
         BIGRAM           2000-216F            170           1
-        CODE             0004-07D1            7CE           2
+        CODE             0004-07CA            7C7           2
                          0800-0FFF            800
         COMMON           0079-007D              5           1
         CONFIG           8007-8008              2           2
-        CONST            0004-07D1            100           2
+        CONST            0004-07CA            100           2
                          0800-0FFF            100
         EEDATA           F000-F0FF            100           2
-        ENTRY            0004-07D1            100           2
+        ENTRY            0004-07CA            100           2
                          0800-0FFF            100
         IDLOC            8000-8003              4           2
         RAM              0020-006F             50           1
@@ -284,15 +284,15 @@ UNUSED ADDRESS RANGES
         SFR8             0400-046F             70           1
         SFR9             0480-04EF             70           1
         STACK            2000-216F            170           1
-        STRCODE          0004-07D1            7CE           2
+        STRCODE          0004-07CA            7C7           2
                          0800-0FFF            800
-        STRING           0004-07D1            100           2
+        STRING           0004-07CA            100           2
                          0800-0FFF            100
 
                                   Symbol Table
 
 Fkt_test@multiplier      cstackCOMMON 0076
-_Fkt_test                text1        07DD
+_Fkt_test                text1        07CB
 __Habs1                  abs1         0000
 __Hbank0                 bank0        0000
 __Hbank1                 bank1        0000
@@ -479,28 +479,28 @@ __S0                     (abs)        0800
 __S1                     (abs)        0079
 __S2                     (abs)        0000
 __S3                     (abs)        0000
-___bmul                  text2        07EA
+___bmul                  text2        07D8
 ___bmul@multiplicand     cstackCOMMON 0070
 ___bmul@multiplier       cstackCOMMON 0073
 ___bmul@product          cstackCOMMON 0072
 ___int_sp                stack        0000
 ___latbits               (abs)        0001
 ___sp                    stack        0000
-__end_of_Fkt_test        text1        07EA
-__end_of___bmul          text2        07FB
+__end_of_Fkt_test        text1        07D8
+__end_of___bmul          text2        07E9
 __end_of__initialization cinit        07FD
-__end_of_main            maintext     07DD
+__end_of_main            maintext     07FB
 __initialization         cinit        07FB
 __pbitbssCOMMON          bitbssCOMMON 03B8
 __pbssCOMMON             bssCOMMON    0078
 __pcstackCOMMON          cstackCOMMON 0070
-__pmaintext              maintext     07D2
-__ptext1                 text1        07DD
-__ptext2                 text2        07EA
+__pmaintext              maintext     07E9
+__ptext1                 text1        07CB
+__ptext2                 text2        07D8
 __size_of_Fkt_test       (abs)        0000
 __size_of___bmul         (abs)        0000
 __size_of_main           (abs)        0000
-_main                    maintext     07D2
+_main                    maintext     07E9
 _product                 bssCOMMON    0078
 _status                  bitbssCOMMON 03B8
 btemp                    (abs)        007E
@@ -541,7 +541,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 20 in file "test_sim_2.c"
+		line 20 in file "test_sim_3.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -570,7 +570,7 @@ Total ram usage:        0 bytes
 
  *************** function _Fkt_test *****************
  Defined at:
-		line 15 in file "test_sim_2.c"
+		line 15 in file "test_sim_3.c"
  Parameters:    Size  Location     Type
   multiplier      1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -633,19 +633,19 @@ Total ram usage:        4 bytes
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
+test_sim_3.c
+		_Fkt_test      		CODE           	07CB	0000	14
+		_main          		CODE           	07E9	0000	19
+
+test_sim_3.c estimated size: 33
+
 shared
 		__initialization		CODE           	07FB	0000	3
 
 shared estimated size: 3
 
-test_sim_2.c
-		_Fkt_test      		CODE           	07DD	0000	14
-		_main          		CODE           	07D2	0000	12
-
-test_sim_2.c estimated size: 26
-
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-		___bmul        		CODE           	07EA	0000	18
+		___bmul        		CODE           	07D8	0000	18
 
 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c estimated size: 18
 

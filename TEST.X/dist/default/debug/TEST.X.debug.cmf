@@ -13,13 +13,13 @@
 %PSECTS
 $dist/default/debug\TEST.X.debug.obj
 cinit CODE 0 7FB 7FB 5 2
-text1 CODE 0 7DD 7DD D 2
-text2 CODE 0 7EA 7EA 11 2
-maintext CODE 0 7D2 7D2 B 2
+text1 CODE 0 7CB 7CB D 2
+text2 CODE 0 7D8 7D8 11 2
+maintext CODE 0 7E9 7E9 12 2
 cstackCOMMON COMMON 1 70 70 7 1
 bitbssCOMMON COMMON 1 3B8 77 1 1
 bssCOMMON COMMON 1 78 78 1 1
-$C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
+$C:\Users\Lucas\AppData\Local\Temp\s63k.obj
 reset_vec CODE 0 0 0 2 2
 end_init CODE 0 2 2 2 2
 # %UNUSED Section
@@ -38,9 +38,9 @@ BANK1 A0-EF 1
 BANK2 120-16F 1
 BANK3 1A0-1EF 1
 BANK4 220-24F 1
-CONST 4-7D1 2
+CONST 4-7CA 2
 CONST 800-FFF 2
-ENTRY 4-7D1 2
+ENTRY 4-7CA 2
 ENTRY 800-FFF 2
 IDLOC 8000-8003 2
 SFR10 500-56F 1
@@ -66,7 +66,7 @@ SFR29 E80-EEF 1
 SFR30 F00-F6F 1
 SFR31 F80-FEF 1
 STACK 2000-216F 1
-CODE 4-7D1 2
+CODE 4-7CA 2
 CODE 800-FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
@@ -82,9 +82,9 @@ BIGRAM 2000-216F 1
 COMMON 79-7D 1
 CONFIG 8007-8008 2
 EEDATA F000-F0FF 2
-STRCODE 4-7D1 2
+STRCODE 4-7CA 2
 STRCODE 800-FFF 2
-STRING 4-7D1 2
+STRING 4-7CA 2
 STRING 800-FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
@@ -100,31 +100,32 @@ STRING 800-FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/debug\TEST.X.debug.obj
-7FB cinit CODE >380:C:\Users\Lucas\AppData\Local\Temp\s7l4.
-7FB cinit CODE >383:C:\Users\Lucas\AppData\Local\Temp\s7l4.
-7FB cinit CODE >401:C:\Users\Lucas\AppData\Local\Temp\s7l4.
-7FC cinit CODE >405:C:\Users\Lucas\AppData\Local\Temp\s7l4.
-7FD cinit CODE >411:C:\Users\Lucas\AppData\Local\Temp\s7l4.
-7FD cinit CODE >413:C:\Users\Lucas\AppData\Local\Temp\s7l4.
-7FE cinit CODE >414:C:\Users\Lucas\AppData\Local\Temp\s7l4.
-7EA text2 CODE >4:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7EB text2 CODE >6:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7EC text2 CODE >43:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7EE text2 CODE >44:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7F2 text2 CODE >45:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7F4 text2 CODE >46:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7F6 text2 CODE >47:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7F9 text2 CODE >50:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
-7DD text1 CODE >15:C:\projecthovi\TEST.X\test_sim_2.c
-7DE text1 CODE >16:C:\projecthovi\TEST.X\test_sim_2.c
-7E8 text1 CODE >17:C:\projecthovi\TEST.X\test_sim_2.c
-7D2 maintext CODE >20:C:\projecthovi\TEST.X\test_sim_2.c
-7D2 maintext CODE >22:C:\projecthovi\TEST.X\test_sim_2.c
-7D3 maintext CODE >23:C:\projecthovi\TEST.X\test_sim_2.c
-7D4 maintext CODE >21:C:\projecthovi\TEST.X\test_sim_2.c
-7D4 maintext CODE >22:C:\projecthovi\TEST.X\test_sim_2.c
-7DB maintext CODE >25:C:\projecthovi\TEST.X\test_sim_2.c
-7DC maintext CODE >21:C:\projecthovi\TEST.X\test_sim_2.c
+7FB cinit CODE >380:C:\Users\Lucas\AppData\Local\Temp\s63k.
+7FB cinit CODE >383:C:\Users\Lucas\AppData\Local\Temp\s63k.
+7FB cinit CODE >401:C:\Users\Lucas\AppData\Local\Temp\s63k.
+7FC cinit CODE >405:C:\Users\Lucas\AppData\Local\Temp\s63k.
+7FD cinit CODE >411:C:\Users\Lucas\AppData\Local\Temp\s63k.
+7FD cinit CODE >413:C:\Users\Lucas\AppData\Local\Temp\s63k.
+7FE cinit CODE >414:C:\Users\Lucas\AppData\Local\Temp\s63k.
+7D8 text2 CODE >4:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7D9 text2 CODE >6:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7DA text2 CODE >43:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7DC text2 CODE >44:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7E0 text2 CODE >45:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7E2 text2 CODE >46:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7E4 text2 CODE >47:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7E7 text2 CODE >50:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul8.c
+7CB text1 CODE >15:C:\projecthovi\TEST.X\test_sim_3.c
+7CC text1 CODE >16:C:\projecthovi\TEST.X\test_sim_3.c
+7D6 text1 CODE >17:C:\projecthovi\TEST.X\test_sim_3.c
+7E9 maintext CODE >20:C:\projecthovi\TEST.X\test_sim_3.c
+7E9 maintext CODE >22:C:\projecthovi\TEST.X\test_sim_3.c
+7EA maintext CODE >23:C:\projecthovi\TEST.X\test_sim_3.c
+7EB maintext CODE >21:C:\projecthovi\TEST.X\test_sim_3.c
+7EB maintext CODE >22:C:\projecthovi\TEST.X\test_sim_3.c
+7F2 maintext CODE >24:C:\projecthovi\TEST.X\test_sim_3.c
+7F9 maintext CODE >25:C:\projecthovi\TEST.X\test_sim_3.c
+7FA maintext CODE >21:C:\projecthovi\TEST.X\test_sim_3.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -142,19 +143,19 @@ __Hspace_0 800 0 ABS 0 - -
 __Hspace_1 3B9 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
-_Fkt_test FBA 0 CODE 0 text1 dist/default/debug\TEST.X.debug.obj
+_Fkt_test F96 0 CODE 0 text1 dist/default/debug\TEST.X.debug.obj
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 ltemp0 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ltemp1 82 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ltemp2 86 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ltemp3 80 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
-_main FA4 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
+___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s63k.obj
+_main FD2 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
 btemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
-__end_of_Fkt_test FD4 0 CODE 0 text1 dist/default/debug\TEST.X.debug.obj
+__end_of_Fkt_test FB0 0 CODE 0 text1 dist/default/debug\TEST.X.debug.obj
 ltemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
-start 4 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
+start 4 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s63k.obj
 ttemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 wtemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __size_of_main 0 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
@@ -166,12 +167,12 @@ ttemp1 81 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ttemp2 84 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ttemp3 87 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ttemp4 7F 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
-intlevel0 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
-intlevel1 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
-intlevel2 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
-intlevel3 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
-intlevel4 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
-intlevel5 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
+intlevel0 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s63k.obj
+intlevel1 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s63k.obj
+intlevel2 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s63k.obj
+intlevel3 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s63k.obj
+intlevel4 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s63k.obj
+intlevel5 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s63k.obj
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 ___bmul@multiplicand 70 0 COMMON 1 cstackCOMMON dist/default/debug\TEST.X.debug.obj
 wtemp0 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
@@ -184,11 +185,11 @@ wtemp6 7F 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __Hfunctab 0 0 CODE 0 functab -
 __Hclrtext 0 0 ABS 0 clrtext -
 Fkt_test@multiplier 76 0 COMMON 1 cstackCOMMON dist/default/debug\TEST.X.debug.obj
-__end_of___bmul FF6 0 CODE 0 text2 dist/default/debug\TEST.X.debug.obj
+__end_of___bmul FD2 0 CODE 0 text2 dist/default/debug\TEST.X.debug.obj
 __Lmaintext 0 0 ABS 0 maintext -
 ___bmul@multiplier 73 0 COMMON 1 cstackCOMMON dist/default/debug\TEST.X.debug.obj
 start_initialization FF6 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
-___int_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
+___int_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s63k.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -313,14 +314,14 @@ __Lsfr7 0 0 ABS 0 sfr7 -
 __Lsfr8 0 0 ABS 0 sfr8 -
 __Lsfr9 0 0 ABS 0 sfr9 -
 __Ltext 0 0 ABS 0 text -
-___bmul FD4 0 CODE 0 text2 dist/default/debug\TEST.X.debug.obj
+___bmul FB0 0 CODE 0 text2 dist/default/debug\TEST.X.debug.obj
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 __S0 800 0 ABS 0 - -
 __S1 79 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 __Lintentry 4 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Lucas\AppData\Local\Temp\s63k.obj
 __size_of___bmul 0 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __Lbank10 0 0 BANK10 1 bank10 -
 __Lbank11 0 0 BANK11 1 bank11 -
@@ -344,13 +345,13 @@ __Lbank28 0 0 BANK28 1 bank28 -
 __Lbank29 0 0 BANK29 1 bank29 -
 __Lbank30 0 0 BANK30 1 bank30 -
 __Lbank31 0 0 BANK31 1 bank31 -
-__pmaintext FA4 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
+__pmaintext FD2 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
 __Lbigram 0 0 ABS 0 bigram -
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 0 config -
 _status 3B8 -341 COMMON 1 bitbssCOMMON dist/default/debug\TEST.X.debug.obj
-stackhi 216F 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
-stacklo 2000 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s7l4.obj
+stackhi 216F 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s63k.obj
+stacklo 2000 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s63k.obj
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_2 0 0 ABS 0 - -
@@ -363,8 +364,8 @@ end_of_initialization FFA 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
 __Hintentry 4 0 CODE 0 intentry -
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 4 0 CODE 0 reset_vec -
-__ptext1 FBA 0 CODE 0 text1 dist/default/debug\TEST.X.debug.obj
-__ptext2 FD4 0 CODE 0 text2 dist/default/debug\TEST.X.debug.obj
+__ptext1 F96 0 CODE 0 text1 dist/default/debug\TEST.X.debug.obj
+__ptext2 FB0 0 CODE 0 text2 dist/default/debug\TEST.X.debug.obj
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 __Lreset_vec 0 0 CODE 0 reset_vec -
@@ -374,7 +375,7 @@ __Lclrtext 0 0 ABS 0 clrtext -
 __pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/debug\TEST.X.debug.obj
 __Hend_init 8 0 CODE 0 end_init -
 _product 78 0 COMMON 1 bssCOMMON dist/default/debug\TEST.X.debug.obj
-__end_of_main FBA 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
+__end_of_main FF6 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
 __size_of_Fkt_test 0 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
@@ -407,8 +408,8 @@ ___bmul@product 72 0 COMMON 1 cstackCOMMON dist/default/debug\TEST.X.debug.obj
 # All other numeric quantities are in decimal.
 %SEGMENTS
 cinit 0 7FB FF6 5 2
-text1 0 7DD FBA D 2
-text2 0 7EA FD4 11 2
-maintext 0 7D2 FA4 B 2
+text1 0 7CB F96 D 2
+text2 0 7D8 FB0 11 2
+maintext 0 7E9 FD2 12 2
 cstackCOMMON 1 70 70 9 1
 reset_vec 0 0 0 4 2
