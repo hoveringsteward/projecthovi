@@ -32,7 +32,7 @@
 #define WIDTH_MAX       320
 #define HEIGHT_MAX      200
 #define PIXY_FRAME_OBJ  0xaa55
-#define PIXY_COLOURCODE 0xaa56
+#define PIXY_COLORCODE  0xaa56
 
 
 unsigned char frame;

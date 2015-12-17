@@ -6,9 +6,7 @@
                    projectFiles="true">
       <itemPath>hovi_v2.h</itemPath>
       <itemPath>hovi_LED_v2.h</itemPath>
-      <itemPath>hovi_Pixy_v2.h</itemPath>
       <itemPath>hovi_SPI_v2.h</itemPath>
-      <itemPath>hovi_UART_v2.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -19,9 +17,7 @@
                    projectFiles="true">
       <itemPath>main_v2.c</itemPath>
       <itemPath>led_position_v2.c</itemPath>
-      <itemPath>Pixy_com_v2.c</itemPath>
       <itemPath>SPI_com_v2.c</itemPath>
-      <itemPath>UART_com_v2.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
