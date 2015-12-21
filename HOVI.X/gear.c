@@ -13,7 +13,6 @@ unsigned int Fkt_CalcTime(void) {
     return time_pulse;
 }
 
-
 /* Calls Fkt_CalcTime to get count of TMR3                                   */
 /* Compares value of TMR3 with GEAR_TIME to select the mode to use           */
 /*      returns 0 for manual mode, gearswitch position 1 or 2                */
