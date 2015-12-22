@@ -3725,18 +3725,14 @@ unsigned char ExchangeSpiChar(unsigned char data);
 
 unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
 
-# 14 "hovi_UART_v2.h"
-void send_UART_char(unsigned char data);
-
-void send_UART_word(unsigned int data);
-
 # 13 "hovi_LED_v2.h"
 unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 bit ProofObject(unsigned int des_obj, unsigned int num);
 void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 
-# 38 "hovi_v2.h"
+# 36 "hovi_v2.h"
 unsigned char frame;
+unsigned int w = 0, lw = 0;
 
 # 15 "led_position_v2.c"
 unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
@@ -3754,34 +3750,36 @@ unsigned int width;
 unsigned int height;
 unsigned int angle;
 
-};
+} farben;
 
-typedef struct colorobject farben;
-farben afarben[];
+farben afarben[3];
 
 unsigned char c = 0;
+frame = 0;
 
 
 for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
 
 
 
-do {
-if(ExchangeSpi2char(0x5a, 0) == 0xaa55) {
+
+while(frame == 0) {
+w = ExchangeSpi2char(0x5a, 0);
+if(lw == 0xaa55 && w == 0xaa55) {
 frame = 1;
-if(ExchangeSpi2char(0x5a, 0) == 0xaa55) {
 obj_type = 0;
-}else if(ExchangeSpi2char(0x5a, 0) == 0xaa56) {
+} else if(lw == 0xaa55 && w == 0xaa56) {
+frame = 1;
 obj_type = 1;
-}
-}else {
+} else if(w == 0 && lw == 0){
 frame = 0;
 }
+lw = w;
 c++;
 if(c > 254) {
 return 0;
 }
-} while(frame == 0);
+}
 
 unsigned int checksum = ExchangeSpi2char(0x5a, 0);
 
@@ -3797,6 +3795,7 @@ if(ProofObject(des_obj, afarben[c_obj].num)) {
 LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
 }
 }
+_delay((unsigned long)((20)*(4000000/4000.0)));
 return 1;
 }
 
@@ -3814,7 +3813,7 @@ return 0;
 
 void LedSignalling(unsigned int pos_x, unsigned int pos_y){
 
-# 94
+# 97
 if(pos_x > 170){
 RA4 = 0;
 RA7 = 1;
@@ -3829,7 +3828,7 @@ RA4 = 1;
 RA7 = 1;
 }
 
-# 112
+# 115
 if(pos_y < 90){
 RA2 = 1;
 RA3 = 0;

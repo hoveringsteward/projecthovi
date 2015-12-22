@@ -27,10 +27,9 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
         unsigned int height; // height of object
         unsigned int angle; // Rotation
         
-    };
+    } farben;
     
-    typedef struct colorobject farben;
-    farben afarben[];
+    farben afarben[3];
     
     unsigned char c = 0;    // Counter for following do, while loop
     frame = 0;
@@ -40,13 +39,13 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
         /* Routine for getting startcondition                                    */
         /* Returns 0 after 10 cycles without detecting an object                 */
         /*-----------------------------------------------------------------------*/
+        
         while(frame == 0) {
-            unsigned int w = 0, lw = 0;
             w = ExchangeSpi2char(PIXY_SYNC, DUMMY);
-            if(w == PIXY_FRAME_OBJ && lw == PIXY_FRAME_OBJ) {
+            if(lw == PIXY_FRAME_OBJ && w == PIXY_FRAME_OBJ) {
                 frame = 1;
                 obj_type = 0;
-            } else if(w == PIXY_FRAME_OBJ && lw == PIXY_COLORCODE) {
+            } else if(lw == PIXY_FRAME_OBJ && w == PIXY_COLORCODE) {
                 frame = 1;
                 obj_type = 1;
             } else if(w == 0 && lw == 0){
@@ -73,6 +72,7 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
             LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
         }
     }
+    __delay_ms(20);
     return 1;
 }
 

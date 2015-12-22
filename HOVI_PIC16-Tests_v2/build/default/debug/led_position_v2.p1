@@ -5,7 +5,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ProofObject `(b ~T0 @X0 0 ef2`ui`ui ]
 "15
 [v _LedSignalling `(v ~T0 @X0 0 ef2`ui`ui ]
-"28 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic.h
+[v F2766 `(v ~T0 @X0 1 tf1`ul ]
+"150 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic.h
+[v __delay `JF2766 ~T0 @X0 0 e ]
+[p i __delay ]
+"28
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
 "7220 C:\Program Files (x86)\Microchip\xc8\v1.35\include\PIC16F1827.h
@@ -2773,14 +2777,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hovi_SPI_v2.h: 14: void SendSpiChar(unsigned char data);
 [; ;hovi_SPI_v2.h: 16: unsigned char ExchangeSpiChar(unsigned char data);
 [; ;hovi_SPI_v2.h: 18: unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
-[; ;hovi_UART_v2.h: 14: void send_UART_char(unsigned char data);
-[; ;hovi_UART_v2.h: 16: void send_UART_word(unsigned int data);
 [; ;hovi_LED_v2.h: 13: unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;hovi_LED_v2.h: 14: bit ProofObject(unsigned int des_obj, unsigned int num);
 [; ;hovi_LED_v2.h: 15: void LedSignalling(unsigned int pos_x, unsigned int pos_y);
-"38 hovi_v2.h
+"36 hovi_v2.h
 [v _frame `uc ~T0 @X0 1 e ]
-[; ;hovi_v2.h: 38: unsigned char frame;
+[; ;hovi_v2.h: 36: unsigned char frame;
+"37
+[v _w `ui ~T0 @X0 1 e ]
+[i _w
+-> -> 0 `i `ui
+]
+[v _lw `ui ~T0 @X0 1 e ]
+[i _lw
+-> -> 0 `i `ui
+]
+[; ;hovi_v2.h: 37: unsigned int w = 0, lw = 0;
 "15 led_position_v2.c
 [v _GetObject `(uc ~T0 @X0 1 ef3`uc`ui`uc ]
 {
@@ -2798,11 +2810,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "21
 [s S350 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S350 colorobject num pos_x pos_y width height angle ]
-"32
+"30
 [v _farben `S350 ~T0 @X0 1 t ]
-"33
-[v _afarben `S350 ~T0 @X0 -> 0 `x a ]
-"35
+"32
+[v _afarben `S350 ~T0 @X0 -> 3 `i a ]
+"34
 [v _c `uc ~T0 @X0 1 a ]
 [; ;led_position_v2.c: 16: unsigned int start, objcc;
 [; ;led_position_v2.c: 17: unsigned char obj_type;
@@ -2813,11 +2825,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;led_position_v2.c: 26: unsigned int width;
 [; ;led_position_v2.c: 27: unsigned int height;
 [; ;led_position_v2.c: 28: unsigned int angle;
-[; ;led_position_v2.c: 30: };
-[; ;led_position_v2.c: 32: typedef struct colorobject farben;
-[; ;led_position_v2.c: 33: farben afarben[];
-[; ;led_position_v2.c: 35: unsigned char c = 0;
+[; ;led_position_v2.c: 30: } farben;
+[; ;led_position_v2.c: 32: farben afarben[3];
+[; ;led_position_v2.c: 34: unsigned char c = 0;
 [e = _c -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 35: frame = 0;
+"35
+[e = _frame -> -> 0 `i `uc ]
 [; ;led_position_v2.c: 38: for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
 "38
 {
@@ -2826,277 +2840,286 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 355  ]
 [e :U 352 ]
 {
-[; ;led_position_v2.c: 42: do {
-"42
-[e :U 358 ]
-{
-[; ;led_position_v2.c: 43: if(ExchangeSpi2char(0x5a, 0) == 0xaa55) {
+[; ;led_position_v2.c: 43: while(frame == 0) {
 "43
-[e $ ! == ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc -> 43605 `ui 359  ]
+[e $U 356  ]
+[e :U 357 ]
 {
-[; ;led_position_v2.c: 44: frame = 1;
+[; ;led_position_v2.c: 44: w = ExchangeSpi2char(0x5a, 0);
 "44
-[e = _frame -> -> 1 `i `uc ]
-[; ;led_position_v2.c: 45: if(ExchangeSpi2char(0x5a, 0) == 0xaa55) {
+[e = _w ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 45: if(lw == 0xaa55 && w == 0xaa55) {
 "45
-[e $ ! == ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc -> 43605 `ui 360  ]
+[e $ ! && == _lw -> 43605 `ui == _w -> 43605 `ui 359  ]
 {
-[; ;led_position_v2.c: 46: obj_type = 0;
+[; ;led_position_v2.c: 46: frame = 1;
 "46
-[e = _obj_type -> -> 0 `i `uc ]
+[e = _frame -> -> 1 `i `uc ]
+[; ;led_position_v2.c: 47: obj_type = 0;
 "47
-}
-[; ;led_position_v2.c: 47: }else if(ExchangeSpi2char(0x5a, 0) == 0xaa56) {
-[e $U 361  ]
-[e :U 360 ]
-[e $ ! == ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc -> 43606 `ui 362  ]
-{
-[; ;led_position_v2.c: 48: obj_type = 1;
+[e = _obj_type -> -> 0 `i `uc ]
 "48
-[e = _obj_type -> -> 1 `i `uc ]
-"49
 }
-[e :U 362 ]
-"50
-[e :U 361 ]
-}
-[; ;led_position_v2.c: 49: }
-[; ;led_position_v2.c: 50: }else {
-[e $U 363  ]
+[; ;led_position_v2.c: 48: } else if(lw == 0xaa55 && w == 0xaa56) {
+[e $U 360  ]
 [e :U 359 ]
+[e $ ! && == _lw -> 43605 `ui == _w -> 43606 `ui 361  ]
 {
-[; ;led_position_v2.c: 51: frame = 0;
+[; ;led_position_v2.c: 49: frame = 1;
+"49
+[e = _frame -> -> 1 `i `uc ]
+[; ;led_position_v2.c: 50: obj_type = 1;
+"50
+[e = _obj_type -> -> 1 `i `uc ]
 "51
-[e = _frame -> -> 0 `i `uc ]
+}
+[; ;led_position_v2.c: 51: } else if(w == 0 && lw == 0){
+[e $U 362  ]
+[e :U 361 ]
+[e $ ! && == _w -> -> 0 `i `ui == _lw -> -> 0 `i `ui 363  ]
+{
+[; ;led_position_v2.c: 52: frame = 0;
 "52
+[e = _frame -> -> 0 `i `uc ]
+"53
 }
 [e :U 363 ]
-[; ;led_position_v2.c: 52: }
-[; ;led_position_v2.c: 53: c++;
-"53
-[e ++ _c -> -> 1 `i `uc ]
-[; ;led_position_v2.c: 54: if(c > 254) {
 "54
+[e :U 362 ]
+[e :U 360 ]
+[; ;led_position_v2.c: 53: }
+[; ;led_position_v2.c: 54: lw = w;
+[e = _lw _w ]
+[; ;led_position_v2.c: 55: c++;
+"55
+[e ++ _c -> -> 1 `i `uc ]
+[; ;led_position_v2.c: 56: if(c > 254) {
+"56
 [e $ ! > -> _c `i -> 254 `i 364  ]
 {
-[; ;led_position_v2.c: 55: return 0;
-"55
+[; ;led_position_v2.c: 57: return 0;
+"57
 [e ) -> -> 0 `i `uc ]
 [e $UE 351  ]
-"56
+"58
 }
 [e :U 364 ]
-"57
-}
-[; ;led_position_v2.c: 56: }
-[; ;led_position_v2.c: 57: } while(frame == 0);
-[e $ == -> _frame `i -> 0 `i 358  ]
-[e :U 357 ]
 "59
+}
+[e :U 356 ]
+"43
+[e $ == -> _frame `i -> 0 `i 357  ]
+[e :U 358 ]
+"61
 [v _checksum `ui ~T0 @X0 1 a ]
-[; ;led_position_v2.c: 59: unsigned int checksum = ExchangeSpi2char(0x5a, 0);
+[; ;led_position_v2.c: 58: }
+[; ;led_position_v2.c: 59: }
+[; ;led_position_v2.c: 61: unsigned int checksum = ExchangeSpi2char(0x5a, 0);
 [e = _checksum ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 62: afarben[c_obj].num = ExchangeSpi2char(0x5a, 0);
-"62
-[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 0 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 63: afarben[c_obj].pos_x = ExchangeSpi2char(0x5a, 0);
-"63
-[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 1 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 64: afarben[c_obj].pos_y = ExchangeSpi2char(0x5a, 0);
+[; ;led_position_v2.c: 64: afarben[c_obj].num = ExchangeSpi2char(0x5a, 0);
 "64
-[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 2 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 65: afarben[c_obj].width = ExchangeSpi2char(0x5a, 0);
+[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 0 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 65: afarben[c_obj].pos_x = ExchangeSpi2char(0x5a, 0);
 "65
-[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 3 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 66: afarben[c_obj].height = ExchangeSpi2char(0x5a, 0);
+[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 1 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 66: afarben[c_obj].pos_y = ExchangeSpi2char(0x5a, 0);
 "66
-[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 4 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 67: afarben[c_obj].angle = ExchangeSpi2char(0x5a, 0);
+[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 2 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 67: afarben[c_obj].width = ExchangeSpi2char(0x5a, 0);
 "67
-[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 5 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;led_position_v2.c: 69: if(ProofObject(des_obj, afarben[c_obj].num)) {
+[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 3 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 68: afarben[c_obj].height = ExchangeSpi2char(0x5a, 0);
+"68
+[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 4 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 69: afarben[c_obj].angle = ExchangeSpi2char(0x5a, 0);
 "69
+[e = . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 5 ( _ExchangeSpi2char (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;led_position_v2.c: 71: if(ProofObject(des_obj, afarben[c_obj].num)) {
+"71
 [e $ ! ( _ProofObject (2 , _des_obj . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 0 365  ]
 {
-[; ;led_position_v2.c: 70: LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
-"70
+[; ;led_position_v2.c: 72: LedSignalling(afarben[c_obj].pos_x, afarben[c_obj].pos_y);
+"72
 [e ( _LedSignalling (2 , . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 1 . *U + &U _afarben * -> _c_obj `ux -> -> # *U &U _afarben `ui `ux 2 ]
-"71
+"73
 }
 [e :U 365 ]
-"72
+"74
 }
 "38
 [e ++ _c_obj -> -> 1 `i `uc ]
 [e :U 355 ]
 [e $ < -> _c_obj `i -> _max_obj `i 352  ]
 [e :U 353 ]
-"72
+"74
 }
-[; ;led_position_v2.c: 71: }
-[; ;led_position_v2.c: 72: }
-[; ;led_position_v2.c: 73: return 1;
-"73
+[; ;led_position_v2.c: 73: }
+[; ;led_position_v2.c: 74: }
+[; ;led_position_v2.c: 75: _delay((unsigned long)((20)*(4000000/4000.0)));
+"75
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;led_position_v2.c: 76: return 1;
+"76
 [e ) -> -> 1 `i `uc ]
 [e $UE 351  ]
-[; ;led_position_v2.c: 74: }
-"74
+[; ;led_position_v2.c: 77: }
+"77
 [e :UE 351 ]
 }
-"76
+"79
 [v _ProofObject `(b ~T0 @X0 1 ef2`ui`ui ]
 {
-[; ;led_position_v2.c: 76: bit ProofObject(unsigned int des_obj, unsigned int num){
+[; ;led_position_v2.c: 79: bit ProofObject(unsigned int des_obj, unsigned int num){
 [e :U _ProofObject ]
 [v _des_obj `ui ~T0 @X0 1 r1 ]
 [v _num `ui ~T0 @X0 1 r2 ]
 [f ]
-[; ;led_position_v2.c: 78: if(num == des_obj) {
-"78
+[; ;led_position_v2.c: 81: if(num == des_obj) {
+"81
 [e $ ! == _num _des_obj 367  ]
 {
-[; ;led_position_v2.c: 79: return 1;
-"79
-[e ) -> -> 1 `i `b ]
-[e $UE 366  ]
-"80
-}
-[; ;led_position_v2.c: 80: }else {
-[e $U 368  ]
-[e :U 367 ]
-{
-[; ;led_position_v2.c: 81: __nop();
-"81
-[e ( ___nop ..  ]
-[; ;led_position_v2.c: 82: return 0;
+[; ;led_position_v2.c: 82: return 1;
 "82
-[e ) -> -> 0 `i `b ]
+[e ) -> -> 1 `i `b ]
 [e $UE 366  ]
 "83
 }
-[e :U 368 ]
-[; ;led_position_v2.c: 83: }
-[; ;led_position_v2.c: 84: }
+[; ;led_position_v2.c: 83: }else {
+[e $U 368  ]
+[e :U 367 ]
+{
+[; ;led_position_v2.c: 84: __nop();
 "84
+[e ( ___nop ..  ]
+[; ;led_position_v2.c: 85: return 0;
+"85
+[e ) -> -> 0 `i `b ]
+[e $UE 366  ]
+"86
+}
+[e :U 368 ]
+[; ;led_position_v2.c: 86: }
+[; ;led_position_v2.c: 87: }
+"87
 [e :UE 366 ]
 }
-"88
+"91
 [v _LedSignalling `(v ~T0 @X0 1 ef2`ui`ui ]
 {
-[; ;led_position_v2.c: 88: void LedSignalling(unsigned int pos_x, unsigned int pos_y){
+[; ;led_position_v2.c: 91: void LedSignalling(unsigned int pos_x, unsigned int pos_y){
 [e :U _LedSignalling ]
 [v _pos_x `ui ~T0 @X0 1 r1 ]
 [v _pos_y `ui ~T0 @X0 1 r2 ]
 [f ]
-[; ;led_position_v2.c: 94: if(pos_x > 170){
-"94
+[; ;led_position_v2.c: 97: if(pos_x > 170){
+"97
 [e $ ! > _pos_x -> -> 170 `i `ui 370  ]
 {
-[; ;led_position_v2.c: 95: RA4 = 0;
-"95
+[; ;led_position_v2.c: 98: RA4 = 0;
+"98
 [e = _RA4 -> -> 0 `i `b ]
-[; ;led_position_v2.c: 96: RA7 = 1;
-"96
+[; ;led_position_v2.c: 99: RA7 = 1;
+"99
 [e = _RA7 -> -> 1 `i `b ]
-"97
+"100
 }
-[; ;led_position_v2.c: 97: }else if(pos_x < 150){
+[; ;led_position_v2.c: 100: }else if(pos_x < 150){
 [e $U 371  ]
 [e :U 370 ]
 [e $ ! < _pos_x -> -> 150 `i `ui 372  ]
 {
-[; ;led_position_v2.c: 98: RA4 = 1;
-"98
-[e = _RA4 -> -> 1 `i `b ]
-[; ;led_position_v2.c: 99: RA7 = 0;
-"99
-[e = _RA7 -> -> 0 `i `b ]
-"100
-}
-[; ;led_position_v2.c: 100: }else if(pos_x >= 150 && pos_x <= 170){
-[e $U 373  ]
-[e :U 372 ]
-[e $ ! && >= _pos_x -> -> 150 `i `ui <= _pos_x -> -> 170 `i `ui 374  ]
-{
-[; ;led_position_v2.c: 101: RA4 = 0;
+[; ;led_position_v2.c: 101: RA4 = 1;
 "101
-[e = _RA4 -> -> 0 `i `b ]
+[e = _RA4 -> -> 1 `i `b ]
 [; ;led_position_v2.c: 102: RA7 = 0;
 "102
 [e = _RA7 -> -> 0 `i `b ]
 "103
 }
-[; ;led_position_v2.c: 103: }else{
+[; ;led_position_v2.c: 103: }else if(pos_x >= 150 && pos_x <= 170){
+[e $U 373  ]
+[e :U 372 ]
+[e $ ! && >= _pos_x -> -> 150 `i `ui <= _pos_x -> -> 170 `i `ui 374  ]
+{
+[; ;led_position_v2.c: 104: RA4 = 0;
+"104
+[e = _RA4 -> -> 0 `i `b ]
+[; ;led_position_v2.c: 105: RA7 = 0;
+"105
+[e = _RA7 -> -> 0 `i `b ]
+"106
+}
+[; ;led_position_v2.c: 106: }else{
 [e $U 375  ]
 [e :U 374 ]
 {
-[; ;led_position_v2.c: 104: RA4 = 1;
-"104
+[; ;led_position_v2.c: 107: RA4 = 1;
+"107
 [e = _RA4 -> -> 1 `i `b ]
-[; ;led_position_v2.c: 105: RA7 = 1;
-"105
+[; ;led_position_v2.c: 108: RA7 = 1;
+"108
 [e = _RA7 -> -> 1 `i `b ]
-"106
+"109
 }
 [e :U 375 ]
 [e :U 373 ]
 [e :U 371 ]
-[; ;led_position_v2.c: 106: }
-[; ;led_position_v2.c: 112: if(pos_y < 90){
-"112
+[; ;led_position_v2.c: 109: }
+[; ;led_position_v2.c: 115: if(pos_y < 90){
+"115
 [e $ ! < _pos_y -> -> 90 `i `ui 376  ]
 {
-[; ;led_position_v2.c: 113: RA2 = 1;
-"113
+[; ;led_position_v2.c: 116: RA2 = 1;
+"116
 [e = _RA2 -> -> 1 `i `b ]
-[; ;led_position_v2.c: 114: RA3 = 0;
-"114
+[; ;led_position_v2.c: 117: RA3 = 0;
+"117
 [e = _RA3 -> -> 0 `i `b ]
-"115
+"118
 }
-[; ;led_position_v2.c: 115: }else if(pos_y > 110){
+[; ;led_position_v2.c: 118: }else if(pos_y > 110){
 [e $U 377  ]
 [e :U 376 ]
 [e $ ! > _pos_y -> -> 110 `i `ui 378  ]
 {
-[; ;led_position_v2.c: 116: RA2 = 0;
-"116
+[; ;led_position_v2.c: 119: RA2 = 0;
+"119
 [e = _RA2 -> -> 0 `i `b ]
-[; ;led_position_v2.c: 117: RA3 = 1;
-"117
+[; ;led_position_v2.c: 120: RA3 = 1;
+"120
 [e = _RA3 -> -> 1 `i `b ]
-"118
+"121
 }
-[; ;led_position_v2.c: 118: }else if(pos_y >= 90 && pos_y <= 110){
+[; ;led_position_v2.c: 121: }else if(pos_y >= 90 && pos_y <= 110){
 [e $U 379  ]
 [e :U 378 ]
 [e $ ! && >= _pos_y -> -> 90 `i `ui <= _pos_y -> -> 110 `i `ui 380  ]
 {
-[; ;led_position_v2.c: 119: RA2 = 0;
-"119
+[; ;led_position_v2.c: 122: RA2 = 0;
+"122
 [e = _RA2 -> -> 0 `i `b ]
-[; ;led_position_v2.c: 120: RA3 = 0;
-"120
+[; ;led_position_v2.c: 123: RA3 = 0;
+"123
 [e = _RA3 -> -> 0 `i `b ]
-"121
+"124
 }
-[; ;led_position_v2.c: 121: }else{
+[; ;led_position_v2.c: 124: }else{
 [e $U 381  ]
 [e :U 380 ]
 {
-[; ;led_position_v2.c: 122: RA2 = 1;
-"122
+[; ;led_position_v2.c: 125: RA2 = 1;
+"125
 [e = _RA2 -> -> 1 `i `b ]
-[; ;led_position_v2.c: 123: RA3 = 1;
-"123
+[; ;led_position_v2.c: 126: RA3 = 1;
+"126
 [e = _RA3 -> -> 1 `i `b ]
-"124
+"127
 }
 [e :U 381 ]
 [e :U 379 ]
 [e :U 377 ]
-[; ;led_position_v2.c: 124: }
-[; ;led_position_v2.c: 125: }
-"125
+[; ;led_position_v2.c: 127: }
+[; ;led_position_v2.c: 128: }
+"128
 [e :UE 369 ]
 }

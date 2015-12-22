@@ -12,9 +12,7 @@
 
 //own header files
 #include "hovi_SPI_v2.h"
-#include "hovi_UART_v2.h"
 #include "hovi_LED_v2.h"
-#include "hovi_Pixy_v2.h"
 
 
 /*---------------------------------------------------------------------------*/
@@ -36,7 +34,7 @@
 
 
 unsigned char frame;
-
+unsigned int w = 0, lw = 0;
 /*Global variables                                                           */
 /*---------------------------------------------------------------------------*/
 

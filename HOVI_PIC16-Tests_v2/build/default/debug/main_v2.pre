@@ -3725,18 +3725,14 @@ unsigned char ExchangeSpiChar(unsigned char data);
 
 unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
 
-# 14 "hovi_UART_v2.h"
-void send_UART_char(unsigned char data);
-
-void send_UART_word(unsigned int data);
-
 # 13 "hovi_LED_v2.h"
 unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 bit ProofObject(unsigned int des_obj, unsigned int num);
 void LedSignalling(unsigned int pos_x, unsigned int pos_y);
 
-# 38 "hovi_v2.h"
+# 36 "hovi_v2.h"
 unsigned char frame;
+unsigned int w = 0, lw = 0;
 
 
 # 20 "main_v2.c"
@@ -3778,7 +3774,7 @@ APFCON0bits.SDO1SEL = 1;
 void main(void) {
 init();
 while (1) {
-if(GetObject(1, 10, 1) == 0) {
+if(GetObject(1, 10, 2) == 0) {
 __nop();
 PORTBbits.RB3 = 1;
 }else {

@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/projecthovi/HOVI_PIC16-Tests_v2/led_position_v2.c</file>
-            <file>file:/C:/projecthovi/HOVI_PIC16-Tests_v2/SPI_com_v2.c</file>
-            <file>file:/C:/projecthovi/HOVI_PIC16-Tests_v2/hovi_SPI_v2.h</file>
-            <file>file:/C:/projecthovi/HOVI_PIC16-Tests_v2/hovi_v2.h</file>
-            <file>file:/C:/projecthovi/HOVI_PIC16-Tests_v2/main_v2.c</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

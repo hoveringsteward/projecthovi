@@ -2796,14 +2796,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hovi_SPI_v2.h: 14: void SendSpiChar(unsigned char data);
 [; ;hovi_SPI_v2.h: 16: unsigned char ExchangeSpiChar(unsigned char data);
 [; ;hovi_SPI_v2.h: 18: unsigned int ExchangeSpi2char(unsigned char data, unsigned char data2);
-[; ;hovi_UART_v2.h: 14: void send_UART_char(unsigned char data);
-[; ;hovi_UART_v2.h: 16: void send_UART_word(unsigned int data);
 [; ;hovi_LED_v2.h: 13: unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;hovi_LED_v2.h: 14: bit ProofObject(unsigned int des_obj, unsigned int num);
 [; ;hovi_LED_v2.h: 15: void LedSignalling(unsigned int pos_x, unsigned int pos_y);
-"38 hovi_v2.h
+"36 hovi_v2.h
 [v _frame `uc ~T0 @X0 1 e ]
-[; ;hovi_v2.h: 38: unsigned char frame;
+[; ;hovi_v2.h: 36: unsigned char frame;
+"37
+[v _w `ui ~T0 @X0 1 e ]
+[i _w
+-> -> 0 `i `ui
+]
+[v _lw `ui ~T0 @X0 1 e ]
+[i _lw
+-> -> 0 `i `ui
+]
+[; ;hovi_v2.h: 37: unsigned int w = 0, lw = 0;
 "20 main_v2.c
 [p x FOSC=INTOSC ]
 "21
@@ -2887,9 +2895,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "57
 [e :U 353 ]
 {
-[; ;main_v2.c: 58: if(GetObject(1, 10, 1) == 0) {
+[; ;main_v2.c: 58: if(GetObject(1, 10, 2) == 0) {
 "58
-[e $ ! == -> ( _GetObject (3 , , -> -> 1 `i `uc -> -> 10 `i `ui -> -> 1 `i `uc `i -> 0 `i 355  ]
+[e $ ! == -> ( _GetObject (3 , , -> -> 1 `i `uc -> -> 10 `i `ui -> -> 2 `i `uc `i -> 0 `i 355  ]
 {
 [; ;main_v2.c: 59: __nop();
 "59
