@@ -14,6 +14,8 @@
  * (roll_nick_gear - directory)
  */
 
+// chrizzlybaer ist unfähig
+
 #include <xc.h>
 #include "main.h"
 
