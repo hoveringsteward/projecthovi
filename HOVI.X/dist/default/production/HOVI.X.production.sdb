@@ -23,11 +23,11 @@
 [v ___flmul __flmul `(d  1 e 3 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"6 C:\projecthovi\HOVI.X\gear.c
+"6 C:\github\projecthovi\HOVI.X\gear.c
 [v _Fkt_CalcTime Fkt_CalcTime `(ui  1 e 2 0 ]
 "20
 [v _Fkt_ModeCheck Fkt_ModeCheck `(b  1 e 0 0 ]
-"12 C:\projecthovi\HOVI.X\init.c
+"12 C:\github\projecthovi\HOVI.X\init.c
 [v _Fkt_Init Fkt_Init `(v  1 e 0 0 ]
 "23
 [v _Fkt_InitPort Fkt_InitPort `(v  1 e 0 0 ]
@@ -45,9 +45,9 @@
 [v _Fkt_InitTimer Fkt_InitTimer `(v  1 e 0 0 ]
 "77
 [v _Fkt_InitInterrupt Fkt_InitInterrupt `(v  1 e 0 0 ]
-"6 C:\projecthovi\HOVI.X\interrupt.c
+"6 C:\github\projecthovi\HOVI.X\interrupt.c
 [v _Fkt_Isr Fkt_Isr `II(v  1 e 0 0 ]
-"81 C:\projecthovi\HOVI.X\main.c
+"81 C:\github\projecthovi\HOVI.X\main.c
 [v _main main `(v  1 e 0 0 ]
 "49 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
@@ -203,12 +203,12 @@
 [v _TMR3IE TMR3IE `VEb  1 e 0 @32001 ]
 "20112
 [v _TMR3IF TMR3IF `VEb  1 e 0 @32009 ]
-"81 C:\projecthovi\HOVI.X\main.c
+"81 C:\github\projecthovi\HOVI.X\main.c
 [v _main main `(v  1 e 0 0 ]
 {
 "88
 } 0
-"12 C:\projecthovi\HOVI.X\init.c
+"12 C:\github\projecthovi\HOVI.X\init.c
 [v _Fkt_Init Fkt_Init `(v  1 e 0 0 ]
 {
 "21
@@ -253,12 +253,12 @@
 {
 "45
 } 0
-"6 C:\projecthovi\HOVI.X\interrupt.c
+"6 C:\github\projecthovi\HOVI.X\interrupt.c
 [v _Fkt_Isr Fkt_Isr `II(v  1 e 0 0 ]
 {
 "16
 } 0
-"20 C:\projecthovi\HOVI.X\gear.c
+"20 C:\github\projecthovi\HOVI.X\gear.c
 [v _Fkt_ModeCheck Fkt_ModeCheck `(b  1 e 0 0 ]
 {
 "21

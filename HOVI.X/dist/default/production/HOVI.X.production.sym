@@ -271,7 +271,7 @@ __CFG_CP0$OFF 0 0 ABS 0
 __smallconst 0 0 SMALLCONST 0
 __size_of_Fkt_Isr 0 0 ABS 0
 __CFG_CP1$OFF 0 0 ABS 0
-__Hreset_vec 6 0 CODE 0
+__Hreset_vec 4 0 CODE 0
 __Lreset_vec 0 0 CODE 0
 __CFG_CP2$OFF 0 0 ABS 0
 Fkt_ModeCheck@time 5 0 COMRAM 1
@@ -306,15 +306,15 @@ __end_of_Fkt_InitPort 176 0 CODE 0
 _Fkt_InitSpi 19A 0 CODE 0
 __CFG_LVP$OFF 0 0 ABS 0
 %segments
-reset_vec 0 5 CODE 0 0
+reset_vec 0 3 CODE 0 0
 intcode 8 19B CODE 8 0
 config 300000 30000D CONFIG 300000 0
 idloc 200000 200007 IDLOC 200000 0
 cstackCOMRAM 1 15 COMRAM 1 1
 %locals
-dist/default/debug\HOVI.X.debug.obj
+dist/default/production\HOVI.X.production.obj
 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-C:\Users\Lucas\AppData\Local\Temp\s674.
+C:\Users\PRINCESS\AppData\Local\Temp\s6lc.
 4853 176 0 CODE 0
 4855 176 0 CODE 0
 4858 176 0 CODE 0
