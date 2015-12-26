@@ -1,5 +1,1 @@
-# Folders to be excluded from pushes
-build/
-debug/
-dist/
-nbproject/
+*.mk
