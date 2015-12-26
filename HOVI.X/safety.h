@@ -1,12 +1,12 @@
 /* 
- * File:   gear.h
+ * File:   safety.h
  * Author: Lucas
  *
- * Created on 1. Dezember 2015, 16:19
+ * Created on 26. Dezember 2015, 23:15
  */
 
-#ifndef GEAR_H
-#define	GEAR_H
+#ifndef SAFETY_H
+#define	SAFETY_H
 
 #include <xc.h>
 #include "main.h"
@@ -14,8 +14,6 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
-unsigned int Fkt_CalcTime(void);
-bit Fkt_ModeCheck(void);
 
-#endif	/* GEAR_H */
+#endif	/* SAFETY_H */
 

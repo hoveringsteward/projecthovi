@@ -9,12 +9,17 @@
 #define	MAIN_H
 
 #include <stdlib.h>
-#include "init.h"
+#include "actors.h"
+#include "failure.h"
 #include "gear.h"
-
-/*****************************************************************************/
+#include "init.h"
+#include "pixy.h"
+#include "safety.h"
+#include "ultrasonic.h"
+   
+/*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
-/*****************************************************************************/
+/*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userrroutines">
 interrupt void Fkt_Isr(void);
 // </editor-fold>

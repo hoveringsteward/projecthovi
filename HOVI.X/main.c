@@ -76,7 +76,7 @@
 // </editor-fold>
 
 #include "main.h"
-    
+
 
 void main(void) {
     Fkt_Init();

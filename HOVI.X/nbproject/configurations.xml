@@ -7,6 +7,11 @@
       <itemPath>gear.h</itemPath>
       <itemPath>init.h</itemPath>
       <itemPath>main.h</itemPath>
+      <itemPath>actors.h</itemPath>
+      <itemPath>failure.h</itemPath>
+      <itemPath>pixy.h</itemPath>
+      <itemPath>safety.h</itemPath>
+      <itemPath>ultrasonic.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

@@ -1,12 +1,12 @@
 /* 
- * File:   gear.h
+ * File:   pixy.h
  * Author: Lucas
  *
- * Created on 1. Dezember 2015, 16:19
+ * Created on 26. Dezember 2015, 23:14
  */
 
-#ifndef GEAR_H
-#define	GEAR_H
+#ifndef PIXY_H
+#define	PIXY_H
 
 #include <xc.h>
 #include "main.h"
@@ -14,8 +14,6 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
-unsigned int Fkt_CalcTime(void);
-bit Fkt_ModeCheck(void);
 
-#endif	/* GEAR_H */
+#endif	/* PIXY_H */
 
