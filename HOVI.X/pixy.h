@@ -34,6 +34,7 @@ typedef struct colorobject {
 } farben;
     
 bit frame = 0;
+bit obj_type;
 unsigned int w;
 unsigned int lw;
 // </editor-fold>

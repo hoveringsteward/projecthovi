@@ -37,8 +37,17 @@ interrupt void Isr(void);
 /* User defined Variables                                                    */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
-#define _XTAL_FREQ 16000000
-#define GEAR_TIME  6800         /* 1700 탎 / 0.25 탎 = 6800 pulses on TMR3*/
+#define _XTAL_FREQ      16000000
+#define GEAR_TIME       6800        /* 1700 탎 / 0.25 탎 = 6800 pulses on TMR3*/
+#define DUMMY           0
+#define PIXY_SYNC       0x5a
+#define PIXY_SYNC_DATA  0x5b
+#define X_MAX           319
+#define Y_MAX           199
+#define WIDTH_MAX       320
+#define HEIGHT_MAX      200
+#define PIXY_FRAME_OBJ  0xaa55
+#define PIXY_COLORCODE  0xaa56
 // </editor-fold>
 
 /*---------------------------------------------------------------------------*/
