@@ -1,9 +1,12 @@
-/* 
- * File:   pixy.h
- * Author: Lucas
- *
- * Created on 26. Dezember 2015, 23:14
- */
+/*-----------------------------------------------------------------*/
+/* Author: Lucas                                                   */
+/*                                                                 */
+/* Created: 2015-12-25                                             */
+/* Project: HOVI.X                                                 */
+/*                                                                 */
+/* Diese Beschreibung dient als Beispieltext für eine              */
+/* Filebeschreibung aus welcher klar hervorgehen soll was in       */
+/* diesem File passiert und wozu dieses benötigt wird.             */
 
 #ifndef PIXY_H
 #define	PIXY_H
