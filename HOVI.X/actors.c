@@ -10,26 +10,52 @@
  * if the rotation is wrong, he has to gear
  * if everything is fine, he could fly forwards
  * he has to change the velocity, if he flys to high or to low
- * -> the commands for roll / nick / gear are in their c-files 
- * (roll_nick_gear - directory)
+ * -> the commands for roll / pitch / yaw are in their c-files 
  */
 
 
 #include <xc.h>
 #include "main.h"
 
+// <editor-fold defaultstate="collapsed" desc="Act Ailerons">
+/*-----------------------------------------------------------------*/
+/* ActAilerons                                    */
+/* roll = rollen -> links/rechts            */
+/*-----------------------------------------------------------------*/
 void ActAilerons(){
+
     
 }
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="Act Elevator">
+/*-----------------------------------------------------------------*/
+/* ActElevatoe                                    */
+/* pitch = nicken -> vor/zurück                 */
+/*-----------------------------------------------------------------*/
 void ActElevator(){
+    
+    
 
 }
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="Act Rudder">
+/*-----------------------------------------------------------------*/
+/* ActRudder                                    */
+/* yaw = gieren -> drehung an der hochachse                */
+/*-----------------------------------------------------------------*/
 void ActRudder(){
-
+ 
 }
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="Act Throttle">
+/*-----------------------------------------------------------------*/
+/* ActThrottle                                    */
+/* Height                */
+/*-----------------------------------------------------------------*/
 void ActThrottle(){
-    // Height
+
 }
+// </editor-fold>
