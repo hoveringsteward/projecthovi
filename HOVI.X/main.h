@@ -14,13 +14,13 @@
 // <editor-fold defaultstate="collapsed" desc="Included Files">
 #include <stdlib.h>
 #include "actors.h"
+#include "communication.h"
 #include "failure.h"
 #include "gear.h"
 #include "init.h"
 #include "pixy.h"
 #include "safety.h"
 #include "ultrasonic.h"
-#include "communication.h"
 // </editor-fold>
 
    

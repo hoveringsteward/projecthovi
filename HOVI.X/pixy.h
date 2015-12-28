@@ -31,8 +31,9 @@ typedef struct colorobject {
     unsigned int width; // width of object
     unsigned int height; // height of object
     unsigned int angle; // Rotation
-} farben;
+} t_colors;
     
+t_colors a_colors[5];
 bit frame = 0;
 bit obj_type;
 unsigned int w;

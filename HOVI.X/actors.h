@@ -26,12 +26,14 @@
 /* Beginning of uservariables.                                               */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Uservariables">
-typedef struct act_out{
+typedef struct act_out {
     unsigned int aile;      //Seitwärts
     unsigned int elev;      //Vorwärts/Rückwärts
     unsigned int thro;      //Höhe
     unsigned int rudd;      //Drehung
 } t_actors;
+
+t_actors a_actors[1];
 // </editor-fold>
 
 #endif	/* ACTORS_H */

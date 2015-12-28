@@ -16,7 +16,7 @@
  */
 
 #include <xc.h>
-#include "init.h"
+#include "main.h"
 
 
 /*---------------------------------------------------------------------------*/
@@ -36,6 +36,7 @@ void Init(void) {
     InitSpi();
     InitTimer();
     InitInterrupt();
+    InitActors();
 }
 // </editor-fold>
 
@@ -135,10 +136,10 @@ void InitInterrupt(void) {
 /* Setting the default point of the actors                              */
 /* Actors are on default state -> no motion will occoure                */
 void InitActors (void) {
-    t_actors.aile = 500;
-    t_actors.elev = 500;
-    t_actors.thro = 0;
-    t_actors.rudd = 500;
+    a_actors[0].aile = 500;
+    a_actors[0].elev = 500;
+    a_actors[0].thro = 0;
+    a_actors[0].rudd = 500;
 }
 // </editor-fold>
 

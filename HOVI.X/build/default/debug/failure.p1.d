@@ -1,0 +1,12 @@
+ build/default/debug/failure.d  \
+ build/default/debug/failure.p1:  \
+ failure.c  \
+init.h  \
+communication.h  \
+main.h  \
+actors.h  \
+safety.h  \
+ultrasonic.h  \
+gear.h  \
+failure.h  \
+pixy.h 
