@@ -18,6 +18,18 @@
 #include <xc.h>
 #include "main.h"
 
+void ActAilerons(){
+    
+}
 
+void ActElevator(){
 
+}
 
+void ActRudder(){
+
+}
+
+void ActThrottle(){
+    // Height
+}
