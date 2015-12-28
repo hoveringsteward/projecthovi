@@ -18,44 +18,45 @@
 #include "main.h"
 
 // <editor-fold defaultstate="collapsed" desc="Act Ailerons">
-/*-----------------------------------------------------------------*/
-/* ActAilerons                                    */
-/* roll = rollen -> links/rechts            */
-/*-----------------------------------------------------------------*/
-void ActAilerons(){
+/*------------------------------------------------------------------*/
+/* ActAilerons                                                      */
+/* roll = rollen -> links/rechts                                    */
+/*------------------------------------------------------------------*/
+void ActAilerons(void){
 
     
 }
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Act Elevator">
-/*-----------------------------------------------------------------*/
-/* ActElevatoe                                    */
-/* pitch = nicken -> vor/zurück                 */
-/*-----------------------------------------------------------------*/
-void ActElevator(){
+/*------------------------------------------------------------------*/
+/* ActElevatoe                                                      */
+/* pitch = nicken -> vor/zurück                                     */
+/*------------------------------------------------------------------*/
+void ActElevator(void){
     
     
+
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="Act Throttle">
+/*------------------------------------------------------------------*/
+/* ActThrottle                                                      */
+/* Height                                                           */
+/*------------------------------------------------------------------*/
+void ActThrottle(void){
 
 }
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Act Rudder">
-/*-----------------------------------------------------------------*/
-/* ActRudder                                    */
-/* yaw = gieren -> drehung an der hochachse                */
-/*-----------------------------------------------------------------*/
-void ActRudder(){
+/*------------------------------------------------------------------*/
+/* ActRudder                                                        */
+/* yaw = gieren -> drehung an der hochachse                         */
+/*------------------------------------------------------------------*/
+void ActRudder(void){
  
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Act Throttle">
-/*-----------------------------------------------------------------*/
-/* ActThrottle                                    */
-/* Height                */
-/*-----------------------------------------------------------------*/
-void ActThrottle(){
-
-}
-// </editor-fold>
