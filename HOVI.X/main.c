@@ -79,7 +79,7 @@
 
 
 void main(void) {
-    Fkt_Init();
+    Init();
     while(1) {
         
         NOP();

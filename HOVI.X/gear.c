@@ -13,7 +13,7 @@
 
 /* Returns by TMR3 measured time                                             */
 /*---------------------------------------------------------------------------*/
-unsigned int Fkt_CalcTime(void) {
+unsigned int CalcTime(void) {
     unsigned int time_pulse = TMR3H;
     time_pulse <<= 8;
     time_pulse |= TMR3L;
@@ -27,8 +27,8 @@ unsigned int Fkt_CalcTime(void) {
 /* Compares value of TMR3 with GEAR_TIME to select the mode to use           */
 /*      returns 0 for manual mode, gearswitch position 1 or 2                */
 /*      returns 1 for automatic mode, gearswitch position 0                  */
-bit Fkt_ModeCheck(void) {
-    unsigned int time = Fkt_CalcTime();
+bit ModeCheck(void) {
+    unsigned int time = CalcTime();
     if(time < GEAR_TIME){
         LED = 0;
         return 0;
