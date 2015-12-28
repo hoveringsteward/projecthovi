@@ -13,3 +13,7 @@
 #include <xc.h>
 #include "main.h"
 
+unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
+    frame = 0;
+    
+}

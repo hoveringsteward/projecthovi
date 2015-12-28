@@ -18,5 +18,22 @@
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
 
+
+/*---------------------------------------------------------------------------*/
+/* User defined Variables                                                    */
+/*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Variables">
+typedef struct colorobject{
+        unsigned int num; /* num contains as much diggits as colors in the code 
+                           * -> color 3, color 7, num = 37*/
+        unsigned int pos_x; // X center of object
+        unsigned int pos_y; // Y center of object
+        unsigned int width; // width of object
+        unsigned int height; // height of object
+        unsigned int angle; // Rotation
+        
+    } farben;
+// </editor-fold>
+
 #endif	/* PIXY_H */
 
