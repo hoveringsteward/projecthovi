@@ -13,7 +13,7 @@
 #include <xc.h>
 #include "main.h"
 
-unsigned char ExchangeSpiChar(unsigned char byte1) {
+unsigned char ExchangeSpiByte(unsigned char byte1) {
     if(SSP1IF == 1) {
         __delay_us(100);
         SSP1IF = 0;
