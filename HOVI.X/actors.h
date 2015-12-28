@@ -17,6 +17,22 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Userroutines">
+
+// </editor-fold>
+
+
+/*---------------------------------------------------------------------------*/
+/* Beginning of uservariables.                                               */
+/*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Uservariables">
+typedef struct act_out{
+    unsigned int aile;
+    unsigned int elev;
+    unsigned int thro;
+    unsigned int rudd;
+} t_actors;
+// </editor-fold>
 
 #endif	/* ACTORS_H */
 

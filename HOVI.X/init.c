@@ -97,4 +97,11 @@ void InitInterrupt(void) {
     /* Enabling interrupt for Timer 3 gate                                   */
     TMR3GIE = 1;        // Direct access due to conflicts with PIE3bits.TMR3GIE    
 }
+
+void InitActors (void) {
+    t_actors.aile = 500;
+    t_actors.elev = 500;
+    t_actors.thro = 0;
+    t_actors.rudd = 500;
+}
 // </editor-fold>

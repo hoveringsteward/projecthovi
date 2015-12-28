@@ -41,11 +41,23 @@ interrupt void Isr(void);
 /* Namedefinitions of Pinouts                                                */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Pinouts">
-#define LED PORTBbits.RB2
-#define A   PORTAbits.RA0
-#define E   PORTAbits.RA1
-#define T   PORTAbits.RA3
-#define R   PORTAbits.RA2
+#define LED     PORTBbits.RB2
+#define A       PORTAbits.RA0
+#define E       PORTAbits.RA1
+#define T       PORTAbits.RA3
+#define R       PORTAbits.RA2
+#define Gate    PORTAbits.RA4
+#define Trigger PORTBbits.RB3
+#define Connect PORTDbits.RD5
+// </editor-fold>
+
+
+/*---------------------------------------------------------------------------*/
+/* Namedefinitions of Pinins                                                 */
+/*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Pinins">
+#define Connected   PORTDbits.RD4
+#define Associated  PORTDbits.RD6
 // </editor-fold>
 
 

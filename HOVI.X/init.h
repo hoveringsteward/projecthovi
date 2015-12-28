@@ -26,6 +26,7 @@ void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
 void InitInterrupt(void);
+void InitActors(void);
 
 #endif	/* INIT_H */
 
