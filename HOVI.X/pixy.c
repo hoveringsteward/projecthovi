@@ -15,14 +15,14 @@
 
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
     frame = 0;
-    
+    farben a_farben[max_obj];
     for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
         /* Routine for getting startcondition                                    */
-        /* Returns 0 after 10 cycles without detecting an object                 */
+        /* Returns 0 after 254 cycles without detecting an object                 */
         /*-----------------------------------------------------------------------*/
         
         while(frame == 0) {
-            w = ExchangeSpi2char(PIXY_SYNC, DUMMY);
+            w = ExchangeSpiWord(PIXY_SYNC, DUMMY);
             if(lw == PIXY_FRAME_OBJ && w == PIXY_FRAME_OBJ) {
                 frame = 1;
                 obj_type = 0;
@@ -39,14 +39,14 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
             }
         }
 
-        unsigned int checksum = ExchangeSpi2char(PIXY_SYNC, DUMMY);
+        unsigned int checksum = ExchangeSpiWord(PIXY_SYNC, DUMMY);
 
 
-        afarben[c_obj].num =    ExchangeSpi2char(PIXY_SYNC, DUMMY);
-        afarben[c_obj].pos_x =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-        afarben[c_obj].pos_y =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-        afarben[c_obj].width =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-        afarben[c_obj].height = ExchangeSpi2char(PIXY_SYNC, DUMMY);
-        afarben[c_obj].angle =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
-    
+        afarben[c_obj].num =    ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        afarben[c_obj].pos_x =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        afarben[c_obj].pos_y =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        afarben[c_obj].width =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        afarben[c_obj].height = ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        afarben[c_obj].angle =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+    }
 }

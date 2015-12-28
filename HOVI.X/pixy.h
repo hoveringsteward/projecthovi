@@ -17,7 +17,7 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
-
+unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 
 /*---------------------------------------------------------------------------*/
 /* User defined Variables                                                    */
