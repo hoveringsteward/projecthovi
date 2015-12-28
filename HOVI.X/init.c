@@ -1,3 +1,13 @@
+/*-----------------------------------------------------------------*/
+/* Author: Lucas                                                   */
+/*                                                                 */
+/* Created: 2015-12-25                                             */
+/* Project: HOVI.X                                                 */
+/*                                                                 */
+/* Diese Beschreibung dient als Beispieltext für eine              */
+/* Filebeschreibung aus welcher klar hervorgehen soll was in       */
+/* diesem File passiert und wozu dieses benötigt wird.             */
+
 #include <xc.h>
 #include "init.h"
 
