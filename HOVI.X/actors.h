@@ -27,10 +27,10 @@
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Uservariables">
 typedef struct act_out{
-    unsigned int aile;
-    unsigned int elev;
-    unsigned int thro;
-    unsigned int rudd;
+    unsigned int aile;      //Seitwärts
+    unsigned int elev;      //Vorwärts/Rückwärts
+    unsigned int thro;      //Höhe
+    unsigned int rudd;      //Drehung
 } t_actors;
 // </editor-fold>
 

@@ -11,6 +11,7 @@
 #ifndef MAIN_H
 #define	MAIN_H
 
+// <editor-fold defaultstate="collapsed" desc="Included Files">
 #include <stdlib.h>
 #include "actors.h"
 #include "failure.h"
@@ -19,6 +20,9 @@
 #include "pixy.h"
 #include "safety.h"
 #include "ultrasonic.h"
+#include "communication.h"
+// </editor-fold>
+
    
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
@@ -38,7 +42,7 @@ interrupt void Isr(void);
 // </editor-fold>
 
 /*---------------------------------------------------------------------------*/
-/* Namedefinitions of Pinouts                                                */
+/* Definitions of Pinouts                                                */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Pinouts">
 #define LED     PORTBbits.RB2
@@ -53,7 +57,7 @@ interrupt void Isr(void);
 
 
 /*---------------------------------------------------------------------------*/
-/* Namedefinitions of Pinins                                                 */
+/* Definitions of Pinins                                                 */
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Pinins">
 #define Connected   PORTDbits.RD4

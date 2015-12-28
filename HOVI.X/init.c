@@ -1,3 +1,5 @@
+
+
 #include <xc.h>
 #include "init.h"
 
@@ -52,8 +54,16 @@ void InitUart(void) {
     
 }
 
+/* SPI1 used to communicate with PIXY and possible othe periperals      */
+/*  Samlpled at middle of data outpu                                    */
+/*  Transmit on idle to active                                          */
+/*  SPI1 enabled                                                        */
+/*  Idle low                                                            */
+/*  Master mode, clock FOSC/16                                          */
+/*----------------------------------------------------------------------*/
 void InitSpi(void) {
-    
+    SSP1STAT = 0b00000000;      //Rising edge;
+    SSP1CON1 = 0b00100001;      //FOSC/16
 }
 
 /* Timer 3, used to measure time of gaer signal                          */
@@ -84,10 +94,12 @@ void InitTimer(void) {
 void InitInterrupt(void) {
     GIE = 1;
     PEIE = 1;
-    /* Enabling interrupt for Timer 3 gate                                   */
+    /* Enabling interrupt for Timer 3 gate                              */
     TMR3GIE = 1;        // Direct access due to conflicts with PIE3bits.TMR3GIE    
 }
 
+/* Setting the default point of the actors                              */
+/* Actors are on default state -> no motion will occoure                */
 void InitActors (void) {
     t_actors.aile = 500;
     t_actors.elev = 500;

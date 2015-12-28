@@ -12,6 +12,7 @@
       <itemPath>pixy.h</itemPath>
       <itemPath>safety.h</itemPath>
       <itemPath>ultrasonic.h</itemPath>
+      <itemPath>communication.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -29,6 +30,7 @@
       <itemPath>pixy.c</itemPath>
       <itemPath>safety.c</itemPath>
       <itemPath>ultrasonic.c</itemPath>
+      <itemPath>communication.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -47,7 +49,7 @@
         <targetDevice>PIC18F46K22</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.35</languageToolchainVersion>
         <platform>3</platform>
