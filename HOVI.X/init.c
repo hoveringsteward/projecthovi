@@ -19,9 +19,9 @@
 #include "main.h"
 
 
-/*---------------------------------------------------------------------------*/
-/* Beginning of userroutines.                                                   */
-/*---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------*/
+/* Beginning of userroutines.                                           */
+/*----------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Initfunctions">
 
 // <editor-fold defaultstate="collapsed" desc="Init">
@@ -97,26 +97,44 @@ void InitSpi(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Timer">
-/* Timer 3, used to measure time of gaer signal                          */
-/*  high active                                                          */
-/*  no toggle mode                                                       */
-/*  no single pulse mode                                                 */
-/*  gatepin                                                              */
-/*  FOSC/4                                                               */
-/*  Prescale 1:1                                                         */
-/*  no sync                                                              */
-/*-----------------------------------------------------------------------*/
+/* Timer 3, used to measure time of gaer signal                         */
+/* Timer 5, used to measure the ultrasonic echo                         */
+/*  high active                                                         */
+/*  no toggle mode                                                      */
+/*  no single pulse mode                                                */
+/*  gatepin                                                             */
+/*  FOSC/4                                                              */
+/*  Prescale 1:1                                                        */
+/*  no sync                                                             */
+/*  16-Bit disabled                                                      */
+/*----------------------------------------------------------------------*/
 void InitTimer(void) {
+    // <editor-fold defaultstate="collapsed" desc="TMR3">
+    //Timer 3 Gatecontrolregister
     T3GCONbits.TMR3GE = 1;
     T3GCONbits.T3GSPM = 0;
-    T3GCONbits.T3GTM = 0;
+    T3GCONbits.T3GTM =  0;
     T3GCONbits.T3GPOL = 1;
-    T3GCONbits.T3GSS = 0b00;
-    
-    T3CONbits.TMR3CS = 0b00;
-    T3CONbits.T3CKPS = 0b00;
+    T3GCONbits.T3GSS =  0b00;
+    //Timer 3 Controlregister
+    T3CONbits.TMR3CS =  0b00;
+    T3CONbits.T3CKPS =  0b00;
     T3CONbits.nT3SYNC = 1;
-    T3CONbits.TMR3ON = 1;
+    T3CONbits.TMR3ON =  1;
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="TMR5">
+    //Timer 5 Gatecontrolregister
+    T5GCONbits.TMR5GE = 1;
+    T5GCONbits.T5GSPM = 0;
+    T5GCONbits.T5GTM =  0;
+    T5GCONbits.T5GPOL = 1;
+    T5GCONbits.T5GSS =  0b00;
+    //Timer 5 Controlregister
+    T5CONbits.TMR5CS =  0b00;
+    T5CONbits.T5CKPS =  0b00;
+    T5CONbits.nT5SYNC = 1;
+    T5CONbits.TMR5ON =  1;
+    // </editor-fold>
 }
 // </editor-fold>
 

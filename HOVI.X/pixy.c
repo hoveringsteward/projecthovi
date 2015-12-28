@@ -16,7 +16,7 @@
 // <editor-fold defaultstate="collapsed" desc="Reading Object">
 /*---------------------------------------------------------------------------*/
 /* Retrieves Object from Pixy                                                */
-/* Maximum tries for getting startcondition c = 10, retuns 0 if overrun      */
+/* Maximum tries for getting startcondition c = 254, retuns 0 if overrun      */
 /* Returns a found Object in struct colorobject                              */
 /* Searches for desired object des_obj by controlling with ProofObject()     */
 /* Searches for specific objecttype by des_obj_type, desired object type     */
@@ -31,14 +31,24 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
         /* Routine for getting startcondition                                    */
         /* Returns 0 after 254 cycles without detecting an object                 */
         /*-----------------------------------------------------------------------*/
+        if(frame == 1) {
+            w = ExchangeSpiWord(PIXY_SYNC, DUMMY);
+            if(w == PIXY_FRAME_OBJ) {
+                a_color[c_obj].type = PIXY_FRAME_OBJ;
+            }else if(w == PIXY_COLORCODE) {
+                a_color[c_obj].type = PIXY_COLORCODE;
+            }
+        }
         while(frame == 0) {
             w = ExchangeSpiWord(PIXY_SYNC, DUMMY);
             if(lw == PIXY_FRAME_OBJ && w == PIXY_FRAME_OBJ) {
                 frame = 1;
                 obj_type = 0;
+                a_color[c_obj].type = PIXY_FRAME_OBJ;
             } else if(lw == PIXY_FRAME_OBJ && w == PIXY_COLORCODE) {
                 frame = 1;
                 obj_type = 1;
+                a_color[c_obj].type = PIXY_COLORCODE;
             } else if(w == 0 && lw == 0){
                 frame = 0;
             }
@@ -51,12 +61,12 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
         
         unsigned int checksum = ExchangeSpiWord(PIXY_SYNC, DUMMY);
 
-        a_colors[c_obj].num =    ExchangeSpiWord(PIXY_SYNC, DUMMY);
-        a_colors[c_obj].pos_x =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
-        a_colors[c_obj].pos_y =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
-        a_colors[c_obj].width =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
-        a_colors[c_obj].height = ExchangeSpiWord(PIXY_SYNC, DUMMY);
-        a_colors[c_obj].angle =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].num =    ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].pos_x =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].pos_y =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].width =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].height = ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].angle =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
     }
     return 1;
 }

@@ -84,7 +84,6 @@
 void main(void) {
     Init();
     while(1) {
-        
         NOP();
     }
     return;
