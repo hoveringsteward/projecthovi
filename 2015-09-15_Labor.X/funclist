@@ -1,0 +1,10 @@
+_init: CODE, 1337 0 20
+___ftpack: CODE, 1416 0 96
+_measure: CODE, 1681 0 178
+_main: CODE, 1311 0 7
+___lwtoft: CODE, 1318 0 19
+__initialization: CODE, 2039 0 5
+___ftmul: CODE, 1859 0 180
+___ftge: CODE, 1357 0 59
+___ftdiv: CODE, 1512 0 169
+Total: 733

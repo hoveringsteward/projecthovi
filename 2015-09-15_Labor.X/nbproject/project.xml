@@ -3,12 +3,12 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>HOVI_PIC16_SPI</name>
-            <creation-uuid>c4f45afd-7f65-4542-9728-a5f08f0abc74</creation-uuid>
+            <name>2015-09-15_Labor</name>
+            <creation-uuid>e095ce4e-da33-435e-bada-658a79baded0</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions>h</header-extensions>
+            <header-extensions/>
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
