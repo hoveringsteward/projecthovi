@@ -17,8 +17,8 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
-unsigned int Fkt_CalcTime(void);
-bit Fkt_ModeCheck(void);
+unsigned int CalcTime(void);
+bit ModeCheck(void);
 
 #endif	/* GEAR_H */
 

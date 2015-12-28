@@ -17,15 +17,15 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
-void Fkt_Init(void);
-void Fkt_InitPort(void);
-void Fkt_InitTris(void);
-void Fkt_InitAnsel(void);
-void Fkt_InitOsc(void);
-void Fkt_InitUart(void);
-void Fkt_InitSpi(void);
-void Fkt_InitTimer(void);
-void Fkt_InitInterrupt(void);
+void Init(void);
+void InitPort(void);
+void InitTris(void);
+void InitAnsel(void);
+void InitOsc(void);
+void InitUart(void);
+void InitSpi(void);
+void InitTimer(void);
+void InitInterrupt(void);
 
 #endif	/* INIT_H */
 

@@ -24,7 +24,7 @@
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userrroutines">
-interrupt void Fkt_Isr(void);
+interrupt void Isr(void);
 // </editor-fold>
 
 
@@ -42,6 +42,10 @@ interrupt void Fkt_Isr(void);
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Pinouts">
 #define LED PORTBbits.RB2
+#define A   PORTAbits.RA0
+#define E   PORTAbits.RA1
+#define T   PORTAbits.RA3
+#define R   PORTAbits.RA2
 // </editor-fold>
 
 

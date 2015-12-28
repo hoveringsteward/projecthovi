@@ -19,18 +19,18 @@
 
 /* Calls all needed inits                                                    */
 /*---------------------------------------------------------------------------*/
-void Fkt_Init(void) {
-    Fkt_InitPort();
-    Fkt_InitTris();
-    Fkt_InitAnsel();
-    Fkt_InitOsc();
-    Fkt_InitUart();
-    Fkt_InitSpi();
-    Fkt_InitTimer();
-    Fkt_InitInterrupt();
+void Init(void) {
+    InitPort();
+    InitTris();
+    InitAnsel();
+    InitOsc();
+    InitUart();
+    InitSpi();
+    InitTimer();
+    InitInterrupt();
 }
 
-void Fkt_InitPort(void) {
+void InitPort(void) {
     PORTA = 0b00010000;
     PORTB = 0b00001000;
     PORTC = 0b00000000;
@@ -38,7 +38,7 @@ void Fkt_InitPort(void) {
     PORTE = 0b00000000;
 }
 
-void Fkt_InitTris(void) {
+void InitTris(void) {
     TRISA = 0b00000000;
     TRISB = 0b00010000;
     TRISC = 0b10010001;
@@ -46,7 +46,7 @@ void Fkt_InitTris(void) {
     TRISE = 0b00000000;
 }
 
-void Fkt_InitAnsel(void) {
+void InitAnsel(void) {
     ANSELA = 0b00000000;
     ANSELB = 0b00000000;
     ANSELC = 0b00000000;
@@ -54,24 +54,28 @@ void Fkt_InitAnsel(void) {
     ANSELE = 0b00000000;
 }
 
-void Fkt_InitOsc(void) {
+void InitOsc(void) {
     OSCCON = 0b01110111;    // 16MHz, INTOSC, stable HFOSC, Internal osc-block
 }
 
-void Fkt_InitUart(void) {
+void InitUart(void) {
     
 }
 
-void Fkt_InitSpi(void) {
+void InitSpi(void) {
     
 }
 
-void Fkt_InitTimer(void) {
-    /* Timer 3, used to measure time of gaer signal                          */
-    /*-----------------------------------------------------------------------*/
-//    T3CON = 0b000000111;    // source fosc/4, 1:1, no sync, 16-Bit Mode, TMR3 on
-//    T3GCON = 0b110000000;   // high active, no toggle, no single pulse, gatepin
-    //GE, GPOL, GTM, GSPM, GGOnDONE, GVAL, GSS
+/* Timer 3, used to measure time of gaer signal                          */
+/*  high active                                                          */
+/*  no toggle mode                                                       */
+/*  no single pulse mode                                                 */
+/*  gatepin                                                              */
+/*  FOSC/4                                                               */
+/*  Prescale 1:1                                                         */
+/*  no sync                                                              */
+/*-----------------------------------------------------------------------*/
+void InitTimer(void) {
     T3GCONbits.TMR3GE = 1;
     T3GCONbits.T3GSPM = 0;
     T3GCONbits.T3GTM = 0;
@@ -84,12 +88,13 @@ void Fkt_InitTimer(void) {
     T3CONbits.TMR3ON = 1;
 }
 
-void Fkt_InitInterrupt(void) {
+/* Interrupts from:                                                      */
+/*  Timer 3 Gate                                                         */
+/*-----------------------------------------------------------------------*/
+void InitInterrupt(void) {
     GIE = 1;
     PEIE = 1;
     /* Enabling interrupt for Timer 3 gate                                   */
-    TMR3GIE = 1;        // Direct access due to conflicts with PIE3bits.TMR3GIE
-    TMR3IE = 1;
-    
+    TMR3GIE = 1;        // Direct access due to conflicts with PIE3bits.TMR3GIE    
 }
 // </editor-fold>
