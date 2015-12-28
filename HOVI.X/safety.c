@@ -8,8 +8,9 @@
  * anyway: 
  * The hex-rotor has to act after detecting a barricade, like walls,
  * humans or other things which are blocking the way
- * 
- *       */
+ *
+ *
+ */
 
 #include <xc.h>
 #include "main.h"
