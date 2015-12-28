@@ -1,9 +1,12 @@
-/* 
- * File:   mainheader.h
- * Author: Lucas
- *
- * Created on 25. November 2015, 16:56
- */
+/*-----------------------------------------------------------------*/
+/* Author: Lucas                                                   */
+/*                                                                 */
+/* Created: 2015-12-25                                             */
+/* Project: HOVI.X                                                 */
+/*                                                                 */
+/* Diese Beschreibung dient als Beispieltext für eine              */
+/* Filebeschreibung aus welcher klar hervorgehen soll was in       */
+/* diesem File passiert und wozu dieses benötigt wird.             */
 
 #ifndef MAIN_H
 #define	MAIN_H
