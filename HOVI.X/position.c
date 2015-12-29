@@ -11,6 +11,7 @@
 #include <xc.h>
 #include "main.h"
 #include "position.h"
+#include "actors.h"
 
 
 
@@ -65,14 +66,29 @@ void CheckAileron(void){
             ActElevator();
             
         }else if(a_frame[0].pos_x > 170){
+            if(a_frame[1].pos_x < a_frame[0].pos_x){
+                if((a_frame[1].pos_x - a_frame[0].pos_x) < 4){
+                    ActAileron(0); // keep doing
+                }else{
+                    ActAileron(-DUMMY); // slow down
+                }
+            }else{
+                ActAileron(); // fly to the left
+            }
+        }else{ // a_frame[0].pos_x < 170
+            if(a_frame[1].pos_x > a_frame[0].pos_x){
+                if((a_frame[1].pos_x - a_frame[0].pos_x) >- 4){
+                    ActAileron(0); // keep doing
+                }else{
+                    ActAileron(DUMMY); // slow down
+                }
+            }
             
-            ActAileron(DUMMY); // nach rechts fliegen 
-         
-        }else if(a_frame[0].pos_x < 150){
-            
-            ActAileron(DUMMY); // nach links fliegen
+            ActAileron(DUMMY); // fly to the right
         
         }
+        
+        
         
         {
             int tmp = difold - dif;
