@@ -56,12 +56,34 @@ void CompareFrames(void){
 void CheckAileron(void){
       
     DES_X_MIN, DES_X_MAX;
-    int dif0, dif1;
+    int dif, difold;
      
     if(a_frame[1].num == a_frame[0].num){  
         
-        dif0 = a_frame[0] - X_MID;
-        if(dif0 < 10){
+        if(a_frame[0].pos_x >= 150 && a_frame[0].pos_x <= 170){
+            
+            ActElevator();
+            
+        }else if(a_frame[0].pos_x > 170){
+            
+            ActAileron(DUMMY); // nach rechts fliegen 
+         
+        }else if(a_frame[0].pos_x < 150){
+            
+            ActAileron(DUMMY); // nach links fliegen
+        
+        }
+        
+        {
+            int tmp = difold - dif;
+            if(tmp > 0){ // am richtigen Weg
+                ActAileron(); // Zahl wie viel er schneller/langsame werden soll
+            }else{
+                ActAileron(); // am falschen Weg
+            }
+            
+            
+            
             
         }
         
@@ -86,7 +108,7 @@ void CheckAileron(void){
          LEDright = 1; 
      }
     
-    
+    difold = dif;
     a_frame[1].num = a_frame[0].num;
     a_frame[1].pos_x = a_frame[0].pos_x;
     a_frame[1].pos_y = a_frame[0].pos_y;

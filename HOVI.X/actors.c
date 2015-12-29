@@ -22,7 +22,7 @@
 /* ActAilerons                                                      */
 /* roll = rollen -> links/rechts                                    */
 /*------------------------------------------------------------------*/
-void ActAilerons(void){
+void ActAileron(void){
 
     
 }
