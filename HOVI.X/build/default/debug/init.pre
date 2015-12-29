@@ -9409,7 +9409,13 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 29 "actors.h"
+# 21 "actors.h"
+void ActAileron(void);
+void ActElevator(void);
+void ActThrottle(void);
+void ActRudder(void);
+
+# 32
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9444,21 +9450,29 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
 
 # 26
 typedef struct colorobject {
+unsigned int type;
 unsigned int num;
 
-# 29
+# 31
 unsigned int pos_x;
 unsigned int pos_y;
-unsigned int width;
-unsigned int height;
+unsigned int obj_width;
+unsigned int obj_height;
 unsigned int angle;
 } t_colors;
 
-t_colors a_colors[5];
+t_colors a_color[5];
 bit frame = 0;
 bit obj_type;
 unsigned int w;
 unsigned int lw;
+
+# 20 "ultrasonic.h"
+void StartHightMeasure(void);
+void ReadHight(void);
+
+# 28
+unsigned int time_hight;
 
 # 31 "main.h"
 interrupt void Isr(void);
@@ -9524,8 +9538,10 @@ SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 109
+# 111
 void InitTimer(void) {
+
+
 T3GCONbits.TMR3GE = 1;
 T3GCONbits.T3GSPM = 0;
 T3GCONbits.T3GTM = 0;
@@ -9536,9 +9552,23 @@ T3CONbits.TMR3CS = 0b00;
 T3CONbits.T3CKPS = 0b00;
 T3CONbits.nT3SYNC = 1;
 T3CONbits.TMR3ON = 1;
+
+
+
+T5GCONbits.TMR5GE = 1;
+T5GCONbits.T5GSPM = 0;
+T5GCONbits.T5GTM = 0;
+T5GCONbits.T5GPOL = 1;
+T5GCONbits.T5GSS = 0b00;
+
+T5CONbits.TMR5CS = 0b00;
+T5CONbits.T5CKPS = 0b00;
+T5CONbits.nT5SYNC = 1;
+T5CONbits.TMR5ON = 1;
+
 }
 
-# 127
+# 145
 void InitInterrupt(void) {
 GIE = 1;
 PEIE = 1;
@@ -9546,7 +9576,7 @@ PEIE = 1;
 TMR3GIE = 1;
 }
 
-# 138
+# 156
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;

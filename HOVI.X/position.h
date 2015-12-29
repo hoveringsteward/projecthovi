@@ -15,9 +15,35 @@
 /* Prototypes of userroutines.                                      */ 
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
-
+void CompareFrames(void);
+void CheckAileron(void);
 // </editor-fold>
 
 
+/*----------------------------------------------------------------------*/
+/* User defined Variables                                               */
+/*----------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Variables">
+typedef struct t_frame {
+    unsigned int num; // colorcode id
+    unsigned int pos_x; // X center of object
+    unsigned int pos_y; // Y center of object
+    unsigned int height; // height of hex-rotor
+    unsigned int angle; // rotation
+} a_frame[2];
+/* (?) old
+ * a_frame[0] = current frame
+   a_frame[1] = last frame
+   a_frame_dif[0] = difference of a_frame[0] and a_frame[1]*/
+
+typedef struct t_frame {
+    unsigned int num; // colorcode id
+    int pos_x; // X center of object
+    int pos_y; // Y center of object
+    int height; // height of hex-rotor
+    int angle; // rotation
+} a_frame_dif[1];
+
+// </editor-fold>
 #endif	/* POSITION_H */
 

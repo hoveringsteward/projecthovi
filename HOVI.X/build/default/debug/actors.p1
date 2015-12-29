@@ -1,10 +1,10 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"29 actors.h
+"32 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
 "26 pixy.h
-[s S1148 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
-[n S1148 colorobject num pos_x pos_y width height angle ]
+[s S1148 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S1148 colorobject type num pos_x pos_y obj_width obj_height angle ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7498,15 +7498,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 29: typedef struct act_out {
-[; ;actors.h: 30: unsigned int aile;
-[; ;actors.h: 31: unsigned int elev;
-[; ;actors.h: 32: unsigned int thro;
-[; ;actors.h: 33: unsigned int rudd;
-[; ;actors.h: 34: } t_actors;
-"36 actors.h
+[; ;actors.h: 21: void ActAileron(void);
+[; ;actors.h: 22: void ActElevator(void);
+[; ;actors.h: 23: void ActThrottle(void);
+[; ;actors.h: 24: void ActRudder(void);
+[; ;actors.h: 32: typedef struct act_out {
+[; ;actors.h: 33: unsigned int aile;
+[; ;actors.h: 34: unsigned int elev;
+[; ;actors.h: 35: unsigned int thro;
+[; ;actors.h: 36: unsigned int rudd;
+[; ;actors.h: 37: } t_actors;
+"39 actors.h
 [v _a_actors `S1147 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;actors.h: 36: t_actors a_actors[1];
+[; ;actors.h: 39: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
@@ -7523,36 +7527,42 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 36: void InitActors(void);
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
-[; ;pixy.h: 27: unsigned int num;
-[; ;pixy.h: 29: unsigned int pos_x;
-[; ;pixy.h: 30: unsigned int pos_y;
-[; ;pixy.h: 31: unsigned int width;
-[; ;pixy.h: 32: unsigned int height;
-[; ;pixy.h: 33: unsigned int angle;
-[; ;pixy.h: 34: } t_colors;
-"36 pixy.h
-[v _a_colors `S1148 ~T0 @X0 -> 5 `i e ]
-[; ;pixy.h: 36: t_colors a_colors[5];
-"37
+[; ;pixy.h: 27: unsigned int type;
+[; ;pixy.h: 28: unsigned int num;
+[; ;pixy.h: 31: unsigned int pos_x;
+[; ;pixy.h: 32: unsigned int pos_y;
+[; ;pixy.h: 33: unsigned int obj_width;
+[; ;pixy.h: 34: unsigned int obj_height;
+[; ;pixy.h: 35: unsigned int angle;
+[; ;pixy.h: 36: } t_colors;
+"38 pixy.h
+[v _a_color `S1148 ~T0 @X0 -> 5 `i e ]
+[; ;pixy.h: 38: t_colors a_color[5];
+"39
 [v _frame `b ~T0 @X0 1 e ]
 [i _frame
 -> 0 `i
 ]
-[; ;pixy.h: 37: bit frame = 0;
-"38
-[v _obj_type `b ~T0 @X0 1 e ]
-[; ;pixy.h: 38: bit obj_type;
-"39
-[v _w `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 39: unsigned int w;
+[; ;pixy.h: 39: bit frame = 0;
 "40
+[v _obj_type `b ~T0 @X0 1 e ]
+[; ;pixy.h: 40: bit obj_type;
+"41
+[v _w `ui ~T0 @X0 1 e ]
+[; ;pixy.h: 41: unsigned int w;
+"42
 [v _lw `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 40: unsigned int lw;
+[; ;pixy.h: 42: unsigned int lw;
+[; ;ultrasonic.h: 20: void StartHightMeasure(void);
+[; ;ultrasonic.h: 21: void ReadHight(void);
+"28 ultrasonic.h
+[v _time_hight `ui ~T0 @X0 1 e ]
+[; ;ultrasonic.h: 28: unsigned int time_hight;
 [; ;main.h: 31: interrupt void Isr(void);
 "25 actors.c
 [v _ActAilerons `(v ~T0 @X0 1 ef ]
 {
-[; ;actors.c: 25: void ActAilerons(){
+[; ;actors.c: 25: void ActAilerons(void){
 [e :U _ActAilerons ]
 [f ]
 [; ;actors.c: 28: }
@@ -7562,7 +7572,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "36
 [v _ActElevator `(v ~T0 @X0 1 ef ]
 {
-[; ;actors.c: 36: void ActElevator(){
+[; ;actors.c: 36: void ActElevator(void){
 [e :U _ActElevator ]
 [f ]
 [; ;actors.c: 40: }
@@ -7570,20 +7580,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 1150 ]
 }
 "48
-[v _ActRudder `(v ~T0 @X0 1 ef ]
+[v _ActThrottle `(v ~T0 @X0 1 ef ]
 {
-[; ;actors.c: 48: void ActRudder(){
-[e :U _ActRudder ]
+[; ;actors.c: 48: void ActThrottle(void){
+[e :U _ActThrottle ]
 [f ]
 [; ;actors.c: 50: }
 "50
 [e :UE 1151 ]
 }
 "58
-[v _ActThrottle `(v ~T0 @X0 1 ef ]
+[v _ActRudder `(v ~T0 @X0 1 ef ]
 {
-[; ;actors.c: 58: void ActThrottle(){
-[e :U _ActThrottle ]
+[; ;actors.c: 58: void ActRudder(void){
+[e :U _ActRudder ]
 [f ]
 [; ;actors.c: 60: }
 "60

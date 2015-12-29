@@ -1,10 +1,45 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"29 actors.h
+"32 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
 "26 pixy.h
-[s S1148 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
-[n S1148 colorobject num pos_x pos_y width height angle ]
+[s S1148 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S1148 colorobject type num pos_x pos_y obj_width obj_height angle ]
+"1763 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _TMR5L `Vuc ~T0 @X0 0 e@3919 ]
+"1782
+[v _TMR5H `Vuc ~T0 @X0 0 e@3920 ]
+"6662
+[s S416 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S416 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"6672
+[s S417 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S417 . INT0 INT1 INT2 CCP2 KBI0 KBI1 KBI2 KBI3 ]
+"6682
+[s S418 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S418 . AN12 AN10 AN8 AN9 AN11 AN13 PGC PGD ]
+"6692
+[s S419 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S419 . FLT0 C12IN3M . C12IN2M T5G T1G ]
+"6700
+[s S420 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S420 . SRI C12IN3N . C12IN2N . CCP3 ]
+"6708
+[s S421 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S421 . . CTED1 CTED2 . T3CKI ]
+"6715
+[s S422 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S422 . . P2A . P3A ]
+"6721
+[s S423 :3 `uc 1 :1 `uc 1 ]
+[n S423 . . CCP2_PA2 ]
+"6661
+[u S415 `S416 1 `S417 1 `S418 1 `S419 1 `S420 1 `S421 1 `S422 1 `S423 1 ]
+[n S415 . . . . . . . . . ]
+"6726
+[v _PORTBbits `VS415 ~T0 @X0 0 e@3969 ]
+"20144
+[v _TMR5IF `Vb ~T0 @X0 0 e@31729 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7498,15 +7533,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 29: typedef struct act_out {
-[; ;actors.h: 30: unsigned int aile;
-[; ;actors.h: 31: unsigned int elev;
-[; ;actors.h: 32: unsigned int thro;
-[; ;actors.h: 33: unsigned int rudd;
-[; ;actors.h: 34: } t_actors;
-"36 actors.h
+[; ;actors.h: 21: void ActAileron(void);
+[; ;actors.h: 22: void ActElevator(void);
+[; ;actors.h: 23: void ActThrottle(void);
+[; ;actors.h: 24: void ActRudder(void);
+[; ;actors.h: 32: typedef struct act_out {
+[; ;actors.h: 33: unsigned int aile;
+[; ;actors.h: 34: unsigned int elev;
+[; ;actors.h: 35: unsigned int thro;
+[; ;actors.h: 36: unsigned int rudd;
+[; ;actors.h: 37: } t_actors;
+"39 actors.h
 [v _a_actors `S1147 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;actors.h: 36: t_actors a_actors[1];
+[; ;actors.h: 39: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
@@ -7523,29 +7562,83 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 36: void InitActors(void);
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
-[; ;pixy.h: 27: unsigned int num;
-[; ;pixy.h: 29: unsigned int pos_x;
-[; ;pixy.h: 30: unsigned int pos_y;
-[; ;pixy.h: 31: unsigned int width;
-[; ;pixy.h: 32: unsigned int height;
-[; ;pixy.h: 33: unsigned int angle;
-[; ;pixy.h: 34: } t_colors;
-"36 pixy.h
-[v _a_colors `S1148 ~T0 @X0 -> 5 `i e ]
-[; ;pixy.h: 36: t_colors a_colors[5];
-"37
+[; ;pixy.h: 27: unsigned int type;
+[; ;pixy.h: 28: unsigned int num;
+[; ;pixy.h: 31: unsigned int pos_x;
+[; ;pixy.h: 32: unsigned int pos_y;
+[; ;pixy.h: 33: unsigned int obj_width;
+[; ;pixy.h: 34: unsigned int obj_height;
+[; ;pixy.h: 35: unsigned int angle;
+[; ;pixy.h: 36: } t_colors;
+"38 pixy.h
+[v _a_color `S1148 ~T0 @X0 -> 5 `i e ]
+[; ;pixy.h: 38: t_colors a_color[5];
+"39
 [v _frame `b ~T0 @X0 1 e ]
 [i _frame
 -> 0 `i
 ]
-[; ;pixy.h: 37: bit frame = 0;
-"38
-[v _obj_type `b ~T0 @X0 1 e ]
-[; ;pixy.h: 38: bit obj_type;
-"39
-[v _w `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 39: unsigned int w;
+[; ;pixy.h: 39: bit frame = 0;
 "40
+[v _obj_type `b ~T0 @X0 1 e ]
+[; ;pixy.h: 40: bit obj_type;
+"41
+[v _w `ui ~T0 @X0 1 e ]
+[; ;pixy.h: 41: unsigned int w;
+"42
 [v _lw `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 40: unsigned int lw;
+[; ;pixy.h: 42: unsigned int lw;
+[; ;ultrasonic.h: 20: void StartHightMeasure(void);
+[; ;ultrasonic.h: 21: void ReadHight(void);
+"28 ultrasonic.h
+[v _time_hight `ui ~T0 @X0 1 e ]
+[; ;ultrasonic.h: 28: unsigned int time_hight;
 [; ;main.h: 31: interrupt void Isr(void);
+"27 ultrasonic.c
+[v _StartHightMeasure `(v ~T0 @X0 1 ef ]
+{
+[; ;ultrasonic.c: 27: void StartHightMeasure(void) {
+[e :U _StartHightMeasure ]
+[f ]
+[; ;ultrasonic.c: 28: TMR5L = 0;
+"28
+[e = _TMR5L -> -> 0 `i `uc ]
+[; ;ultrasonic.c: 29: TMR5H = 0;
+"29
+[e = _TMR5H -> -> 0 `i `uc ]
+[; ;ultrasonic.c: 30: PORTBbits.RB3 = 0;
+"30
+[e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
+[; ;ultrasonic.c: 31: }
+"31
+[e :UE 1149 ]
+}
+"33
+[v _ReadHight `(v ~T0 @X0 1 ef ]
+{
+[; ;ultrasonic.c: 33: void ReadHight(void) {
+[e :U _ReadHight ]
+[f ]
+[; ;ultrasonic.c: 34: while(TMR5IF == 0);
+"34
+[e $U 1151  ]
+[e :U 1152 ]
+[e :U 1151 ]
+[e $ == -> _TMR5IF `i -> 0 `i 1152  ]
+[e :U 1153 ]
+[; ;ultrasonic.c: 35: TMR5IF = 0;
+"35
+[e = _TMR5IF -> -> 0 `i `b ]
+[; ;ultrasonic.c: 36: time_hight = TMR5H;
+"36
+[e = _time_hight -> _TMR5H `ui ]
+[; ;ultrasonic.c: 37: time_hight <<= 8;
+"37
+[e =<< _time_hight -> 8 `i ]
+[; ;ultrasonic.c: 38: time_hight |= TMR5L;
+"38
+[e =| _time_hight -> _TMR5L `ui ]
+[; ;ultrasonic.c: 39: }
+"39
+[e :UE 1150 ]
+}

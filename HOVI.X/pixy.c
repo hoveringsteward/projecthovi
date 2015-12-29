@@ -64,43 +64,10 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
         a_color[c_obj].num =    ExchangeSpiWord(PIXY_SYNC, DUMMY);
         a_color[c_obj].pos_x =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
         a_color[c_obj].pos_y =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
-        a_color[c_obj].width =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
-        a_color[c_obj].height = ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].obj_width =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        a_color[c_obj].obj_height = ExchangeSpiWord(PIXY_SYNC, DUMMY);
         a_color[c_obj].angle =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
     }
     return 1;
-}
-// </editor-fold>
-
-// <editor-fold defaultstate="collapsed" desc="compare Frames">
-
-/*---------------------------------------------------------------------------*/
-/* compareFrames
- * compares the position Y of one colorobject in a frame with the same 
- * colorobject in the next frame
- * 2nd frame - 1st frame
-/*---------------------------------------------------------------------------*/
-
-void compareFrames(void){
-    
-    unsigned int last_num, last_pos_x, last_pos_y;
-    int diff_pos_x, diff_pos_y;
-    
-    if(last_num == t_colors.num){
-        
-        diff_pos_y = last_pos_y - t_colors.pos_y;
-        
-        diff_pos_x = last_pos_x - t_colors.pos_x;
-    
-    }else{
-        diff_pos_y = Y_MAX - t_colors.pos_y; 
-    }
-          
-    last_num = t_colors.num;
-    last_pos_x= t_colors.pos_x;
-    last_pos_y= t_colors.pos_y;
-    
-       
-    
 }
 // </editor-fold>

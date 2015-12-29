@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "position.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9337,68 +9337,6 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-
-# 20 "main.c"
-#pragma config IESO = OFF
-#pragma config PLLCFG = OFF
-#pragma config PRICLKEN = OFF
-#pragma config FOSC = INTIO67
-#pragma config FCMEN = OFF
-
-
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 190
-#pragma config PWRTEN = OFF
-
-
-#pragma config WDTPS = 32768
-#pragma config WDTEN = OFF
-
-
-#pragma config CCP2MX = PORTC1
-#pragma config P2BMX = PORTD2
-#pragma config HFOFST = ON
-#pragma config PBADEN = ON
-#pragma config CCP3MX = PORTB5
-#pragma config MCLRE = EXTMCLR
-#pragma config T3CMX = PORTC0
-
-
-#pragma config LVP = OFF
-#pragma config STVREN = ON
-#pragma config XINST = OFF
-#pragma config DEBUG = OFF
-
-
-#pragma config CP2 = OFF
-#pragma config CP1 = OFF
-#pragma config CP3 = OFF
-#pragma config CP0 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTD = OFF
-#pragma config WRTB = OFF
-
-
-#pragma config EBTR3 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR0 = OFF
-
-
-#pragma config EBTRB = OFF
-
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\__size_t.h"
 typedef unsigned size_t;
 
@@ -9539,11 +9477,91 @@ unsigned int time_hight;
 # 31 "main.h"
 interrupt void Isr(void);
 
-# 84 "main.c"
-void main(void) {
-Init();
-while(1) {
-__nop();
+# 18 "position.h"
+void CompareFrames(void);
+void CheckAileron(void);
+
+# 27
+typedef struct t_frame {
+unsigned int num;
+unsigned int pos_x;
+unsigned int pos_y;
+unsigned int height;
+unsigned int angle;
+} a_frame[2];
+
+# 39
+typedef struct t_frame {
+unsigned int num;
+int pos_x;
+int pos_y;
+int height;
+int angle;
+} a_frame_dif[1];
+
+# 26 "position.c"
+void CompareFrames(void){
+
+a_frame_dif[0].height = a_frame[1].height - a_frame[0].height;
+
+if(a_frame[1].num == a_frame[0].num){
+a_frame_dif[0].pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
+a_frame_dif[0].pos_y = a_frame[1].pos_y - a_frame[0].pos_y;
+a_frame_dif[0].angle = a_frame[1].angle - a_frame[0].angle;
+}else{
+return 0;
 }
-return;
+
+a_frame[1].num = a_frame[0].num;
+a_frame[1].pos_x = a_frame[0].pos_x;
+a_frame[1].pos_y = a_frame[0].pos_y;
+a_frame[1].height = a_frame[0].height;
+a_frame[1].angle = a_frame[0].angle;
+
 }
+
+# 56
+void CheckAileron(void){
+
+150, 170;
+int dif0, dif1;
+
+if(a_frame[1].num == a_frame[0].num){
+
+dif0 = a_frame[0] - X_MID;
+if(dif0 < 10){
+
+}
+
+
+a_frame_dif[0].pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
+}else{
+return 0;
+}
+
+
+if(pos_x > 170){
+LEDleft = 0;
+LEDright = 1;
+}else if(pos_x < 150){
+LEDleft = 1;
+LEDright = 0;
+}else if(pos_x >= 150 && pos_x <= 170){
+LEDleft = 0;
+LEDright = 0;
+}else{
+LEDleft = 1;
+LEDright = 1;
+}
+
+
+a_frame[1].num = a_frame[0].num;
+a_frame[1].pos_x = a_frame[0].pos_x;
+a_frame[1].pos_y = a_frame[0].pos_y;
+a_frame[1].height = a_frame[0].height;
+a_frame[1].angle = a_frame[0].angle;
+
+
+
+}
+

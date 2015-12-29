@@ -30,8 +30,8 @@ typedef struct colorobject {
                        * -> color 3, color 7, num = 37*/
     unsigned int pos_x; // X center of object
     unsigned int pos_y; // Y center of object
-    unsigned int width; // width of object
-    unsigned int height; // height of object
+    unsigned int obj_width; // width of object
+    unsigned int obj_height; // height of object
     unsigned int angle; // Rotation
 } t_colors;
     

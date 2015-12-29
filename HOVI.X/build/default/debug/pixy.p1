@@ -1,10 +1,10 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"29 actors.h
+"32 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
 "26 pixy.h
-[s S1148 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
-[n S1148 colorobject num pos_x pos_y width height angle ]
+[s S1148 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S1148 colorobject type num pos_x pos_y obj_width obj_height angle ]
 "23 communication.h
 [v _ExchangeSpiWord `(ui ~T0 @X0 0 ef2`uc`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -7500,15 +7500,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 29: typedef struct act_out {
-[; ;actors.h: 30: unsigned int aile;
-[; ;actors.h: 31: unsigned int elev;
-[; ;actors.h: 32: unsigned int thro;
-[; ;actors.h: 33: unsigned int rudd;
-[; ;actors.h: 34: } t_actors;
-"36 actors.h
+[; ;actors.h: 21: void ActAileron(void);
+[; ;actors.h: 22: void ActElevator(void);
+[; ;actors.h: 23: void ActThrottle(void);
+[; ;actors.h: 24: void ActRudder(void);
+[; ;actors.h: 32: typedef struct act_out {
+[; ;actors.h: 33: unsigned int aile;
+[; ;actors.h: 34: unsigned int elev;
+[; ;actors.h: 35: unsigned int thro;
+[; ;actors.h: 36: unsigned int rudd;
+[; ;actors.h: 37: } t_actors;
+"39 actors.h
 [v _a_actors `S1147 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;actors.h: 36: t_actors a_actors[1];
+[; ;actors.h: 39: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
@@ -7525,31 +7529,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 36: void InitActors(void);
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
-[; ;pixy.h: 27: unsigned int num;
-[; ;pixy.h: 29: unsigned int pos_x;
-[; ;pixy.h: 30: unsigned int pos_y;
-[; ;pixy.h: 31: unsigned int width;
-[; ;pixy.h: 32: unsigned int height;
-[; ;pixy.h: 33: unsigned int angle;
-[; ;pixy.h: 34: } t_colors;
-"36 pixy.h
-[v _a_colors `S1148 ~T0 @X0 -> 5 `i e ]
-[; ;pixy.h: 36: t_colors a_colors[5];
-"37
+[; ;pixy.h: 27: unsigned int type;
+[; ;pixy.h: 28: unsigned int num;
+[; ;pixy.h: 31: unsigned int pos_x;
+[; ;pixy.h: 32: unsigned int pos_y;
+[; ;pixy.h: 33: unsigned int obj_width;
+[; ;pixy.h: 34: unsigned int obj_height;
+[; ;pixy.h: 35: unsigned int angle;
+[; ;pixy.h: 36: } t_colors;
+"38 pixy.h
+[v _a_color `S1148 ~T0 @X0 -> 5 `i e ]
+[; ;pixy.h: 38: t_colors a_color[5];
+"39
 [v _frame `b ~T0 @X0 1 e ]
 [i _frame
 -> 0 `i
 ]
-[; ;pixy.h: 37: bit frame = 0;
-"38
-[v _obj_type `b ~T0 @X0 1 e ]
-[; ;pixy.h: 38: bit obj_type;
-"39
-[v _w `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 39: unsigned int w;
+[; ;pixy.h: 39: bit frame = 0;
 "40
+[v _obj_type `b ~T0 @X0 1 e ]
+[; ;pixy.h: 40: bit obj_type;
+"41
+[v _w `ui ~T0 @X0 1 e ]
+[; ;pixy.h: 41: unsigned int w;
+"42
 [v _lw `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 40: unsigned int lw;
+[; ;pixy.h: 42: unsigned int lw;
+[; ;ultrasonic.h: 20: void StartHightMeasure(void);
+[; ;ultrasonic.h: 21: void ReadHight(void);
+"28 ultrasonic.h
+[v _time_hight `ui ~T0 @X0 1 e ]
+[; ;ultrasonic.h: 28: unsigned int time_hight;
 [; ;main.h: 31: interrupt void Isr(void);
 "27 pixy.c
 [v _ReadObject `(uc ~T0 @X0 1 ef3`uc`ui`uc ]
@@ -7575,115 +7585,154 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 1153  ]
 [e :U 1150 ]
 {
-[; ;pixy.c: 34: while(frame == 0) {
+[; ;pixy.c: 34: if(frame == 1) {
 "34
-[e $U 1154  ]
-[e :U 1155 ]
+[e $ ! == -> _frame `i -> 1 `i 1154  ]
 {
 [; ;pixy.c: 35: w = ExchangeSpiWord(0x5a, 0);
 "35
 [e = _w ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;pixy.c: 36: if(lw == 0xaa55 && w == 0xaa55) {
+[; ;pixy.c: 36: if(w == 0xaa55) {
 "36
-[e $ ! && == _lw -> 43605 `ui == _w -> 43605 `ui 1157  ]
+[e $ ! == _w -> 43605 `ui 1155  ]
 {
-[; ;pixy.c: 37: frame = 1;
+[; ;pixy.c: 37: a_color[c_obj].type = 0xaa55;
 "37
-[e = _frame -> -> 1 `i `b ]
-[; ;pixy.c: 38: obj_type = 0;
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43605 `ui ]
 "38
-[e = _obj_type -> -> 0 `i `b ]
+}
+[; ;pixy.c: 38: }else if(w == 0xaa56) {
+[e $U 1156  ]
+[e :U 1155 ]
+[e $ ! == _w -> 43606 `ui 1157  ]
+{
+[; ;pixy.c: 39: a_color[c_obj].type = 0xaa56;
 "39
-}
-[; ;pixy.c: 39: } else if(lw == 0xaa55 && w == 0xaa56) {
-[e $U 1158  ]
-[e :U 1157 ]
-[e $ ! && == _lw -> 43605 `ui == _w -> 43606 `ui 1159  ]
-{
-[; ;pixy.c: 40: frame = 1;
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43606 `ui ]
 "40
-[e = _frame -> -> 1 `i `b ]
-[; ;pixy.c: 41: obj_type = 1;
+}
+[e :U 1157 ]
 "41
-[e = _obj_type -> -> 1 `i `b ]
-"42
-}
-[; ;pixy.c: 42: } else if(w == 0 && lw == 0){
-[e $U 1160  ]
-[e :U 1159 ]
-[e $ ! && == _w -> -> 0 `i `ui == _lw -> -> 0 `i `ui 1161  ]
-{
-[; ;pixy.c: 43: frame = 0;
-"43
-[e = _frame -> -> 0 `i `b ]
-"44
-}
-[e :U 1161 ]
-"45
-[e :U 1160 ]
-[e :U 1158 ]
-[; ;pixy.c: 44: }
-[; ;pixy.c: 45: lw = w;
-[e = _lw _w ]
-[; ;pixy.c: 46: c++;
-"46
-[e ++ _c -> -> 1 `i `uc ]
-[; ;pixy.c: 47: if(c > 254) {
-"47
-[e $ ! > -> _c `i -> 254 `i 1162  ]
-{
-[; ;pixy.c: 48: return 0;
-"48
-[e ) -> -> 0 `i `uc ]
-[e $UE 1149  ]
-"49
-}
-[e :U 1162 ]
-"50
+[e :U 1156 ]
 }
 [e :U 1154 ]
-"34
-[e $ == -> _frame `i -> 0 `i 1155  ]
-[e :U 1156 ]
+[; ;pixy.c: 40: }
+[; ;pixy.c: 41: }
+[; ;pixy.c: 42: while(frame == 0) {
+"42
+[e $U 1158  ]
+[e :U 1159 ]
+{
+[; ;pixy.c: 43: w = ExchangeSpiWord(0x5a, 0);
+"43
+[e = _w ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 44: if(lw == 0xaa55 && w == 0xaa55) {
+"44
+[e $ ! && == _lw -> 43605 `ui == _w -> 43605 `ui 1161  ]
+{
+[; ;pixy.c: 45: frame = 1;
+"45
+[e = _frame -> -> 1 `i `b ]
+[; ;pixy.c: 46: obj_type = 0;
+"46
+[e = _obj_type -> -> 0 `i `b ]
+[; ;pixy.c: 47: a_color[c_obj].type = 0xaa55;
+"47
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43605 `ui ]
+"48
+}
+[; ;pixy.c: 48: } else if(lw == 0xaa55 && w == 0xaa56) {
+[e $U 1162  ]
+[e :U 1161 ]
+[e $ ! && == _lw -> 43605 `ui == _w -> 43606 `ui 1163  ]
+{
+[; ;pixy.c: 49: frame = 1;
+"49
+[e = _frame -> -> 1 `i `b ]
+[; ;pixy.c: 50: obj_type = 1;
+"50
+[e = _obj_type -> -> 1 `i `b ]
+[; ;pixy.c: 51: a_color[c_obj].type = 0xaa56;
+"51
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43606 `ui ]
 "52
-[v _checksum `ui ~T0 @X0 1 a ]
-[; ;pixy.c: 49: }
-[; ;pixy.c: 50: }
-[; ;pixy.c: 52: unsigned int checksum = ExchangeSpiWord(0x5a, 0);
-[e = _checksum ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;pixy.c: 54: a_colors[c_obj].num = ExchangeSpiWord(0x5a, 0);
+}
+[; ;pixy.c: 52: } else if(w == 0 && lw == 0){
+[e $U 1164  ]
+[e :U 1163 ]
+[e $ ! && == _w -> -> 0 `i `ui == _lw -> -> 0 `i `ui 1165  ]
+{
+[; ;pixy.c: 53: frame = 0;
+"53
+[e = _frame -> -> 0 `i `b ]
 "54
-[e = . *U + &U _a_colors * -> _c_obj `ux -> -> # *U &U _a_colors `ui `ux 0 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;pixy.c: 55: a_colors[c_obj].pos_x = ExchangeSpiWord(0x5a, 0);
+}
+[e :U 1165 ]
 "55
-[e = . *U + &U _a_colors * -> _c_obj `ux -> -> # *U &U _a_colors `ui `ux 1 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;pixy.c: 56: a_colors[c_obj].pos_y = ExchangeSpiWord(0x5a, 0);
+[e :U 1164 ]
+[e :U 1162 ]
+[; ;pixy.c: 54: }
+[; ;pixy.c: 55: lw = w;
+[e = _lw _w ]
+[; ;pixy.c: 56: c++;
 "56
-[e = . *U + &U _a_colors * -> _c_obj `ux -> -> # *U &U _a_colors `ui `ux 2 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;pixy.c: 57: a_colors[c_obj].width = ExchangeSpiWord(0x5a, 0);
+[e ++ _c -> -> 1 `i `uc ]
+[; ;pixy.c: 57: if(c > 254) {
 "57
-[e = . *U + &U _a_colors * -> _c_obj `ux -> -> # *U &U _a_colors `ui `ux 3 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;pixy.c: 58: a_colors[c_obj].height = ExchangeSpiWord(0x5a, 0);
+[e $ ! > -> _c `i -> 254 `i 1166  ]
+{
+[; ;pixy.c: 58: return 0;
 "58
-[e = . *U + &U _a_colors * -> _c_obj `ux -> -> # *U &U _a_colors `ui `ux 4 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
-[; ;pixy.c: 59: a_colors[c_obj].angle = ExchangeSpiWord(0x5a, 0);
+[e ) -> -> 0 `i `uc ]
+[e $UE 1149  ]
 "59
-[e = . *U + &U _a_colors * -> _c_obj `ux -> -> # *U &U _a_colors `ui `ux 5 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+}
+[e :U 1166 ]
 "60
+}
+[e :U 1158 ]
+"42
+[e $ == -> _frame `i -> 0 `i 1159  ]
+[e :U 1160 ]
+"62
+[v _checksum `ui ~T0 @X0 1 a ]
+[; ;pixy.c: 59: }
+[; ;pixy.c: 60: }
+[; ;pixy.c: 62: unsigned int checksum = ExchangeSpiWord(0x5a, 0);
+[e = _checksum ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 64: a_color[c_obj].num = ExchangeSpiWord(0x5a, 0);
+"64
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 1 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 65: a_color[c_obj].pos_x = ExchangeSpiWord(0x5a, 0);
+"65
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 2 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 66: a_color[c_obj].pos_y = ExchangeSpiWord(0x5a, 0);
+"66
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 3 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 67: a_color[c_obj].obj_width = ExchangeSpiWord(0x5a, 0);
+"67
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 4 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 68: a_color[c_obj].obj_height = ExchangeSpiWord(0x5a, 0);
+"68
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 5 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 69: a_color[c_obj].angle = ExchangeSpiWord(0x5a, 0);
+"69
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 6 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+"70
 }
 "30
 [e ++ _c_obj -> -> 1 `i `uc ]
 [e :U 1153 ]
 [e $ < -> _c_obj `i -> _max_obj `i 1150  ]
 [e :U 1151 ]
-"60
+"70
 }
-[; ;pixy.c: 60: }
-[; ;pixy.c: 61: return 1;
-"61
+[; ;pixy.c: 70: }
+[; ;pixy.c: 71: return 1;
+"71
 [e ) -> -> 1 `i `uc ]
 [e $UE 1149  ]
-[; ;pixy.c: 62: }
-"62
+[; ;pixy.c: 72: }
+"72
 [e :UE 1149 ]
 }

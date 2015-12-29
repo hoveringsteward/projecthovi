@@ -9409,7 +9409,13 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 29 "actors.h"
+# 21 "actors.h"
+void ActAileron(void);
+void ActElevator(void);
+void ActThrottle(void);
+void ActRudder(void);
+
+# 32
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9440,21 +9446,29 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
 
 # 26
 typedef struct colorobject {
+unsigned int type;
 unsigned int num;
 
-# 29
+# 31
 unsigned int pos_x;
 unsigned int pos_y;
-unsigned int width;
-unsigned int height;
+unsigned int obj_width;
+unsigned int obj_height;
 unsigned int angle;
 } t_colors;
 
-t_colors a_colors[5];
+t_colors a_color[5];
 bit frame = 0;
 bit obj_type;
 unsigned int w;
 unsigned int lw;
+
+# 20 "ultrasonic.h"
+void StartHightMeasure(void);
+void ReadHight(void);
+
+# 28
+unsigned int time_hight;
 
 # 31 "main.h"
 interrupt void Isr(void);
@@ -9465,22 +9479,22 @@ bit ModeCheck(void);
 
 # 16 "gear.c"
 unsigned int CalcTime(void) {
-unsigned int time_pulse = TMR3H;
-time_pulse <<= 8;
-time_pulse |= TMR3L;
+unsigned int time_gear = TMR3H;
+time_gear <<= 8;
+time_gear |= TMR3L;
 TMR3H = 0;
 TMR3L = 0;
 __nop();
-return time_pulse;
+return time_gear;
 }
 
 # 30
 bit ModeCheck(void) {
-unsigned int time = CalcTime();
-if(time < 6800){
+unsigned int time_gear = CalcTime();
+if(time_gear < 6800){
 PORTBbits.RB2 = 0;
 return 0;
-}else if(time >= 6800) {
+}else if(time_gear >= 6800) {
 PORTBbits.RB2 = 1;
 return 1;
 }

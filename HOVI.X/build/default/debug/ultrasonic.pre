@@ -9409,7 +9409,13 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 29 "actors.h"
+# 21 "actors.h"
+void ActAileron(void);
+void ActElevator(void);
+void ActThrottle(void);
+void ActRudder(void);
+
+# 32
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9444,22 +9450,44 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
 
 # 26
 typedef struct colorobject {
+unsigned int type;
 unsigned int num;
 
-# 29
+# 31
 unsigned int pos_x;
 unsigned int pos_y;
-unsigned int width;
-unsigned int height;
+unsigned int obj_width;
+unsigned int obj_height;
 unsigned int angle;
 } t_colors;
 
-t_colors a_colors[5];
+t_colors a_color[5];
 bit frame = 0;
 bit obj_type;
 unsigned int w;
 unsigned int lw;
 
+# 20 "ultrasonic.h"
+void StartHightMeasure(void);
+void ReadHight(void);
+
+# 28
+unsigned int time_hight;
+
 # 31 "main.h"
 interrupt void Isr(void);
 
+# 27 "ultrasonic.c"
+void StartHightMeasure(void) {
+TMR5L = 0;
+TMR5H = 0;
+PORTBbits.RB3 = 0;
+}
+
+void ReadHight(void) {
+while(TMR5IF == 0);
+TMR5IF = 0;
+time_hight = TMR5H;
+time_hight <<= 8;
+time_hight |= TMR5L;
+}
