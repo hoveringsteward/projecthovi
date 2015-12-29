@@ -80,7 +80,7 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
  * colorobject in the next frame
 /*---------------------------------------------------------------------------*/
 
-void compareFrames(){
+void compareFrames(void){
     
     unsigned int last_pos_y, last_num, diff_pos_y;
     
