@@ -19,6 +19,7 @@
 #include "gear.h"
 #include "init.h"
 #include "pixy.h"
+#include "position.h"
 #include "safety.h"
 #include "ultrasonic.h"
 // </editor-fold>
@@ -39,19 +40,21 @@ interrupt void Isr(void);
 // <editor-fold defaultstate="collapsed" desc="Variables">
 #define _XTAL_FREQ      16000000
 #define GEAR_TIME       6800        /* 1700 µs / 0.25 µs = 6800 pulses on TMR3*/
-#define DUMMY           0
-#define PIXY_SYNC       0x5a
-#define PIXY_SYNC_DATA  0x5b
-#define X_MAX           319
-#define Y_MAX           199         /* Maximum 
+#define DUMMY           0           /* Dummydata for Pixy */
+#define PIXY_SYNC       0x5a        /* Syncbyte, dummy data followed */
+#define PIXY_SYNC_DATA  0x5b        /* Syncbyte followed by meaningful data */
+#define X_MAX           319         /* Maximum X-position */
+#define Y_MAX           199         /* Maximum Y-position */
 #define WIDTH_MAX       320         /* Maximum size ob obj, (size of screen)*/
 #define HEIGHT_MAX      200         /* Maximum size ob obj, (size of screen)*/
 #define DES_X_MIN       150         /* Desired minimum X-coordinate of obj */
 #define DES_X_MAX       170         /* Desired maximum X-coordinate of obj */
+#define X_MID           160         /* Center in X-direction */
 #define DES_Y_MIN       90          /* Desired minimum Y-coordinate of obj */
+#define Y_MID           100         /* Center in Y-direction */
 #define DES_Y_MAX       110         /* Desired maximum Y-coordinate of obj */
-#define PIXY_FRAME_OBJ  0xaa55
-#define PIXY_COLORCODE  0xaa56
+#define PIXY_FRAME_OBJ  0xaa55      /* Pixycode for an object */
+#define PIXY_COLORCODE  0xaa56      /* Pixycode for a colorcode */
 // </editor-fold>
 
 /*------------------------------------------------------------------*/
