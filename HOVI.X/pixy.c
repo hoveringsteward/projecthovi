@@ -78,22 +78,29 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
 /* compareFrames
  * compares the position Y of one colorobject in a frame with the same 
  * colorobject in the next frame
+ * 2nd frame - 1st frame
 /*---------------------------------------------------------------------------*/
 
 void compareFrames(void){
     
-    unsigned int last_pos_y, last_num, diff_pos_y;
+    unsigned int last_num, last_pos_x, last_pos_y;
+    int diff_pos_x, diff_pos_y;
     
     if(last_num == t_colors.num){
         
-        diff_pos_y = last_pos_y - t_colors.pos_y;        
+        diff_pos_y = last_pos_y - t_colors.pos_y;
+        
+        diff_pos_x = last_pos_x - t_colors.pos_x;
     
     }else{
         diff_pos_y = Y_MAX - t_colors.pos_y; 
     }
           
     last_num = t_colors.num;
+    last_pos_x= t_colors.pos_x;
     last_pos_y= t_colors.pos_y;
+    
+       
     
 }
 // </editor-fold>
