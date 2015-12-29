@@ -43,9 +43,13 @@ interrupt void Isr(void);
 #define PIXY_SYNC       0x5a
 #define PIXY_SYNC_DATA  0x5b
 #define X_MAX           319
-#define Y_MAX           199
-#define WIDTH_MAX       320
-#define HEIGHT_MAX      200
+#define Y_MAX           199         /* Maximum 
+#define WIDTH_MAX       320         /* Maximum size ob obj, (size of screen)*/
+#define HEIGHT_MAX      200         /* Maximum size ob obj, (size of screen)*/
+#define DES_X_MIN       150         /* Desired minimum X-coordinate of obj */
+#define DES_X_MAX       170         /* Desired maximum X-coordinate of obj */
+#define DES_Y_MIN       90          /* Desired minimum Y-coordinate of obj */
+#define DES_Y_MAX       110         /* Desired maximum Y-coordinate of obj */
 #define PIXY_FRAME_OBJ  0xaa55
 #define PIXY_COLORCODE  0xaa56
 // </editor-fold>
