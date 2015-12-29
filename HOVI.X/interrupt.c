@@ -32,6 +32,9 @@ interrupt void Isr() {
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
         ModeCheck();
+        StartHightMeasure();
+        ReadObject();
+        ReadHight();
     }else if (TMR3IF == 1) {
         TMR3IF = 0;
     }

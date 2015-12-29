@@ -14,17 +14,19 @@
 #include <xc.h>
 #include "main.h"
 
-/*---------------------------------------------------------------------------*/
-/* Prototypes of userroutines.                                               */ 
-/*---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------*/
+/* Prototypes of userroutines.                                          */ 
+/*----------------------------------------------------------------------*/
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 
-/*---------------------------------------------------------------------------*/
-/* User defined Variables                                                    */
-/*---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------*/
+/* User defined Variables                                               */
+/*----------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
 typedef struct colorobject {
-    unsigned int num; /* num contains as much diggits as colors in the code 
+    unsigned int type;  /* Colorcode or Object */
+    unsigned int num; /* num contains as much diggits as colors in the code
+                       * displayed as octal value
                        * -> color 3, color 7, num = 37*/
     unsigned int pos_x; // X center of object
     unsigned int pos_y; // Y center of object
@@ -33,7 +35,7 @@ typedef struct colorobject {
     unsigned int angle; // Rotation
 } t_colors;
     
-t_colors a_colors[5];
+t_colors a_color[5];
 bit frame = 0;
 bit obj_type;
 unsigned int w;

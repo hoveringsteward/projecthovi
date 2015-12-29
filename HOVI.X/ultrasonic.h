@@ -16,6 +16,17 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Userroutines">
+void StartHightMeasure(void);
+void ReadHight(void);
+// </editor-fold>
+
+/*------------------------------------------------------------------*/
+/* User defined Variables                                           */
+/*------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Variables">
+unsigned int time_hight;
+// </editor-fold>
 
 #endif	/* ULTRASONIC_H */
 
