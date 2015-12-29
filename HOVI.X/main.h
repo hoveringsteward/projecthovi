@@ -4,9 +4,10 @@
 /* Created: 2015-12-25                                             */
 /* Project: HOVI.X                                                 */
 /*                                                                 */
-/* Diese Beschreibung dient als Beispieltext für eine              */
-/* Filebeschreibung aus welcher klar hervorgehen soll was in       */
-/* diesem File passiert und wozu dieses benötigt wird.             */
+/* 
+ * In this file is the mainroutine. The routine waits for an
+ * interrupt an reacts to it in the interrupt subroutine.
+ */
 
 #ifndef MAIN_H
 #define	MAIN_H
@@ -24,15 +25,13 @@
 #include "ultrasonic.h"
 // </editor-fold>
 
-   
+
 /*------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                      */ 
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userrroutines">
 interrupt void Isr(void);
 // </editor-fold>
-
-
 
 /*------------------------------------------------------------------*/
 /* User defined Variables                                           */

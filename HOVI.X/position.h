@@ -38,10 +38,10 @@ typedef struct t_frame {
 
 typedef struct t_frame {
     unsigned int num; // colorcode id
-    int pos_x; // X center of object
-    int pos_y; // Y center of object
-    int height; // height of hex-rotor
-    int angle; // rotation
+    signed int pos_x; // X center of object
+    signed int pos_y; // Y center of object
+    signed int height; // height of hex-rotor
+    signed int angle; // rotation
 } a_frame_dif[1];
 
 // </editor-fold>
