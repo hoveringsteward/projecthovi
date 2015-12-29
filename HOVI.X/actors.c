@@ -22,7 +22,7 @@
 /* ActAilerons                                                      */
 /* roll = rollen -> links/rechts                                    */
 /*------------------------------------------------------------------*/
-void ActAileron(void){
+void ActAileron(unsigned char change){
 
     
 }
@@ -33,7 +33,7 @@ void ActAileron(void){
 /* ActElevatoe                                                      */
 /* pitch = nicken -> vor/zurück                                     */
 /*------------------------------------------------------------------*/
-void ActElevator(void){
+void ActElevator(unsigned char change){
     
     
 
@@ -45,7 +45,7 @@ void ActElevator(void){
 /* ActThrottle                                                      */
 /* Height                                                           */
 /*------------------------------------------------------------------*/
-void ActThrottle(void){
+void ActThrottle(unsigned char change){
 
 }
 // </editor-fold>
@@ -55,7 +55,7 @@ void ActThrottle(void){
 /* ActRudder                                                        */
 /* yaw = gieren -> drehung an der hochachse                         */
 /*------------------------------------------------------------------*/
-void ActRudder(void){
+void ActRudder(unsigned char change){
  
 }
 // </editor-fold>

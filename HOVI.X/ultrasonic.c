@@ -24,16 +24,16 @@
 #include "main.h"
 
 
-void StartHightMeasure(void) {
+void StartHeightMeasure(void) {
     TMR5L = 0;
     TMR5H = 0;
     Trigger = 0;
 }
 
-void ReadHight(void) {
+void ReadHeight(void) {
     while(TMR5IF == 0);
     TMR5IF = 0;
-    time_hight = TMR5H;
-    time_hight <<= 8;
-    time_hight |= TMR5L;
+    time_height = TMR5H;
+    time_height <<= 8;
+    time_height |= TMR5L;
 }

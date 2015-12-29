@@ -18,10 +18,10 @@
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
-void ActAileron(void);
-void ActElevator(void);
-void ActThrottle(void);
-void ActRudder(void);
+void ActAileron(unsigned char change);
+void ActElevator(unsigned char change);
+void ActThrottle(unsigned char change);
+void ActRudder(unsigned char change);
 // </editor-fold>
 
 

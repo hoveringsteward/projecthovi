@@ -36,7 +36,6 @@ void Init(void) {
     InitSpi();
     InitTimer();
     InitInterrupt();
-    InitActors();
 }
 // </editor-fold>
 

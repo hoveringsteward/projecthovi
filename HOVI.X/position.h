@@ -15,8 +15,9 @@
 /* Prototypes of userroutines.                                      */ 
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
-void CompareFrames(void);
-void CheckAileron(void);
+bit CompareFrames(void);
+bit CheckAileron(void);
+void StoreAsOld(void);
 // </editor-fold>
 
 
@@ -33,8 +34,9 @@ typedef struct t_frame {
 } a_frame[2];
 /* (?) old
  * a_frame[0] = current frame
-   a_frame[1] = last frame
-   a_frame_dif[0] = difference of a_frame[0] and a_frame[1]*/
+ * a_frame[1] = last frame
+ * a_frame_dif[0] = difference of a_frame[0] and a_frame[1]
+ */
 
 typedef struct t_frame {
     unsigned int num; // colorcode id
@@ -43,7 +45,6 @@ typedef struct t_frame {
     signed int height; // height of hex-rotor
     signed int angle; // rotation
 } a_frame_dif[1];
-
 // </editor-fold>
 #endif	/* POSITION_H */
 
