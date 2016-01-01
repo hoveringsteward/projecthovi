@@ -45,22 +45,29 @@ bit CompareFrames(void) {
  * the difference is only checked if the same colorcodes are stored
 /*---------------------------------------------------------------------------*/
 bit CheckAileron(void) {
-    /* DES_X_MIN, DES_X_MAX; */
+    /* Two oft the used constants DES_X_MIN, DES_X_MAX; */
     
     if(a_frame[1].num == a_frame[0].num) {
+        // <editor-fold defaultstate="collapsed" desc="centered">
         if(a_frame[0].pos_x >= 150 && a_frame[0].pos_x <= 170) {
         /* CC/Obj nearly centered, no further actions taken */
             ActAileron(0);   // keep doing
-        }else if(a_frame[0].pos_x > 170) {
+        }
+        // </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="right side">
+        else if(a_frame[0].pos_x > 170) {
         /* CC/Obj is on the right side of the frame */
             if(a_frame[1].pos_x > a_frame[0].pos_x) {
-            /* Old bigger than new, MC moving towards CC/Obj */
+            /* Old bigger than new, MC moving towards CC/Obj, moving right */
                 if(a_frame_dif[0].pos_x <= V_MAX) {
                 /* Velocity is OK */
                     ActAileron(0); // keep doing
+                }else if(a_frame_dif[0].pos_x <= V_MIN) {
+                /* Velocity is very slow, increase */
+                    ActAileron(-AIL_INC);
                 }else {
                 /* Velocity is too high */
-                    ActAileron(-DUMMY); // slow down, slower to the left
+                    ActAileron(AIL_INC); // slow down, bit more left
                 }
             }else {
             /* Ols smaller than new, MC moving away from CC/Obj */
@@ -68,18 +75,26 @@ bit CheckAileron(void) {
             /* Dif is negative, HC needs to get back in right direction */
             /* As soon as the right direction is achieved, velocity is */
             /* limited by the previous function */
-                ActAileron(); // fly to the left
+                ActAileron(-AIL_INC); // fly to the right
             }
-        }else { // a_frame[0].pos_x < 150
+        }
+        // </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="left side">
+        else { // a_frame[0].pos_x < 150
         /* CC/Obj is on the left side of the frame */
             if(a_frame[1].pos_x < a_frame[0].pos_x) {
-            /* Old smaller than new, MC moving towards CC/Obj */
+            /* Old smaller than new, MC moving towards CC/Obj, moving left */
                 if(a_frame_dif[0].pos_x >= -V_MAX) {
-                /* Velocity is OK */
-                    ActAileron(0); // keep doing
+                    if(a_frame_dif[0].pos_x >= -V_MIN) {
+                    /* Velocity is very slow, increase */
+                        ActAileron(AIL_INC);
+                    }else {
+                    /* Velocity is OK */
+                        ActAileron(0); // keep doing
+                    }
                 }else {
                 /* Velocity is too high */
-                    ActAileron(DUMMY); // slow down, slower to the right
+                    ActAileron(-AIL_INC); // slow down, bit more right
                 }
             }else {
             /* Old bigger than new, MC moving away from CC/Obj */
@@ -87,9 +102,10 @@ bit CheckAileron(void) {
             /* Dif is positive, HC needs to get back in right direction */
             /* As soon as the right direction is aachieved, velocity is */
             /* limited by the previous function */
-                ActAileron(DUMMY);
+                ActAileron(AIL_INC);  // fly to the left side
             }
         }
+        // </editor-fold>
 
 //        {
 //            int tmp = dif_old - dif;

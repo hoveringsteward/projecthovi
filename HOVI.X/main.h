@@ -53,8 +53,10 @@ interrupt void Isr(void);
 #define Y_MID           100         /* Center in Y-direction */
 #define DES_Y_MAX       110         /* Desired maximum Y-coordinate of obj */
 #define V_MAX           8           /* Maximum Velocity, Unit: px per frame */
+#define V_MIN           1           /* Minimum Velocity, Unit: px per frame */
 #define PIXY_FRAME_OBJ  0xaa55      /* Pixycode for an object */
 #define PIXY_COLORCODE  0xaa56      /* Pixycode for a colorcode */
+#define AIL_INC         3           /* changerate for actors */
 // </editor-fold>
 
 /*------------------------------------------------------------------*/
