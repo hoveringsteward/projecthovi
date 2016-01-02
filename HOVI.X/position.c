@@ -34,8 +34,11 @@ bit CompareFrames(void) {
         CheckAileron();
         CheckElevator();
         CheckThrottle();
-        CheckRudderAhead();
-        CheckRudderBack();
+        if(direction == 0) {
+            CheckRudderAhead();
+        }else {
+            CheckRudderBack();
+        }
     }else {
         return 0;   // No changes should be taken on outputs
     }
