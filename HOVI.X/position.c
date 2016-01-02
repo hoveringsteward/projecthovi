@@ -191,7 +191,13 @@ void CheckThrottle(void) {
 /*------------------------------------------------------------*/
 void CheckRudderAhead(void) {
     
-    if(a_frame.angle ){}
+    if(a_frame[0].angle >= -5 && a_frame[0].angle <= 5 ){
+        ActRudder(0);        
+    }else if(a_frame[0].angle < -5){ // Rotation is too much on the "left" side
+        ActRudder(-RUD_INC); // - to the right
+    }else{ // Rotation is too much on the "right" side
+        ActRudder(RUD_INC); // + to the left
+    }
     
 }
 // </editor-fold>
@@ -202,7 +208,12 @@ void CheckRudderAhead(void) {
 /*------------------------------------------------------------*/
 void CheckRudderBack(void) {
     
-    if(a_frame[0].angle > - 175 && a_frame[0].angle > 175){
+    if(a_frame[0].angle <= - 175 || a_frame[0].angle >= 175){
+        ActRudder(0);        
+    }else if(a_frame[0].angle < 175){ // Rotation is too much on the "left" side
+        ActRudder(-RUD_INC); // - to the right
+    }else{ // Rotation is too much on the "right" side
+        ActRudder(RUD_INC); // + to the left 
     }
     
 }
