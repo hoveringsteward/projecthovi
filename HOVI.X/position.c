@@ -106,40 +106,10 @@ bit CheckAileron(void) {
             }
         }
         // </editor-fold>
-
-//        {
-//            int tmp = dif_old - dif;
-//            if(tmp > 0){ // am richtigen Weg
-//                ActAileron(); // Zahl wie viel er schneller/langsamer werden soll
-//            }else{
-//                ActAileron(); // am falschen Weg
-//            }         
-//        }
-        
-        
-//        a_frame_dif[0].pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
         return 1;
     }else {
         return 0; 
     }
-
-    
-//    if(pos_x > 170){
-//         LEDleft = 0;
-//         LEDright = 1;
-//     }else if(pos_x < 150){
-//         LEDleft = 1;
-//         LEDright = 0;   
-//     }else if(pos_x >= 150 && pos_x <= 170){
-//         LEDleft = 0;
-//         LEDright = 0;  
-//     }else{
-//         LEDleft = 1;
-//         LEDright = 1; 
-//     }
-    
-    
-     
 }
 // </editor-fold>
 
