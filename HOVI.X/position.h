@@ -32,7 +32,7 @@ typedef struct t_frame {
     unsigned int pos_x; // X center of object
     unsigned int pos_y; // Y center of object
     unsigned int height; // height of hex-rotor
-    unsigned int angle; // rotation
+    int angle; // rotation 
 } a_frame[2];
 /* (?) old
  * a_frame[0] = current frame

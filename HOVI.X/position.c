@@ -34,7 +34,8 @@ bit CompareFrames(void) {
         CheckAileron();
         CheckElevator();
         CheckThrottle();
-        CheckRudder();
+        CheckRudderAhead();
+        CheckRudderBack();
     }else {
         return 0;   // No changes should be taken on outputs
     }
@@ -188,11 +189,25 @@ void CheckThrottle(void) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Check Rudder">
+// <editor-fold defaultstate="collapsed" desc="Check Rudder Ahead">
 /*
  * 
 /*------------------------------------------------------------*/
-void CheckRudder(void) {
+void CheckRudderAhead(void) {
+    
+    if(a_frame.angle ){}
+    
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
+/*
+ * 
+/*------------------------------------------------------------*/
+void CheckRudderBack(void) {
+    
+    if(a_frame[0].angle > - 175 && a_frame[0].angle > 175){
+    }
     
 }
 // </editor-fold>
