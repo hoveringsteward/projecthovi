@@ -18,7 +18,8 @@
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckThrottle(void);
-void CheckRudder(void);
+void CheckRudderAhead(void);
+void CheckRudderBack(void);
 void StoreAsOld(void);
 // </editor-fold>
 
@@ -47,6 +48,8 @@ typedef struct t_frame {
     signed int height; // height of hex-rotor
     signed int angle; // rotation
 } a_frame_dif[1];
+
+bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
 // </editor-fold>
 #endif	/* POSITION_H */
 

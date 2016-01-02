@@ -58,6 +58,8 @@ interrupt void Isr(void);
 #define PIXY_COLORCODE  0xaa56      /* Pixycode for a colorcode */
 #define AIL_INC         3           /* changerate for actors */
 #define RUD_INC         3           /* changerate for actors */
+#define ELE_INC         3           /* changerate for actors */
+
 // </editor-fold>
 
 /*------------------------------------------------------------------*/

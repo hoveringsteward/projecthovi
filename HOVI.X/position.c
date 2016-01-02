@@ -13,9 +13,6 @@
 
 #include <xc.h>
 #include "main.h"
-#include "position.h"
-#include "actors.h"
-
 
 
 // <editor-fold defaultstate="collapsed" desc="Compare Frames">
@@ -34,8 +31,11 @@ bit CompareFrames(void) {
         CheckAileron();
         CheckElevator();
         CheckThrottle();
-        CheckRudderAhead();
-        CheckRudderBack();
+        if(direction == 0) {
+            CheckRudderAhead();
+        }else {
+            CheckRudderBack();
+        }
     }else {
         return 0;   // No changes should be taken on outputs
     }
@@ -44,7 +44,8 @@ bit CompareFrames(void) {
 
 // <editor-fold defaultstate="collapsed" desc="Check Aileron">
 /* This function checks the changes that happen in x-direction
- * 
+ * Based on the current position of the CC/Obj the ActAileron
+ * function is called to change the pulsetime of the aileron pin
 /*-----------------------------------------------------------*/
 void CheckAileron(void) {
     /* Two oft the used constants DES_X_MIN, DES_X_MAX; */
@@ -61,11 +62,13 @@ void CheckAileron(void) {
         if(a_frame[1].pos_x > a_frame[0].pos_x) {
         /* Old bigger than new, MC moving towards CC/Obj, moving right */
             if(a_frame_dif[0].pos_x <= V_MAX) {
-            /* Velocity is OK */
-                ActAileron(0); // keep doing
-            }else if(a_frame_dif[0].pos_x <= V_MIN) {
-            /* Velocity is very slow, increase */
-                ActAileron(-AIL_INC);
+                if(a_frame_dif[0].pos_x <= V_MIN) {
+                /* Velocity is very slow, increase */
+                    ActAileron(-AIL_INC);
+                }else {
+                /* Velocity is OK */
+                    ActAileron(0);
+                }
             }else {
             /* Velocity is too high */
                 ActAileron(AIL_INC); // slow down, bit more left
@@ -101,7 +104,7 @@ void CheckAileron(void) {
         /* Old bigger than new, MC moving away from CC/Obj */
         /* Moving in the wrong direction */
         /* Dif is positive, HC needs to get back in right direction */
-        /* As soon as the right direction is aachieved, velocity is */
+        /* As soon as the right direction is achieved, velocity is */
         /* limited by the previous function */
             ActAileron(AIL_INC);  // fly to the left side
         }
@@ -112,64 +115,68 @@ void CheckAileron(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Elevator">
-/* */
+/* This function checks the changes that happen in y-direction
+ * Based on the current position of the CC/Obj the ActElevator
+ * function is called to change the pulsetime of the elevator pin
 /*-----------------------------------------------------------*/
 void CheckElevator(void) {
     // <editor-fold defaultstate="collapsed" desc="centered">
-    if(a_frame[0].pos_x >= 150 && a_frame[0].pos_x <= 170) {
+    if(a_frame[0].pos_y >= 90 && a_frame[0].pos_y <= 110) {
     /* CC/Obj nearly centered, no further actions taken */
-        ActAileron(0);   // keep doing
+        ActElevator(0);   // keep doing
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="right side">
-    else if(a_frame[0].pos_x > 170) {
-    /* CC/Obj is on the right side of the frame */
-        if(a_frame[1].pos_x > a_frame[0].pos_x) {
-        /* Old bigger than new, MC moving towards CC/Obj, moving right */
-            if(a_frame_dif[0].pos_x <= V_MAX) {
-            /* Velocity is OK */
-                ActAileron(0); // keep doing
-            }else if(a_frame_dif[0].pos_x <= V_MIN) {
-            /* Velocity is very slow, increase */
-                ActAileron(-AIL_INC);
+    // <editor-fold defaultstate="collapsed" desc="front side">
+    else if(a_frame[0].pos_y > 110) {
+    /* CC/Obj is in front of the frame */
+        if(a_frame[1].pos_y < a_frame[0].pos_y) {
+        /* Old smaller than new, MC moving towards CC/Obj, moving forward */
+            if(a_frame_dif[0].pos_y >= -V_MAX) {
+                if(a_frame_dif[0].pos_y >= -V_MIN) {
+                /* Velocity is very slow, increase */
+                    ActElevator(ELE_INC);
+                }else {
+                /* Velocity is OK */
+                    ActElevator(0);
+                }
             }else {
             /* Velocity is too high */
-                ActAileron(AIL_INC); // slow down, bit more left
+                ActElevator(-ELE_INC); // slow down, bit more backward
             }
         }else {
-        /* Ols smaller than new, MC moving away from CC/Obj */
+        /* Old smaller than new, MC moving away from CC/Obj */
+        /* Moving in the wrong direction */
+        /* Dif is positive, HC needs to get back in right direction */
+        /* As soon as the right direction is achieved, velocity is */
+        /* limited by the previous function */
+            ActElevator(ELE_INC); // fly forward
+        }
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="back side">
+    else { // a_frame[0].pos_y < 90
+    /* CC/Obj is in the back of the frame */
+        if(a_frame[1].pos_y > a_frame[0].pos_y) {
+        /* Old bigger than new, MC moving towards CC/Obj, moving backwards */
+            if(a_frame_dif[0].pos_y <= V_MAX) {
+                if(a_frame_dif[0].pos_y <= V_MIN) {
+                /* Velocity is very slow, increase */
+                    ActElevator(-ELE_INC);
+                }else {
+                /* Velocity is OK */
+                    ActElevator(0); // keep doing
+                }
+            }else {
+            /* Velocity is too high */
+                ActElevator(ELE_INC); // slow down, bit more forward
+            }
+        }else {
+        /* Old smaller than new, MC moving away from CC/Obj */
         /* Moving in the wrong direction */
         /* Dif is negative, HC needs to get back in right direction */
         /* As soon as the right direction is achieved, velocity is */
         /* limited by the previous function */
-            ActAileron(-AIL_INC); // fly to the right
-        }
-    }
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="left side">
-    else { // a_frame[0].pos_x < 150
-    /* CC/Obj is on the left side of the frame */
-        if(a_frame[1].pos_x < a_frame[0].pos_x) {
-        /* Old smaller than new, MC moving towards CC/Obj, moving left */
-            if(a_frame_dif[0].pos_x >= -V_MAX) {
-                if(a_frame_dif[0].pos_x >= -V_MIN) {
-                /* Velocity is very slow, increase */
-                    ActAileron(AIL_INC);
-                }else {
-                /* Velocity is OK */
-                    ActAileron(0); // keep doing
-                }
-            }else {
-            /* Velocity is too high */
-                ActAileron(-AIL_INC); // slow down, bit more right
-            }
-        }else {
-        /* Old bigger than new, MC moving away from CC/Obj */
-        /* Moving in the wrong direction */
-        /* Dif is positive, HC needs to get back in right direction */
-        /* As soon as the right direction is aachieved, velocity is */
-        /* limited by the previous function */
-            ActAileron(AIL_INC);  // fly to the left side
+            ActElevator(-ELE_INC);  // fly to the left backwards
         }
     }
     // </editor-fold>
@@ -177,8 +184,9 @@ void CheckElevator(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Throttle">
-/* 
- * 
+/* This function checks the current flightheight 
+ * Depending on the changes in the height and the total height
+ * the ActThrottle function is called to make changes
 /*------------------------------------------------------------*/
 void CheckThrottle(void) {
     
@@ -186,7 +194,7 @@ void CheckThrottle(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Rudder Ahead">
-/*
+/* 
  * 
 /*------------------------------------------------------------*/
 void CheckRudderAhead(void) {
