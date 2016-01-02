@@ -13,9 +13,6 @@
 
 #include <xc.h>
 #include "main.h"
-#include "position.h"
-#include "actors.h"
-
 
 
 // <editor-fold defaultstate="collapsed" desc="Compare Frames">
@@ -47,7 +44,8 @@ bit CompareFrames(void) {
 
 // <editor-fold defaultstate="collapsed" desc="Check Aileron">
 /* This function checks the changes that happen in x-direction
- * 
+ * Based on the current position of the CC/Obj the ActAileron
+ * function is called to change the pulsetime of the aileron pin
 /*-----------------------------------------------------------*/
 void CheckAileron(void) {
     /* Two oft the used constants DES_X_MIN, DES_X_MAX; */
@@ -117,7 +115,9 @@ void CheckAileron(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Elevator">
-/* */
+/* This function checks the changes that happen in y-direction
+ * Based on the current position of the CC/Obj the ActElevator
+ * function is called to change the pulsetime of the elevator pin
 /*-----------------------------------------------------------*/
 void CheckElevator(void) {
     // <editor-fold defaultstate="collapsed" desc="centered">
@@ -184,8 +184,9 @@ void CheckElevator(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Throttle">
-/* 
- * 
+/* This function checks the current flightheight 
+ * Depending on the changes in the height and the total height
+ * the ActThrottle function is called to make changes
 /*------------------------------------------------------------*/
 void CheckThrottle(void) {
     
@@ -193,12 +194,14 @@ void CheckThrottle(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Rudder Ahead">
-/*
+/* 
  * 
 /*------------------------------------------------------------*/
 void CheckRudderAhead(void) {
     
-    if(a_frame.angle ){}
+    if(a_frame[0].angle ){
+        
+    }
     
 }
 // </editor-fold>
@@ -209,7 +212,8 @@ void CheckRudderAhead(void) {
 /*------------------------------------------------------------*/
 void CheckRudderBack(void) {
     
-    if(a_frame[0].angle > - 175 && a_frame[0].angle > 175){
+    if(a_frame[0].angle < - 175 || a_frame[0].angle > 175){
+        
     }
     
 }
