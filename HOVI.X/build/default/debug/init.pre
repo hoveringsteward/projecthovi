@@ -9410,10 +9410,10 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 extern char * ftoa(float f, int * status);
 
 # 21 "actors.h"
-void ActAileron(void);
-void ActElevator(void);
-void ActThrottle(void);
-void ActRudder(void);
+void ActAileron(unsigned char change);
+void ActElevator(unsigned char change);
+void ActThrottle(unsigned char change);
+void ActRudder(unsigned char change);
 
 # 32
 typedef struct act_out {
@@ -9467,14 +9467,39 @@ bit obj_type;
 unsigned int w;
 unsigned int lw;
 
+# 18 "position.h"
+void CompareFrames(void);
+void CheckAileron(void);
+void CheckThrottle(void);
+void CheckRudder(void);
+void StoreAsOld(void);
+
+# 30
+typedef struct t_frame {
+unsigned int num;
+unsigned int pos_x;
+unsigned int pos_y;
+unsigned int height;
+unsigned int angle;
+} a_frame[2];
+
+# 43
+typedef struct t_frame {
+unsigned int num;
+signed int pos_x;
+signed int pos_y;
+signed int height;
+signed int angle;
+} a_frame_dif[1];
+
 # 20 "ultrasonic.h"
-void StartHightMeasure(void);
-void ReadHight(void);
+void StartHeightMeasure(void);
+void ReadHeight(void);
 
 # 28
-unsigned int time_hight;
+unsigned int time_height;
 
-# 31 "main.h"
+# 33 "main.h"
 interrupt void Isr(void);
 
 # 30 "init.c"
@@ -9487,7 +9512,6 @@ InitUart();
 InitSpi();
 InitTimer();
 InitInterrupt();
-InitActors();
 }
 
 
@@ -9532,13 +9556,13 @@ void InitUart(void) {
 
 }
 
-# 93
+# 92
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 111
+# 110
 void InitTimer(void) {
 
 
@@ -9568,7 +9592,7 @@ T5CONbits.TMR5ON = 1;
 
 }
 
-# 145
+# 144
 void InitInterrupt(void) {
 GIE = 1;
 PEIE = 1;
@@ -9576,7 +9600,7 @@ PEIE = 1;
 TMR3GIE = 1;
 }
 
-# 156
+# 155
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;
