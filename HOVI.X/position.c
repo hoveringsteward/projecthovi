@@ -189,7 +189,7 @@ void CheckElevator(void) {
  * the ActThrottle function is called to make changes
 /*------------------------------------------------------------*/
 void CheckThrottle(void) {
-    
+    // dasda machen (chrisy :b)
 }
 // </editor-fold>
 
@@ -198,7 +198,7 @@ void CheckThrottle(void) {
  * 
 /*------------------------------------------------------------*/
 void CheckRudderAhead(void) {
-    
+    // geschwindigkeitsbegrenzung
     if(a_frame[0].angle >= -5 && a_frame[0].angle <= 5 ){
         ActRudder(0);        
     }else if(a_frame[0].angle < -5){ // Rotation is too much on the "left" side
