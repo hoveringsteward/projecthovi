@@ -15,8 +15,10 @@
 /* Prototypes of userroutines.                                      */ 
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
-bit CompareFrames(void);
-bit CheckAileron(void);
+void CompareFrames(void);
+void CheckAileron(void);
+void CheckThrottle(void);
+void CheckRudder(void);
 void StoreAsOld(void);
 // </editor-fold>
 
