@@ -191,7 +191,7 @@ void CheckThrottle(void) {
 /*------------------------------------------------------------*/
 void CheckRudderAhead(void) {
     
-    if(a_frame.angle )
+    if(a_frame.angle ){}
     
 }
 // </editor-fold>
@@ -202,7 +202,8 @@ void CheckRudderAhead(void) {
 /*------------------------------------------------------------*/
 void CheckRudderBack(void) {
     
-    if(a_frame[0].angle > - 175 && a_frame[0].angle > 175)
+    if(a_frame[0].angle > - 175 && a_frame[0].angle > 175){
+    }
     
 }
 // </editor-fold>
