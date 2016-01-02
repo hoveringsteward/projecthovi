@@ -37,12 +37,9 @@ bit CompareFrames(void) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="compare Frames">
-/* compareFrames
- * compares the X position of one colorobject in a frame with the same 
- * colorobject in the next frame
- * 2nd frame - 1st frame, respective old - new
- * the difference is only checked if the same colorcodes are stored
+// <editor-fold defaultstate="collapsed" desc="check aileron">
+/* This function checks the changes that happen in x-direction
+ * 
 /*---------------------------------------------------------------------------*/
 bit CheckAileron(void) {
     /* Two oft the used constants DES_X_MIN, DES_X_MAX; */
@@ -108,10 +105,16 @@ bit CheckAileron(void) {
         // </editor-fold>
         return 1;
     }else {
-        return 0; 
+        return 0;
     }
 }
 // </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="check elevator">
+/* */
+/*-----------------------------------------------------------*/
+// </editor-fold>
+
 
 // <editor-fold defaultstate="collapsed" desc="store old">
 /*
