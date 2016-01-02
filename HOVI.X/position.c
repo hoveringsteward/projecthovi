@@ -34,7 +34,8 @@ bit CompareFrames(void) {
         CheckAileron();
         CheckElevator();
         CheckThrottle();
-        CheckRudder();
+        CheckRudderAhead();
+        CheckRudderBack();
     }else {
         return 0;   // No changes should be taken on outputs
     }
@@ -70,7 +71,7 @@ void CheckAileron(void) {
                 ActAileron(AIL_INC); // slow down, bit more left
             }
         }else {
-        /* Ols smaller than new, MC moving away from CC/Obj */
+        /* Old smaller than new, MC moving away from CC/Obj */
         /* Moving in the wrong direction */
         /* Dif is negative, HC needs to get back in right direction */
         /* As soon as the right direction is achieved, velocity is */
@@ -184,11 +185,24 @@ void CheckThrottle(void) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Check Rudder">
+// <editor-fold defaultstate="collapsed" desc="Check Rudder Ahead">
 /*
  * 
 /*------------------------------------------------------------*/
-void CheckRudder(void) {
+void CheckRudderAhead(void) {
+    
+    if(a_frame.angle )
+    
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
+/*
+ * 
+/*------------------------------------------------------------*/
+void CheckRudderBack(void) {
+    
+    if(a_frame[0].angle > - 175 && a_frame[0].angle > 175)
     
 }
 // </editor-fold>
