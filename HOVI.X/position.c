@@ -40,7 +40,7 @@ bit CompareFrames(void) {
 // <editor-fold defaultstate="collapsed" desc="check aileron">
 /* This function checks the changes that happen in x-direction
  * 
-/*---------------------------------------------------------------------------*/
+/*-----------------------------------------------------------*/
 bit CheckAileron(void) {
     /* Two oft the used constants DES_X_MIN, DES_X_MAX; */
     
@@ -113,6 +113,9 @@ bit CheckAileron(void) {
 // <editor-fold defaultstate="collapsed" desc="check elevator">
 /* */
 /*-----------------------------------------------------------*/
+void CheckElevator(void) {
+    
+}
 // </editor-fold>
 
 
