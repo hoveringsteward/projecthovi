@@ -76,8 +76,27 @@ void InitOsc(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="UART">
+/* UART is used to communicate with the server over the WLAN module     */
+/*  Baudrate 57600                                                      */
+/*  Asynchronus mode                                                    */
+/*  Trnsmission and reception enabled                                   */
+/*  Interrupt on reception enabled                                      */
+/*----------------------------------------------------------------------*/
 void InitUart(void) {
-    
+    //Baudrate
+    SPBRG1 = 68;
+    BRGH = 1;
+    BRG16 = 1;
+    //General
+    //Tris already set in InitTris()
+    SYNC = 0;
+    SPEN = 1;
+    //Transmission
+    TXEN = 1;
+    TX1IF = 0;
+    //Reception
+    CREN = 1;
+    RC1IE = 1;
 }
 // </editor-fold>
 
@@ -145,7 +164,7 @@ void InitInterrupt(void) {
     GIE = 1;
     PEIE = 1;
     /* Enabling interrupt for Timer 3 gate                              */
-    TMR3GIE = 1;        // Direct access due to conflicts with PIE3bits.TMR3GIE    
+    TMR3GIE = 0;
 }
 // </editor-fold>
 
