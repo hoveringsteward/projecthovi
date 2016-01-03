@@ -59,7 +59,8 @@ interrupt void Isr(void);
 #define AIL_INC         3           /* changerate for actors */
 #define RUD_INC         3           /* changerate for actors */
 #define ELE_INC         3           /* changerate for actors */
-
+#define W_MAX           2           /* OMEGA -> Maximum of degree difference per frame */
+#define W_MIN           1           /* OMEGA -> Minimum of degee difference per frame*/
 // </editor-fold>
 
 /*------------------------------------------------------------------*/
