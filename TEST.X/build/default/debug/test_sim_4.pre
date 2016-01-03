@@ -3719,11 +3719,13 @@ extern __bit __powerdown;
 extern __bit __timeout;
 
 # 11 "test_sim_4.c"
+unsigned char test = 0;
+signed char n_test = 0;
+
+
+
 void main(void) {
-if(-4 > -3) {
-__nop();
-} else if (-4 < 3) {
-__nop();
-}
+test = 10;
+n_test = -10;
 return;
 }

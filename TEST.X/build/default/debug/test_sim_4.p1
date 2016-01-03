@@ -1,8 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"28 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2758,37 +2755,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 185: extern __bit __powerdown;
 [; ;pic.h: 186: extern __bit __timeout;
 "11 test_sim_4.c
+[v _test `uc ~T0 @X0 1 e ]
+[i _test
+-> -> 0 `i `uc
+]
+[; ;test_sim_4.c: 11: unsigned char test = 0;
+"12
+[v _n_test `c ~T0 @X0 1 e ]
+[i _n_test
+-> -> 0 `i `c
+]
+[; ;test_sim_4.c: 12: signed char n_test = 0;
+"16
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;test_sim_4.c: 11: void main(void) {
+[; ;test_sim_4.c: 16: void main(void) {
 [e :U _main ]
 [f ]
-[; ;test_sim_4.c: 12: if(-4 > -3) {
-"12
-[e $ ! > -U -> 4 `i -U -> 3 `i 351  ]
-{
-[; ;test_sim_4.c: 13: __nop();
-"13
-[e ( ___nop ..  ]
-"14
-}
-[; ;test_sim_4.c: 14: } else if (-4 < 3) {
-[e $U 352  ]
-[e :U 351 ]
-[e $ ! < -U -> 4 `i -> 3 `i 353  ]
-{
-[; ;test_sim_4.c: 15: __nop();
-"15
-[e ( ___nop ..  ]
-"16
-}
-[e :U 353 ]
+[; ;test_sim_4.c: 17: test = 10;
 "17
-[e :U 352 ]
-[; ;test_sim_4.c: 16: }
-[; ;test_sim_4.c: 17: return;
-[e $UE 350  ]
-[; ;test_sim_4.c: 18: }
+[e = _test -> -> 10 `i `uc ]
+[; ;test_sim_4.c: 18: n_test = -10;
 "18
+[e = _n_test -> -U -> 10 `i `c ]
+[; ;test_sim_4.c: 19: return;
+"19
+[e $UE 350  ]
+[; ;test_sim_4.c: 20: }
+"20
 [e :UE 350 ]
 }

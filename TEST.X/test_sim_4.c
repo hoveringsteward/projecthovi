@@ -8,11 +8,13 @@
 
 #include <xc.h>
 
+unsigned char test = 0;
+signed char n_test = 0;
+
+#define TEST 10
+
 void main(void) {
-    if(-4 > -3) {
-        NOP();
-    } else if (-4 < 3) {
-        NOP();
-    }
+    test = TEST;
+    n_test = -TEST;
     return;
 }
