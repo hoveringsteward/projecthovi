@@ -198,7 +198,6 @@ void CheckThrottle(void) {
  * 
 /*------------------------------------------------------------*/
 void CheckRudderAhead(void) {
-    // geschwindigkeitsbegrenzung
     // <editor-fold defaultstate="collapsed" desc="centered">
     if(a_frame[0].angle >= -5 && a_frame[0].angle <= 5 ){
         ActRudder(0);        
@@ -229,6 +228,63 @@ void CheckRudderAhead(void) {
     else{
         /* CC/Obj Rotation is on the left side -> everything is minus*/
         if(a_frame[1].angle < a_frame[0].angle) {
+            /* good: old smaller than new, moving left */
+            if(a_frame_dif[0].angle <= -W_MAX){ // if rotation difference is smaller than eg -2
+                if(a_frame_dif[0].angle <= -W_MAX){ // if rotation difference is smaller than eg -1
+                    ActRudder(RUD_INC); // + to the left
+                }else{
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
+                }
+            }else{
+                // Omega is too low = too much on the left side
+                ActRudder(-RUD_INC); // slow down, less left
+            }   
+        }else{
+            /* wrong rudder-direction, ... */
+            ActRudder(RUD_INC); // + to the right
+        }      
+    }
+    // </editor-fold> 
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
+/*
+ * 
+/*------------------------------------------------------------*/
+void CheckRudderBack(void) {
+
+    // <editor-fold defaultstate="collapsed" desc="centered">
+    if(a_frame[0].angle <= - 175 || a_frame[0].angle >= 175){ 
+        ActRudder(0); // do nothing - it's perfect      
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="right side">
+    else if(a_frame[0].angle > -175){
+        /* CC/Obj Rotation is on the right side, everything is minus */
+        if(a_frame[1].angle > a_frame[0].angle) {
+            /* good: Old bigger than new, moving right */
+            if(a_frame_dif[0].angle <= W_MAX) { // if rotation difference is smaller than eg 2
+                if(a_frame_dif[0].angle <= W_MIN) { // if rotation difference is smaller than eg 1
+                    ActRudder(-RUD_INC); // - to the right
+                }else{
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
+                }
+            }else{
+                // Omega is too high
+                ActRudder(RUD_INC); // slow down, less right
+            }
+        }else{ 
+            /* wrong rudder-direction, ... */
+            ActRudder(-RUD_INC); // - to the right
+        }
+    }
+        
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="left side">
+    else{
+        /* CC/Obj Rotation is on the left side */
+        if(a_frame[1].angle < a_frame[0].angle) {
             /* good: new bigger than old, moving left */
             if(a_frame_dif[0].angle <= -W_MAX){ // if rotation difference is smaller than eg -2
                 if(a_frame_dif[0].angle <= -W_MAX){ // if rotation difference is smaller than eg -1
@@ -246,24 +302,10 @@ void CheckRudderAhead(void) {
         }      
     }
     // </editor-fold>
-        
-    
-}
-// </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
-/*
- * 
-/*------------------------------------------------------------*/
-void CheckRudderBack(void) {
-    
-    if(a_frame[0].angle <= - 175 || a_frame[0].angle >= 175){
-        ActRudder(0);        
-    }else if(a_frame[0].angle < 175){ // Rotation is too much on the "left" side
-        ActRudder(-RUD_INC); // - to the right
-    }else{ // Rotation is too much on the "right" side
-        ActRudder(RUD_INC); // + to the left 
-    }
+ //   - 175 = 5
+ //   175 = -5
+
     
 }
 // </editor-fold>
