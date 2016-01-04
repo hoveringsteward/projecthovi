@@ -6,7 +6,7 @@
 /*                                                                 */
 /* 
  * In this file is the mainroutine. The routine waits for an
- * interrupt an reacts to it in the interrupt subroutine.
+ * interrupt and reacts to it in the interrupt subroutine.
  */
 
 #ifndef MAIN_H
@@ -14,15 +14,10 @@
 
 // <editor-fold defaultstate="collapsed" desc="Included Files">
 #include <stdlib.h>
-#include "actors.h"
 #include "communication.h"
-#include "failure.h"
-#include "gear.h"
 #include "init.h"
-#include "pixy.h"
-#include "position.h"
-#include "safety.h"
-#include "ultrasonic.h"
+#include "wlan.h"
+
 // </editor-fold>
 
 
@@ -38,7 +33,7 @@ interrupt void Isr(void);
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
 #define _XTAL_FREQ      16000000
-#define GEAR_TIME       6800        /* 1700 µs / 0.25 µs = 6800 pulses on TMR3*/
+#define GEAR_TIME       6800        /* 1700 ï¿½s / 0.25 ï¿½s = 6800 pulses on TMR3*/
 #define DUMMY           0           /* Dummydata for Pixy */
 #define PIXY_SYNC       0x5a        /* Syncbyte, dummy data followed */
 #define PIXY_SYNC_DATA  0x5b        /* Syncbyte followed by meaningful data */
@@ -57,7 +52,9 @@ interrupt void Isr(void);
 #define PIXY_FRAME_OBJ  0xaa55      /* Pixycode for an object */
 #define PIXY_COLORCODE  0xaa56      /* Pixycode for a colorcode */
 #define AIL_INC         3           /* changerate for actors */
+#define RUD_INC         3           /* changerate for actors */
 #define ELE_INC         3           /* changerate for actors */
+
 // </editor-fold>
 
 /*------------------------------------------------------------------*/
@@ -73,7 +70,6 @@ interrupt void Isr(void);
 #define Trigger PORTBbits.RB3
 #define Connect PORTDbits.RD5
 // </editor-fold>
-
 
 /*------------------------------------------------------------------*/
 /* Definitions of Pinins                                            */

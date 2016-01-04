@@ -6,9 +6,9 @@
             <name>HOVI_WLAN</name>
             <creation-uuid>8cf1003c-26dc-4940-95fb-93f09fbed7b9</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions/>
+            <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions/>
+            <header-extensions>h</header-extensions>
             <asminc-extensions/>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>

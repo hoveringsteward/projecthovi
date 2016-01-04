@@ -81,6 +81,13 @@
 
 #include "main.h"
 
+interrupt void isr() {
+    if(RC1IF == 1) {
+        RC1IF = 0;
+        UartStore();
+    }
+}
+
 
 void main(void) {
     Init();
