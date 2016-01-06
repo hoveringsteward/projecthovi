@@ -34,7 +34,10 @@ interrupt void Isr() {
         ModeCheck();
         StartHeightMeasure();
         ReadObject();
+        CompareFrames();
         ReadHeight();
+        CheckThrottle();
+        // Funktion für Ausgabe von Steuersignalen fehlt
     }else if (TMR3IF == 1) {
         TMR3IF = 0;
     }
