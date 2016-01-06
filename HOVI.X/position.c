@@ -218,19 +218,10 @@ void CheckThrottle(void) {
         } else { // over 2.2m
             ActThrottle(); // decrease 
         }
-
-
-
     } else { // Table
-
         // starten / landen
-        
         ActThrottle(); // increase much
-
-
     }
-
-
 }
 // </editor-fold>
 
