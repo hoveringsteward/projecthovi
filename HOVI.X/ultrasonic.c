@@ -37,3 +37,10 @@ void ReadHeight(void) {
     time_height <<= 8;
     time_height |= TMR5L;
 }
+
+void Pt1_Filter(){
+    
+    // chrisyyyyyyyyyyy :b
+    
+    
+}
