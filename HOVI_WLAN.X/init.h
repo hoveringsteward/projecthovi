@@ -34,6 +34,7 @@ void InitSpi(void);
 void InitTimer(void);
 void InitInterrupt(void);
 void InitActors(void);
+void InitWlan(void);
 
 #endif	/* INIT_H */
 

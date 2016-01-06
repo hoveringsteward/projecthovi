@@ -1,5 +1,5 @@
 __S0 800 0 ABS 0
-__S1 73 0 ABS 0
+__S1 0 0 ABS 0
 __S2 0 0 ABS 0
 __S3 0 0 ABS 0
 __Hintentry 2 0 CODE 0
@@ -11,7 +11,6 @@ ltemp 7E 0 ABS 0
 ttemp 7E 0 ABS 0
 wtemp 7E 0 ABS 0
 start 2 0 CODE 0
-_test 71 0 COMMON 1
 reset_vec 0 0 CODE 0
 ltemp0 7E 0 ABS 0
 ttemp0 7E 0 ABS 0
@@ -71,7 +70,6 @@ stacklo 2000 0 ABS 0
 __Hinit 2 0 CODE 0
 __Linit 2 0 CODE 0
 __end_of_main 7FD 0 CODE 0
-_n_test 70 0 COMMON 1
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
 end_of_initialization 7FD 0 CODE 0
@@ -119,9 +117,6 @@ __Hsfr19 0 0 ABS 0
 __Lsfr19 0 0 ABS 0
 __Hsfr29 0 0 ABS 0
 __Lsfr29 0 0 ABS 0
-__HnvCOMMON 0 0 ABS 0
-__LnvCOMMON 0 0 ABS 0
-__pnvCOMMON 70 0 COMMON 1
 __Hstrings 0 0 ABS 0
 __Lstrings 0 0 ABS 0
 __Hbank0 0 0 ABS 0
@@ -156,7 +151,7 @@ __Hstack 0 0 STACK 2
 __Lstack 0 0 STACK 2
 __Hspace_0 800 0 ABS 0
 __Lspace_0 0 0 ABS 0
-__Hspace_1 73 0 ABS 0
+__Hspace_1 0 0 ABS 0
 __Lspace_1 0 0 ABS 0
 __Hspace_2 0 0 ABS 0
 __Lspace_2 0 0 ABS 0
@@ -221,7 +216,7 @@ intlevel4 0 0 CODE 0
 intlevel5 0 0 CODE 0
 __HcstackCOMMON 0 0 ABS 0
 __LcstackCOMMON 0 0 ABS 0
-__pcstackCOMMON 72 0 COMMON 1
+__pcstackCOMMON 0 0 COMMON 1
 start_initialization 7FD 0 CODE 0
 __Hmaintext 0 0 ABS 0
 __Lmaintext 0 0 ABS 0
@@ -230,18 +225,25 @@ __initialization 7FD 0 CODE 0
 %segments
 reset_vec 0 7 CODE 0 0
 cinit FFA FFF CODE FFA 0
-nvCOMMON 70 72 COMMON 70 1
 maintext FE6 FF9 CODE FE6 0
 %locals
 dist/default/debug\TEST.X.debug.obj
-C:\Users\Lucas\AppData\Local\Temp\s5g8.
+C:\Users\Lucas\AppData\Local\Temp\s1c8.
+376 7FD 0 CODE 0
+379 7FD 0 CODE 0
+385 7FD 0 CODE 0
 387 7FD 0 CODE 0
-390 7FD 0 CODE 0
-396 7FD 0 CODE 0
-398 7FD 0 CODE 0
-399 7FE 0 CODE 0
-test_sim_4.c
-16 7F3 0 CODE 0
-17 7F3 0 CODE 0
-18 7F7 0 CODE 0
-20 7FB 0 CODE 0
+388 7FE 0 CODE 0
+test_sim_6.c
+13 7F3 0 CODE 0
+14 7F3 0 CODE 0
+15 7F4 0 CODE 0
+16 7F5 0 CODE 0
+17 7F6 0 CODE 0
+18 7F6 0 CODE 0
+19 7F7 0 CODE 0
+21 7F8 0 CODE 0
+22 7F9 0 CODE 0
+23 7FA 0 CODE 0
+24 7FB 0 CODE 0
+25 7FC 0 CODE 0
