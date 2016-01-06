@@ -215,7 +215,7 @@ void CheckRudderAhead(void) {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
                 }
             }else{
-                // Omega is too high
+                // Omega (W -> W_MAX) is too high
                 ActRudder(RUD_INC); // slow down, less right
             }
         }else{ 
@@ -236,12 +236,12 @@ void CheckRudderAhead(void) {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
                 }
             }else{
-                // Omega is too low = too much on the left side
+                // Omega is too low (minus side)
                 ActRudder(-RUD_INC); // slow down, less left
             }   
         }else{
             /* wrong rudder-direction, ... */
-            ActRudder(RUD_INC); // + to the right
+            ActRudder(RUD_INC); // + to the left
         }      
     }
     // </editor-fold> 
@@ -298,7 +298,7 @@ void CheckRudderBack(void) {
             }   
         }else{
             /* wrong rudder-direction, ... */
-            ActRudder(RUD_INC); // + to the right
+            ActRudder(RUD_INC); // + to the left
         }      
     }
     // </editor-fold>
