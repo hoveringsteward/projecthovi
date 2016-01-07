@@ -264,8 +264,8 @@ void CheckRudderAhead(void) {
         /* CC/Obj Rotation is on the left side -> everything is minus*/
         if (a_frame[1].angle < a_frame[0].angle) {
             /* good: old smaller than new, moving left */
-            if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
-                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
+            if (a_frame_dif[0].angle >= -W_MAX) { // if rotation difference is smaller than eg -2
+                if (a_frame_dif[0].angle >= -W_MAX) { // if rotation difference is smaller than eg -1
                     ActRudder(RUD_INC); // + to the left
                 } else {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
@@ -323,8 +323,8 @@ void CheckRudderBack(void) {
         /* CC/Obj Rotation is on the left side */
         if (a_frame[1].angle < a_frame[0].angle) {
             /* good: old smaller than new, moving left */
-            if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
-                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
+            if (a_frame_dif[0].angle >= -W_MAX) { // if rotation difference is smaller than eg -2
+                if (a_frame_dif[0].angle >= -W_MAX) { // if rotation difference is smaller than eg -1
                     ActRudder(RUD_INC); // + to the left
                 } else {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
