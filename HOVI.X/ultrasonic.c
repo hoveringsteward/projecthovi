@@ -36,6 +36,7 @@ void ReadHeight(void) {
     time_height = TMR5H;
     time_height <<= 8;
     time_height |= TMR5L;
+    a_frame[0].height = time_height;
 }
 
 void Pt1_Filter(){

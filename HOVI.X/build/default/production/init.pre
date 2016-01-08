@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "init.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9337,68 +9337,6 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-
-# 21 "main.c"
-#pragma config IESO = OFF
-#pragma config PLLCFG = OFF
-#pragma config PRICLKEN = OFF
-#pragma config FOSC = INTIO67
-#pragma config FCMEN = OFF
-
-
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 190
-#pragma config PWRTEN = OFF
-
-
-#pragma config WDTPS = 32768
-#pragma config WDTEN = OFF
-
-
-#pragma config CCP2MX = PORTC1
-#pragma config P2BMX = PORTD2
-#pragma config HFOFST = ON
-#pragma config PBADEN = ON
-#pragma config CCP3MX = PORTB5
-#pragma config MCLRE = EXTMCLR
-#pragma config T3CMX = PORTC0
-
-
-#pragma config LVP = OFF
-#pragma config STVREN = ON
-#pragma config XINST = OFF
-#pragma config DEBUG = OFF
-
-
-#pragma config CP2 = OFF
-#pragma config CP1 = OFF
-#pragma config CP3 = OFF
-#pragma config CP0 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTD = OFF
-#pragma config WRTB = OFF
-
-
-#pragma config EBTR3 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR0 = OFF
-
-
-#pragma config EBTRB = OFF
-
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\__size_t.h"
 typedef unsigned size_t;
 
@@ -9521,9 +9459,8 @@ unsigned int pos_y;
 unsigned int obj_width;
 unsigned int obj_height;
 unsigned int angle;
-} t_colors;
+} a_color[5];
 
-t_colors a_color[5];
 bit frame = 0;
 bit obj_type;
 unsigned int w;
@@ -9533,19 +9470,20 @@ unsigned int lw;
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckThrottle(void);
-void CheckRudder(void);
+void CheckRudderAhead(void);
+void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 30
+# 31
 typedef struct t_frame {
 unsigned int num;
 unsigned int pos_x;
 unsigned int pos_y;
 unsigned int height;
-unsigned int angle;
+int angle;
 } a_frame[2];
 
-# 43
+# 42
 typedef struct t_frame {
 unsigned int num;
 signed int pos_x;
@@ -9553,6 +9491,20 @@ signed int pos_y;
 signed int height;
 signed int angle;
 } a_frame_dif[1];
+
+
+bit direction;
+
+int cm180 = 41982;
+int cm220 = 51310;
+int cm100 = 23323;
+int cm120 = 27987;
+int cm80 = 18659;
+int cm50 = 11662;
+
+
+int c_path = 10;
+int id_current_cc;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9564,11 +9516,109 @@ unsigned int time_height;
 # 33 "main.h"
 interrupt void Isr(void);
 
-# 85 "main.c"
-void main(void) {
-Init();
-while(1) {
-__nop();
+# 30 "init.c"
+void Init(void) {
+InitPort();
+InitTris();
+InitAnsel();
+InitOsc();
+InitUart();
+InitSpi();
+InitTimer();
+InitInterrupt();
 }
-return;
+
+
+
+void InitPort(void) {
+PORTA = 0b00010000;
+PORTB = 0b00001000;
+PORTC = 0b00000000;
+PORTD = 0b00001000;
+PORTE = 0b00000000;
 }
+
+
+
+void InitTris(void) {
+TRISA = 0b00000000;
+TRISB = 0b00010000;
+TRISC = 0b10010001;
+TRISD = 0b01010000;
+TRISE = 0b00000000;
+}
+
+
+
+void InitAnsel(void) {
+ANSELA = 0b00000000;
+ANSELB = 0b00000000;
+ANSELC = 0b00000000;
+ANSELD = 0b00000000;
+ANSELE = 0b00000000;
+}
+
+
+
+void InitOsc(void) {
+OSCCON = 0b01110111;
+}
+
+
+
+void InitUart(void) {
+
+}
+
+# 92
+void InitSpi(void) {
+SSP1STAT = 0b00000000;
+SSP1CON1 = 0b00100001;
+}
+
+# 110
+void InitTimer(void) {
+
+
+T3GCONbits.TMR3GE = 1;
+T3GCONbits.T3GSPM = 0;
+T3GCONbits.T3GTM = 0;
+T3GCONbits.T3GPOL = 1;
+T3GCONbits.T3GSS = 0b00;
+
+T3CONbits.TMR3CS = 0b00;
+T3CONbits.T3CKPS = 0b00;
+T3CONbits.nT3SYNC = 1;
+T3CONbits.TMR3ON = 1;
+
+
+
+T5GCONbits.TMR5GE = 1;
+T5GCONbits.T5GSPM = 0;
+T5GCONbits.T5GTM = 0;
+T5GCONbits.T5GPOL = 1;
+T5GCONbits.T5GSS = 0b00;
+
+T5CONbits.TMR5CS = 0b00;
+T5CONbits.T5CKPS = 0b00;
+T5CONbits.nT5SYNC = 1;
+T5CONbits.TMR5ON = 1;
+
+}
+
+# 144
+void InitInterrupt(void) {
+GIE = 1;
+PEIE = 1;
+
+TMR3GIE = 1;
+}
+
+# 155
+void InitActors (void) {
+a_actors[0].aile = 500;
+a_actors[0].elev = 500;
+a_actors[0].thro = 0;
+a_actors[0].rudd = 500;
+}
+

@@ -59,6 +59,10 @@ interrupt void Isr(void);
 #define AIL_INC         3           /* changerate for actors */
 #define RUD_INC         3           /* changerate for actors */
 #define ELE_INC         3           /* changerate for actors */
+#define THR_INC         3           /* changerate for actors */
+#define THR_INC_MUCH    6           /* changerate for actors */
+#define THR_MIN         23          /* Minimum Velocity, Unit: 343 m/s * 250 ns */
+#define THR_MAX         46          /* Maximum Velocity, Unit: 343 m/s * 250 ns */
 #define W_MAX           2           /* OMEGA -> Maximum of degree difference per frame */
 #define W_MIN           1           /* OMEGA -> Minimum of degee difference per frame*/
 // </editor-fold>

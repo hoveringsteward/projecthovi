@@ -1,5 +1,5 @@
 
-# 1 "interrupt.c"
+# 1 "failure.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9459,9 +9459,8 @@ unsigned int pos_y;
 unsigned int obj_width;
 unsigned int obj_height;
 unsigned int angle;
-} t_colors;
+} a_color[5];
 
-t_colors a_color[5];
 bit frame = 0;
 bit obj_type;
 unsigned int w;
@@ -9471,19 +9470,20 @@ unsigned int lw;
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckThrottle(void);
-void CheckRudder(void);
+void CheckRudderAhead(void);
+void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 30
+# 31
 typedef struct t_frame {
 unsigned int num;
 unsigned int pos_x;
 unsigned int pos_y;
 unsigned int height;
-unsigned int angle;
+int angle;
 } a_frame[2];
 
-# 43
+# 42
 typedef struct t_frame {
 unsigned int num;
 signed int pos_x;
@@ -9491,6 +9491,20 @@ signed int pos_y;
 signed int height;
 signed int angle;
 } a_frame_dif[1];
+
+
+bit direction;
+
+int cm180 = 41982;
+int cm220 = 51310;
+int cm100 = 23323;
+int cm120 = 27987;
+int cm80 = 18659;
+int cm50 = 11662;
+
+
+int c_path = 10;
+int id_current_cc;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9502,16 +9516,3 @@ unsigned int time_height;
 # 33 "main.h"
 interrupt void Isr(void);
 
-# 30 "interrupt.c"
-interrupt void Isr() {
-__nop();
-if(TMR3GIF == 1) {
-TMR3GIF = 0;
-ModeCheck();
-StartHeightMeasure();
-ReadObject();
-ReadHeight();
-}else if (TMR3IF == 1) {
-TMR3IF = 0;
-}
-}

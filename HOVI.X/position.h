@@ -35,10 +35,8 @@ typedef struct t_frame {
     unsigned int height; // height of hex-rotor
     int angle; // rotation 
 } a_frame[2];
-/* (?) old
- * a_frame[0] = current frame
+/* a_frame[0] = current frame
  * a_frame[1] = last frame
- * a_frame_dif[0] = difference of a_frame[0] and a_frame[1]
  */
 
 typedef struct t_frame {
@@ -48,8 +46,22 @@ typedef struct t_frame {
     signed int height; // height of hex-rotor
     signed int angle; // rotation
 } a_frame_dif[1];
+/* a_frame_dif[0] = difference of a_frame[0] and a_frame[1] */
 
 bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
+
+int cm180 = 41982;
+int cm220 = 51310;
+int cm100 = 23323;
+int cm120 = 27987;
+int cm80 = 18659;
+int cm50 = 11662; // 11661.5
+
+// FÜRS WLAN !!!!!!!!!!!!!!! - gehört da nicht rein
+int c_path = 10; // 10 counter der farben
+int id_current_cc; // der wievielte Farbcode 0-9
+
+
 // </editor-fold>
 #endif	/* POSITION_H */
 
