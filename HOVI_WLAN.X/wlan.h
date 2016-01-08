@@ -24,13 +24,13 @@ unsigned char numb_cc_table = 0;    /* point from which on CC's are on
 bit receiving_ok = 0;   /* States if startkondition appeared or not if not,
                          * received bytes wont be stored as CC num */
 
-typedef struct {
+typedef struct t_path{
     unsigned char lower_cc;
     unsigned char higher_cc;
-}t_path;
+}a_path[21];
 
-t_path a_path[21];
-unsigned char a_name[33];
+
+unsigned char a_name[32];
 bit path_name = 0;  // 0 => storing path; 1 => storing name
 
 #endif	/* WLAN_H */
