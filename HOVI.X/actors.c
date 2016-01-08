@@ -23,7 +23,6 @@
 /* roll = rollen -> links/rechts                                    */
 /*------------------------------------------------------------------*/
 void ActAileron(unsigned char change){
-
     
 }
 // </editor-fold>
@@ -35,8 +34,6 @@ void ActAileron(unsigned char change){
 /*------------------------------------------------------------------*/
 void ActElevator(unsigned char change){
     
-    
-
 }
 // </editor-fold>
 
@@ -46,7 +43,7 @@ void ActElevator(unsigned char change){
 /* Height                                                           */
 /*------------------------------------------------------------------*/
 void ActThrottle(unsigned char change){
-
+    
 }
 // </editor-fold>
 
@@ -56,7 +53,7 @@ void ActThrottle(unsigned char change){
 /* yaw = gieren -> drehung an der hochachse                         */
 /*------------------------------------------------------------------*/
 void ActRudder(unsigned char change){
- 
+    
 }
 // </editor-fold>
 
