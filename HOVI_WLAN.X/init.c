@@ -85,17 +85,17 @@ void InitOsc(void) {
 void InitUart(void) {
     //Baudrate
     SPBRG1 = 68;
-    BRGH = 1;
-    BRG16 = 1;
+    TXSTA1bits.BRGH = 1;
+    BAUDCON1bits.BRG16 = 1;
     //General
     //Tris already set in InitTris()
-    SYNC = 0;
-    SPEN = 1;
+    TXSTA1bits.SYNC = 0;
+    RCSTA1bits.SPEN = 1;
     //Transmission
-    TXEN = 1;
+    TXSTA1bits.TXEN = 1;
     TX1IF = 0;
     //Reception
-    CREN = 1;
+    RCSTA1bits.CREN = 1;
     RC1IE = 1;
 }
 // </editor-fold>
@@ -171,12 +171,12 @@ void InitInterrupt(void) {
 // <editor-fold defaultstate="collapsed" desc="Actors">
 /* Setting the default point of the actors                              */
 /* Actors are on default state -> no motion will occoure                */
-void InitActors (void) {
-    a_actors[0].aile = 500;
-    a_actors[0].elev = 500;
-    a_actors[0].thro = 0;
-    a_actors[0].rudd = 500;
-}
+//void InitActors (void) {
+//    a_actors[0].aile = 500;
+//    a_actors[0].elev = 500;
+//    a_actors[0].thro = 0;
+//    a_actors[0].rudd = 500;
+//}
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="WLAN">

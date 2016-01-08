@@ -18,7 +18,6 @@
 #include "main.h"
 
 // <editor-fold defaultstate="collapsed" desc="Act Ailerons">
-/*------------------------------------------------------------------*/
 /* ActAilerons                                                      */
 /* roll = rollen -> links/rechts                                    */
 /*------------------------------------------------------------------*/
@@ -28,8 +27,7 @@ void ActAileron(unsigned char change){
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Act Elevator">
-/*------------------------------------------------------------------*/
-/* ActElevatoe                                                      */
+/* ActElevator                                                      */
 /* pitch = nicken -> vor/zurück                                     */
 /*------------------------------------------------------------------*/
 void ActElevator(unsigned char change){
@@ -38,7 +36,6 @@ void ActElevator(unsigned char change){
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Act Throttle">
-/*------------------------------------------------------------------*/
 /* ActThrottle                                                      */
 /* Height                                                           */
 /*------------------------------------------------------------------*/
@@ -48,7 +45,6 @@ void ActThrottle(unsigned char change){
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Act Rudder">
-/*------------------------------------------------------------------*/
 /* ActRudder                                                        */
 /* yaw = gieren -> drehung an der hochachse                         */
 /*------------------------------------------------------------------*/
