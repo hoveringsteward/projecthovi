@@ -179,4 +179,11 @@ void InitActors (void) {
 }
 // </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="WLAN">
+void InitWlan(void) {
+    while(Associated == 0);
+    Connect = 1;
+    while(Connected == 0);
+}
+// </editor-fold>
 // </editor-fold>

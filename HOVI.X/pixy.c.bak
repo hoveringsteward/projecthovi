@@ -55,7 +55,7 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
             lw = w;
             c++;
             if(c > 254) {
-                return 0;	//****Error, end of function
+                return 0;
             }
         }
         

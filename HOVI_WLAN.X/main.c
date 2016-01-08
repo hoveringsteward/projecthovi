@@ -84,7 +84,11 @@
 interrupt void isr() {
     if(RC1IF == 1) {
         RC1IF = 0;
-        UartStore();
+        if(Connected == 1) {
+            UartStore();
+        }else {
+            UartDump();
+        }
     }
 }
 
