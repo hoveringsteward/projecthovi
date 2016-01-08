@@ -23,7 +23,7 @@
 /* roll = rollen -> links/rechts                                    */
 /*------------------------------------------------------------------*/
 void ActAileron(unsigned char change){
-    
+    a_actors[0].aile += change;
 }
 // </editor-fold>
 
@@ -33,7 +33,7 @@ void ActAileron(unsigned char change){
 /* pitch = nicken -> vor/zurück                                     */
 /*------------------------------------------------------------------*/
 void ActElevator(unsigned char change){
-    
+    a_actors[0].elev += change;
 }
 // </editor-fold>
 
@@ -43,7 +43,7 @@ void ActElevator(unsigned char change){
 /* Height                                                           */
 /*------------------------------------------------------------------*/
 void ActThrottle(unsigned char change){
-    
+    a_actors[0].thro += change;
 }
 // </editor-fold>
 
@@ -53,7 +53,7 @@ void ActThrottle(unsigned char change){
 /* yaw = gieren -> drehung an der hochachse                         */
 /*------------------------------------------------------------------*/
 void ActRudder(unsigned char change){
-    
+    a_actors[0].rudd += change;
 }
 // </editor-fold>
 

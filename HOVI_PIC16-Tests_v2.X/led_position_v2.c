@@ -54,7 +54,7 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
             lw = w;
             c++;
             if(c > 254) {
-                return 0;
+                return 0;	//****Error, end of function
             }
         }
 
