@@ -187,29 +187,6 @@ void CheckElevator(void) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Check Table">
-
-/* if the hexrotor is "allowed to find a table", the 
- * n_table_floor and the table_allowed bits change
-/*------------------------------------------------------------*/
-void CheckTable(void) {
-
-    int lastCode = 12;
-    int zweiMminus20 = 41982;
-    int zweiMplus20 = 51310;
-    int oneM = 23323;
-    time_height;
-    bit ntable_floor = 0; // 0 = table, 1 = floor
-    bit tabe_allowed = 0; // 0 = no , 1 = yes 
-
-    if (a_frame[0].num == lastCode) { // Falsch!!!!
-
-
-    }
-
-
-}
-// </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Throttle">
 
@@ -233,6 +210,8 @@ void CheckThrottle(void) {
     int aktFarbcodeNummer; // der wievielte Farbcode 0-9
     int THR_INC = 100;
     int THR_INC_MUCH = 200;
+    int DEC_MIN;
+    int DEC_MAX;
 
     // SPRINGEN / HÖHENUNTERSCHIED fehlt
 
@@ -249,9 +228,6 @@ void CheckThrottle(void) {
         } else { // over 2.2
             ActThrottle(-THR_INC); // decrease
         }
-
-
-
 
 
 
@@ -309,7 +285,7 @@ void CheckThrottle(void) {
             // starten
         }
     }
-
+}
 
     // </editor-fold>
 
