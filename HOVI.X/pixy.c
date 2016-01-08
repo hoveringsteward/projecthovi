@@ -67,6 +67,12 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
         a_color[c_obj].obj_width =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
         a_color[c_obj].obj_height = ExchangeSpiWord(PIXY_SYNC, DUMMY);
         a_color[c_obj].angle =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
+        
+        a_frame[0].num = a_color[c_obj].num;
+        a_frame[0].pos_x = a_color[c_obj].pos_x;
+        a_frame[0].pos_y = a_color[c_obj].pos_y;
+        a_frame[0].angle = a_color[c_obj].angle;
+                
     }
     return 1;
 }

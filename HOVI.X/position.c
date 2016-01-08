@@ -196,26 +196,12 @@ void CheckElevator(void) {
 /*------------------------------------------------------------*/
 void CheckThrottle(void) {
 
-    int cm180 = 41982;
-    int cm220 = 51310;
-    int cm100 = 23323;
-    int cm120 = 27987;
-    int cm80 = 18659;
-    int cm50 = 11662; // 11661.5
-    time_height;
-    // bit ntable_floor = 0; // 0 = table, 1 = floor
-    // bit tabe_allowed = 0; // 0 = no , 1 = yes 
-    int a_path[10]; // 10
-    int anzFarbcodes = 10; // 10
-    int aktFarbcodeNummer; // der wievielte Farbcode 0-9
-    int THR_INC = 100;
-    int THR_INC_MUCH = 200;
-    int DEC_MIN;
-    int DEC_MAX;
+
+
 
     // SPRINGEN / HÖHENUNTERSCHIED fehlt
 
-    if (aktFarbcodeNummer == 0) { // Table: start
+    if (id_current_cc == 0) { // Table: start
 
         if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) { // between 0.8 and 1.2
             ActThrottle(0);
@@ -225,13 +211,13 @@ void CheckThrottle(void) {
             } else { // between 0.5m and 0.8m
                 ActThrottle(THR_INC); // increase
             }
-        } else { // over 2.2
+        } else { // over 1.2
             ActThrottle(-THR_INC); // decrease
         }
 
 
 
-    } else if (aktFarbcodeNummer > 0 && aktFarbcodeNummer < anzFarbcodes) { // Floor
+    } else if (id_current_cc > 0 && id_current_cc < c_path) { // Floor
 
         if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) { // between 1.8 and 2.2
             ActThrottle(0);
@@ -247,25 +233,21 @@ void CheckThrottle(void) {
 
 
 
-    } else if (aktFarbcodeNummer == (anzFarbcodes - 1)) { // last CC/Obj in front of the table
+    } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table
 
 
 
 
-    } else { // on the rable -> last colorcode + landing
+    } else { // on the table -> last colorcode + landing
         /* Landing / Decreasing - has to check, if the height - difference is between
          * dec min and dec max
          * if landed: invert colorcodes, delay + fly back
          */
-
-        // if (a_frame[0].num == a_path[anzFarbcodes - 1]) {
-
-
         if (a_frame[0].height >= 30) { // higher than 30cm
             if (a_frame[1].height > a_frame[0].height) {
                 /* Old bigger than new, MC is decreasing */
-                if (a_frame_dif[0].height <= DEC_MAX) {
-                    if (a_frame_dif[0].pos_x <= DEC_MIN) {
+                if (a_frame_dif[0].height <= THR_MAX) {
+                    if (a_frame_dif[0].pos_x <= THR_MIN) {
                         /* Decrease is very slow, decrease more == increase less */
                         ActThrottle(-THR_INC);
                     } else { /* Decrease is OK */
@@ -278,8 +260,11 @@ void CheckThrottle(void) {
                 /* Old smaller than new, MC is not decreasing */
                 ActThrottle(-THR_INC); // decrease = increase less
             }
-        }else{ // good: lower than 30cm
+        } else { // good: lower than 30cm
             // landed - take a break
+
+
+
             // farbcodearray umdrehen
             // delay + whileschleife
             // starten
@@ -287,135 +272,135 @@ void CheckThrottle(void) {
     }
 }
 
-    // </editor-fold>
+// </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Check Rudder Ahead">
+// <editor-fold defaultstate="collapsed" desc="Check Rudder Ahead">
 
 /* The rotation is checked, if it's between -5 and +5, if not,
-     * ActRudder has to increase / decrease
-     * The new and the last frame are always compared, if the hexrotor
-     * does, what he is supposed to do, in this way, we can check
-     * if the transformation of the two frames is between W_MAX and 
-     * W_MIN; if W_MAX is too high, it should slow down
+ * ActRudder has to increase / decrease
+ * The new and the last frame are always compared, if the hexrotor
+ * does, what he is supposed to do, in this way, we can check
+ * if the transformation of the two frames is between W_MAX and 
+ * W_MIN; if W_MAX is too high, it should slow down
     /*------------------------------------------------------------*/
-    void CheckRudderAhead(void) {
-        // <editor-fold defaultstate="collapsed" desc="centered">
-        if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
-            ActRudder(0);
-        }// </editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="right side">
-        else if (a_frame[0].angle > 5) {
-            /* CC/Obj Rotation is on the right side */
-            if (a_frame[1].angle > a_frame[0].angle) {
-                /* good: Old bigger than new, moving right */
-                if (a_frame_dif[0].angle <= W_MAX) { // if rotation difference is smaller than eg 2
-                    if (a_frame_dif[0].angle <= W_MIN) { // if rotation difference is smaller than eg 1
-                        ActRudder(-RUD_INC); // - to the right
-                    } else {
-                        ActRudder(0); // good: Rudder is between W_MIN and W_MAX
-                    }
+void CheckRudderAhead(void) {
+    // <editor-fold defaultstate="collapsed" desc="centered">
+    if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
+        ActRudder(0);
+    }// </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="right side">
+    else if (a_frame[0].angle > 5) {
+        /* CC/Obj Rotation is on the right side */
+        if (a_frame[1].angle > a_frame[0].angle) {
+            /* good: Old bigger than new, moving right */
+            if (a_frame_dif[0].angle <= W_MAX) { // if rotation difference is smaller than eg 2
+                if (a_frame_dif[0].angle <= W_MIN) { // if rotation difference is smaller than eg 1
+                    ActRudder(-RUD_INC); // - to the right
                 } else {
-                    // Omega (W -> W_MAX) is too high
-                    ActRudder(RUD_INC); // slow down, less right
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
                 }
             } else {
-                /* wrong rudder-direction, ... */
-                ActRudder(-RUD_INC); // - to the right
+                // Omega (W -> W_MAX) is too high
+                ActRudder(RUD_INC); // slow down, less right
             }
-        }// </editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="left side">
-        else {
-            /* CC/Obj Rotation is on the left side -> everything is minus*/
-            if (a_frame[1].angle < a_frame[0].angle) {
-                /* good: old smaller than new, moving left */
-                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
-                    if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
-                        ActRudder(RUD_INC); // + to the left
-                    } else {
-                        ActRudder(0); // good: Rudder is between W_MIN and W_MAX
-                    }
-                } else {
-                    // Omega is too low (minus side)
-                    ActRudder(-RUD_INC); // slow down, less left
-                }
-            } else {
-                /* wrong rudder-direction, ... */
-                ActRudder(RUD_INC); // + to the left
-            }
+        } else {
+            /* wrong rudder-direction, ... */
+            ActRudder(-RUD_INC); // - to the right
         }
-        // </editor-fold> 
-    }
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
-
-    /* The rotation is checked, if it's over 175 and under -175, if not,
-     * ActRudder has to increase / decrease
-     * The new and the last frame are always compared, if the hexrotor
-     * does, what he is supposed to do, in this way, we can check
-     * if the transformation of the two frames is between W_MAX and 
-     * W_MIN; if W_MAX is too high, it should slow down
-    /*------------------------------------------------------------*/
-    void CheckRudderBack(void) {
-
-        // <editor-fold defaultstate="collapsed" desc="centered">
-        if (a_frame[0].angle <= -175 || a_frame[0].angle >= 175) {
-            ActRudder(0); // do nothing - it's perfect      
-        }// </editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="right side">
-        else if (a_frame[0].angle > -175) {
-            /* CC/Obj Rotation is on the right side, everything is minus */
-            if (a_frame[1].angle > a_frame[0].angle) {
-                /* good: Old bigger than new, moving right */
-                if (a_frame_dif[0].angle <= W_MAX) { // if rotation difference is smaller than eg 2
-                    if (a_frame_dif[0].angle <= W_MIN) { // if rotation difference is smaller than eg 1
-                        ActRudder(-RUD_INC); // - to the right
-                    } else {
-                        ActRudder(0); // good: Rudder is between W_MIN and W_MAX
-                    }
+    }// </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="left side">
+    else {
+        /* CC/Obj Rotation is on the left side -> everything is minus*/
+        if (a_frame[1].angle < a_frame[0].angle) {
+            /* good: old smaller than new, moving left */
+            if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
+                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
+                    ActRudder(RUD_INC); // + to the left
                 } else {
-                    // Omega is too high
-                    ActRudder(RUD_INC); // slow down, less right
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
                 }
             } else {
-                /* wrong rudder-direction, ... */
-                ActRudder(-RUD_INC); // - to the right
+                // Omega is too low (minus side)
+                ActRudder(-RUD_INC); // slow down, less left
             }
-        }// </editor-fold>
-            // <editor-fold defaultstate="collapsed" desc="left side">
-        else {
-            /* CC/Obj Rotation is on the left side */
-            if (a_frame[1].angle < a_frame[0].angle) {
-                /* good: old smaller than new, moving left */
-                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
-                    if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
-                        ActRudder(RUD_INC); // + to the left
-                    } else {
-                        ActRudder(0); // good: Rudder is between W_MIN and W_MAX
-                    }
-                } else {
-                    // Omega is too low = too much on the left side
-                    ActRudder(-RUD_INC); // slow down, less left
-                }
-            } else {
-                /* wrong rudder-direction, ... */
-                ActRudder(RUD_INC); // + to the left
-            }
+        } else {
+            /* wrong rudder-direction, ... */
+            ActRudder(RUD_INC); // + to the left
         }
-        // </editor-fold>
+    }
+    // </editor-fold> 
+}
+// </editor-fold>
+// <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
 
+/* The rotation is checked, if it's over 175 and under -175, if not,
+ * ActRudder has to increase / decrease
+ * The new and the last frame are always compared, if the hexrotor
+ * does, what he is supposed to do, in this way, we can check
+ * if the transformation of the two frames is between W_MAX and 
+ * W_MIN; if W_MAX is too high, it should slow down
+/*------------------------------------------------------------*/
+void CheckRudderBack(void) {
 
+    // <editor-fold defaultstate="collapsed" desc="centered">
+    if (a_frame[0].angle <= -175 || a_frame[0].angle >= 175) {
+        ActRudder(0); // do nothing - it's perfect      
+    }// </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="right side">
+    else if (a_frame[0].angle > -175) {
+        /* CC/Obj Rotation is on the right side, everything is minus */
+        if (a_frame[1].angle > a_frame[0].angle) {
+            /* good: Old bigger than new, moving right */
+            if (a_frame_dif[0].angle <= W_MAX) { // if rotation difference is smaller than eg 2
+                if (a_frame_dif[0].angle <= W_MIN) { // if rotation difference is smaller than eg 1
+                    ActRudder(-RUD_INC); // - to the right
+                } else {
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
+                }
+            } else {
+                // Omega is too high
+                ActRudder(RUD_INC); // slow down, less right
+            }
+        } else {
+            /* wrong rudder-direction, ... */
+            ActRudder(-RUD_INC); // - to the right
+        }
+    }// </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="left side">
+    else {
+        /* CC/Obj Rotation is on the left side */
+        if (a_frame[1].angle < a_frame[0].angle) {
+            /* good: old smaller than new, moving left */
+            if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
+                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
+                    ActRudder(RUD_INC); // + to the left
+                } else {
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
+                }
+            } else {
+                // Omega is too low = too much on the left side
+                ActRudder(-RUD_INC); // slow down, less left
+            }
+        } else {
+            /* wrong rudder-direction, ... */
+            ActRudder(RUD_INC); // + to the left
+        }
     }
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="store old">
 
-    /*
-     *
-     ------------------------------------------------------------*/
-    void StoreAsOld(void) {
-        a_frame[1].num = a_frame[0].num;
-        a_frame[1].pos_x = a_frame[0].pos_x;
-        a_frame[1].pos_y = a_frame[0].pos_y;
-        a_frame[1].height = a_frame[0].height;
-        a_frame[1].angle = a_frame[0].angle;
-    }
-    // </editor-fold>
+
+}
+// </editor-fold>
+// <editor-fold defaultstate="collapsed" desc="store old">
+
+/*
+ *
+ ------------------------------------------------------------*/
+void StoreAsOld(void) {
+    a_frame[1].num = a_frame[0].num;
+    a_frame[1].pos_x = a_frame[0].pos_x;
+    a_frame[1].pos_y = a_frame[0].pos_y;
+    a_frame[1].height = a_frame[0].height;
+    a_frame[1].angle = a_frame[0].angle;
+}
+// </editor-fold>
