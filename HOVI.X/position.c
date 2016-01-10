@@ -20,16 +20,19 @@
 #include "main.h"
 
 
+
+
 // <editor-fold defaultstate="collapsed" desc="Compare Frames">
+
 /* compareFrames
  * compares the X and Y position of one colorobject in a frame with the same 
  * colorobject in the next frame
  * frame 1 - frame 0, respective old - new
 /*---------------------------------------------------------------------------*/
 void CompareFrames(void) {
-    
+
     a_frame_dif[0].height = a_frame[1].height - a_frame[0].height;
-    
+
     if (a_frame[1].num == a_frame[0].num) {
         a_frame_dif[0].pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
         a_frame_dif[0].pos_y = a_frame[1].pos_y - a_frame[0].pos_y;
@@ -133,7 +136,7 @@ void CheckElevator(void) {
     else if (a_frame[0].pos_y > 110) {
         /* CC/Obj is in front of the frame */
         if (a_frame[1].pos_y < a_frame[0].pos_y) {
-            /* Old smaller than new, MC moving towards CC/Obj, moving forward */
+            /* good: Old smaller than new, MC moving towards CC/Obj, moving forward */
             if (a_frame_dif[0].pos_y >= -V_MAX) {
                 if (a_frame_dif[0].pos_y >= -V_MIN) {
                     /* Velocity is very slow, increase */
@@ -186,6 +189,7 @@ void CheckElevator(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="BeneathTable">
+
 /* The Hexrotor flies beneath the table
  * the hexrotors height should be between 80 and 120cm
 /*-----------------------------------------------------------*/
@@ -204,8 +208,8 @@ void BeneathTable(void) {
 }
 // </editor-fold>
 
-
 // <editor-fold defaultstate="collapsed" desc="BeneathFloor">
+
 /* Hexrotor flies beneath the floor
  * the hexrotors height should be between 180 and 220cm
 /*------------------------------------------------------------*/
@@ -225,24 +229,20 @@ void BeneathFloor(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Throttle">
+
 /* This function checks the current flightheight 
  * Depending on the changes in the height and the total height
  * the ActThrottle function is called to make changes
 /*------------------------------------------------------------*/
 void CheckThrottle(void) {
 
-    bit storedif = 0; // if the difference was over 50cm the last time, it's 1
-    bit table = 1; // 1 table; 0 floor
-    int a_old[c_path]; // 10 - 0-9 
-    int a_new[c_path]; // 10 - 0-9 : the one i'm using
-
     if (id_current_cc == 0) { // Table: start
         // check, if difference is more than 50cm, from table to floor
-        if (a_frame_dif[0].height < - cm50) {
+        if (a_frame_dif[0].height < -cm50) {
             if (storedif) {
                 table = 0;
                 storedif = 0;
-            }else{
+            } else {
                 storedif = 1;
             }
         }
@@ -251,7 +251,6 @@ void CheckThrottle(void) {
         } else {
             BeneathFloor(void);
         }
-
     } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
         BeneathFloor(void);
     } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table (pre-last CC)
@@ -260,7 +259,7 @@ void CheckThrottle(void) {
             if (storedif) {
                 table = 1;
                 storedif = 0;
-            }else{
+            } else {
                 storedif = 1;
             }
         }
@@ -269,7 +268,6 @@ void CheckThrottle(void) {
         } else {
             BeneathFloor(void);
         }
-
     } else { // on the table -> last colorcode + landing
         /* Landing / Decreasing - has to check, if the height - difference is between
          * dec min and dec max
@@ -294,20 +292,26 @@ void CheckThrottle(void) {
             }
         } else { // good: lower than 30cm, landed - take a break
             // change the path-colorcode-array for coming home
+            /* old saves the path, which the hexrotor flied
+             * the new way, is the old way reserved (=umgekehrte Reihenfolge)
+             */
             int tmp = c_path - 1;
             for (int i = 0; i <= tmp; i++) {
-                a_new[(tmp - i)] = a_old[i];
+                a_path_old[i].higher_cc = a_path[i].higher_cc;
+                a_path_old[i].lower_cc = a_path[i].lower_cc;
+            }
+            for (int i = 0; i <= tmp; i++) {
+                a_path[(tmp - i)].higher_cc = a_path_old[i].higher_cc;
+                a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
             }
             // waiting 30 seconds, break for getting the cupcake
             for (int i = 0; i <= 10000; i++) {
                 __delay_ms(3);
             }
-
             // STARTEN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
     }
 }
-
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Rudder Ahead">
@@ -367,6 +371,7 @@ void CheckRudderAhead(void) {
     // </editor-fold> 
 }
 // </editor-fold>
+
 // <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
 
 /* The rotation is checked, if it's over 175 and under -175, if not,
@@ -427,10 +432,10 @@ void CheckRudderBack(void) {
 
 }
 // </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="store old">
 
-/*
- *
+// <editor-fold defaultstate="collapsed" desc="Store Old">
+
+/* This Function stores the last Frame
  ------------------------------------------------------------*/
 void StoreAsOld(void) {
     a_frame[1].num = a_frame[0].num;
