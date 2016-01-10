@@ -6,13 +6,13 @@
             <file>file:/C:/github/projecthovi/HOVI.X/position.h</file>
             <file>file:/C:/github/projecthovi/HOVI.X/ultrasonic.c</file>
             <file>file:/C:/github/projecthovi/HOVI.X/gear.c</file>
-            <file>file:/C:/github/projecthovi/HOVI.X/actors.c</file>
             <file>file:/C:/github/projecthovi/HOVI.X/position.c</file>
             <file>file:/C:/github/projecthovi/HOVI.X/interrupt.c</file>
             <file>file:/C:/github/projecthovi/HOVI.X/safety.c</file>
             <file>file:/C:/github/projecthovi/HOVI.X/main.h</file>
             <file>file:/C:/github/projecthovi/HOVI.X/pixy.c</file>
-            <file>file:/C:/github/projecthovi/HOVI.X/failure.c</file>
+            <file>file:/C:/github/projecthovi/HOVI.X/pixy.h</file>
+            <file>file:/C:/github/projecthovi/HOVI.X/ultrasonic.h</file>
             <file>file:/C:/github/projecthovi/HOVI.X/main.c</file>
         </group>
     </open-files>
