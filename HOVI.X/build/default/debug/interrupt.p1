@@ -8,9 +8,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "34 position.h
 [s S1149 `ui 1 `ui 1 `ui 1 `ui 1 `i 1 ]
 [n S1149 nt_frame num pos_x pos_y height angle ]
-"47
+"55
 [s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
-[n S1150 nt_frame_dif num pos_x pos_y height angle ]
+[n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height dif_angle ]
+"79
+[s S1151 `uc 1 `uc 1 ]
+[n S1151 nt_path lower_cc higher_cc ]
 "43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
@@ -7563,21 +7566,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 "38 pixy.h
 [v _a_color `S1148 ~T0 @X0 -> 5 `i e ]
 [; ;pixy.h: 38: t_color a_color[5];
-"42
+"40
 [v _frame `b ~T0 @X0 1 e ]
 [i _frame
 -> 0 `i
 ]
-[; ;pixy.h: 42: bit frame = 0;
-"43
+[; ;pixy.h: 40: bit frame = 0;
+"41
 [v _obj_type `b ~T0 @X0 1 e ]
-[; ;pixy.h: 43: bit obj_type;
-"44
+[; ;pixy.h: 41: bit obj_type;
+"42
 [v _w `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 44: unsigned int w;
-"45
+[; ;pixy.h: 42: unsigned int w;
+"43
 [v _lw `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 45: unsigned int lw;
+[; ;pixy.h: 43: unsigned int lw;
 [; ;position.h: 18: void CompareFrames(void);
 [; ;position.h: 19: void CheckAileron(void);
 [; ;position.h: 20: void CheckElevator(void);
@@ -7597,79 +7600,110 @@ Version 3.2 HI-TECH Software Intermediate Code
 "42 position.h
 [v _a_frame `S1149 ~T0 @X0 -> 2 `i e ]
 [; ;position.h: 42: t_frame a_frame[2];
-[; ;position.h: 47: typedef struct nt_frame_dif {
-[; ;position.h: 48: unsigned int num;
-[; ;position.h: 49: signed int pos_x;
-[; ;position.h: 50: signed int pos_y;
-[; ;position.h: 51: signed int height;
-[; ;position.h: 52: signed int angle;
-[; ;position.h: 53: } t_frame_dif;
-"55
-[v _a_frame_dif `S1150 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;position.h: 55: t_frame_dif a_frame_dif[1];
-"58
-[v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 58: bit direction;
-"60
-[v _cm180 `i ~T0 @X0 1 e ]
-[i _cm180
--> -> 41982 `l `i
-]
-[; ;position.h: 60: int cm180 = 41982;
-"61
-[v _cm220 `i ~T0 @X0 1 e ]
-[i _cm220
--> -> 51310 `l `i
-]
-[; ;position.h: 61: int cm220 = 51310;
-"62
-[v _cm100 `i ~T0 @X0 1 e ]
-[i _cm100
--> 23323 `i
-]
-[; ;position.h: 62: int cm100 = 23323;
+[; ;position.h: 55: typedef struct nt_frame_dif {
+[; ;position.h: 56: unsigned int num;
+[; ;position.h: 57: signed int dif_pos_x;
+[; ;position.h: 58: signed int dif_pos_y;
+[; ;position.h: 59: signed int dif_height;
+[; ;position.h: 60: signed int dif_angle;
+[; ;position.h: 61: } t_frame_dif;
 "63
-[v _cm120 `i ~T0 @X0 1 e ]
+[v _a_frame_dif `S1150 ~T0 @X0 -> -> 1 `i `ux e ]
+[; ;position.h: 63: t_frame_dif a_frame_dif[1];
+"67
+[v _direction `b ~T0 @X0 1 e ]
+[; ;position.h: 67: bit direction;
+"69
+[v _cm180 `ui ~T0 @X0 1 e ]
+[i _cm180
+-> -> 41982 `l `ui
+]
+[; ;position.h: 69: unsigned int cm180 = 41982;
+"70
+[v _cm220 `ui ~T0 @X0 1 e ]
+[i _cm220
+-> -> 51310 `l `ui
+]
+[; ;position.h: 70: unsigned int cm220 = 51310;
+"71
+[v _cm100 `ui ~T0 @X0 1 e ]
+[i _cm100
+-> -> 23323 `i `ui
+]
+[; ;position.h: 71: unsigned int cm100 = 23323;
+"72
+[v _cm120 `ui ~T0 @X0 1 e ]
 [i _cm120
--> 27987 `i
+-> -> 27987 `i `ui
 ]
-[; ;position.h: 63: int cm120 = 27987;
-"64
-[v _cm80 `i ~T0 @X0 1 e ]
+[; ;position.h: 72: unsigned int cm120 = 27987;
+"73
+[v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
--> 18659 `i
+-> -> 18659 `i `ui
 ]
-[; ;position.h: 64: int cm80 = 18659;
-"65
-[v _cm50 `i ~T0 @X0 1 e ]
+[; ;position.h: 73: unsigned int cm80 = 18659;
+"74
+[v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
--> 11662 `i
+-> -> 11662 `i `ui
 ]
-[; ;position.h: 65: int cm50 = 11662;
-"68
+[; ;position.h: 74: unsigned int cm50 = 11662;
+"77
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
 -> 10 `i
 ]
-[; ;position.h: 68: int c_path = 10;
-"69
+[; ;position.h: 77: int c_path = 10;
+"78
 [v _id_current_cc `i ~T0 @X0 1 e ]
-[; ;position.h: 69: int id_current_cc;
-"71
+[; ;position.h: 78: int id_current_cc;
+[; ;position.h: 79: typedef struct nt_path{
+[; ;position.h: 80: unsigned char lower_cc;
+[; ;position.h: 81: unsigned char higher_cc;
+[; ;position.h: 82: } t_path;
+"84
+[v _a_path `S1151 ~T0 @X0 -> 21 `i e ]
+[v _a_path_old `S1151 ~T0 @X0 -> 21 `i e ]
+[; ;position.h: 84: t_path a_path[21], a_path_old[21];
+"86
 [v _storedif `b ~T0 @X0 1 e ]
-[; ;position.h: 71: bit storedif;
-"72
+[i _storedif
+-> 0 `i
+]
+[; ;position.h: 86: bit storedif = 0;
+"87
 [v _table `b ~T0 @X0 1 e ]
-[; ;position.h: 72: bit table;
+[i _table
+-> 1 `i
+]
+[; ;position.h: 87: bit table = 1;
+[; ;position.h: 90: bit storedif;
+[; ;position.h: 91: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
 [v _time_height `ui ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 28: unsigned int time_height;
+"29
+[v _outgoing `f ~T0 @X0 1 e ]
+[; ;ultrasonic.h: 29: float outgoing;
+"30
+[v _changerate `f ~T0 @X0 1 e ]
+[i _changerate
+-> .0.2 `f
+]
+[; ;ultrasonic.h: 30: float changerate = 0.2;
+"31
+[v _highpassallowed `b ~T0 @X0 1 e ]
+[i _highpassallowed
+-> 1 `i
+]
+[; ;ultrasonic.h: 31: bit highpassallowed = 1;
 [; ;main.h: 33: interrupt void Isr(void);
-[v F8074 `(v ~T0 @X0 1 tf ]
+[v F8083 `(v ~T0 @X0 1 tf ]
 "30 interrupt.c
-[v _Isr `IF8074 ~T0 @X0 1 e ]
+[v _Isr `IF8083 ~T0 @X0 1 e ]
 {
 [; ;interrupt.c: 30: interrupt void Isr() {
 [e :U _Isr ]
@@ -7679,7 +7713,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( ___nop ..  ]
 [; ;interrupt.c: 32: if(TMR3GIF == 1) {
 "32
-[e $ ! == -> _TMR3GIF `i -> 1 `i 1152  ]
+[e $ ! == -> _TMR3GIF `i -> 1 `i 1153  ]
 {
 [; ;interrupt.c: 33: TMR3GIF = 0;
 "33
@@ -7705,19 +7739,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 "41
 }
 [; ;interrupt.c: 41: }else if (TMR3IF == 1) {
-[e $U 1153  ]
-[e :U 1152 ]
-[e $ ! == -> _TMR3IF `i -> 1 `i 1154  ]
+[e $U 1154  ]
+[e :U 1153 ]
+[e $ ! == -> _TMR3IF `i -> 1 `i 1155  ]
 {
 [; ;interrupt.c: 42: TMR3IF = 0;
 "42
 [e = _TMR3IF -> -> 0 `i `b ]
 "43
 }
-[e :U 1154 ]
+[e :U 1155 ]
 "44
-[e :U 1153 ]
+[e :U 1154 ]
 [; ;interrupt.c: 43: }
 [; ;interrupt.c: 44: }
-[e :UE 1151 ]
+[e :UE 1152 ]
 }

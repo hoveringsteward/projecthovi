@@ -10,7 +10,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1149 nt_frame num pos_x pos_y height angle ]
 "55
 [s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
-[n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height if_angle ]
+[n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height dif_angle ]
+"79
+[s S1151 `uc 1 `uc 1 ]
+[n S1151 nt_path lower_cc higher_cc ]
 "12005 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
 "11986
@@ -7617,7 +7620,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 57: signed int dif_pos_x;
 [; ;position.h: 58: signed int dif_pos_y;
 [; ;position.h: 59: signed int dif_height;
-[; ;position.h: 60: signed int if_angle;
+[; ;position.h: 60: signed int dif_angle;
 [; ;position.h: 61: } t_frame_dif;
 "63
 [v _a_frame_dif `S1150 ~T0 @X0 -> -> 1 `i `ux e ]
@@ -7670,29 +7673,48 @@ Version 3.2 HI-TECH Software Intermediate Code
 "78
 [v _id_current_cc `i ~T0 @X0 1 e ]
 [; ;position.h: 78: int id_current_cc;
-[; ;position.h: 79: typedef struct t_path{
+[; ;position.h: 79: typedef struct nt_path{
 [; ;position.h: 80: unsigned char lower_cc;
 [; ;position.h: 81: unsigned char higher_cc;
-[; ;position.h: 82: }a_path[21], a_path_old[21];
+[; ;position.h: 82: } t_path;
 "84
+[v _a_path `S1151 ~T0 @X0 -> 21 `i e ]
+[v _a_path_old `S1151 ~T0 @X0 -> 21 `i e ]
+[; ;position.h: 84: t_path a_path[21], a_path_old[21];
+"86
 [v _storedif `b ~T0 @X0 1 e ]
 [i _storedif
 -> 0 `i
 ]
-[; ;position.h: 84: bit storedif = 0;
-"85
+[; ;position.h: 86: bit storedif = 0;
+"87
 [v _table `b ~T0 @X0 1 e ]
 [i _table
 -> 1 `i
 ]
-[; ;position.h: 85: bit table = 1;
-[; ;position.h: 88: bit storedif;
-[; ;position.h: 89: bit table;
+[; ;position.h: 87: bit table = 1;
+[; ;position.h: 90: bit storedif;
+[; ;position.h: 91: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
 [v _time_height `ui ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 28: unsigned int time_height;
+"29
+[v _outgoing `f ~T0 @X0 1 e ]
+[; ;ultrasonic.h: 29: float outgoing;
+"30
+[v _changerate `f ~T0 @X0 1 e ]
+[i _changerate
+-> .0.2 `f
+]
+[; ;ultrasonic.h: 30: float changerate = 0.2;
+"31
+[v _highpassallowed `b ~T0 @X0 1 e ]
+[i _highpassallowed
+-> 1 `i
+]
+[; ;ultrasonic.h: 31: bit highpassallowed = 1;
 [; ;main.h: 33: interrupt void Isr(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);

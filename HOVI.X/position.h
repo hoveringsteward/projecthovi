@@ -57,7 +57,7 @@ typedef struct nt_frame_dif {
     signed int dif_pos_x; // X center of object
     signed int dif_pos_y; // Y center of object
     signed int dif_height; // height of hex-rotor
-    signed int if_angle; // rotation
+    signed int dif_angle; // rotation
 } t_frame_dif;
 
 t_frame_dif a_frame_dif[1];
@@ -76,10 +76,12 @@ unsigned int cm50 = 11662; // 11661.5
 // FÜRS WLAN !!!!!!!!!!!!!!! - gehört da nicht rein
 int c_path = 10; // 10 counter der farben
 int id_current_cc; // der wievielte Farbcode 0-9
-typedef struct t_path{
+typedef struct nt_path{
     unsigned char lower_cc;
     unsigned char higher_cc;
-}a_path[21], a_path_old[21];
+} t_path;
+
+t_path a_path[21], a_path_old[21];
 
 bit storedif = 0; // table / floor: if the difference was over 50cm the last time, it's 1
 bit table = 1; // 1 table; 0 floor

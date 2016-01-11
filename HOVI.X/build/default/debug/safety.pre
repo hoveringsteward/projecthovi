@@ -9496,7 +9496,7 @@ unsigned int num;
 signed int dif_pos_x;
 signed int dif_pos_y;
 signed int dif_height;
-signed int if_angle;
+signed int dif_angle;
 } t_frame_dif;
 
 t_frame_dif a_frame_dif[1];
@@ -9515,10 +9515,12 @@ unsigned int cm50 = 11662;
 
 int c_path = 10;
 int id_current_cc;
-typedef struct t_path{
+typedef struct nt_path{
 unsigned char lower_cc;
 unsigned char higher_cc;
-}a_path[21], a_path_old[21];
+} t_path;
+
+t_path a_path[21], a_path_old[21];
 
 bit storedif = 0;
 bit table = 1;
@@ -9533,6 +9535,9 @@ void ReadHeight(void);
 
 # 28
 unsigned int time_height;
+float outgoing;
+float changerate = 0.2;
+bit highpassallowed = 1;
 
 # 33 "main.h"
 interrupt void Isr(void);

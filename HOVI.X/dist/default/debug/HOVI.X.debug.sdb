@@ -1,0 +1,543 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F46K22 ]
+[d frameptr 4065 ]
+"24 C:\projecthovi\HOVI.X\actors.c
+[v _ActAileron ActAileron `(v  1 e 0 0 ]
+"33
+[v _ActElevator ActElevator `(v  1 e 0 0 ]
+"42
+[v _ActThrottle ActThrottle `(v  1 e 0 0 ]
+"51
+[v _ActRudder ActRudder `(v  1 e 0 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftneg.c
+[v ___ftneg __ftneg `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"44 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\fttol.c
+[v ___fttol __fttol `(l  1 e 4 0 ]
+"28 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"27 C:\projecthovi\HOVI.X\communication.c
+[v _ExchangeSpiWord ExchangeSpiWord `(ui  1 e 2 0 ]
+"16 C:\projecthovi\HOVI.X\gear.c
+[v _CalcTime CalcTime `(ui  1 e 2 0 ]
+"30
+[v _ModeCheck ModeCheck `(b  1 e 0 0 ]
+"30 C:\projecthovi\HOVI.X\init.c
+[v _Init Init `(v  1 e 0 0 ]
+"43
+[v _InitPort InitPort `(v  1 e 0 0 ]
+"53
+[v _InitTris InitTris `(v  1 e 0 0 ]
+"63
+[v _InitAnsel InitAnsel `(v  1 e 0 0 ]
+"73
+[v _InitOsc InitOsc `(v  1 e 0 0 ]
+"79
+[v _InitUart InitUart `(v  1 e 0 0 ]
+"92
+[v _InitSpi InitSpi `(v  1 e 0 0 ]
+"110
+[v _InitTimer InitTimer `(v  1 e 0 0 ]
+"144
+[v _InitInterrupt InitInterrupt `(v  1 e 0 0 ]
+"30 C:\projecthovi\HOVI.X\interrupt.c
+[v _Isr Isr `II(v  1 e 0 0 ]
+"85 C:\projecthovi\HOVI.X\main.c
+[v _main main `(v  1 e 0 0 ]
+"27 C:\projecthovi\HOVI.X\pixy.c
+[v _ReadObject ReadObject `(uc  1 e 1 0 ]
+"32 C:\projecthovi\HOVI.X\position.c
+[v _CompareFrames CompareFrames `(v  1 e 0 0 ]
+"59
+[v _CheckAileron CheckAileron `(v  1 e 0 0 ]
+"129
+[v _CheckElevator CheckElevator `(v  1 e 0 0 ]
+"196
+[v _BeneathTable BeneathTable `(v  1 e 0 0 ]
+"216
+[v _BeneathFloor BeneathFloor `(v  1 e 0 0 ]
+"237
+[v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
+"333
+[v _CheckRudderAhead CheckRudderAhead `(v  1 e 0 0 ]
+"392
+[v _CheckRudderBack CheckRudderBack `(v  1 e 0 0 ]
+"27 C:\projecthovi\HOVI.X\ultrasonic.c
+[v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
+"33
+[v _ReadHeight ReadHeight `(v  1 e 0 0 ]
+[s S21 act_out 8 `ui 1 aile 2 0 `ui 1 elev 2 2 `ui 1 thro 2 4 `ui 1 rudd 2 6 ]
+"39 C:\projecthovi\HOVI.X\actors.h
+[v _a_actors a_actors `[1]S21  1 e 8 0 ]
+"49 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
+"93
+[v _ANSELB ANSELB `VEuc  1 e 1 @3897 ]
+"142
+[v _ANSELC ANSELC `VEuc  1 e 1 @3898 ]
+"192
+[v _ANSELD ANSELD `VEuc  1 e 1 @3899 ]
+"253
+[v _ANSELE ANSELE `VEuc  1 e 1 @3900 ]
+[s S506 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T5GGO_NOT_DONE 1 0 :1:3 
+]
+"1583
+[s S509 . 1 `uc 1 T5GSS 1 0 :2:0 
+`uc 1 T5GVAL 1 0 :1:2 
+`uc 1 T5GGO_nDONE 1 0 :1:3 
+`uc 1 T5GSPM 1 0 :1:4 
+`uc 1 T5GTM 1 0 :1:5 
+`uc 1 T5GPOL 1 0 :1:6 
+`uc 1 TMR5GE 1 0 :1:7 
+]
+[s S517 . 1 `uc 1 T5GSS0 1 0 :1:0 
+`uc 1 T5GSS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 T5GGO 1 0 :1:3 
+]
+[s S522 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T5G_DONE 1 0 :1:3 
+]
+[u S525 . 1 `S506 1 . 1 0 `S509 1 . 1 0 `S517 1 . 1 0 `S522 1 . 1 0 ]
+[v _T5GCONbits T5GCONbits `VES525  1 e 1 @3917 ]
+[s S550 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T5SYNC 1 0 :1:2 
+]
+"1683
+[s S553 . 1 `uc 1 TMR5ON 1 0 :1:0 
+`uc 1 T5RD16 1 0 :1:1 
+`uc 1 nT5SYNC 1 0 :1:2 
+`uc 1 T5SOSCEN 1 0 :1:3 
+`uc 1 T5CKPS 1 0 :2:4 
+`uc 1 TMR5CS 1 0 :2:6 
+]
+[s S560 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T5SYNC 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T5CKPS0 1 0 :1:4 
+`uc 1 T5CKPS1 1 0 :1:5 
+`uc 1 TMR5CS0 1 0 :1:6 
+`uc 1 TMR5CS1 1 0 :1:7 
+]
+[s S568 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RD165 1 0 :1:1 
+]
+[s S571 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SOSCEN5 1 0 :1:3 
+]
+[u S574 . 1 `S550 1 . 1 0 `S553 1 . 1 0 `S560 1 . 1 0 `S568 1 . 1 0 `S571 1 . 1 0 ]
+[v _T5CONbits T5CONbits `VES574  1 e 1 @3918 ]
+"1763
+[v _TMR5L TMR5L `VEuc  1 e 1 @3919 ]
+"1782
+[v _TMR5H TMR5H `VEuc  1 e 1 @3920 ]
+"6370
+[v _PORTA PORTA `VEuc  1 e 1 @3968 ]
+"6656
+[v _PORTB PORTB `VEuc  1 e 1 @3969 ]
+[s S173 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"6726
+[s S182 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 INT1 1 0 :1:1 
+`uc 1 INT2 1 0 :1:2 
+`uc 1 CCP2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S191 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 AN11 1 0 :1:4 
+`uc 1 AN13 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S200 . 1 `uc 1 FLT0 1 0 :1:0 
+`uc 1 C12IN3M 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 C12IN2M 1 0 :1:3 
+`uc 1 T5G 1 0 :1:4 
+`uc 1 T1G 1 0 :1:5 
+]
+[s S207 . 1 `uc 1 SRI 1 0 :1:0 
+`uc 1 C12IN3N 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 C12IN2N 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 CCP3 1 0 :1:5 
+]
+[s S214 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CTED1 1 0 :1:2 
+`uc 1 CTED2 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 T3CKI 1 0 :1:5 
+]
+[s S220 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 P2A 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 P3A 1 0 :1:5 
+]
+[s S225 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S228 . 1 `S173 1 . 1 0 `S182 1 . 1 0 `S191 1 . 1 0 `S200 1 . 1 0 `S207 1 . 1 0 `S214 1 . 1 0 `S220 1 . 1 0 `S225 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES228  1 e 1 @3969 ]
+"6925
+[v _PORTC PORTC `VEuc  1 e 1 @3970 ]
+"7234
+[v _PORTD PORTD `VEuc  1 e 1 @3971 ]
+"7476
+[v _PORTE PORTE `VEuc  1 e 1 @3972 ]
+"8406
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"8627
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"8848
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+"9069
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+"9290
+[v _TRISE TRISE `VEuc  1 e 1 @3990 ]
+[s S453 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T3SYNC 1 0 :1:2 
+]
+"11906
+[s S456 . 1 `uc 1 TMR3ON 1 0 :1:0 
+`uc 1 T3RD16 1 0 :1:1 
+`uc 1 nT3SYNC 1 0 :1:2 
+`uc 1 T3SOSCEN 1 0 :1:3 
+`uc 1 T3CKPS 1 0 :2:4 
+`uc 1 TMR3CS 1 0 :2:6 
+]
+[s S463 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T3OSCEN 1 0 :1:3 
+`uc 1 T3CKPS0 1 0 :1:4 
+`uc 1 T3CKPS1 1 0 :1:5 
+`uc 1 TMR3CS0 1 0 :1:6 
+`uc 1 TMR3CS1 1 0 :1:7 
+]
+[s S470 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 RD163 1 0 :1:7 
+]
+[s S473 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SOSCEN3 1 0 :1:3 
+]
+[u S476 . 1 `S453 1 . 1 0 `S456 1 . 1 0 `S463 1 . 1 0 `S470 1 . 1 0 `S473 1 . 1 0 ]
+[v _T3CONbits T3CONbits `VES476  1 e 1 @4017 ]
+"11986
+[v _TMR3L TMR3L `VEuc  1 e 1 @4018 ]
+"12005
+[v _TMR3H TMR3H `VEuc  1 e 1 @4019 ]
+[s S409 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T3GGO_NOT_DONE 1 0 :1:3 
+]
+"12054
+[s S412 . 1 `uc 1 T3GSS 1 0 :2:0 
+`uc 1 T3GVAL 1 0 :1:2 
+`uc 1 T3GGO_nDONE 1 0 :1:3 
+`uc 1 T3GSPM 1 0 :1:4 
+`uc 1 T3GTM 1 0 :1:5 
+`uc 1 T3GPOL 1 0 :1:6 
+`uc 1 TMR3GE 1 0 :1:7 
+]
+[s S420 . 1 `uc 1 T3GSS0 1 0 :1:0 
+`uc 1 T3GSS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 T3G_DONE 1 0 :1:3 
+]
+[s S425 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T3GGO 1 0 :1:3 
+]
+[u S428 . 1 `S409 1 . 1 0 `S412 1 . 1 0 `S420 1 . 1 0 `S425 1 . 1 0 ]
+[v _T3GCONbits T3GCONbits `VES428  1 e 1 @4020 ]
+"14695
+[v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @4038 ]
+"14974
+[v _SSP1STAT SSP1STAT `VEuc  1 e 1 @4039 ]
+"16022
+[v _SSP1BUF SSP1BUF `VEuc  1 e 1 @4041 ]
+"16782
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+"18846
+[v _GIE GIE `VEb  1 e 0 @32663 ]
+"19430
+[v _PEIE PEIE `VEb  1 e 0 @32662 ]
+"19760
+[v _SSP1IF SSP1IF `VEb  1 e 0 @31987 ]
+"20104
+[v _TMR3GIE TMR3GIE `VEb  1 e 0 @32025 ]
+"20106
+[v _TMR3GIF TMR3GIF `VEb  1 e 0 @32033 ]
+"20112
+[v _TMR3IF TMR3IF `VEb  1 e 0 @32009 ]
+"20144
+[v _TMR5IF TMR5IF `VEb  1 e 0 @31729 ]
+[s S26 colorobject 14 `ui 1 type 2 0 `ui 1 num 2 2 `ui 1 pos_x 2 4 `ui 1 pos_y 2 6 `ui 1 obj_width 2 8 `ui 1 obj_height 2 10 `ui 1 angle 2 12 ]
+"38 C:\projecthovi\HOVI.X\pixy.h
+[v _a_color a_color `[5]S26  1 e 70 0 ]
+"40
+[v _frame frame `b  1 e 0 0 ]
+"41
+[v _obj_type obj_type `b  1 e 0 0 ]
+"42
+[v _w w `ui  1 e 2 0 ]
+"43
+[v _lw lw `ui  1 e 2 0 ]
+[s S34 nt_frame 10 `ui 1 num 2 0 `ui 1 pos_x 2 2 `ui 1 pos_y 2 4 `ui 1 height 2 6 `i 1 angle 2 8 ]
+"42 C:\projecthovi\HOVI.X\position.h
+[v _a_frame a_frame `[2]S34  1 e 20 0 ]
+[s S40 nt_frame_dif 10 `ui 1 num 2 0 `i 1 dif_pos_x 2 2 `i 1 dif_pos_y 2 4 `i 1 dif_height 2 6 `i 1 dif_angle 2 8 ]
+"63
+[v _a_frame_dif a_frame_dif `[1]S40  1 e 10 0 ]
+"67
+[v _direction direction `b  1 e 0 0 ]
+"69
+[v _cm180 cm180 `ui  1 e 2 0 ]
+"70
+[v _cm220 cm220 `ui  1 e 2 0 ]
+"71
+[v _cm100 cm100 `ui  1 e 2 0 ]
+"72
+[v _cm120 cm120 `ui  1 e 2 0 ]
+"73
+[v _cm80 cm80 `ui  1 e 2 0 ]
+"74
+[v _cm50 cm50 `ui  1 e 2 0 ]
+"77
+[v _c_path c_path `i  1 e 2 0 ]
+"78
+[v _id_current_cc id_current_cc `i  1 e 2 0 ]
+[s S46 nt_path 2 `uc 1 lower_cc 1 0 `uc 1 higher_cc 1 1 ]
+"84
+[v _a_path a_path `[21]S46  1 e 42 0 ]
+[v _a_path_old a_path_old `[21]S46  1 e 42 0 ]
+"86
+[v _storedif storedif `b  1 e 0 0 ]
+"87
+[v _table table `b  1 e 0 0 ]
+"28 C:\projecthovi\HOVI.X\ultrasonic.h
+[v _time_height time_height `ui  1 e 2 0 ]
+"29
+[v _outgoing outgoing `f  1 e 3 0 ]
+"30
+[v _changerate changerate `f  1 e 3 0 ]
+"31
+[v _highpassallowed highpassallowed `b  1 e 0 0 ]
+"85 C:\projecthovi\HOVI.X\main.c
+[v _main main `(v  1 e 0 0 ]
+{
+"91
+} 0
+"30 C:\projecthovi\HOVI.X\init.c
+[v _Init Init `(v  1 e 0 0 ]
+{
+"39
+} 0
+"79
+[v _InitUart InitUart `(v  1 e 0 0 ]
+{
+"81
+} 0
+"53
+[v _InitTris InitTris `(v  1 e 0 0 ]
+{
+"59
+} 0
+"110
+[v _InitTimer InitTimer `(v  1 e 0 0 ]
+{
+"137
+} 0
+"92
+[v _InitSpi InitSpi `(v  1 e 0 0 ]
+{
+"95
+} 0
+"43
+[v _InitPort InitPort `(v  1 e 0 0 ]
+{
+"49
+} 0
+"73
+[v _InitOsc InitOsc `(v  1 e 0 0 ]
+{
+"75
+} 0
+"144
+[v _InitInterrupt InitInterrupt `(v  1 e 0 0 ]
+{
+"149
+} 0
+"63
+[v _InitAnsel InitAnsel `(v  1 e 0 0 ]
+{
+"69
+} 0
+"30 C:\projecthovi\HOVI.X\interrupt.c
+[v _Isr Isr `II(v  1 e 0 0 ]
+{
+"44
+} 0
+"27 C:\projecthovi\HOVI.X\ultrasonic.c
+[v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
+{
+"31
+} 0
+"27 C:\projecthovi\HOVI.X\pixy.c
+[v _ReadObject ReadObject `(uc  1 e 1 0 ]
+{
+"62
+[v ReadObject@checksum checksum `ui  1 a 2 8 ]
+"30
+[v ReadObject@c_obj c_obj `uc  1 a 1 11 ]
+"29
+[v ReadObject@c c `uc  1 a 1 10 ]
+"27
+[v ReadObject@des_obj des_obj `ui  1 p 2 5 ]
+[v ReadObject@max_obj max_obj `uc  1 p 1 7 ]
+"78
+} 0
+"27 C:\projecthovi\HOVI.X\communication.c
+[v _ExchangeSpiWord ExchangeSpiWord `(ui  1 e 2 0 ]
+{
+[v ExchangeSpiWord@byte1 byte1 `uc  1 a 1 wreg ]
+"29
+[v ExchangeSpiWord@SPI_word SPI_word `ui  1 a 2 3 ]
+"27
+[v ExchangeSpiWord@byte1 byte1 `uc  1 a 1 wreg ]
+[v ExchangeSpiWord@byte2 byte2 `uc  1 p 1 0 ]
+[v ExchangeSpiWord@byte1 byte1 `uc  1 a 1 2 ]
+"45
+} 0
+"33 C:\projecthovi\HOVI.X\ultrasonic.c
+[v _ReadHeight ReadHeight `(v  1 e 0 0 ]
+{
+"40
+} 0
+"30 C:\projecthovi\HOVI.X\gear.c
+[v _ModeCheck ModeCheck `(b  1 e 0 0 ]
+{
+"31
+[v ModeCheck@time_gear time_gear `ui  1 a 2 4 ]
+"40
+} 0
+"16
+[v _CalcTime CalcTime `(ui  1 e 2 0 ]
+{
+"17
+[v CalcTime@time_gear time_gear `ui  1 a 2 2 ]
+"24
+} 0
+"32 C:\projecthovi\HOVI.X\position.c
+[v _CompareFrames CompareFrames `(v  1 e 0 0 ]
+{
+"50
+} 0
+"392
+[v _CheckRudderBack CheckRudderBack `(v  1 e 0 0 ]
+{
+"441
+} 0
+"333
+[v _CheckRudderAhead CheckRudderAhead `(v  1 e 0 0 ]
+{
+"379
+} 0
+"51 C:\projecthovi\HOVI.X\actors.c
+[v _ActRudder ActRudder `(v  1 e 0 0 ]
+{
+[v ActRudder@change change `uc  1 a 1 wreg ]
+[v ActRudder@change change `uc  1 a 1 wreg ]
+[v ActRudder@change change `uc  1 a 1 0 ]
+"53
+} 0
+"129 C:\projecthovi\HOVI.X\position.c
+[v _CheckElevator CheckElevator `(v  1 e 0 0 ]
+{
+"188
+} 0
+"33 C:\projecthovi\HOVI.X\actors.c
+[v _ActElevator ActElevator `(v  1 e 0 0 ]
+{
+[v ActElevator@change change `uc  1 a 1 wreg ]
+[v ActElevator@change change `uc  1 a 1 wreg ]
+[v ActElevator@change change `uc  1 a 1 0 ]
+"35
+} 0
+"59 C:\projecthovi\HOVI.X\position.c
+[v _CheckAileron CheckAileron `(v  1 e 0 0 ]
+{
+"120
+} 0
+"24 C:\projecthovi\HOVI.X\actors.c
+[v _ActAileron ActAileron `(v  1 e 0 0 ]
+{
+[v ActAileron@change change `uc  1 a 1 wreg ]
+[v ActAileron@change change `uc  1 a 1 wreg ]
+[v ActAileron@change change `uc  1 a 1 0 ]
+"26
+} 0
+"237 C:\projecthovi\HOVI.X\position.c
+[v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
+{
+"315
+[v CheckThrottle@i_1231 i `i  1 a 2 6 ]
+"310
+[v CheckThrottle@i_1230 i `i  1 a 2 12 ]
+"306
+[v CheckThrottle@i i `i  1 a 2 10 ]
+"305
+[v CheckThrottle@tmp tmp `i  1 a 2 8 ]
+"321
+} 0
+"196
+[v _BeneathTable BeneathTable `(v  1 e 0 0 ]
+{
+"208
+} 0
+"216
+[v _BeneathFloor BeneathFloor `(v  1 e 0 0 ]
+{
+"228
+} 0
+"42 C:\projecthovi\HOVI.X\actors.c
+[v _ActThrottle ActThrottle `(v  1 e 0 0 ]
+{
+[v ActThrottle@change change `uc  1 a 1 wreg ]
+[v ActThrottle@change change `uc  1 a 1 wreg ]
+[v ActThrottle@change change `uc  1 a 1 0 ]
+"44
+} 0

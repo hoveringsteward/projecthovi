@@ -44,9 +44,7 @@ void ReadHeight(void) {
 /*------------------------------------------------------------*/
 unsigned int Filter(unsigned int entry){
     
-    float outgoing;
-    float changerate = 0.2; // 20 percent
-    bit highpassallowed = 1; // should be used in position.c -> check throttle
+    
     
     if(highpassallowed){
         // i don't know
