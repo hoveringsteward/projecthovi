@@ -31,12 +31,12 @@
 /*---------------------------------------------------------------------------*/
 void CompareFrames(void) {
 
-    a_frame_dif[0].height = a_frame[1].height - a_frame[0].height;
+    a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
 
     if (a_frame[1].num == a_frame[0].num) {
-        a_frame_dif[0].pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
-        a_frame_dif[0].pos_y = a_frame[1].pos_y - a_frame[0].pos_y;
-        a_frame_dif[0].angle = a_frame[1].angle - a_frame[0].angle;
+        a_frame_dif[0].dif_pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
+        a_frame_dif[0].dif_pos_y = a_frame[1].pos_y - a_frame[0].pos_y;
+        a_frame_dif[0].dif_angle = a_frame[1].angle - a_frame[0].angle;
         CheckAileron();
         CheckElevator();
         if (direction == 0) {
@@ -68,8 +68,8 @@ void CheckAileron(void) {
         /* CC/Obj is on the right side of the frame */
         if (a_frame[1].pos_x > a_frame[0].pos_x) {
             /* good: Old bigger than new, MC moving towards CC/Obj, moving right */
-            if (a_frame_dif[0].pos_x <= V_MAX) {
-                if (a_frame_dif[0].pos_x <= V_MIN) {
+            if (a_frame_dif[0].dif_pos_x <= V_MAX) {
+                if (a_frame_dif[0].dif_pos_x <= V_MIN) {
                     /* Velocity is very slow, increase */
                     ActAileron(-AIL_INC); // fly to the right
                 } else {
@@ -94,8 +94,8 @@ void CheckAileron(void) {
         /* CC/Obj is on the left side of the frame */
         if (a_frame[1].pos_x < a_frame[0].pos_x) {
             /* good: Old smaller than new, MC moving towards CC/Obj, moving left */
-            if (a_frame_dif[0].pos_x >= -V_MAX) {
-                if (a_frame_dif[0].pos_x >= -V_MIN) {
+            if (a_frame_dif[0].dif_pos_x >= -V_MAX) {
+                if (a_frame_dif[0].dif_pos_x >= -V_MIN) {
                     /* Velocity is very slow, increase */
                     ActAileron(AIL_INC);
                 } else {
@@ -137,8 +137,8 @@ void CheckElevator(void) {
         /* CC/Obj is in front of the frame */
         if (a_frame[1].pos_y < a_frame[0].pos_y) {
             /* good: Old smaller than new, MC moving towards CC/Obj, moving forward */
-            if (a_frame_dif[0].pos_y >= -V_MAX) {
-                if (a_frame_dif[0].pos_y >= -V_MIN) {
+            if (a_frame_dif[0].dif_pos_y >= -V_MAX) {
+                if (a_frame_dif[0].dif_pos_y >= -V_MIN) {
                     /* Velocity is very slow, increase */
                     ActElevator(ELE_INC);
                 } else {
@@ -163,8 +163,8 @@ void CheckElevator(void) {
         /* CC/Obj is in the back of the frame */
         if (a_frame[1].pos_y > a_frame[0].pos_y) {
             /* Old bigger than new, MC moving towards CC/Obj, moving backwards */
-            if (a_frame_dif[0].pos_y <= V_MAX) {
-                if (a_frame_dif[0].pos_y <= V_MIN) {
+            if (a_frame_dif[0].dif_pos_y <= V_MAX) {
+                if (a_frame_dif[0].dif_pos_y <= V_MIN) {
                     /* Velocity is very slow, increase */
                     ActElevator(-ELE_INC);
                 } else {
@@ -238,35 +238,37 @@ void CheckThrottle(void) {
 
     if (id_current_cc == 0) { // Table: start
         // check, if difference is more than 50cm, from table to floor
-        if (a_frame_dif[0].height < -cm50) {
+        if (a_frame_dif[0].dif_height < -cm50) {
             if (storedif) {
                 table = 0;
-                storedif = 0;
             } else {
                 storedif = 1;
             }
+        }else{
+            storedif = 0;
         }
         if (table) {
-            BeneathTable(void);
+            BeneathTable();
         } else {
-            BeneathFloor(void);
+            BeneathFloor();
         }
     } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
-        BeneathFloor(void);
+        BeneathFloor();
     } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table (pre-last CC)
         // check, if difference is more than 50cm, from floor to table
-        if (a_frame_dif[0].height > cm50) {
+        if (a_frame_dif[0].dif_height > cm50) {
             if (storedif) {
-                table = 1;
-                storedif = 0;
+                table = 1;  
             } else {
                 storedif = 1;
             }
+        }else{
+            storedif = 0;
         }
         if (table) {
-            BeneathTable(void);
+            BeneathTable();
         } else {
-            BeneathFloor(void);
+            BeneathFloor();
         }
     } else { // on the table -> last colorcode + landing
         /* Landing / Decreasing - has to check, if the height - difference is between
@@ -276,8 +278,8 @@ void CheckThrottle(void) {
         if (a_frame[0].height >= 30) { // higher than 30cm
             if (a_frame[1].height > a_frame[0].height) {
                 /* Old bigger than new, MC is decreasing */
-                if (a_frame_dif[0].height <= THR_MAX) {
-                    if (a_frame_dif[0].pos_x <= THR_MIN) {
+                if (a_frame_dif[0].dif_height <= THR_MAX) {
+                    if (a_frame_dif[0].dif_pos_x <= THR_MIN) {
                         /* Decrease is very slow, decrease more == increase less */
                         ActThrottle(-THR_INC);
                     } else { /* Decrease is OK */
@@ -295,6 +297,11 @@ void CheckThrottle(void) {
             /* old saves the path, which the hexrotor flied
              * the new way, is the old way reserved (=umgekehrte Reihenfolge)
              */
+            if(direction){ // if it was on the way back to the base 
+                direction = 0; // outgoing flight = fly to table
+            }else{
+                direction = 1; // flies back to base
+            }
             int tmp = c_path - 1;
             for (int i = 0; i <= tmp; i++) {
                 a_path_old[i].higher_cc = a_path[i].higher_cc;
@@ -333,8 +340,8 @@ void CheckRudderAhead(void) {
         /* CC/Obj Rotation is on the right side */
         if (a_frame[1].angle > a_frame[0].angle) {
             /* good: Old bigger than new, moving right */
-            if (a_frame_dif[0].angle <= W_MAX) { // if rotation difference is smaller than eg 2
-                if (a_frame_dif[0].angle <= W_MIN) { // if rotation difference is smaller than eg 1
+            if (a_frame_dif[0].dif_angle <= W_MAX) { // if rotation difference is smaller than eg 2
+                if (a_frame_dif[0].dif_angle <= W_MIN) { // if rotation difference is smaller than eg 1
                     ActRudder(-RUD_INC); // - to the right
                 } else {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
@@ -353,8 +360,8 @@ void CheckRudderAhead(void) {
         /* CC/Obj Rotation is on the left side -> everything is minus*/
         if (a_frame[1].angle < a_frame[0].angle) {
             /* good: old smaller than new, moving left */
-            if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
-                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
+            if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -2
+                if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -1
                     ActRudder(RUD_INC); // + to the left
                 } else {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
@@ -392,8 +399,8 @@ void CheckRudderBack(void) {
         /* CC/Obj Rotation is on the right side, everything is minus */
         if (a_frame[1].angle > a_frame[0].angle) {
             /* good: Old bigger than new, moving right */
-            if (a_frame_dif[0].angle <= W_MAX) { // if rotation difference is smaller than eg 2
-                if (a_frame_dif[0].angle <= W_MIN) { // if rotation difference is smaller than eg 1
+            if (a_frame_dif[0].dif_angle <= W_MAX) { // if rotation difference is smaller than eg 2
+                if (a_frame_dif[0].dif_angle <= W_MIN) { // if rotation difference is smaller than eg 1
                     ActRudder(-RUD_INC); // - to the right
                 } else {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
@@ -412,8 +419,8 @@ void CheckRudderBack(void) {
         /* CC/Obj Rotation is on the left side */
         if (a_frame[1].angle < a_frame[0].angle) {
             /* good: old smaller than new, moving left */
-            if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -2
-                if (a_frame_dif[0].angle <= -W_MAX) { // if rotation difference is smaller than eg -1
+            if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -2
+                if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -1
                     ActRudder(RUD_INC); // + to the left
                 } else {
                     ActRudder(0); // good: Rudder is between W_MIN and W_MAX
