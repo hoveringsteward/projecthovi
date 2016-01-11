@@ -33,7 +33,7 @@ interrupt void Isr() {
         TMR3GIF = 0;
         ModeCheck();
         StartHeightMeasure();
-        ReadObject();
+        ReadObject(1,3,5);
         CompareFrames();
         ReadHeight();
         CheckThrottle();

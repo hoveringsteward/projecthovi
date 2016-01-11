@@ -33,7 +33,9 @@ typedef struct colorobject {
     unsigned int obj_width; // width of object
     unsigned int obj_height; // height of object
     unsigned int angle; // Rotation
-} a_color[5];
+} t_color;
+
+t_color a_color[5];
 
 /* !!! schwer: WENN * statt 5 verwendet wird, kann das array dynamisch verwenet werden*/
 

@@ -45,7 +45,7 @@ void CompareFrames(void) {
             CheckRudderBack();
         }
     } else {
-        return 0; // No changes should be taken on outputs
+        return; // No changes should be taken on outputs
     }
 }
 // </editor-fold>
@@ -247,12 +247,12 @@ void CheckThrottle(void) {
             }
         }
         if (table) {
-            BeneathTable(void);
+            BeneathTable();
         } else {
-            BeneathFloor(void);
+            BeneathFloor();
         }
     } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
-        BeneathFloor(void);
+        BeneathFloor();
     } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table (pre-last CC)
         // check, if difference is more than 50cm, from floor to table
         if (a_frame_dif[0].height > cm50) {
@@ -264,9 +264,9 @@ void CheckThrottle(void) {
             }
         }
         if (table) {
-            BeneathTable(void);
+            BeneathTable();
         } else {
-            BeneathFloor(void);
+            BeneathFloor();
         }
     } else { // on the table -> last colorcode + landing
         /* Landing / Decreasing - has to check, if the height - difference is between

@@ -1,5 +1,5 @@
 
-# 1 "safety.c"
+# 1 "actors.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9459,7 +9459,11 @@ unsigned int pos_y;
 unsigned int obj_width;
 unsigned int obj_height;
 unsigned int angle;
-} a_color[5];
+} t_color;
+
+t_color a_color[5];
+
+
 
 bit frame = 0;
 bit obj_type;
@@ -9469,28 +9473,35 @@ unsigned int lw;
 # 18 "position.h"
 void CompareFrames(void);
 void CheckAileron(void);
+void CheckElevator(void);
+void BeneathTable(void);
+void BeneathFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 31
-typedef struct t_frame {
+# 34
+typedef struct nt_frame {
 unsigned int num;
 unsigned int pos_x;
 unsigned int pos_y;
 unsigned int height;
 int angle;
-} a_frame[2];
+} t_frame;
 
-# 42
-typedef struct t_frame {
+t_frame a_frame[2];
+
+# 47
+typedef struct nt_frame_dif {
 unsigned int num;
 signed int pos_x;
 signed int pos_y;
 signed int height;
 signed int angle;
-} a_frame_dif[1];
+} t_frame_dif;
+
+t_frame_dif a_frame_dif[1];
 
 
 bit direction;
@@ -9506,6 +9517,9 @@ int cm50 = 11662;
 int c_path = 10;
 int id_current_cc;
 
+bit storedif;
+bit table;
+
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
 void ReadHeight(void);
@@ -9515,4 +9529,24 @@ unsigned int time_height;
 
 # 33 "main.h"
 interrupt void Isr(void);
+
+# 24 "actors.c"
+void ActAileron(unsigned char change){
+a_actors[0].aile += change;
+}
+
+# 33
+void ActElevator(unsigned char change){
+a_actors[0].elev += change;
+}
+
+# 42
+void ActThrottle(unsigned char change){
+a_actors[0].thro += change;
+}
+
+# 51
+void ActRudder(unsigned char change){
+a_actors[0].rudd += change;
+}
 

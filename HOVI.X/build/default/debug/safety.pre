@@ -1,5 +1,5 @@
 
-# 1 "init.c"
+# 1 "safety.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9459,7 +9459,11 @@ unsigned int pos_y;
 unsigned int obj_width;
 unsigned int obj_height;
 unsigned int angle;
-} a_color[5];
+} t_color;
+
+t_color a_color[5];
+
+
 
 bit frame = 0;
 bit obj_type;
@@ -9469,28 +9473,35 @@ unsigned int lw;
 # 18 "position.h"
 void CompareFrames(void);
 void CheckAileron(void);
+void CheckElevator(void);
+void BeneathTable(void);
+void BeneathFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 31
-typedef struct t_frame {
+# 34
+typedef struct nt_frame {
 unsigned int num;
 unsigned int pos_x;
 unsigned int pos_y;
 unsigned int height;
 int angle;
-} a_frame[2];
+} t_frame;
 
-# 42
-typedef struct t_frame {
+t_frame a_frame[2];
+
+# 47
+typedef struct nt_frame_dif {
 unsigned int num;
 signed int pos_x;
 signed int pos_y;
 signed int height;
 signed int angle;
-} a_frame_dif[1];
+} t_frame_dif;
+
+t_frame_dif a_frame_dif[1];
 
 
 bit direction;
@@ -9506,6 +9517,9 @@ int cm50 = 11662;
 int c_path = 10;
 int id_current_cc;
 
+bit storedif;
+bit table;
+
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
 void ReadHeight(void);
@@ -9515,110 +9529,4 @@ unsigned int time_height;
 
 # 33 "main.h"
 interrupt void Isr(void);
-
-# 30 "init.c"
-void Init(void) {
-InitPort();
-InitTris();
-InitAnsel();
-InitOsc();
-InitUart();
-InitSpi();
-InitTimer();
-InitInterrupt();
-}
-
-
-
-void InitPort(void) {
-PORTA = 0b00010000;
-PORTB = 0b00001000;
-PORTC = 0b00000000;
-PORTD = 0b00001000;
-PORTE = 0b00000000;
-}
-
-
-
-void InitTris(void) {
-TRISA = 0b00000000;
-TRISB = 0b00010000;
-TRISC = 0b10010001;
-TRISD = 0b01010000;
-TRISE = 0b00000000;
-}
-
-
-
-void InitAnsel(void) {
-ANSELA = 0b00000000;
-ANSELB = 0b00000000;
-ANSELC = 0b00000000;
-ANSELD = 0b00000000;
-ANSELE = 0b00000000;
-}
-
-
-
-void InitOsc(void) {
-OSCCON = 0b01110111;
-}
-
-
-
-void InitUart(void) {
-
-}
-
-# 92
-void InitSpi(void) {
-SSP1STAT = 0b00000000;
-SSP1CON1 = 0b00100001;
-}
-
-# 110
-void InitTimer(void) {
-
-
-T3GCONbits.TMR3GE = 1;
-T3GCONbits.T3GSPM = 0;
-T3GCONbits.T3GTM = 0;
-T3GCONbits.T3GPOL = 1;
-T3GCONbits.T3GSS = 0b00;
-
-T3CONbits.TMR3CS = 0b00;
-T3CONbits.T3CKPS = 0b00;
-T3CONbits.nT3SYNC = 1;
-T3CONbits.TMR3ON = 1;
-
-
-
-T5GCONbits.TMR5GE = 1;
-T5GCONbits.T5GSPM = 0;
-T5GCONbits.T5GTM = 0;
-T5GCONbits.T5GPOL = 1;
-T5GCONbits.T5GSS = 0b00;
-
-T5CONbits.TMR5CS = 0b00;
-T5CONbits.T5CKPS = 0b00;
-T5CONbits.nT5SYNC = 1;
-T5CONbits.TMR5ON = 1;
-
-}
-
-# 144
-void InitInterrupt(void) {
-GIE = 1;
-PEIE = 1;
-
-TMR3GIE = 1;
-}
-
-# 155
-void InitActors (void) {
-a_actors[0].aile = 500;
-a_actors[0].elev = 500;
-a_actors[0].thro = 0;
-a_actors[0].rudd = 500;
-}
 

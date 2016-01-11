@@ -17,6 +17,7 @@
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
 void CompareFrames(void);
 void CheckAileron(void);
+void CheckElevator(void);
 void BeneathTable(void);
 void BeneathFloor(void);
 void CheckThrottle(void);
@@ -30,24 +31,28 @@ void StoreAsOld(void);
 /* User defined Variables                                               */
 /*----------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
-typedef struct t_frame {
+typedef struct nt_frame {
     unsigned int num; // colorcode id
     unsigned int pos_x; // X center of object
     unsigned int pos_y; // Y center of object
     unsigned int height; // height of hex-rotor
     int angle; // rotation 
-} a_frame[2];
+} t_frame;
+
+t_frame a_frame[2];
 /* a_frame[0] = current frame
  * a_frame[1] = last frame
  */
 
-typedef struct t_frame {
+typedef struct nt_frame_dif {
     unsigned int num; // colorcode id
     signed int pos_x; // X center of object
     signed int pos_y; // Y center of object
     signed int height; // height of hex-rotor
     signed int angle; // rotation
-} a_frame_dif[1];
+} t_frame_dif;
+
+t_frame_dif a_frame_dif[1];
 /* a_frame_dif[0] = difference of a_frame[0] and a_frame[1] */
 
 bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
@@ -63,6 +68,8 @@ int cm50 = 11662; // 11661.5
 int c_path = 10; // 10 counter der farben
 int id_current_cc; // der wievielte Farbcode 0-9
 
+bit storedif;
+bit table;
 
 // </editor-fold>
 #endif	/* POSITION_H */
