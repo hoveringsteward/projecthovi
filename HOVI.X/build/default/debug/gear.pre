@@ -9518,10 +9518,6 @@ unsigned char higher_cc;
 
 t_path a_path[21], a_path_old[21];
 
-bit storedif = 0;
-bit table = 1;
-
-
 bit storedif;
 bit table;
 
@@ -9532,8 +9528,8 @@ void ReadHeight(void);
 # 28
 unsigned int time_height;
 float outgoing;
-float changerate = 0.2;
-bit highpassallowed = 1;
+float changerate;
+bit highpassallowed;
 
 # 33 "main.h"
 interrupt void Isr(void);
@@ -9541,6 +9537,7 @@ interrupt void Isr(void);
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
+bit set_ret;
 
 # 16 "gear.c"
 unsigned int CalcTime(void) {
@@ -9558,10 +9555,11 @@ bit ModeCheck(void) {
 unsigned int time_gear = CalcTime();
 if(time_gear < 6800){
 PORTBbits.RB2 = 0;
-return 0;
+set_ret = 0;
 }else if(time_gear >= 6800) {
 PORTBbits.RB2 = 1;
-return 1;
+set_ret = 1;
 }
 __nop();
+return set_ret;
 }

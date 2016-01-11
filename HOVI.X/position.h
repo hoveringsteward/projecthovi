@@ -83,12 +83,8 @@ typedef struct nt_path{
 
 t_path a_path[21], a_path_old[21];
 
-bit storedif = 0; // table / floor: if the difference was over 50cm the last time, it's 1
-bit table = 1; // 1 table; 0 floor
-
-
-bit storedif;
-bit table;
+bit storedif; // table / floor: if the difference was over 50cm the last time, it's 1
+bit table; // 1 table; 0 floor
 
 // </editor-fold>
 #endif	/* POSITION_H */

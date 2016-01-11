@@ -9494,6 +9494,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
+bit set_ret;
 
 # 27 "init.h"
 void Init(void);
@@ -9584,10 +9585,6 @@ unsigned char higher_cc;
 
 t_path a_path[21], a_path_old[21];
 
-bit storedif = 0;
-bit table = 1;
-
-
 bit storedif;
 bit table;
 
@@ -9598,8 +9595,8 @@ void ReadHeight(void);
 # 28
 unsigned int time_height;
 float outgoing;
-float changerate = 0.2;
-bit highpassallowed = 1;
+float changerate;
+bit highpassallowed;
 
 # 33 "main.h"
 interrupt void Isr(void);

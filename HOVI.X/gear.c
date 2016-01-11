@@ -31,10 +31,11 @@ bit ModeCheck(void) {
     unsigned int time_gear = CalcTime();
     if(time_gear < GEAR_TIME){
         LED = 0;
-        return 0;
+        set_ret = 0;
     }else if(time_gear >= GEAR_TIME) {
         LED = 1;
-        return 1;
+        set_ret = 1;
     }
     NOP();
+    return set_ret;
 }

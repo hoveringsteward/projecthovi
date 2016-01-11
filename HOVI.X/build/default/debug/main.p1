@@ -7608,6 +7608,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
+"22 gear.h
+[v _set_ret `b ~T0 @X0 1 e ]
+[; ;gear.h: 22: bit set_ret;
 [; ;init.h: 27: void Init(void);
 [; ;init.h: 28: void InitPort(void);
 [; ;init.h: 29: void InitTris(void);
@@ -7733,18 +7736,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 84: t_path a_path[21], a_path_old[21];
 "86
 [v _storedif `b ~T0 @X0 1 e ]
-[i _storedif
--> 0 `i
-]
-[; ;position.h: 86: bit storedif = 0;
+[; ;position.h: 86: bit storedif;
 "87
 [v _table `b ~T0 @X0 1 e ]
-[i _table
--> 1 `i
-]
-[; ;position.h: 87: bit table = 1;
-[; ;position.h: 90: bit storedif;
-[; ;position.h: 91: bit table;
+[; ;position.h: 87: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
@@ -7755,16 +7750,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ultrasonic.h: 29: float outgoing;
 "30
 [v _changerate `f ~T0 @X0 1 e ]
-[i _changerate
--> .0.2 `f
-]
-[; ;ultrasonic.h: 30: float changerate = 0.2;
+[; ;ultrasonic.h: 30: float changerate;
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
-[i _highpassallowed
--> 1 `i
-]
-[; ;ultrasonic.h: 31: bit highpassallowed = 1;
+[; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr(void);
 "85 main.c
 [v _main `(v ~T0 @X0 1 ef ]

@@ -19,6 +19,7 @@
 /*---------------------------------------------------------------------------*/
 unsigned int CalcTime(void);
 bit ModeCheck(void);
+bit set_ret;
 
 #endif	/* GEAR_H */
 

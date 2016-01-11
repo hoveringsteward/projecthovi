@@ -27,8 +27,8 @@ void ReadHeight(void);
 // <editor-fold defaultstate="collapsed" desc="Variables">
 unsigned int time_height;
 float outgoing;
-float changerate = 0.2; // 20 percent
-bit highpassallowed = 1; // should be used in position.c -> check throttle
+float changerate; // 20 percent
+bit highpassallowed; // should be used in position.c -> check throttle
 // </editor-fold>
 
 #endif	/* ULTRASONIC_H */

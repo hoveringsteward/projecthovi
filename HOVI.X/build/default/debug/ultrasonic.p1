@@ -7559,6 +7559,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
+"22 gear.h
+[v _set_ret `b ~T0 @X0 1 e ]
+[; ;gear.h: 22: bit set_ret;
 [; ;init.h: 27: void Init(void);
 [; ;init.h: 28: void InitPort(void);
 [; ;init.h: 29: void InitTris(void);
@@ -7684,18 +7687,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 84: t_path a_path[21], a_path_old[21];
 "86
 [v _storedif `b ~T0 @X0 1 e ]
-[i _storedif
--> 0 `i
-]
-[; ;position.h: 86: bit storedif = 0;
+[; ;position.h: 86: bit storedif;
 "87
 [v _table `b ~T0 @X0 1 e ]
-[i _table
--> 1 `i
-]
-[; ;position.h: 87: bit table = 1;
-[; ;position.h: 90: bit storedif;
-[; ;position.h: 91: bit table;
+[; ;position.h: 87: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
@@ -7706,16 +7701,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ultrasonic.h: 29: float outgoing;
 "30
 [v _changerate `f ~T0 @X0 1 e ]
-[i _changerate
--> .0.2 `f
-]
-[; ;ultrasonic.h: 30: float changerate = 0.2;
+[; ;ultrasonic.h: 30: float changerate;
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
-[i _highpassallowed
--> 1 `i
-]
-[; ;ultrasonic.h: 31: bit highpassallowed = 1;
+[; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr(void);
 "27 ultrasonic.c
 [v _StartHeightMeasure `(v ~T0 @X0 1 ef ]
@@ -7775,28 +7764,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _Filter ]
 [v _entry `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ultrasonic.c: 49: if(highpassallowed){
-"49
+[; ;ultrasonic.c: 46: changerate = 0.2;
+"46
+[e = _changerate -> .0.2 `f ]
+[; ;ultrasonic.c: 47: if(highpassallowed){
+"47
 [e $ ! _highpassallowed 1158  ]
 {
-"51
+"49
 }
-[; ;ultrasonic.c: 51: }else{
+[; ;ultrasonic.c: 49: }else{
 [e $U 1159  ]
 [e :U 1158 ]
 {
-[; ;ultrasonic.c: 52: outgoing = outgoing + (entry - outgoing) * changerate;
-"52
+[; ;ultrasonic.c: 50: outgoing = outgoing + (entry - outgoing) * changerate;
+"50
 [e = _outgoing + _outgoing * - -> _entry `f _outgoing _changerate ]
-"53
+"51
 }
 [e :U 1159 ]
-[; ;ultrasonic.c: 53: }
-[; ;ultrasonic.c: 54: return (int) outgoing;
-"54
+[; ;ultrasonic.c: 51: }
+[; ;ultrasonic.c: 52: return (int) outgoing;
+"52
 [e ) -> -> _outgoing `i `ui ]
 [e $UE 1157  ]
-[; ;ultrasonic.c: 55: }
-"55
+[; ;ultrasonic.c: 53: }
+"53
 [e :UE 1157 ]
 }

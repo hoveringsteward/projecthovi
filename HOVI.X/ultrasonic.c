@@ -43,9 +43,7 @@ void ReadHeight(void) {
 /* 
 /*------------------------------------------------------------*/
 unsigned int Filter(unsigned int entry){
-    
-    
-    
+    changerate = 0.2;
     if(highpassallowed){
         // i don't know
     }else{

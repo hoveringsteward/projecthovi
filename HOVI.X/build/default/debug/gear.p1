@@ -7683,18 +7683,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 84: t_path a_path[21], a_path_old[21];
 "86
 [v _storedif `b ~T0 @X0 1 e ]
-[i _storedif
--> 0 `i
-]
-[; ;position.h: 86: bit storedif = 0;
+[; ;position.h: 86: bit storedif;
 "87
 [v _table `b ~T0 @X0 1 e ]
-[i _table
--> 1 `i
-]
-[; ;position.h: 87: bit table = 1;
-[; ;position.h: 90: bit storedif;
-[; ;position.h: 91: bit table;
+[; ;position.h: 87: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
@@ -7705,19 +7697,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ultrasonic.h: 29: float outgoing;
 "30
 [v _changerate `f ~T0 @X0 1 e ]
-[i _changerate
--> .0.2 `f
-]
-[; ;ultrasonic.h: 30: float changerate = 0.2;
+[; ;ultrasonic.h: 30: float changerate;
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
-[i _highpassallowed
--> 1 `i
-]
-[; ;ultrasonic.h: 31: bit highpassallowed = 1;
+[; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
+"22 gear.h
+[v _set_ret `b ~T0 @X0 1 e ]
+[; ;gear.h: 22: bit set_ret;
 "16 gear.c
 [v _CalcTime `(ui ~T0 @X0 1 ef ]
 {
@@ -7768,10 +7757,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 33: PORTBbits.RB2 = 0;
 "33
 [e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
-[; ;gear.c: 34: return 0;
+[; ;gear.c: 34: set_ret = 0;
 "34
-[e ) -> -> 0 `i `b ]
-[e $UE 1153  ]
+[e = _set_ret -> -> 0 `i `b ]
 "35
 }
 [; ;gear.c: 35: }else if(time_gear >= 6800) {
@@ -7782,10 +7770,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 36: PORTBbits.RB2 = 1;
 "36
 [e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
-[; ;gear.c: 37: return 1;
+[; ;gear.c: 37: set_ret = 1;
 "37
-[e ) -> -> 1 `i `b ]
-[e $UE 1153  ]
+[e = _set_ret -> -> 1 `i `b ]
 "38
 }
 [e :U 1156 ]
@@ -7794,7 +7781,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 38: }
 [; ;gear.c: 39: __nop();
 [e ( ___nop ..  ]
-[; ;gear.c: 40: }
+[; ;gear.c: 40: return set_ret;
 "40
+[e ) -> -> _set_ret `i `b ]
+[e $UE 1153  ]
+[; ;gear.c: 41: }
+"41
 [e :UE 1153 ]
 }
