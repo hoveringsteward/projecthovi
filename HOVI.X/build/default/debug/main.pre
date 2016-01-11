@@ -9521,7 +9521,9 @@ unsigned int pos_y;
 unsigned int obj_width;
 unsigned int obj_height;
 unsigned int angle;
-} a_color[5];
+} t_color;
+
+t_color a_color[5];
 
 bit frame = 0;
 bit obj_type;
@@ -9531,6 +9533,7 @@ unsigned int lw;
 # 18 "position.h"
 void CompareFrames(void);
 void CheckAileron(void);
+void CheckElevator(void);
 void BeneathTable(void);
 void BeneathFloor(void);
 void CheckThrottle(void);
@@ -9538,23 +9541,28 @@ void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 33
-typedef struct t_frame {
+# 34
+typedef struct nt_frame {
 unsigned int num;
 unsigned int pos_x;
 unsigned int pos_y;
 unsigned int height;
 int angle;
-} a_frame[2];
+} t_frame;
 
-# 44
-typedef struct t_frame_dif {
-unsigned int dif_num;
+t_frame a_frame[2];
+
+# 55
+typedef struct nt_frame_dif {
+unsigned int num;
 signed int dif_pos_x;
 signed int dif_pos_y;
 signed int dif_height;
-signed int dif_angle;
-} a_frame_dif[1];
+signed int if_angle;
+} t_frame_dif;
+
+t_frame_dif a_frame_dif[1];
+
 
 
 bit direction;
@@ -9576,6 +9584,10 @@ unsigned char higher_cc;
 
 bit storedif = 0;
 bit table = 1;
+
+
+bit storedif;
+bit table;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);

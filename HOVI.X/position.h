@@ -17,6 +17,7 @@
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
 void CompareFrames(void);
 void CheckAileron(void);
+void CheckElevator(void);
 void BeneathTable(void);
 void BeneathFloor(void);
 void CheckThrottle(void);
@@ -30,24 +31,37 @@ void StoreAsOld(void);
 /* User defined Variables                                               */
 /*----------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
-typedef struct t_frame {
+typedef struct nt_frame {
     unsigned int num; // colorcode id
     unsigned int pos_x; // X center of object
     unsigned int pos_y; // Y center of object
     unsigned int height; // height of hex-rotor
     int angle; // rotation 
-} a_frame[2];
+} t_frame;
+
+t_frame a_frame[2];
 /* a_frame[0] = current frame
  * a_frame[1] = last frame
  */
 
-typedef struct t_frame_dif {
+/*typedef struct t_frame_dif {
     unsigned int dif_num; // colorcode id
     signed int dif_pos_x; // X center of object
     signed int dif_pos_y; // Y center of object
     signed int dif_height; // height of hex-rotor
     signed int dif_angle; // rotation
 } a_frame_dif[1];
+*/
+typedef struct nt_frame_dif {
+    unsigned int num; // colorcode id
+    signed int dif_pos_x; // X center of object
+    signed int dif_pos_y; // Y center of object
+    signed int dif_height; // height of hex-rotor
+    signed int if_angle; // rotation
+} t_frame_dif;
+
+t_frame_dif a_frame_dif[1];
+
 /* a_frame_dif[0] = difference of a_frame[0] and a_frame[1] */
 
 bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
@@ -71,6 +85,8 @@ bit storedif = 0; // table / floor: if the difference was over 50cm the last tim
 bit table = 1; // 1 table; 0 floor
 
 
+bit storedif;
+bit table;
 
 // </editor-fold>
 #endif	/* POSITION_H */

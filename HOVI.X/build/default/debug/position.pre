@@ -9459,7 +9459,9 @@ unsigned int pos_y;
 unsigned int obj_width;
 unsigned int obj_height;
 unsigned int angle;
-} a_color[5];
+} t_color;
+
+t_color a_color[5];
 
 bit frame = 0;
 bit obj_type;
@@ -9469,6 +9471,7 @@ unsigned int lw;
 # 18 "position.h"
 void CompareFrames(void);
 void CheckAileron(void);
+void CheckElevator(void);
 void BeneathTable(void);
 void BeneathFloor(void);
 void CheckThrottle(void);
@@ -9476,23 +9479,28 @@ void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 33
-typedef struct t_frame {
+# 34
+typedef struct nt_frame {
 unsigned int num;
 unsigned int pos_x;
 unsigned int pos_y;
 unsigned int height;
 int angle;
-} a_frame[2];
+} t_frame;
 
-# 44
-typedef struct t_frame_dif {
-unsigned int dif_num;
+t_frame a_frame[2];
+
+# 55
+typedef struct nt_frame_dif {
+unsigned int num;
 signed int dif_pos_x;
 signed int dif_pos_y;
 signed int dif_height;
-signed int dif_angle;
-} a_frame_dif[1];
+signed int if_angle;
+} t_frame_dif;
+
+t_frame_dif a_frame_dif[1];
+
 
 
 bit direction;
@@ -9514,6 +9522,10 @@ unsigned char higher_cc;
 
 bit storedif = 0;
 bit table = 1;
+
+
+bit storedif;
+bit table;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9542,7 +9554,7 @@ CheckRudderAhead();
 CheckRudderBack();
 }
 } else {
-return 0;
+return;
 }
 }
 
@@ -9784,6 +9796,56 @@ else if (a_frame[0].angle > 5) {
 
 if (a_frame[1].angle > a_frame[0].angle) {
 
+if (a_frame_dif[0].angle <= 2) {
+if (a_frame_dif[0].angle <= 1) {
+ActRudder(-3);
+} else {
+ActRudder(0);
+}
+} else {
+
+ActRudder(3);
+}
+} else {
+
+ActRudder(-3);
+}
+}
+
+else {
+
+if (a_frame[1].angle < a_frame[0].angle) {
+
+if (a_frame_dif[0].angle <= -2) {
+if (a_frame_dif[0].angle <= -2) {
+ActRudder(3);
+} else {
+ActRudder(0);
+}
+} else {
+
+ActRudder(-3);
+}
+} else {
+
+ActRudder(3);
+}
+}
+
+}
+
+# 390
+void CheckRudderBack(void) {
+
+
+if (a_frame[0].angle <= -175 || a_frame[0].angle >= 175) {
+ActRudder(0);
+}
+
+else if (a_frame[0].angle > -175) {
+
+if (a_frame[1].angle > a_frame[0].angle) {
+
 if (a_frame_dif[0].dif_angle <= 2) {
 if (a_frame_dif[0].dif_angle <= 1) {
 ActRudder(-3);
@@ -9822,7 +9884,7 @@ ActRudder(3);
 
 }
 
-# 391
+# 449
 void CheckRudderBack(void) {
 
 
@@ -9874,7 +9936,7 @@ ActRudder(3);
 
 }
 
-# 447
+# 505
 void StoreAsOld(void) {
 a_frame[1].num = a_frame[0].num;
 a_frame[1].pos_x = a_frame[0].pos_x;

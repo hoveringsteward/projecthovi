@@ -8,20 +8,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "34 position.h
 [s S1149 `ui 1 `ui 1 `ui 1 `ui 1 `i 1 ]
 [n S1149 nt_frame num pos_x pos_y height angle ]
-"55
+"47
 [s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
-[n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height if_angle ]
-"19760 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-[v _SSP1IF `Vb ~T0 @X0 0 e@31987 ]
-[v F7833 `(v ~T0 @X0 1 tf1`ul ]
-"152 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
-[v __delay `JF7833 ~T0 @X0 0 e ]
-[p i __delay ]
-"16022 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-[v _SSP1BUF `Vuc ~T0 @X0 0 e@4041 ]
-"43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
+[n S1150 nt_frame_dif num pos_x pos_y height angle ]
+"23 communication.h
+[v _ExchangeSpiWord `(ui ~T0 @X0 0 ef2`uc`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7555,21 +7546,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 "38 pixy.h
 [v _a_color `S1148 ~T0 @X0 -> 5 `i e ]
 [; ;pixy.h: 38: t_color a_color[5];
-"40
+"42
 [v _frame `b ~T0 @X0 1 e ]
 [i _frame
 -> 0 `i
 ]
-[; ;pixy.h: 40: bit frame = 0;
-"41
-[v _obj_type `b ~T0 @X0 1 e ]
-[; ;pixy.h: 41: bit obj_type;
-"42
-[v _w `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 42: unsigned int w;
+[; ;pixy.h: 42: bit frame = 0;
 "43
+[v _obj_type `b ~T0 @X0 1 e ]
+[; ;pixy.h: 43: bit obj_type;
+"44
+[v _w `ui ~T0 @X0 1 e ]
+[; ;pixy.h: 44: unsigned int w;
+"45
 [v _lw `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 43: unsigned int lw;
+[; ;pixy.h: 45: unsigned int lw;
 [; ;position.h: 18: void CompareFrames(void);
 [; ;position.h: 19: void CheckAileron(void);
 [; ;position.h: 20: void CheckElevator(void);
@@ -7589,202 +7580,260 @@ Version 3.2 HI-TECH Software Intermediate Code
 "42 position.h
 [v _a_frame `S1149 ~T0 @X0 -> 2 `i e ]
 [; ;position.h: 42: t_frame a_frame[2];
-[; ;position.h: 55: typedef struct nt_frame_dif {
-[; ;position.h: 56: unsigned int num;
-[; ;position.h: 57: signed int dif_pos_x;
-[; ;position.h: 58: signed int dif_pos_y;
-[; ;position.h: 59: signed int dif_height;
-[; ;position.h: 60: signed int if_angle;
-[; ;position.h: 61: } t_frame_dif;
-"63
+[; ;position.h: 47: typedef struct nt_frame_dif {
+[; ;position.h: 48: unsigned int num;
+[; ;position.h: 49: signed int pos_x;
+[; ;position.h: 50: signed int pos_y;
+[; ;position.h: 51: signed int height;
+[; ;position.h: 52: signed int angle;
+[; ;position.h: 53: } t_frame_dif;
+"55
 [v _a_frame_dif `S1150 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;position.h: 63: t_frame_dif a_frame_dif[1];
-"67
+[; ;position.h: 55: t_frame_dif a_frame_dif[1];
+"58
 [v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 67: bit direction;
-"69
-[v _cm180 `ui ~T0 @X0 1 e ]
+[; ;position.h: 58: bit direction;
+"60
+[v _cm180 `i ~T0 @X0 1 e ]
 [i _cm180
--> -> 41982 `l `ui
+-> -> 41982 `l `i
 ]
-[; ;position.h: 69: unsigned int cm180 = 41982;
-"70
-[v _cm220 `ui ~T0 @X0 1 e ]
+[; ;position.h: 60: int cm180 = 41982;
+"61
+[v _cm220 `i ~T0 @X0 1 e ]
 [i _cm220
--> -> 51310 `l `ui
+-> -> 51310 `l `i
 ]
-[; ;position.h: 70: unsigned int cm220 = 51310;
-"71
-[v _cm100 `ui ~T0 @X0 1 e ]
+[; ;position.h: 61: int cm220 = 51310;
+"62
+[v _cm100 `i ~T0 @X0 1 e ]
 [i _cm100
--> -> 23323 `i `ui
+-> 23323 `i
 ]
-[; ;position.h: 71: unsigned int cm100 = 23323;
-"72
-[v _cm120 `ui ~T0 @X0 1 e ]
+[; ;position.h: 62: int cm100 = 23323;
+"63
+[v _cm120 `i ~T0 @X0 1 e ]
 [i _cm120
--> -> 27987 `i `ui
+-> 27987 `i
 ]
-[; ;position.h: 72: unsigned int cm120 = 27987;
-"73
-[v _cm80 `ui ~T0 @X0 1 e ]
+[; ;position.h: 63: int cm120 = 27987;
+"64
+[v _cm80 `i ~T0 @X0 1 e ]
 [i _cm80
--> -> 18659 `i `ui
+-> 18659 `i
 ]
-[; ;position.h: 73: unsigned int cm80 = 18659;
-"74
-[v _cm50 `ui ~T0 @X0 1 e ]
+[; ;position.h: 64: int cm80 = 18659;
+"65
+[v _cm50 `i ~T0 @X0 1 e ]
 [i _cm50
--> -> 11662 `i `ui
+-> 11662 `i
 ]
-[; ;position.h: 74: unsigned int cm50 = 11662;
-"77
+[; ;position.h: 65: int cm50 = 11662;
+"68
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
 -> 10 `i
 ]
-[; ;position.h: 77: int c_path = 10;
-"78
+[; ;position.h: 68: int c_path = 10;
+"69
 [v _id_current_cc `i ~T0 @X0 1 e ]
-[; ;position.h: 78: int id_current_cc;
-[; ;position.h: 79: typedef struct t_path{
-[; ;position.h: 80: unsigned char lower_cc;
-[; ;position.h: 81: unsigned char higher_cc;
-[; ;position.h: 82: }a_path[21], a_path_old[21];
-"84
+[; ;position.h: 69: int id_current_cc;
+"71
 [v _storedif `b ~T0 @X0 1 e ]
-[i _storedif
--> 0 `i
-]
-[; ;position.h: 84: bit storedif = 0;
-"85
+[; ;position.h: 71: bit storedif;
+"72
 [v _table `b ~T0 @X0 1 e ]
-[i _table
--> 1 `i
-]
-[; ;position.h: 85: bit table = 1;
-[; ;position.h: 88: bit storedif;
-[; ;position.h: 89: bit table;
+[; ;position.h: 72: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
 [v _time_height `ui ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 28: unsigned int time_height;
 [; ;main.h: 33: interrupt void Isr(void);
-"16 communication.c
-[v _ExchangeSpiByte `(uc ~T0 @X0 1 ef1`uc ]
+"27 pixy.c
+[v _ReadObject `(uc ~T0 @X0 1 ef3`uc`ui`uc ]
 {
-[; ;communication.c: 16: unsigned char ExchangeSpiByte(unsigned char byte1) {
-[e :U _ExchangeSpiByte ]
-[v _byte1 `uc ~T0 @X0 1 r1 ]
+[; ;pixy.c: 27: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
+[e :U _ReadObject ]
+[v _des_obj_type `uc ~T0 @X0 1 r1 ]
+[v _des_obj `ui ~T0 @X0 1 r2 ]
+[v _max_obj `uc ~T0 @X0 1 r3 ]
 [f ]
-[; ;communication.c: 17: if(SSP1IF == 1) {
-"17
-[e $ ! == -> _SSP1IF `i -> 1 `i 1153  ]
-{
-[; ;communication.c: 18: _delay((unsigned long)((100)*(16000000/4000000.0)));
-"18
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;communication.c: 19: SSP1IF = 0;
-"19
-[e = _SSP1IF -> -> 0 `i `b ]
-"20
-}
-[e :U 1153 ]
-[; ;communication.c: 20: }
-[; ;communication.c: 21: SSP1BUF = byte1;
-"21
-[e = _SSP1BUF _byte1 ]
-[; ;communication.c: 22: while(SSP1IF == 0);
-"22
-[e $U 1154  ]
-[e :U 1155 ]
-[e :U 1154 ]
-[e $ == -> _SSP1IF `i -> 0 `i 1155  ]
-[e :U 1156 ]
-[; ;communication.c: 23: SSP1IF = 0;
-"23
-[e = _SSP1IF -> -> 0 `i `b ]
-[; ;communication.c: 24: return (SSP1BUF);
-"24
-[e ) _SSP1BUF ]
-[e $UE 1152  ]
-[; ;communication.c: 25: }
-"25
-[e :UE 1152 ]
-}
-"27
-[v _ExchangeSpiWord `(ui ~T0 @X0 1 ef2`uc`uc ]
-{
-[; ;communication.c: 27: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2) {
-[e :U _ExchangeSpiWord ]
-[v _byte1 `uc ~T0 @X0 1 r1 ]
-[v _byte2 `uc ~T0 @X0 1 r2 ]
-[f ]
-[; ;communication.c: 28: __nop();
+[; ;pixy.c: 28: frame = 0;
 "28
-[e ( ___nop ..  ]
+[e = _frame -> -> 0 `i `b ]
 "29
-[v _SPI_word `ui ~T0 @X0 1 a ]
-[; ;communication.c: 29: unsigned int SPI_word = 0;
-[e = _SPI_word -> -> 0 `i `ui ]
-[; ;communication.c: 30: if(SSP1IF == 1) {
+[v _c `uc ~T0 @X0 1 a ]
+[; ;pixy.c: 29: unsigned char c = 0;
+[e = _c -> -> 0 `i `uc ]
+[; ;pixy.c: 30: for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
 "30
-[e $ ! == -> _SSP1IF `i -> 1 `i 1158  ]
 {
-[; ;communication.c: 31: _delay((unsigned long)((100)*(16000000/4000000.0)));
-"31
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;communication.c: 32: SSP1IF = 0;
-"32
-[e = _SSP1IF -> -> 0 `i `b ]
-"33
-}
-[e :U 1158 ]
-[; ;communication.c: 33: }
-[; ;communication.c: 34: SSP1BUF = byte1;
+[v _c_obj `uc ~T0 @X0 1 a ]
+[e = _c_obj -> -> 0 `i `uc ]
+[e $U 1155  ]
+[e :U 1152 ]
+{
+[; ;pixy.c: 34: if(frame == 1) {
 "34
-[e = _SSP1BUF _byte1 ]
-[; ;communication.c: 35: while(SSP1IF == 0);
+[e $ ! == -> _frame `i -> 1 `i 1156  ]
+{
+[; ;pixy.c: 35: w = ExchangeSpiWord(0x5a, 0);
 "35
-[e $U 1159  ]
-[e :U 1160 ]
-[e :U 1159 ]
-[e $ == -> _SSP1IF `i -> 0 `i 1160  ]
-[e :U 1161 ]
-[; ;communication.c: 36: SSP1IF = 0;
+[e = _w ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 36: if(w == 0xaa55) {
 "36
-[e = _SSP1IF -> -> 0 `i `b ]
-[; ;communication.c: 37: SPI_word = SSP1BUF;
+[e $ ! == _w -> 43605 `ui 1157  ]
+{
+[; ;pixy.c: 37: a_color[c_obj].type = 0xaa55;
 "37
-[e = _SPI_word -> _SSP1BUF `ui ]
-[; ;communication.c: 38: SPI_word <<= 8;
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43605 `ui ]
 "38
-[e =<< _SPI_word -> 8 `i ]
-[; ;communication.c: 39: SSP1BUF = byte2;
+}
+[; ;pixy.c: 38: }else if(w == 0xaa56) {
+[e $U 1158  ]
+[e :U 1157 ]
+[e $ ! == _w -> 43606 `ui 1159  ]
+{
+[; ;pixy.c: 39: a_color[c_obj].type = 0xaa56;
 "39
-[e = _SSP1BUF _byte2 ]
-[; ;communication.c: 40: while(SSP1IF == 0);
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43606 `ui ]
 "40
-[e $U 1162  ]
-[e :U 1163 ]
-[e :U 1162 ]
-[e $ == -> _SSP1IF `i -> 0 `i 1163  ]
-[e :U 1164 ]
-[; ;communication.c: 41: SSP1IF = 0;
+}
+[e :U 1159 ]
 "41
-[e = _SSP1IF -> -> 0 `i `b ]
-[; ;communication.c: 42: SPI_word |= SSP1BUF;
+[e :U 1158 ]
+}
+[e :U 1156 ]
+[; ;pixy.c: 40: }
+[; ;pixy.c: 41: }
+[; ;pixy.c: 42: while(frame == 0) {
 "42
-[e =| _SPI_word -> _SSP1BUF `ui ]
-[; ;communication.c: 43: __nop();
+[e $U 1160  ]
+[e :U 1161 ]
+{
+[; ;pixy.c: 43: w = ExchangeSpiWord(0x5a, 0);
 "43
-[e ( ___nop ..  ]
-[; ;communication.c: 44: return (SPI_word);
+[e = _w ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 44: if(lw == 0xaa55 && w == 0xaa55) {
 "44
-[e ) _SPI_word ]
-[e $UE 1157  ]
-[; ;communication.c: 45: }
+[e $ ! && == _lw -> 43605 `ui == _w -> 43605 `ui 1163  ]
+{
+[; ;pixy.c: 45: frame = 1;
 "45
-[e :UE 1157 ]
+[e = _frame -> -> 1 `i `b ]
+[; ;pixy.c: 46: obj_type = 0;
+"46
+[e = _obj_type -> -> 0 `i `b ]
+[; ;pixy.c: 47: a_color[c_obj].type = 0xaa55;
+"47
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43605 `ui ]
+"48
+}
+[; ;pixy.c: 48: } else if(lw == 0xaa55 && w == 0xaa56) {
+[e $U 1164  ]
+[e :U 1163 ]
+[e $ ! && == _lw -> 43605 `ui == _w -> 43606 `ui 1165  ]
+{
+[; ;pixy.c: 49: frame = 1;
+"49
+[e = _frame -> -> 1 `i `b ]
+[; ;pixy.c: 50: obj_type = 1;
+"50
+[e = _obj_type -> -> 1 `i `b ]
+[; ;pixy.c: 51: a_color[c_obj].type = 0xaa56;
+"51
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 0 -> 43606 `ui ]
+"52
+}
+[; ;pixy.c: 52: } else if(w == 0 && lw == 0){
+[e $U 1166  ]
+[e :U 1165 ]
+[e $ ! && == _w -> -> 0 `i `ui == _lw -> -> 0 `i `ui 1167  ]
+{
+[; ;pixy.c: 53: frame = 0;
+"53
+[e = _frame -> -> 0 `i `b ]
+"54
+}
+[e :U 1167 ]
+"55
+[e :U 1166 ]
+[e :U 1164 ]
+[; ;pixy.c: 54: }
+[; ;pixy.c: 55: lw = w;
+[e = _lw _w ]
+[; ;pixy.c: 56: c++;
+"56
+[e ++ _c -> -> 1 `i `uc ]
+[; ;pixy.c: 57: if(c > 254) {
+"57
+[e $ ! > -> _c `i -> 254 `i 1168  ]
+{
+[; ;pixy.c: 58: return 0;
+"58
+[e ) -> -> 0 `i `uc ]
+[e $UE 1151  ]
+"59
+}
+[e :U 1168 ]
+"60
+}
+[e :U 1160 ]
+"42
+[e $ == -> _frame `i -> 0 `i 1161  ]
+[e :U 1162 ]
+"62
+[v _checksum `ui ~T0 @X0 1 a ]
+[; ;pixy.c: 59: }
+[; ;pixy.c: 60: }
+[; ;pixy.c: 62: unsigned int checksum = ExchangeSpiWord(0x5a, 0);
+[e = _checksum ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 64: a_color[c_obj].num = ExchangeSpiWord(0x5a, 0);
+"64
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 1 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 65: a_color[c_obj].pos_x = ExchangeSpiWord(0x5a, 0);
+"65
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 2 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 66: a_color[c_obj].pos_y = ExchangeSpiWord(0x5a, 0);
+"66
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 3 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 67: a_color[c_obj].obj_width = ExchangeSpiWord(0x5a, 0);
+"67
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 4 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 68: a_color[c_obj].obj_height = ExchangeSpiWord(0x5a, 0);
+"68
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 5 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 69: a_color[c_obj].angle = ExchangeSpiWord(0x5a, 0);
+"69
+[e = . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 6 ( _ExchangeSpiWord (2 , -> -> 90 `i `uc -> -> 0 `i `uc ]
+[; ;pixy.c: 71: a_frame[0].num = a_color[c_obj].num;
+"71
+[e = . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 1 ]
+[; ;pixy.c: 72: a_frame[0].pos_x = a_color[c_obj].pos_x;
+"72
+[e = . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 2 ]
+[; ;pixy.c: 73: a_frame[0].pos_y = a_color[c_obj].pos_y;
+"73
+[e = . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 3 ]
+[; ;pixy.c: 74: a_frame[0].angle = a_color[c_obj].angle;
+"74
+[e = . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -> . *U + &U _a_color * -> _c_obj `ux -> -> # *U &U _a_color `ui `ux 6 `i ]
+"76
+}
+"30
+[e ++ _c_obj -> -> 1 `i `uc ]
+[e :U 1155 ]
+[e $ < -> _c_obj `i -> _max_obj `i 1152  ]
+[e :U 1153 ]
+"76
+}
+[; ;pixy.c: 76: }
+[; ;pixy.c: 77: return 1;
+"77
+[e ) -> -> 1 `i `uc ]
+[e $UE 1151  ]
+[; ;pixy.c: 78: }
+"78
+[e :UE 1151 ]
 }

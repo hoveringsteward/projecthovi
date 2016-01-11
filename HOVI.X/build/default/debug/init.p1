@@ -2,6 +2,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "32 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
+"26 pixy.h
+[s S1148 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S1148 colorobject type num pos_x pos_y obj_width obj_height angle ]
+"34 position.h
+[s S1149 `ui 1 `ui 1 `ui 1 `ui 1 `i 1 ]
+[n S1149 nt_frame num pos_x pos_y height angle ]
+"55
+[s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
+[n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height if_angle ]
 "28 init.h
 [v _InitPort `(v ~T0 @X0 0 ef ]
 "29
@@ -7663,108 +7672,120 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pixy.h: 33: unsigned int obj_width;
 [; ;pixy.h: 34: unsigned int obj_height;
 [; ;pixy.h: 35: unsigned int angle;
-[; ;pixy.h: 36: } a_color[5];
+[; ;pixy.h: 36: } t_color;
 "38 pixy.h
+[v _a_color `S1148 ~T0 @X0 -> 5 `i e ]
+[; ;pixy.h: 38: t_color a_color[5];
+"40
 [v _frame `b ~T0 @X0 1 e ]
 [i _frame
 -> 0 `i
 ]
-[; ;pixy.h: 38: bit frame = 0;
-"39
-[v _obj_type `b ~T0 @X0 1 e ]
-[; ;pixy.h: 39: bit obj_type;
-"40
-[v _w `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 40: unsigned int w;
+[; ;pixy.h: 40: bit frame = 0;
 "41
+[v _obj_type `b ~T0 @X0 1 e ]
+[; ;pixy.h: 41: bit obj_type;
+"42
+[v _w `ui ~T0 @X0 1 e ]
+[; ;pixy.h: 42: unsigned int w;
+"43
 [v _lw `ui ~T0 @X0 1 e ]
-[; ;pixy.h: 41: unsigned int lw;
+[; ;pixy.h: 43: unsigned int lw;
 [; ;position.h: 18: void CompareFrames(void);
 [; ;position.h: 19: void CheckAileron(void);
-[; ;position.h: 20: void BeneathTable(void);
-[; ;position.h: 21: void BeneathFloor(void);
-[; ;position.h: 22: void CheckThrottle(void);
-[; ;position.h: 23: void CheckRudderAhead(void);
-[; ;position.h: 24: void CheckRudderBack(void);
-[; ;position.h: 25: void StoreAsOld(void);
-[; ;position.h: 33: typedef struct t_frame {
-[; ;position.h: 34: unsigned int num;
-[; ;position.h: 35: unsigned int pos_x;
-[; ;position.h: 36: unsigned int pos_y;
-[; ;position.h: 37: unsigned int height;
-[; ;position.h: 38: int angle;
-[; ;position.h: 39: } a_frame[2];
-[; ;position.h: 44: typedef struct t_frame_dif {
-[; ;position.h: 45: unsigned int dif_num;
-[; ;position.h: 46: signed int dif_pos_x;
-[; ;position.h: 47: signed int dif_pos_y;
-[; ;position.h: 48: signed int dif_height;
-[; ;position.h: 49: signed int dif_angle;
-[; ;position.h: 50: } a_frame_dif[1];
-"53 position.h
+[; ;position.h: 20: void CheckElevator(void);
+[; ;position.h: 21: void BeneathTable(void);
+[; ;position.h: 22: void BeneathFloor(void);
+[; ;position.h: 23: void CheckThrottle(void);
+[; ;position.h: 24: void CheckRudderAhead(void);
+[; ;position.h: 25: void CheckRudderBack(void);
+[; ;position.h: 26: void StoreAsOld(void);
+[; ;position.h: 34: typedef struct nt_frame {
+[; ;position.h: 35: unsigned int num;
+[; ;position.h: 36: unsigned int pos_x;
+[; ;position.h: 37: unsigned int pos_y;
+[; ;position.h: 38: unsigned int height;
+[; ;position.h: 39: int angle;
+[; ;position.h: 40: } t_frame;
+"42 position.h
+[v _a_frame `S1149 ~T0 @X0 -> 2 `i e ]
+[; ;position.h: 42: t_frame a_frame[2];
+[; ;position.h: 55: typedef struct nt_frame_dif {
+[; ;position.h: 56: unsigned int num;
+[; ;position.h: 57: signed int dif_pos_x;
+[; ;position.h: 58: signed int dif_pos_y;
+[; ;position.h: 59: signed int dif_height;
+[; ;position.h: 60: signed int if_angle;
+[; ;position.h: 61: } t_frame_dif;
+"63
+[v _a_frame_dif `S1150 ~T0 @X0 -> -> 1 `i `ux e ]
+[; ;position.h: 63: t_frame_dif a_frame_dif[1];
+"67
 [v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 53: bit direction;
-"55
+[; ;position.h: 67: bit direction;
+"69
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
 -> -> 41982 `l `ui
 ]
-[; ;position.h: 55: unsigned int cm180 = 41982;
-"56
+[; ;position.h: 69: unsigned int cm180 = 41982;
+"70
 [v _cm220 `ui ~T0 @X0 1 e ]
 [i _cm220
 -> -> 51310 `l `ui
 ]
-[; ;position.h: 56: unsigned int cm220 = 51310;
-"57
+[; ;position.h: 70: unsigned int cm220 = 51310;
+"71
 [v _cm100 `ui ~T0 @X0 1 e ]
 [i _cm100
 -> -> 23323 `i `ui
 ]
-[; ;position.h: 57: unsigned int cm100 = 23323;
-"58
+[; ;position.h: 71: unsigned int cm100 = 23323;
+"72
 [v _cm120 `ui ~T0 @X0 1 e ]
 [i _cm120
 -> -> 27987 `i `ui
 ]
-[; ;position.h: 58: unsigned int cm120 = 27987;
-"59
+[; ;position.h: 72: unsigned int cm120 = 27987;
+"73
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
 -> -> 18659 `i `ui
 ]
-[; ;position.h: 59: unsigned int cm80 = 18659;
-"60
+[; ;position.h: 73: unsigned int cm80 = 18659;
+"74
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
 -> -> 11662 `i `ui
 ]
-[; ;position.h: 60: unsigned int cm50 = 11662;
-"63
+[; ;position.h: 74: unsigned int cm50 = 11662;
+"77
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
 -> 10 `i
 ]
-[; ;position.h: 63: int c_path = 10;
-"64
+[; ;position.h: 77: int c_path = 10;
+"78
 [v _id_current_cc `i ~T0 @X0 1 e ]
-[; ;position.h: 64: int id_current_cc;
-[; ;position.h: 65: typedef struct t_path{
-[; ;position.h: 66: unsigned char lower_cc;
-[; ;position.h: 67: unsigned char higher_cc;
-[; ;position.h: 68: }a_path[21], a_path_old[21];
-"70
+[; ;position.h: 78: int id_current_cc;
+[; ;position.h: 79: typedef struct t_path{
+[; ;position.h: 80: unsigned char lower_cc;
+[; ;position.h: 81: unsigned char higher_cc;
+[; ;position.h: 82: }a_path[21], a_path_old[21];
+"84
 [v _storedif `b ~T0 @X0 1 e ]
 [i _storedif
 -> 0 `i
 ]
-[; ;position.h: 70: bit storedif = 0;
-"71
+[; ;position.h: 84: bit storedif = 0;
+"85
 [v _table `b ~T0 @X0 1 e ]
 [i _table
 -> 1 `i
 ]
-[; ;position.h: 71: bit table = 1;
+[; ;position.h: 85: bit table = 1;
+[; ;position.h: 88: bit storedif;
+[; ;position.h: 89: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
