@@ -17,6 +17,8 @@
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
 void CompareFrames(void);
 void CheckAileron(void);
+void BeneathTable(void);
+void BeneathFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);

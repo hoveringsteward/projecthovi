@@ -20,6 +20,8 @@
 #include "main.h"
 
 
+
+
 // <editor-fold defaultstate="collapsed" desc="Compare Frames">
 
 /* compareFrames
@@ -28,6 +30,7 @@
  * frame 1 - frame 0, respective old - new
 /*---------------------------------------------------------------------------*/
 void CompareFrames(void) {
+
     a_frame_dif[0].height = a_frame[1].height - a_frame[0].height;
 
     if (a_frame[1].num == a_frame[0].num) {
@@ -36,7 +39,6 @@ void CompareFrames(void) {
         a_frame_dif[0].angle = a_frame[1].angle - a_frame[0].angle;
         CheckAileron();
         CheckElevator();
-
         if (direction == 0) {
             CheckRudderAhead();
         } else {
@@ -55,7 +57,6 @@ void CompareFrames(void) {
  * function is called to change the pulsetime of the aileron pin
 /*-----------------------------------------------------------*/
 void CheckAileron(void) {
-    /* Two oft the used constants DES_X_MIN, DES_X_MAX; */
 
     // <editor-fold defaultstate="collapsed" desc="centered">
     if (a_frame[0].pos_x >= 150 && a_frame[0].pos_x <= 170) {
@@ -66,11 +67,11 @@ void CheckAileron(void) {
     else if (a_frame[0].pos_x > 170) {
         /* CC/Obj is on the right side of the frame */
         if (a_frame[1].pos_x > a_frame[0].pos_x) {
-            /* Old bigger than new, MC moving towards CC/Obj, moving right */
+            /* good: Old bigger than new, MC moving towards CC/Obj, moving right */
             if (a_frame_dif[0].pos_x <= V_MAX) {
                 if (a_frame_dif[0].pos_x <= V_MIN) {
                     /* Velocity is very slow, increase */
-                    ActAileron(-AIL_INC);
+                    ActAileron(-AIL_INC); // fly to the right
                 } else {
                     /* Velocity is OK */
                     ActAileron(0);
@@ -92,7 +93,7 @@ void CheckAileron(void) {
     else { // a_frame[0].pos_x < 150
         /* CC/Obj is on the left side of the frame */
         if (a_frame[1].pos_x < a_frame[0].pos_x) {
-            /* Old smaller than new, MC moving towards CC/Obj, moving left */
+            /* good: Old smaller than new, MC moving towards CC/Obj, moving left */
             if (a_frame_dif[0].pos_x >= -V_MAX) {
                 if (a_frame_dif[0].pos_x >= -V_MIN) {
                     /* Velocity is very slow, increase */
@@ -115,7 +116,7 @@ void CheckAileron(void) {
         }
     }
     // </editor-fold>
-    return;
+    return; // WHY IS THERE A RETURN ????????????????????????????????????????????????????????????????
 }
 // </editor-fold>
 
@@ -135,7 +136,7 @@ void CheckElevator(void) {
     else if (a_frame[0].pos_y > 110) {
         /* CC/Obj is in front of the frame */
         if (a_frame[1].pos_y < a_frame[0].pos_y) {
-            /* Old smaller than new, MC moving towards CC/Obj, moving forward */
+            /* good: Old smaller than new, MC moving towards CC/Obj, moving forward */
             if (a_frame_dif[0].pos_y >= -V_MAX) {
                 if (a_frame_dif[0].pos_y >= -V_MIN) {
                     /* Velocity is very slow, increase */
@@ -180,13 +181,52 @@ void CheckElevator(void) {
             /* Dif is negative, HC needs to get back in right direction */
             /* As soon as the right direction is achieved, velocity is */
             /* limited by the previous function */
-            ActElevator(-ELE_INC); // fly to the left backwards
+            ActElevator(-ELE_INC); // fly backwards
         }
     }
     // </editor-fold>
 }
 // </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="BeneathTable">
+
+/* The Hexrotor flies beneath the table
+ * the hexrotors height should be between 80 and 120cm
+/*-----------------------------------------------------------*/
+void BeneathTable(void) {
+    if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) { // between 0.8 and 1.2
+        ActThrottle(0);
+    } else if (a_frame[0].height < cm80) { // under 0.8
+        if (a_frame[0].height < cm50) { // under 0.5
+            ActThrottle(THR_INC_MUCH); // increase much
+        } else { // between 0.5m and 0.8m
+            ActThrottle(THR_INC); // increase
+        }
+    } else { // over 1.2
+        ActThrottle(-THR_INC); // decrease
+    }
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="BeneathFloor">
+
+/* Hexrotor flies beneath the floor
+ * the hexrotors height should be between 180 and 220cm
+/*------------------------------------------------------------*/
+void BeneathFloor(void) {
+    if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) { // between 1.8 and 2.2
+        ActThrottle(0);
+    } else if (a_frame[0].height < cm180) { // under 1.8
+        if (a_frame[0].height < cm100) { // under 1m
+            ActThrottle(THR_INC_MUCH); // increase much
+        } else { // between 1m and 1.8m
+            ActThrottle(THR_INC); // increase
+        }
+    } else { // over 2.2
+        ActThrottle(-THR_INC); // decrease
+    }
+}
+// </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Check Throttle">
 
@@ -196,48 +236,38 @@ void CheckElevator(void) {
 /*------------------------------------------------------------*/
 void CheckThrottle(void) {
 
-
-
-
-    // SPRINGEN / HÖHENUNTERSCHIED fehlt
-
     if (id_current_cc == 0) { // Table: start
-
-        if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) { // between 0.8 and 1.2
-            ActThrottle(0);
-        } else if (a_frame[0].height < cm80) { // under 0.8
-            if (a_frame[0].height < cm50) { // under 0.5
-                ActThrottle(THR_INC_MUCH); // increase much
-            } else { // between 0.5m and 0.8m
-                ActThrottle(THR_INC); // increase
+        // check, if difference is more than 50cm, from table to floor
+        if (a_frame_dif[0].height < -cm50) {
+            if (storedif) {
+                table = 0;
+                storedif = 0;
+            } else {
+                storedif = 1;
             }
-        } else { // over 1.2
-            ActThrottle(-THR_INC); // decrease
         }
-
-
-
-    } else if (id_current_cc > 0 && id_current_cc < c_path) { // Floor
-
-        if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) { // between 1.8 and 2.2
-            ActThrottle(0);
-        } else if (a_frame[0].height < cm180) { // under 1.8
-            if (a_frame[0].height < cm100) { // under 1m
-                ActThrottle(THR_INC_MUCH); // increase much
-            } else { // between 1m and 1.8m
-                ActThrottle(THR_INC); // increase
+        if (table) {
+            BeneathTable(void);
+        } else {
+            BeneathFloor(void);
+        }
+    } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
+        BeneathFloor(void);
+    } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table (pre-last CC)
+        // check, if difference is more than 50cm, from floor to table
+        if (a_frame_dif[0].height > cm50) {
+            if (storedif) {
+                table = 1;
+                storedif = 0;
+            } else {
+                storedif = 1;
             }
-        } else { // over 2.2
-            ActThrottle(-THR_INC); // decrease
         }
-
-
-
-    } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table
-
-
-
-
+        if (table) {
+            BeneathTable(void);
+        } else {
+            BeneathFloor(void);
+        }
     } else { // on the table -> last colorcode + landing
         /* Landing / Decreasing - has to check, if the height - difference is between
          * dec min and dec max
@@ -260,14 +290,25 @@ void CheckThrottle(void) {
                 /* Old smaller than new, MC is not decreasing */
                 ActThrottle(-THR_INC); // decrease = increase less
             }
-        } else { // good: lower than 30cm
-            // landed - take a break
-
-
-
-            // farbcodearray umdrehen
-            // delay + whileschleife
-            // starten
+        } else { // good: lower than 30cm, landed - take a break
+            // change the path-colorcode-array for coming home
+            /* old saves the path, which the hexrotor flied
+             * the new way, is the old way reserved (=umgekehrte Reihenfolge)
+             */
+            int tmp = c_path - 1;
+            for (int i = 0; i <= tmp; i++) {
+                a_path_old[i].higher_cc = a_path[i].higher_cc;
+                a_path_old[i].lower_cc = a_path[i].lower_cc;
+            }
+            for (int i = 0; i <= tmp; i++) {
+                a_path[(tmp - i)].higher_cc = a_path_old[i].higher_cc;
+                a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
+            }
+            // waiting 30 seconds, break for getting the cupcake
+            for (int i = 0; i <= 10000; i++) {
+                __delay_ms(3);
+            }
+            // STARTEN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
     }
 }
@@ -388,6 +429,7 @@ void CheckRudderBack(void) {
     // </editor-fold> 
 }
 // </editor-fold>
+
 // <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
 
 /* The rotation is checked, if it's over 175 and under -175, if not,
@@ -448,10 +490,10 @@ void CheckRudderBack(void) {
 
 }
 // </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="store old">
 
-/*
- *
+// <editor-fold defaultstate="collapsed" desc="Store Old">
+
+/* This Function stores the last Frame
  ------------------------------------------------------------*/
 void StoreAsOld(void) {
     a_frame[1].num = a_frame[0].num;

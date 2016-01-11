@@ -39,9 +39,21 @@ void ReadHeight(void) {
     a_frame[0].height = time_height;
 }
 
-void Pt1_Filter(){
+// <editor-fold defaultstate="collapsed" desc="not used: Filter">
+/* 
+/*------------------------------------------------------------*/
+unsigned int Filter(unsigned int entry){
     
-    // chrisyyyyyyyyyyy :b
+    float outgoing;
+    float changerate = 0.2; // 20 percent
+    bit highpassallowed = 1; // should be used in position.c -> check throttle
     
-    
+    if(highpassallowed){
+        // i don't know
+    }else{
+        outgoing = outgoing + (entry - outgoing) * changerate;
+    }
+    return (int) outgoing;  
 }
+// </editor-fold>
+
