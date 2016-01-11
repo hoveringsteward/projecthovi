@@ -1,5 +1,5 @@
 
-# 1 "gear.c"
+# 1 "pixy.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9429,6 +9429,10 @@ t_actors a_actors[1];
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 
+# 20 "gear.h"
+unsigned int CalcTime(void);
+bit ModeCheck(void);
+
 # 27 "init.h"
 void Init(void);
 void InitPort(void);
@@ -9465,12 +9469,14 @@ unsigned int lw;
 # 18 "position.h"
 void CompareFrames(void);
 void CheckAileron(void);
+void BeneathTable(void);
+void BeneathFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 31
+# 33
 typedef struct t_frame {
 unsigned int num;
 unsigned int pos_x;
@@ -9479,28 +9485,35 @@ unsigned int height;
 int angle;
 } a_frame[2];
 
-# 42
-typedef struct t_frame {
-unsigned int num;
-signed int pos_x;
-signed int pos_y;
-signed int height;
-signed int angle;
+# 44
+typedef struct t_frame_dif {
+unsigned int dif_num;
+signed int dif_pos_x;
+signed int dif_pos_y;
+signed int dif_height;
+signed int dif_angle;
 } a_frame_dif[1];
 
 
 bit direction;
 
-int cm180 = 41982;
-int cm220 = 51310;
-int cm100 = 23323;
-int cm120 = 27987;
-int cm80 = 18659;
-int cm50 = 11662;
+unsigned int cm180 = 41982;
+unsigned int cm220 = 51310;
+unsigned int cm100 = 23323;
+unsigned int cm120 = 27987;
+unsigned int cm80 = 18659;
+unsigned int cm50 = 11662;
 
 
 int c_path = 10;
 int id_current_cc;
+typedef struct t_path{
+unsigned char lower_cc;
+unsigned char higher_cc;
+}a_path[21], a_path_old[21];
+
+bit storedif = 0;
+bit table = 1;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9512,30 +9525,57 @@ unsigned int time_height;
 # 33 "main.h"
 interrupt void Isr(void);
 
-# 20 "gear.h"
-unsigned int CalcTime(void);
-bit ModeCheck(void);
+# 27 "pixy.c"
+unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
+frame = 0;
+unsigned char c = 0;
+for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
 
-# 16 "gear.c"
-unsigned int CalcTime(void) {
-unsigned int time_gear = TMR3H;
-time_gear <<= 8;
-time_gear |= TMR3L;
-TMR3H = 0;
-TMR3L = 0;
-__nop();
-return time_gear;
+
+
+if(frame == 1) {
+w = ExchangeSpiWord(0x5a, 0);
+if(w == 0xaa55) {
+a_color[c_obj].type = 0xaa55;
+}else if(w == 0xaa56) {
+a_color[c_obj].type = 0xaa56;
+}
+}
+while(frame == 0) {
+w = ExchangeSpiWord(0x5a, 0);
+if(lw == 0xaa55 && w == 0xaa55) {
+frame = 1;
+obj_type = 0;
+a_color[c_obj].type = 0xaa55;
+} else if(lw == 0xaa55 && w == 0xaa56) {
+frame = 1;
+obj_type = 1;
+a_color[c_obj].type = 0xaa56;
+} else if(w == 0 && lw == 0){
+frame = 0;
+}
+lw = w;
+c++;
+if(c > 254) {
+return 0;
+}
 }
 
-# 30
-bit ModeCheck(void) {
-unsigned int time_gear = CalcTime();
-if(time_gear < 6800){
-PORTBbits.RB2 = 0;
-return 0;
-}else if(time_gear >= 6800) {
-PORTBbits.RB2 = 1;
+unsigned int checksum = ExchangeSpiWord(0x5a, 0);
+
+a_color[c_obj].num = ExchangeSpiWord(0x5a, 0);
+a_color[c_obj].pos_x = ExchangeSpiWord(0x5a, 0);
+a_color[c_obj].pos_y = ExchangeSpiWord(0x5a, 0);
+a_color[c_obj].obj_width = ExchangeSpiWord(0x5a, 0);
+a_color[c_obj].obj_height = ExchangeSpiWord(0x5a, 0);
+a_color[c_obj].angle = ExchangeSpiWord(0x5a, 0);
+
+a_frame[0].num = a_color[c_obj].num;
+a_frame[0].pos_x = a_color[c_obj].pos_x;
+a_frame[0].pos_y = a_color[c_obj].pos_y;
+a_frame[0].angle = a_color[c_obj].angle;
+
+}
 return 1;
 }
-__nop();
-}
+

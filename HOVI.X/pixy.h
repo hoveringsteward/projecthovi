@@ -35,8 +35,6 @@ typedef struct colorobject {
     unsigned int angle; // Rotation
 } a_color[5];
 
-/* !!! schwer: WENN * statt 5 verwendet wird, kann das array dynamisch verwenet werden*/
-
 bit frame = 0;
 bit obj_type;
 unsigned int w;

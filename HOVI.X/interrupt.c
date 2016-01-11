@@ -33,7 +33,7 @@ interrupt void Isr() {
         TMR3GIF = 0;
         ModeCheck();
         StartHeightMeasure();
-        ReadObject();
+        ReadObject(); // unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj
         CompareFrames();
         ReadHeight();
         CheckThrottle();

@@ -41,27 +41,35 @@ typedef struct t_frame {
  * a_frame[1] = last frame
  */
 
-typedef struct t_frame {
-    unsigned int num; // colorcode id
-    signed int pos_x; // X center of object
-    signed int pos_y; // Y center of object
-    signed int height; // height of hex-rotor
-    signed int angle; // rotation
+typedef struct t_frame_dif {
+    unsigned int dif_num; // colorcode id
+    signed int dif_pos_x; // X center of object
+    signed int dif_pos_y; // Y center of object
+    signed int dif_height; // height of hex-rotor
+    signed int dif_angle; // rotation
 } a_frame_dif[1];
 /* a_frame_dif[0] = difference of a_frame[0] and a_frame[1] */
 
 bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
 
-int cm180 = 41982;
-int cm220 = 51310;
-int cm100 = 23323;
-int cm120 = 27987;
-int cm80 = 18659;
-int cm50 = 11662; // 11661.5
+unsigned int cm180 = 41982;
+unsigned int cm220 = 51310;
+unsigned int cm100 = 23323;
+unsigned int cm120 = 27987;
+unsigned int cm80 = 18659;
+unsigned int cm50 = 11662; // 11661.5
 
 // FÜRS WLAN !!!!!!!!!!!!!!! - gehört da nicht rein
 int c_path = 10; // 10 counter der farben
 int id_current_cc; // der wievielte Farbcode 0-9
+typedef struct t_path{
+    unsigned char lower_cc;
+    unsigned char higher_cc;
+}a_path[21], a_path_old[21];
+
+bit storedif = 0; // table / floor: if the difference was over 50cm the last time, it's 1
+bit table = 1; // 1 table; 0 floor
+
 
 
 // </editor-fold>

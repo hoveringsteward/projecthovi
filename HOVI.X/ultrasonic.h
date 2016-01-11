@@ -26,6 +26,7 @@ void ReadHeight(void);
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
 unsigned int time_height;
+
 // </editor-fold>
 
 #endif	/* ULTRASONIC_H */

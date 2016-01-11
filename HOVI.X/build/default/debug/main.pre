@@ -1,5 +1,5 @@
 
-# 1 "safety.c"
+# 1 "main.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9337,6 +9337,68 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
+
+# 21 "main.c"
+#pragma config IESO = OFF
+#pragma config PLLCFG = OFF
+#pragma config PRICLKEN = OFF
+#pragma config FOSC = INTIO67
+#pragma config FCMEN = OFF
+
+
+#pragma config BOREN = SBORDIS
+#pragma config BORV = 190
+#pragma config PWRTEN = OFF
+
+
+#pragma config WDTPS = 32768
+#pragma config WDTEN = OFF
+
+
+#pragma config CCP2MX = PORTC1
+#pragma config P2BMX = PORTD2
+#pragma config HFOFST = ON
+#pragma config PBADEN = ON
+#pragma config CCP3MX = PORTB5
+#pragma config MCLRE = EXTMCLR
+#pragma config T3CMX = PORTC0
+
+
+#pragma config LVP = OFF
+#pragma config STVREN = ON
+#pragma config XINST = OFF
+#pragma config DEBUG = OFF
+
+
+#pragma config CP2 = OFF
+#pragma config CP1 = OFF
+#pragma config CP3 = OFF
+#pragma config CP0 = OFF
+
+
+#pragma config CPB = OFF
+#pragma config CPD = OFF
+
+
+#pragma config WRT0 = OFF
+#pragma config WRT1 = OFF
+#pragma config WRT2 = OFF
+#pragma config WRT3 = OFF
+
+
+#pragma config WRTC = OFF
+#pragma config WRTD = OFF
+#pragma config WRTB = OFF
+
+
+#pragma config EBTR3 = OFF
+#pragma config EBTR1 = OFF
+#pragma config EBTR2 = OFF
+#pragma config EBTR0 = OFF
+
+
+#pragma config EBTRB = OFF
+
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\__size_t.h"
 typedef unsigned size_t;
 
@@ -9469,12 +9531,14 @@ unsigned int lw;
 # 18 "position.h"
 void CompareFrames(void);
 void CheckAileron(void);
+void BeneathTable(void);
+void BeneathFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 31
+# 33
 typedef struct t_frame {
 unsigned int num;
 unsigned int pos_x;
@@ -9483,28 +9547,35 @@ unsigned int height;
 int angle;
 } a_frame[2];
 
-# 42
-typedef struct t_frame {
-unsigned int num;
-signed int pos_x;
-signed int pos_y;
-signed int height;
-signed int angle;
+# 44
+typedef struct t_frame_dif {
+unsigned int dif_num;
+signed int dif_pos_x;
+signed int dif_pos_y;
+signed int dif_height;
+signed int dif_angle;
 } a_frame_dif[1];
 
 
 bit direction;
 
-int cm180 = 41982;
-int cm220 = 51310;
-int cm100 = 23323;
-int cm120 = 27987;
-int cm80 = 18659;
-int cm50 = 11662;
+unsigned int cm180 = 41982;
+unsigned int cm220 = 51310;
+unsigned int cm100 = 23323;
+unsigned int cm120 = 27987;
+unsigned int cm80 = 18659;
+unsigned int cm50 = 11662;
 
 
 int c_path = 10;
 int id_current_cc;
+typedef struct t_path{
+unsigned char lower_cc;
+unsigned char higher_cc;
+}a_path[21], a_path_old[21];
+
+bit storedif = 0;
+bit table = 1;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9516,3 +9587,11 @@ unsigned int time_height;
 # 33 "main.h"
 interrupt void Isr(void);
 
+# 85 "main.c"
+void main(void) {
+Init();
+while(1) {
+__nop();
+}
+return;
+}
