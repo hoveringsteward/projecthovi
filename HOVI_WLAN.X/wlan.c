@@ -13,6 +13,7 @@ void UartStore(void) {
         received = UartReceive();
         if(received == '<') {
             receiving_ok = 1;
+            c_path = 0;
         }
     }else if(received == 0x04) {  /* EOT received; transmission ended by
                                    * host, reset counter for storing */
@@ -23,12 +24,13 @@ void UartStore(void) {
         NAME:
         c_name = 0;
         path_name = 1;
-    }else if(received == '>') { /* entered if first ending of cc 
+    }else if(received == '>') { /* entered if first ending of cc '>'
                                  * transmission is received */
         received = UartReceive();   // reading next byte
-        if(received == '>'){    /* entered if second ending of cc
+        if(received == '>'){    /* entered if second ending of cc '>'
                                  * transmission is received */
             numb_cc = c_path;
+            receiving_ok = 0;
         }else {     // ending was not complete, send error
             UartSendError();
         }

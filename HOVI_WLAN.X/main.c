@@ -97,7 +97,10 @@ void main(void) {
     Init();
     while(1) {
         NOP();
-        LED = Associated;
+        LED = Connected;
+        if(Connected == 0) {
+            InitWlan();
+        }
     }
     return;
 }

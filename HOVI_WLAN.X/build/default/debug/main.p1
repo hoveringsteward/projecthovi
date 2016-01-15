@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "27 wlan.h
 [s S1147 `uc 1 `uc 1 ]
-[n S1147 . lower_cc higher_cc ]
+[n S1147 nt_path lower_cc higher_cc ]
 "19500 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _RC1IF `Vb ~T0 @X0 0 e@31989 ]
 "7240
@@ -69,6 +69,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S415 . . . . . . . . . ]
 "6726
 [v _PORTBbits `VS415 ~T0 @X0 0 e@3969 ]
+"37 init.h
+[v _InitWlan `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7690,22 +7692,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;wlan.h: 24: bit receiving_ok = 0;
-[; ;wlan.h: 27: typedef struct {
+[; ;wlan.h: 27: typedef struct nt_path{
 [; ;wlan.h: 28: unsigned char lower_cc;
 [; ;wlan.h: 29: unsigned char higher_cc;
 [; ;wlan.h: 30: }t_path;
 "32
 [v _a_path `S1147 ~T0 @X0 -> 21 `i e ]
 [; ;wlan.h: 32: t_path a_path[21];
-"33
-[v _a_name `uc ~T0 @X0 -> 33 `i e ]
-[; ;wlan.h: 33: unsigned char a_name[33];
 "34
+[v _a_name `uc ~T0 @X0 -> 32 `i e ]
+[; ;wlan.h: 34: unsigned char a_name[32];
+"35
 [v _path_name `b ~T0 @X0 1 e ]
 [i _path_name
 -> 0 `i
 ]
-[; ;wlan.h: 34: bit path_name = 0;
+[; ;wlan.h: 35: bit path_name = 0;
 [; ;main.h: 28: interrupt void Isr(void);
 [v F8011 `(v ~T0 @X0 1 tf ]
 "84 main.c
@@ -7765,20 +7767,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 99: __nop();
 "99
 [e ( ___nop ..  ]
-[; ;main.c: 100: PORTBbits.RB2 = PORTDbits.RD6;
+[; ;main.c: 100: PORTBbits.RB2 = PORTDbits.RD4;
 "100
-[e = . . _PORTBbits 0 2 . . _PORTDbits 0 6 ]
+[e = . . _PORTBbits 0 2 . . _PORTDbits 0 4 ]
+[; ;main.c: 101: if(PORTDbits.RD4 == 0) {
 "101
+[e $ ! == -> . . _PORTDbits 0 4 `i -> 0 `i 1156  ]
+{
+[; ;main.c: 102: InitWlan();
+"102
+[e ( _InitWlan ..  ]
+"103
+}
+[e :U 1156 ]
+"104
 }
 [e :U 1153 ]
 "98
 [e $U 1154  ]
 [e :U 1155 ]
-[; ;main.c: 101: }
-[; ;main.c: 102: return;
-"102
-[e $UE 1152  ]
 [; ;main.c: 103: }
-"103
+[; ;main.c: 104: }
+[; ;main.c: 105: return;
+"105
+[e $UE 1152  ]
+[; ;main.c: 106: }
+"106
 [e :UE 1152 ]
 }

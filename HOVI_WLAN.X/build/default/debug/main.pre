@@ -9504,13 +9504,14 @@ unsigned char numb_cc_table = 0;
 bit receiving_ok = 0;
 
 # 27
-typedef struct {
+typedef struct nt_path{
 unsigned char lower_cc;
 unsigned char higher_cc;
 }t_path;
 
 t_path a_path[21];
-unsigned char a_name[33];
+
+unsigned char a_name[32];
 bit path_name = 0;
 
 # 28 "main.h"
@@ -9533,7 +9534,10 @@ void main(void) {
 Init();
 while(1) {
 __nop();
-PORTBbits.RB2 = PORTDbits.RD6;
+PORTBbits.RB2 = PORTDbits.RD4;
+if(PORTDbits.RD4 == 0) {
+InitWlan();
+}
 }
 return;
 }

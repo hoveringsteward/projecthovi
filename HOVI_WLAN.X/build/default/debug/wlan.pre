@@ -9442,13 +9442,14 @@ unsigned char numb_cc_table = 0;
 bit receiving_ok = 0;
 
 # 27
-typedef struct {
+typedef struct nt_path{
 unsigned char lower_cc;
 unsigned char higher_cc;
 }t_path;
 
 t_path a_path[21];
-unsigned char a_name[33];
+
+unsigned char a_name[32];
 bit path_name = 0;
 
 # 28 "main.h"
@@ -9461,10 +9462,11 @@ if(received == '<') {
 received = UartReceive();
 if(received == '<') {
 receiving_ok = 1;
+c_path = 0;
 }
 }else if(received == 0x04) {
 
-# 19
+# 20
 c_path = 0;
 path_name = 0;
 receiving_ok = 0;
@@ -9474,12 +9476,13 @@ c_name = 0;
 path_name = 1;
 }else if(received == '>') {
 
-# 28
+# 29
 received = UartReceive();
 if(received == '>'){
 
-# 31
+# 32
 numb_cc = c_path;
+receiving_ok = 0;
 }else {
 UartSendError();
 }
@@ -9518,7 +9521,7 @@ UartSend(0x11);
 void UartSendError(void) {
 UartSend(0x15);
 
-# 70
+# 72
 }
 
 void UartDump(void) {

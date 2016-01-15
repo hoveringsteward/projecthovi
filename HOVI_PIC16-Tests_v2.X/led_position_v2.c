@@ -17,29 +17,29 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
     unsigned char obj_type;       /* declares type of detected object
                          * 0 for normal objects
                          * 1 for colorcode objects*/
-    
+
     typedef struct colorobject{
-        unsigned int num; /* num contains as much diggits as colors in the code 
+        unsigned int num; /* num contains as much diggits as colors in the code
                            * -> color 3, color 7, num = 37*/
         unsigned int pos_x; // X center of object
         unsigned int pos_y; // Y center of object
         unsigned int width; // width of object
         unsigned int height; // height of object
         unsigned int angle; // Rotation
-        
+
     } farben;
-    
+
     farben afarben[3];
-    
+
     unsigned char c = 0;    // Counter for following do, while loop
     frame = 0;
-    
-    
+
+
     for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
         /* Routine for getting startcondition                                    */
         /* Returns 0 after 10 cycles without detecting an object                 */
         /*-----------------------------------------------------------------------*/
-        
+
         while(frame == 0) {
             w = ExchangeSpi2char(PIXY_SYNC, DUMMY);
             if(lw == PIXY_FRAME_OBJ && w == PIXY_FRAME_OBJ) {
@@ -60,7 +60,6 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
 
         unsigned int checksum = ExchangeSpi2char(PIXY_SYNC, DUMMY);
 
-
         afarben[c_obj].num =    ExchangeSpi2char(PIXY_SYNC, DUMMY);
         afarben[c_obj].pos_x =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
         afarben[c_obj].pos_y =  ExchangeSpi2char(PIXY_SYNC, DUMMY);
@@ -77,7 +76,7 @@ unsigned char GetObject(unsigned char des_obj_type, unsigned int des_obj, unsign
 }
 
 bit ProofObject(unsigned int des_obj, unsigned int num){
-    
+
     if(num == des_obj) {
         return 1;
     }else {
@@ -89,7 +88,7 @@ bit ProofObject(unsigned int des_obj, unsigned int num){
 
 
 void LedSignalling(unsigned int pos_x, unsigned int pos_y){
-    
+
     /* Checking condtions for LED in x-direction                             */
     /* Sets LED in which direction the camera should be moved                */
     /* Both LEDs light up if data is nonsense                                */
@@ -99,15 +98,15 @@ void LedSignalling(unsigned int pos_x, unsigned int pos_y){
          LEDright = 1;
      }else if(pos_x < 150){
          LEDleft = 1;
-         LEDright = 0;   
+         LEDright = 0;
      }else if(pos_x >= 150 && pos_x <= 170){
          LEDleft = 0;
-         LEDright = 0;  
+         LEDright = 0;
      }else{
          LEDleft = 1;
-         LEDright = 1; 
+         LEDright = 1;
      }
-     
+
     /* Checking condtions for LED in y-direction                             */
     /* Sets LED in which direction the camera should be moved                */
     /* Both LEDs light up if data is nonsense                                */
@@ -126,5 +125,3 @@ void LedSignalling(unsigned int pos_x, unsigned int pos_y){
          LEDdown = 1;
      }
 }
-
-

@@ -9442,13 +9442,14 @@ unsigned char numb_cc_table = 0;
 bit receiving_ok = 0;
 
 # 27
-typedef struct {
+typedef struct nt_path{
 unsigned char lower_cc;
 unsigned char higher_cc;
 }t_path;
 
 t_path a_path[21];
-unsigned char a_name[33];
+
+unsigned char a_name[32];
 bit path_name = 0;
 
 # 28 "main.h"
@@ -9464,6 +9465,7 @@ InitUart();
 InitSpi();
 InitTimer();
 InitInterrupt();
+InitWlan();
 }
 
 
@@ -9502,7 +9504,7 @@ void InitOsc(void) {
 OSCCON = 0b01110111;
 }
 
-# 85
+# 86
 void InitUart(void) {
 
 SPBRG1 = 68;
@@ -9520,13 +9522,13 @@ RCSTA1bits.CREN = 1;
 RC1IE = 1;
 }
 
-# 111
+# 112
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 129
+# 130
 void InitTimer(void) {
 
 
@@ -9556,7 +9558,7 @@ T5CONbits.TMR5ON = 1;
 
 }
 
-# 163
+# 164
 void InitInterrupt(void) {
 GIE = 1;
 PEIE = 1;
@@ -9564,10 +9566,11 @@ PEIE = 1;
 TMR3GIE = 0;
 }
 
-# 183
+# 184
 void InitWlan(void) {
 while(PORTDbits.RD6 == 0);
 PORTDbits.RD5 = 1;
+_delay((unsigned long)((30)*(16000000/4000.0)));
 while(PORTDbits.RD4 == 0);
 }
 

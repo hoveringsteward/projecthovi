@@ -36,6 +36,7 @@ void Init(void) {
     InitSpi();
     InitTimer();
     InitInterrupt();
+    InitWlan();
 }
 // </editor-fold>
 
@@ -183,6 +184,7 @@ void InitInterrupt(void) {
 void InitWlan(void) {
     while(Associated == 0);
     Connect = 1;
+    __delay_ms(30);
     while(Connected == 0);
 }
 // </editor-fold>

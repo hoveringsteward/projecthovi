@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Fri Jan 08 20:10:11 2016
+                                                                                               Tue Jan 12 11:25:17 2016
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	18F46K22
@@ -23,1712 +23,1803 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
     17                           	psect	text7,global,reloc=2,class=CODE,delta=1
     18                           	psect	text8,global,reloc=2,class=CODE,delta=1
     19                           	psect	text9,global,reloc=2,class=CODE,delta=1
-    20                           	psect	intcode,global,reloc=2,class=CODE,delta=1
-    21                           	psect	text11,global,reloc=2,class=CODE,delta=1
+    20                           	psect	text10,global,reloc=2,class=CODE,delta=1
+    21                           	psect	intcode,global,reloc=2,class=CODE,delta=1
     22                           	psect	text12,global,reloc=2,class=CODE,delta=1
     23                           	psect	text13,global,reloc=2,class=CODE,delta=1
     24                           	psect	text14,global,reloc=2,class=CODE,delta=1
     25                           	psect	text15,global,reloc=2,class=CODE,delta=1
     26                           	psect	text16,global,reloc=2,class=CODE,delta=1
-    27                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
-    28                           	psect	rparam,global,class=COMRAM,space=1,delta=1
-    29                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
-    30  0000                     _ANSELA	set	3896
-    31  0000                     _ANSELB	set	3897
-    32  0000                     _ANSELC	set	3898
-    33  0000                     _ANSELD	set	3899
-    34  0000                     _ANSELE	set	3900
-    35  0000                     _T5CONbits	set	3918
-    36  0000                     _T5GCONbits	set	3917
-    37  0000                     _BAUDCON1bits	set	4024
-    38  0000                     _OSCCON	set	4051
-    39  0000                     _PORTA	set	3968
-    40  0000                     _PORTB	set	3969
-    41  0000                     _PORTBbits	set	3969
-    42  0000                     _PORTC	set	3970
-    43  0000                     _PORTD	set	3971
-    44  0000                     _PORTDbits	set	3971
-    45  0000                     _PORTE	set	3972
-    46  0000                     _RCREG1	set	4014
-    47  0000                     _RCSTA1bits	set	4011
-    48  0000                     _SPBRG1	set	4015
-    49  0000                     _SSP1CON1	set	4038
-    50  0000                     _SSP1STAT	set	4039
-    51  0000                     _T3CONbits	set	4017
-    52  0000                     _T3GCONbits	set	4020
-    53  0000                     _TRISA	set	3986
-    54  0000                     _TRISB	set	3987
-    55  0000                     _TRISC	set	3988
-    56  0000                     _TRISD	set	3989
-    57  0000                     _TRISE	set	3990
-    58  0000                     _TXREG1	set	4013
-    59  0000                     _TXSTA1bits	set	4012
-    60  0000                     _GIE	set	32663
-    61  0000                     _PEIE	set	32662
-    62  0000                     _RC1IE	set	31981
-    63  0000                     _RC1IF	set	31989
-    64  0000                     _TMR3GIE	set	32025
-    65  0000                     _TX1IF	set	31988
-    66                           
-    67                           ; #config settings
-    68  0000                     
-    69                           	psect	cinit
-    70  0001CC                     __pcinit:
-    71                           	opt stack 0
-    72  0001CC                     start_initialization:
-    73                           	opt stack 0
-    74  0001CC                     __initialization:
-    75                           	opt stack 0
-    76                           
-    77                           ; Clear objects allocated to BANK0 (42 bytes)
-    78  0001CC  EE00  F060         	lfsr	0,__pbssBANK0
-    79  0001D0  0E2A               	movlw	42
-    80  0001D2                     clear_0:
-    81  0001D2  6AEE               	clrf	postinc0,c
-    82  0001D4  06E8               	decf	wreg,f,c
-    83  0001D6  E1FD               	bnz	clear_0
-    84                           
-    85                           ; Clear objects allocated to BITCOMRAM (1 bytes)
-    86  0001D8  6A36               	clrf	(__pbitbssCOMRAM/(0+8))& (0+255),c
-    87                           
-    88                           ; Clear objects allocated to COMRAM (38 bytes)
-    89  0001DA  EE00  F001         	lfsr	0,__pbssCOMRAM
-    90  0001DE  0E26               	movlw	38
-    91  0001E0                     clear_1:
-    92  0001E0  6AEE               	clrf	postinc0,c
-    93  0001E2  06E8               	decf	wreg,f,c
-    94  0001E4  E1FD               	bnz	clear_1
-    95  0001E6                     end_of_initialization:
-    96                           	opt stack 0
-    97  0001E6                     __end_of__initialization:
-    98                           	opt stack 0
-    99  0001E6  9037               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
-   100  0001E8  9237               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
-   101  0001EA  0100               	movlb	0
-   102  0001EC  EF46  F001         	goto	_main	;jump to C main() function
-   103                           postinc0	equ	0xFEE
-   104                           wreg	equ	0xFE8
-   105                           
-   106                           	psect	bitbssCOMRAM
-   107  0001B0                     __pbitbssCOMRAM:
-   108                           	opt stack 0
-   109  0001B0                     _path_name:
-   110                           	opt stack 0
-   111  0001B0                     	ds	1
-   112  0001B1                     _receiving_ok:
-   113                           	opt stack 0
-   114  0001B1                     	ds	1
-   115                           postinc0	equ	0xFEE
-   116                           wreg	equ	0xFE8
-   117                           
-   118                           	psect	bssCOMRAM
-   119  000001                     __pbssCOMRAM:
-   120                           	opt stack 0
-   121  000001                     _a_name:
-   122                           	opt stack 0
-   123  000001                     	ds	33
-   124  000022                     _c_name:
-   125                           	opt stack 0
-   126  000022                     	ds	1
-   127  000023                     _c_path:
-   128                           	opt stack 0
-   129  000023                     	ds	1
-   130  000024                     _numb_cc:
-   131                           	opt stack 0
-   132  000024                     	ds	1
-   133  000025                     _numb_cc_table:
-   134                           	opt stack 0
-   135  000025                     	ds	1
-   136  000026                     _received:
-   137                           	opt stack 0
-   138  000026                     	ds	1
-   139                           postinc0	equ	0xFEE
-   140                           wreg	equ	0xFE8
-   141                           
-   142                           	psect	bssBANK0
-   143  000060                     __pbssBANK0:
-   144                           	opt stack 0
-   145  000060                     _a_path:
-   146                           	opt stack 0
-   147  000060                     	ds	42
-   148                           postinc0	equ	0xFEE
-   149                           wreg	equ	0xFE8
-   150                           
-   151                           	psect	cstackCOMRAM
-   152  000027                     __pcstackCOMRAM:
-   153                           	opt stack 0
-   154  000027                     UartSend@data:
-   155                           	opt stack 0
-   156  000027                     UartDump@dumpdata:
-   157                           	opt stack 0
-   158                           
-   159                           ; 1 bytes @ 0x0
-   160  000027                     	ds	1
-   161  000028                     ??_isr:
-   162                           
-   163                           ; 0 bytes @ 0x1
-   164  000028                     	ds	14
-   165  000036                     postinc0	equ	0xFEE
-   166                           wreg	equ	0xFE8
+    27                           	psect	text17,global,reloc=2,class=CODE,delta=1
+    28                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
+    29                           	psect	rparam,global,class=COMRAM,space=1,delta=1
+    30                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
+    31  0000                     _ANSELA	set	3896
+    32  0000                     _ANSELB	set	3897
+    33  0000                     _ANSELC	set	3898
+    34  0000                     _ANSELD	set	3899
+    35  0000                     _ANSELE	set	3900
+    36  0000                     _T5CONbits	set	3918
+    37  0000                     _T5GCONbits	set	3917
+    38  0000                     _BAUDCON1bits	set	4024
+    39  0000                     _OSCCON	set	4051
+    40  0000                     _PORTA	set	3968
+    41  0000                     _PORTB	set	3969
+    42  0000                     _PORTBbits	set	3969
+    43  0000                     _PORTC	set	3970
+    44  0000                     _PORTD	set	3971
+    45  0000                     _PORTDbits	set	3971
+    46  0000                     _PORTE	set	3972
+    47  0000                     _RCREG1	set	4014
+    48  0000                     _RCSTA1bits	set	4011
+    49  0000                     _SPBRG1	set	4015
+    50  0000                     _SSP1CON1	set	4038
+    51  0000                     _SSP1STAT	set	4039
+    52  0000                     _T3CONbits	set	4017
+    53  0000                     _T3GCONbits	set	4020
+    54  0000                     _TRISA	set	3986
+    55  0000                     _TRISB	set	3987
+    56  0000                     _TRISC	set	3988
+    57  0000                     _TRISD	set	3989
+    58  0000                     _TRISE	set	3990
+    59  0000                     _TXREG1	set	4013
+    60  0000                     _TXSTA1bits	set	4012
+    61  0000                     _GIE	set	32663
+    62  0000                     _PEIE	set	32662
+    63  0000                     _RC1IE	set	31981
+    64  0000                     _RC1IF	set	31989
+    65  0000                     _TMR3GIE	set	32025
+    66  0000                     _TX1IF	set	31988
+    67                           
+    68                           ; #config settings
+    69  0000                     
+    70                           	psect	cinit
+    71  0001F8                     __pcinit:
+    72                           	opt stack 0
+    73  0001F8                     start_initialization:
+    74                           	opt stack 0
+    75  0001F8                     __initialization:
+    76                           	opt stack 0
+    77                           
+    78                           ; Clear objects allocated to BANK0 (42 bytes)
+    79  0001F8  EE00  F060         	lfsr	0,__pbssBANK0
+    80  0001FC  0E2A               	movlw	42
+    81  0001FE                     clear_0:
+    82  0001FE  6AEE               	clrf	postinc0,c
+    83  000200  06E8               	decf	wreg,f,c
+    84  000202  E1FD               	bnz	clear_0
+    85                           
+    86                           ; Clear objects allocated to BITCOMRAM (1 bytes)
+    87  000204  6A36               	clrf	(__pbitbssCOMRAM/(0+8))& (0+255),c
+    88                           
+    89                           ; Clear objects allocated to COMRAM (37 bytes)
+    90  000206  EE00  F001         	lfsr	0,__pbssCOMRAM
+    91  00020A  0E25               	movlw	37
+    92  00020C                     clear_1:
+    93  00020C  6AEE               	clrf	postinc0,c
+    94  00020E  06E8               	decf	wreg,f,c
+    95  000210  E1FD               	bnz	clear_1
+    96  000212                     end_of_initialization:
+    97                           	opt stack 0
+    98  000212                     __end_of__initialization:
+    99                           	opt stack 0
+   100  000212  9037               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   101  000214  9237               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+   102  000216  0100               	movlb	0
+   103  000218  EF2C  F001         	goto	_main	;jump to C main() function
+   104                           postinc0	equ	0xFEE
+   105                           wreg	equ	0xFE8
+   106                           
+   107                           	psect	bitbssCOMRAM
+   108  0001B0                     __pbitbssCOMRAM:
+   109                           	opt stack 0
+   110  0001B0                     _path_name:
+   111                           	opt stack 0
+   112  0001B0                     	ds	1
+   113  0001B1                     _receiving_ok:
+   114                           	opt stack 0
+   115  0001B1                     	ds	1
+   116                           postinc0	equ	0xFEE
+   117                           wreg	equ	0xFE8
+   118                           
+   119                           	psect	bssCOMRAM
+   120  000001                     __pbssCOMRAM:
+   121                           	opt stack 0
+   122  000001                     _a_name:
+   123                           	opt stack 0
+   124  000001                     	ds	32
+   125  000021                     _c_name:
+   126                           	opt stack 0
+   127  000021                     	ds	1
+   128  000022                     _c_path:
+   129                           	opt stack 0
+   130  000022                     	ds	1
+   131  000023                     _numb_cc:
+   132                           	opt stack 0
+   133  000023                     	ds	1
+   134  000024                     _numb_cc_table:
+   135                           	opt stack 0
+   136  000024                     	ds	1
+   137  000025                     _received:
+   138                           	opt stack 0
+   139  000025                     	ds	1
+   140                           postinc0	equ	0xFEE
+   141                           wreg	equ	0xFE8
+   142                           
+   143                           	psect	bssBANK0
+   144  000060                     __pbssBANK0:
+   145                           	opt stack 0
+   146  000060                     _a_path:
+   147                           	opt stack 0
+   148  000060                     	ds	42
+   149                           postinc0	equ	0xFEE
+   150                           wreg	equ	0xFE8
+   151                           
+   152                           	psect	cstackCOMRAM
+   153  000026                     __pcstackCOMRAM:
+   154                           	opt stack 0
+   155  000026                     UartSend@data:
+   156                           	opt stack 0
+   157  000026                     UartDump@dumpdata:
+   158                           	opt stack 0
+   159                           
+   160                           ; 1 bytes @ 0x0
+   161  000026                     	ds	1
+   162  000027                     ??_isr:
+   163                           
+   164                           ; 0 bytes @ 0x1
+   165  000027                     	ds	14
+   166  000035                     ??_InitWlan:
    167                           
    168                           ; 0 bytes @ 0xF
-   169 ;;
-   170 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-   171 ;;
-   172 ;; *************** function _main *****************
-   173 ;; Defined at:
-   174 ;;		line 96 in file "main.c"
-   175 ;; Parameters:    Size  Location     Type
-   176 ;;		None
-   177 ;; Auto vars:     Size  Location     Type
-   178 ;;		None
-   179 ;; Return value:  Size  Location     Type
-   180 ;;		None               void
-   181 ;; Registers used:
-   182 ;;		wreg, status,2, cstack
-   183 ;; Tracked objects:
-   184 ;;		On entry : 0/0
-   185 ;;		On exit  : 0/0
-   186 ;;		Unchanged: 0/0
-   187 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   169  000035                     	ds	1
+   170  000036                     postinc0	equ	0xFEE
+   171                           wreg	equ	0xFE8
+   172                           
+   173                           ; 0 bytes @ 0x10
+   174 ;;
+   175 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   176 ;;
+   177 ;; *************** function _main *****************
+   178 ;; Defined at:
+   179 ;;		line 96 in file "main.c"
+   180 ;; Parameters:    Size  Location     Type
+   181 ;;		None
+   182 ;; Auto vars:     Size  Location     Type
+   183 ;;		None
+   184 ;; Return value:  Size  Location     Type
+   185 ;;		None               void
+   186 ;; Registers used:
+   187 ;;		wreg, status,2, cstack
+   188 ;; Tracked objects:
+   189 ;;		On entry : 0/0
+   190 ;;		On exit  : 0/0
+   191 ;;		Unchanged: 0/0
+   192 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   188 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   193 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   189 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   194 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   190 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   195 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   191 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   196 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   192 ;;Total ram usage:        0 bytes
-   193 ;; Hardware stack levels required when called:    6
-   194 ;; This function calls:
-   195 ;;		_Init
-   196 ;; This function is called by:
-   197 ;;		Startup code after reset
-   198 ;; This function uses a non-reentrant model
-   199 ;;
-   200                           
-   201                           	psect	text0
-   202  00028C                     __ptext0:
-   203                           	opt stack 0
-   204  00028C                     _main:
-   205                           	opt stack 25
+   197 ;;Total ram usage:        0 bytes
+   198 ;; Hardware stack levels required when called:    6
+   199 ;; This function calls:
+   200 ;;		_Init
+   201 ;;		_InitWlan
+   202 ;; This function is called by:
+   203 ;;		Startup code after reset
+   204 ;; This function uses a non-reentrant model
+   205 ;;
    206                           
-   207                           ;main.c: 97: Init();
-   208                           
-   209                           ;incstack = 0
-   210  00028C  ECF8  F000         	call	_Init	;wreg free
-   211  000290                     l1028:
+   207                           	psect	text0
+   208  000258                     __ptext0:
+   209                           	opt stack 0
+   210  000258                     _main:
+   211                           	opt stack 25
    212                           
-   213                           ;main.c: 99: __nop();
-   214  000290  F000               	nop	
-   215                           
-   216                           ;main.c: 100: PORTBbits.RB2 = PORTDbits.RD6;
-   217  000292  AC83               	btfss	3971,6,c	;volatile
-   218  000294  D002               	bra	u205
-   219  000296  8481               	bsf	3969,2,c	;volatile
-   220  000298  D001               	bra	u207
-   221  00029A                     u205:
-   222  00029A  9481               	bcf	3969,2,c	;volatile
-   223  00029C                     u207:
-   224  00029C  D7F9               	goto	l1028
-   225  00029E                     __end_of_main:
-   226                           	opt stack 0
-   227                           postinc0	equ	0xFEE
-   228                           wreg	equ	0xFE8
-   229                           
-   230 ;; *************** function _Init *****************
-   231 ;; Defined at:
-   232 ;;		line 30 in file "init.c"
-   233 ;; Parameters:    Size  Location     Type
-   234 ;;		None
-   235 ;; Auto vars:     Size  Location     Type
-   236 ;;		None
-   237 ;; Return value:  Size  Location     Type
-   238 ;;		None               void
-   239 ;; Registers used:
-   240 ;;		wreg, status,2, cstack
-   241 ;; Tracked objects:
-   242 ;;		On entry : 0/0
-   243 ;;		On exit  : 0/0
-   244 ;;		Unchanged: 0/0
-   245 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   213                           ;main.c: 97: Init();
+   214                           
+   215                           ;incstack = 0
+   216  000258  ECE9  F000         	call	_Init	;wreg free
+   217  00025C                     l1041:
+   218                           
+   219                           ;main.c: 99: __nop();
+   220  00025C  F000               	nop	
+   221                           
+   222                           ;main.c: 100: PORTBbits.RB2 = PORTDbits.RD4;
+   223  00025E  A883               	btfss	3971,4,c	;volatile
+   224  000260  D002               	bra	u205
+   225  000262  8481               	bsf	3969,2,c	;volatile
+   226  000264  D001               	bra	u207
+   227  000266                     u205:
+   228  000266  9481               	bcf	3969,2,c	;volatile
+   229  000268                     u207:
+   230                           
+   231                           ;main.c: 101: if(PORTDbits.RD4 == 0) {
+   232  000268  B883               	btfsc	3971,4,c	;volatile
+   233  00026A  D7F8               	goto	l1041
+   234                           
+   235                           ;main.c: 102: InitWlan();
+   236  00026C  EC1E  F001         	call	_InitWlan	;wreg free
+   237  000270  D7F5               	goto	l1041
+   238  000272                     __end_of_main:
+   239                           	opt stack 0
+   240                           postinc0	equ	0xFEE
+   241                           wreg	equ	0xFE8
+   242                           
+   243 ;; *************** function _Init *****************
+   244 ;; Defined at:
+   245 ;;		line 30 in file "init.c"
+   246 ;; Parameters:    Size  Location     Type
+   247 ;;		None
+   248 ;; Auto vars:     Size  Location     Type
+   249 ;;		None
+   250 ;; Return value:  Size  Location     Type
+   251 ;;		None               void
+   252 ;; Registers used:
+   253 ;;		wreg, status,2, cstack
+   254 ;; Tracked objects:
+   255 ;;		On entry : 0/0
+   256 ;;		On exit  : 0/0
+   257 ;;		Unchanged: 0/0
+   258 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   246 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   259 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   247 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   260 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   248 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   261 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   249 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   262 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   250 ;;Total ram usage:        0 bytes
-   251 ;; Hardware stack levels used:    1
-   252 ;; Hardware stack levels required when called:    5
-   253 ;; This function calls:
-   254 ;;		_InitAnsel
-   255 ;;		_InitInterrupt
-   256 ;;		_InitOsc
-   257 ;;		_InitPort
-   258 ;;		_InitSpi
-   259 ;;		_InitTimer
-   260 ;;		_InitTris
-   261 ;;		_InitUart
-   262 ;; This function is called by:
-   263 ;;		_main
-   264 ;; This function uses a non-reentrant model
-   265 ;;
-   266                           
-   267                           	psect	text1
-   268  0001F0                     __ptext1:
-   269                           	opt stack 0
-   270  0001F0                     _Init:
-   271                           	opt stack 25
-   272                           
-   273                           ;init.c: 31: InitPort();
-   274                           
-   275                           ;incstack = 0
-   276  0001F0  EC3B  F001         	call	_InitPort	;wreg free
-   277                           
-   278                           ;init.c: 32: InitTris();
-   279  0001F4  EC30  F001         	call	_InitTris	;wreg free
+   263 ;;Total ram usage:        0 bytes
+   264 ;; Hardware stack levels used:    1
+   265 ;; Hardware stack levels required when called:    5
+   266 ;; This function calls:
+   267 ;;		_InitAnsel
+   268 ;;		_InitInterrupt
+   269 ;;		_InitOsc
+   270 ;;		_InitPort
+   271 ;;		_InitSpi
+   272 ;;		_InitTimer
+   273 ;;		_InitTris
+   274 ;;		_InitUart
+   275 ;;		_InitWlan
+   276 ;; This function is called by:
+   277 ;;		_main
+   278 ;; This function uses a non-reentrant model
+   279 ;;
    280                           
-   281                           ;init.c: 33: InitAnsel();
-   282  0001F8  EC09  F001         	call	_InitAnsel	;wreg free
-   283                           
-   284                           ;init.c: 34: InitOsc();
-   285  0001FC  EC6A  F001         	call	_InitOsc	;wreg free
+   281                           	psect	text1
+   282  0001D2                     __ptext1:
+   283                           	opt stack 0
+   284  0001D2                     _Init:
+   285                           	opt stack 25
    286                           
-   287                           ;init.c: 35: InitUart();
-   288  000200  EC25  F001         	call	_InitUart	;wreg free
-   289                           
-   290                           ;init.c: 36: InitSpi();
-   291  000204  EC55  F001         	call	_InitSpi	;wreg free
-   292                           
-   293                           ;init.c: 37: InitTimer();
-   294  000208  ECC4  F000         	call	_InitTimer	;wreg free
-   295                           
-   296                           ;init.c: 38: InitInterrupt();
-   297  00020C  EC5A  F001         	call	_InitInterrupt	;wreg free
-   298  000210  0012               	return		;funcret
-   299  000212                     __end_of_Init:
-   300                           	opt stack 0
-   301                           postinc0	equ	0xFEE
-   302                           wreg	equ	0xFE8
+   287                           ;init.c: 31: InitPort();
+   288                           
+   289                           ;incstack = 0
+   290  0001D2  EC5B  F001         	call	_InitPort	;wreg free
+   291                           
+   292                           ;init.c: 32: InitTris();
+   293  0001D6  EC50  F001         	call	_InitTris	;wreg free
+   294                           
+   295                           ;init.c: 33: InitAnsel();
+   296  0001DA  EC0E  F001         	call	_InitAnsel	;wreg free
+   297                           
+   298                           ;init.c: 34: InitOsc();
+   299  0001DE  EC81  F001         	call	_InitOsc	;wreg free
+   300                           
+   301                           ;init.c: 35: InitUart();
+   302  0001E2  EC45  F001         	call	_InitUart	;wreg free
    303                           
-   304 ;; *************** function _InitUart *****************
-   305 ;; Defined at:
-   306 ;;		line 85 in file "init.c"
-   307 ;; Parameters:    Size  Location     Type
-   308 ;;		None
-   309 ;; Auto vars:     Size  Location     Type
-   310 ;;		None
-   311 ;; Return value:  Size  Location     Type
-   312 ;;		None               void
-   313 ;; Registers used:
-   314 ;;		wreg, status,2
-   315 ;; Tracked objects:
-   316 ;;		On entry : 0/0
-   317 ;;		On exit  : 0/0
-   318 ;;		Unchanged: 0/0
-   319 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   304                           ;init.c: 36: InitSpi();
+   305  0001E6  EC6C  F001         	call	_InitSpi	;wreg free
+   306                           
+   307                           ;init.c: 37: InitTimer();
+   308  0001EA  ECC7  F000         	call	_InitTimer	;wreg free
+   309                           
+   310                           ;init.c: 38: InitInterrupt();
+   311  0001EE  EC71  F001         	call	_InitInterrupt	;wreg free
+   312                           
+   313                           ;init.c: 39: InitWlan();
+   314  0001F2  EC1E  F001         	call	_InitWlan	;wreg free
+   315  0001F6  0012               	return		;funcret
+   316  0001F8                     __end_of_Init:
+   317                           	opt stack 0
+   318                           postinc0	equ	0xFEE
+   319                           wreg	equ	0xFE8
+   320                           
+   321 ;; *************** function _InitWlan *****************
+   322 ;; Defined at:
+   323 ;;		line 184 in file "init.c"
+   324 ;; Parameters:    Size  Location     Type
+   325 ;;		None
+   326 ;; Auto vars:     Size  Location     Type
+   327 ;;		None
+   328 ;; Return value:  Size  Location     Type
+   329 ;;		None               void
+   330 ;; Registers used:
+   331 ;;		wreg
+   332 ;; Tracked objects:
+   333 ;;		On entry : 0/0
+   334 ;;		On exit  : 0/0
+   335 ;;		Unchanged: 0/0
+   336 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   320 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   337 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   321 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   338 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   322 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   339 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   323 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   340 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   324 ;;Total ram usage:        0 bytes
-   325 ;; Hardware stack levels used:    1
-   326 ;; Hardware stack levels required when called:    4
-   327 ;; This function calls:
-   328 ;;		Nothing
-   329 ;; This function is called by:
-   330 ;;		_Init
-   331 ;; This function uses a non-reentrant model
-   332 ;;
-   333                           
-   334                           	psect	text2
-   335  00024A                     __ptext2:
-   336                           	opt stack 0
-   337  00024A                     _InitUart:
-   338                           	opt stack 25
-   339                           
-   340                           ;init.c: 87: SPBRG1 = 68;
-   341                           
-   342                           ;incstack = 0
-   343  00024A  0E44               	movlw	68
-   344  00024C  6EAF               	movwf	4015,c	;volatile
-   345                           
-   346                           ;init.c: 88: TXSTA1bits.BRGH = 1;
-   347  00024E  84AC               	bsf	4012,2,c	;volatile
-   348                           
-   349                           ;init.c: 89: BAUDCON1bits.BRG16 = 1;
-   350  000250  86B8               	bsf	4024,3,c	;volatile
+   341 ;;Total ram usage:        1 bytes
+   342 ;; Hardware stack levels used:    1
+   343 ;; Hardware stack levels required when called:    4
+   344 ;; This function calls:
+   345 ;;		Nothing
+   346 ;; This function is called by:
+   347 ;;		_Init
+   348 ;;		_main
+   349 ;; This function uses a non-reentrant model
+   350 ;;
    351                           
-   352                           ;init.c: 92: TXSTA1bits.SYNC = 0;
-   353  000252  98AC               	bcf	4012,4,c	;volatile
-   354                           
-   355                           ;init.c: 93: RCSTA1bits.SPEN = 1;
-   356  000254  8EAB               	bsf	4011,7,c	;volatile
-   357                           
-   358                           ;init.c: 95: TXSTA1bits.TXEN = 1;
-   359  000256  8AAC               	bsf	4012,5,c	;volatile
+   352                           	psect	text2
+   353  00023C                     __ptext2:
+   354                           	opt stack 0
+   355  00023C                     _InitWlan:
+   356                           	opt stack 26
+   357  00023C                     l132:
+   358  00023C  AC83               	btfss	3971,6,c	;volatile
+   359  00023E  D7FE               	goto	l132
    360                           
-   361                           ;init.c: 96: TX1IF = 0;
-   362  000258  989E               	bcf	3998,4,c	;volatile
+   361                           ;init.c: 186: PORTDbits.RD5 = 1;
+   362  000240  8A83               	bsf	3971,5,c	;volatile
    363                           
-   364                           ;init.c: 98: RCSTA1bits.CREN = 1;
-   365  00025A  88AB               	bsf	4011,4,c	;volatile
-   366                           
-   367                           ;init.c: 99: RC1IE = 1;
-   368  00025C  8A9D               	bsf	3997,5,c	;volatile
-   369  00025E  0012               	return		;funcret
-   370  000260                     __end_of_InitUart:
-   371                           	opt stack 0
-   372                           postinc0	equ	0xFEE
-   373                           wreg	equ	0xFE8
-   374                           
-   375 ;; *************** function _InitTris *****************
-   376 ;; Defined at:
-   377 ;;		line 53 in file "init.c"
-   378 ;; Parameters:    Size  Location     Type
-   379 ;;		None
-   380 ;; Auto vars:     Size  Location     Type
-   381 ;;		None
-   382 ;; Return value:  Size  Location     Type
-   383 ;;		None               void
-   384 ;; Registers used:
-   385 ;;		wreg, status,2
-   386 ;; Tracked objects:
-   387 ;;		On entry : 0/0
-   388 ;;		On exit  : 0/0
-   389 ;;		Unchanged: 0/0
-   390 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   364                           ;init.c: 187: _delay((unsigned long)((30)*(16000000/4000.0)));
+   365  000242  0E9C               	movlw	156
+   366  000244  6E35               	movwf	??_InitWlan& (0+255),c
+   367  000246  0ED7               	movlw	215
+   368  000248                     u397:
+   369  000248  2EE8               	decfsz	wreg,f,c
+   370  00024A  D7FE               	goto	u397
+   371  00024C  2E35               	decfsz	??_InitWlan& (0+255),f,c
+   372  00024E  D7FC               	goto	u397
+   373  000250  F000               	nop	
+   374  000252                     l135:
+   375  000252  B883               	btfsc	3971,4,c	;volatile
+   376  000254  0012               	return	
+   377  000256  D7FD               	goto	l135
+   378  000258                     __end_of_InitWlan:
+   379                           	opt stack 0
+   380                           postinc0	equ	0xFEE
+   381                           wreg	equ	0xFE8
+   382                           
+   383 ;; *************** function _InitUart *****************
+   384 ;; Defined at:
+   385 ;;		line 86 in file "init.c"
+   386 ;; Parameters:    Size  Location     Type
+   387 ;;		None
+   388 ;; Auto vars:     Size  Location     Type
+   389 ;;		None
+   390 ;; Return value:  Size  Location     Type
+   391 ;;		None               void
+   392 ;; Registers used:
+   393 ;;		wreg, status,2
+   394 ;; Tracked objects:
+   395 ;;		On entry : 0/0
+   396 ;;		On exit  : 0/0
+   397 ;;		Unchanged: 0/0
+   398 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   391 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   399 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   392 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   400 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   393 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   401 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   394 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   402 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   395 ;;Total ram usage:        0 bytes
-   396 ;; Hardware stack levels used:    1
-   397 ;; Hardware stack levels required when called:    4
-   398 ;; This function calls:
-   399 ;;		Nothing
-   400 ;; This function is called by:
-   401 ;;		_Init
-   402 ;; This function uses a non-reentrant model
-   403 ;;
-   404                           
-   405                           	psect	text3
-   406  000260                     __ptext3:
-   407                           	opt stack 0
-   408  000260                     _InitTris:
-   409                           	opt stack 25
-   410                           
-   411                           ;init.c: 54: TRISA = 0b00000000;
+   403 ;;Total ram usage:        0 bytes
+   404 ;; Hardware stack levels used:    1
+   405 ;; Hardware stack levels required when called:    4
+   406 ;; This function calls:
+   407 ;;		Nothing
+   408 ;; This function is called by:
+   409 ;;		_Init
+   410 ;; This function uses a non-reentrant model
+   411 ;;
    412                           
-   413                           ;incstack = 0
-   414  000260  0E00               	movlw	0
-   415  000262  6E92               	movwf	3986,c	;volatile
-   416                           
-   417                           ;init.c: 55: TRISB = 0b00010000;
-   418  000264  0E10               	movlw	16
-   419  000266  6E93               	movwf	3987,c	;volatile
+   413                           	psect	text3
+   414  00028A                     __ptext3:
+   415                           	opt stack 0
+   416  00028A                     _InitUart:
+   417                           	opt stack 25
+   418                           
+   419                           ;init.c: 88: SPBRG1 = 68;
    420                           
-   421                           ;init.c: 56: TRISC = 0b10010001;
-   422  000268  0E91               	movlw	145
-   423  00026A  6E94               	movwf	3988,c	;volatile
+   421                           ;incstack = 0
+   422  00028A  0E44               	movlw	68
+   423  00028C  6EAF               	movwf	4015,c	;volatile
    424                           
-   425                           ;init.c: 57: TRISD = 0b01010000;
-   426  00026C  0E50               	movlw	80
-   427  00026E  6E95               	movwf	3989,c	;volatile
-   428                           
-   429                           ;init.c: 58: TRISE = 0b00000000;
-   430  000270  0E00               	movlw	0
-   431  000272  6E96               	movwf	3990,c	;volatile
-   432  000274  0012               	return		;funcret
-   433  000276                     __end_of_InitTris:
-   434                           	opt stack 0
-   435                           postinc0	equ	0xFEE
-   436                           wreg	equ	0xFE8
-   437                           
-   438 ;; *************** function _InitTimer *****************
-   439 ;; Defined at:
-   440 ;;		line 129 in file "init.c"
-   441 ;; Parameters:    Size  Location     Type
-   442 ;;		None
-   443 ;; Auto vars:     Size  Location     Type
-   444 ;;		None
-   445 ;; Return value:  Size  Location     Type
-   446 ;;		None               void
-   447 ;; Registers used:
-   448 ;;		wreg, status,2
-   449 ;; Tracked objects:
-   450 ;;		On entry : 0/0
-   451 ;;		On exit  : 0/0
-   452 ;;		Unchanged: 0/0
-   453 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   425                           ;init.c: 89: TXSTA1bits.BRGH = 1;
+   426  00028E  84AC               	bsf	4012,2,c	;volatile
+   427                           
+   428                           ;init.c: 90: BAUDCON1bits.BRG16 = 1;
+   429  000290  86B8               	bsf	4024,3,c	;volatile
+   430                           
+   431                           ;init.c: 93: TXSTA1bits.SYNC = 0;
+   432  000292  98AC               	bcf	4012,4,c	;volatile
+   433                           
+   434                           ;init.c: 94: RCSTA1bits.SPEN = 1;
+   435  000294  8EAB               	bsf	4011,7,c	;volatile
+   436                           
+   437                           ;init.c: 96: TXSTA1bits.TXEN = 1;
+   438  000296  8AAC               	bsf	4012,5,c	;volatile
+   439                           
+   440                           ;init.c: 97: TX1IF = 0;
+   441  000298  989E               	bcf	3998,4,c	;volatile
+   442                           
+   443                           ;init.c: 99: RCSTA1bits.CREN = 1;
+   444  00029A  88AB               	bsf	4011,4,c	;volatile
+   445                           
+   446                           ;init.c: 100: RC1IE = 1;
+   447  00029C  8A9D               	bsf	3997,5,c	;volatile
+   448  00029E  0012               	return		;funcret
+   449  0002A0                     __end_of_InitUart:
+   450                           	opt stack 0
+   451                           postinc0	equ	0xFEE
+   452                           wreg	equ	0xFE8
+   453                           
+   454 ;; *************** function _InitTris *****************
+   455 ;; Defined at:
+   456 ;;		line 54 in file "init.c"
+   457 ;; Parameters:    Size  Location     Type
+   458 ;;		None
+   459 ;; Auto vars:     Size  Location     Type
+   460 ;;		None
+   461 ;; Return value:  Size  Location     Type
+   462 ;;		None               void
+   463 ;; Registers used:
+   464 ;;		wreg, status,2
+   465 ;; Tracked objects:
+   466 ;;		On entry : 0/0
+   467 ;;		On exit  : 0/0
+   468 ;;		Unchanged: 0/0
+   469 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   454 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   470 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   455 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   471 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   456 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   472 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   457 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   473 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   458 ;;Total ram usage:        0 bytes
-   459 ;; Hardware stack levels used:    1
-   460 ;; Hardware stack levels required when called:    4
-   461 ;; This function calls:
-   462 ;;		Nothing
-   463 ;; This function is called by:
-   464 ;;		_Init
-   465 ;; This function uses a non-reentrant model
-   466 ;;
-   467                           
-   468                           	psect	text4
-   469  000188                     __ptext4:
-   470                           	opt stack 0
-   471  000188                     _InitTimer:
-   472                           	opt stack 25
-   473                           
-   474                           ;init.c: 132: T3GCONbits.TMR3GE = 1;
-   475                           
-   476                           ;incstack = 0
-   477  000188  8EB4               	bsf	4020,7,c	;volatile
-   478                           
-   479                           ;init.c: 133: T3GCONbits.T3GSPM = 0;
-   480  00018A  98B4               	bcf	4020,4,c	;volatile
-   481                           
-   482                           ;init.c: 134: T3GCONbits.T3GTM = 0;
-   483  00018C  9AB4               	bcf	4020,5,c	;volatile
-   484                           
-   485                           ;init.c: 135: T3GCONbits.T3GPOL = 1;
-   486  00018E  8CB4               	bsf	4020,6,c	;volatile
-   487                           
-   488                           ;init.c: 136: T3GCONbits.T3GSS = 0b00;
-   489  000190  0EFC               	movlw	-4
-   490  000192  16B4               	andwf	4020,f,c	;volatile
+   474 ;;Total ram usage:        0 bytes
+   475 ;; Hardware stack levels used:    1
+   476 ;; Hardware stack levels required when called:    4
+   477 ;; This function calls:
+   478 ;;		Nothing
+   479 ;; This function is called by:
+   480 ;;		_Init
+   481 ;; This function uses a non-reentrant model
+   482 ;;
+   483                           
+   484                           	psect	text4
+   485  0002A0                     __ptext4:
+   486                           	opt stack 0
+   487  0002A0                     _InitTris:
+   488                           	opt stack 25
+   489                           
+   490                           ;init.c: 55: TRISA = 0b00000000;
    491                           
-   492                           ;init.c: 138: T3CONbits.TMR3CS = 0b00;
-   493  000194  0E3F               	movlw	-193
-   494  000196  16B1               	andwf	4017,f,c	;volatile
+   492                           ;incstack = 0
+   493  0002A0  0E00               	movlw	0
+   494  0002A2  6E92               	movwf	3986,c	;volatile
    495                           
-   496                           ;init.c: 139: T3CONbits.T3CKPS = 0b00;
-   497  000198  0ECF               	movlw	-49
-   498  00019A  16B1               	andwf	4017,f,c	;volatile
+   496                           ;init.c: 56: TRISB = 0b00010000;
+   497  0002A4  0E10               	movlw	16
+   498  0002A6  6E93               	movwf	3987,c	;volatile
    499                           
-   500                           ;init.c: 140: T3CONbits.nT3SYNC = 1;
-   501  00019C  84B1               	bsf	4017,2,c	;volatile
-   502                           
-   503                           ;init.c: 141: T3CONbits.TMR3ON = 1;
-   504  00019E  80B1               	bsf	4017,0,c	;volatile
-   505                           
-   506                           ;init.c: 145: T5GCONbits.TMR5GE = 1;
-   507  0001A0  010F               	movlb	15	; () banked
-   508  0001A2  8F4D               	bsf	77,7,b	;volatile
-   509                           
-   510                           ; BSR set to: 15
-   511                           ;init.c: 146: T5GCONbits.T5GSPM = 0;
-   512  0001A4  010F               	movlb	15	; () banked
-   513  0001A6  994D               	bcf	77,4,b	;volatile
-   514                           
-   515                           ; BSR set to: 15
-   516                           ;init.c: 147: T5GCONbits.T5GTM = 0;
-   517  0001A8  010F               	movlb	15	; () banked
-   518  0001AA  9B4D               	bcf	77,5,b	;volatile
-   519                           
-   520                           ; BSR set to: 15
-   521                           ;init.c: 148: T5GCONbits.T5GPOL = 1;
-   522  0001AC  010F               	movlb	15	; () banked
-   523  0001AE  8D4D               	bsf	77,6,b	;volatile
-   524                           
-   525                           ;init.c: 149: T5GCONbits.T5GSS = 0b00;
-   526  0001B0  0EFC               	movlw	-4
-   527  0001B2  010F               	movlb	15	; () banked
-   528  0001B4  174D               	andwf	77,f,b	;volatile
-   529                           
-   530                           ;init.c: 151: T5CONbits.TMR5CS = 0b00;
-   531  0001B6  0E3F               	movlw	-193
-   532  0001B8  010F               	movlb	15	; () banked
-   533  0001BA  174E               	andwf	78,f,b	;volatile
-   534                           
-   535                           ;init.c: 152: T5CONbits.T5CKPS = 0b00;
-   536  0001BC  0ECF               	movlw	-49
-   537  0001BE  010F               	movlb	15	; () banked
-   538  0001C0  174E               	andwf	78,f,b	;volatile
-   539                           
-   540                           ; BSR set to: 15
-   541                           ;init.c: 153: T5CONbits.nT5SYNC = 1;
-   542  0001C2  010F               	movlb	15	; () banked
-   543  0001C4  854E               	bsf	78,2,b	;volatile
-   544                           
-   545                           ; BSR set to: 15
-   546                           ;init.c: 154: T5CONbits.TMR5ON = 1;
-   547  0001C6  010F               	movlb	15	; () banked
-   548  0001C8  814E               	bsf	78,0,b	;volatile
-   549                           
-   550                           ; BSR set to: 15
-   551  0001CA  0012               	return		;funcret
-   552  0001CC                     __end_of_InitTimer:
-   553                           	opt stack 0
-   554                           postinc0	equ	0xFEE
-   555                           wreg	equ	0xFE8
-   556                           
-   557 ;; *************** function _InitSpi *****************
-   558 ;; Defined at:
-   559 ;;		line 111 in file "init.c"
-   560 ;; Parameters:    Size  Location     Type
-   561 ;;		None
-   562 ;; Auto vars:     Size  Location     Type
-   563 ;;		None
-   564 ;; Return value:  Size  Location     Type
-   565 ;;		None               void
-   566 ;; Registers used:
-   567 ;;		wreg, status,2
-   568 ;; Tracked objects:
-   569 ;;		On entry : 0/0
-   570 ;;		On exit  : 0/0
-   571 ;;		Unchanged: 0/0
-   572 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   500                           ;init.c: 57: TRISC = 0b10010001;
+   501  0002A8  0E91               	movlw	145
+   502  0002AA  6E94               	movwf	3988,c	;volatile
+   503                           
+   504                           ;init.c: 58: TRISD = 0b01010000;
+   505  0002AC  0E50               	movlw	80
+   506  0002AE  6E95               	movwf	3989,c	;volatile
+   507                           
+   508                           ;init.c: 59: TRISE = 0b00000000;
+   509  0002B0  0E00               	movlw	0
+   510  0002B2  6E96               	movwf	3990,c	;volatile
+   511  0002B4  0012               	return		;funcret
+   512  0002B6                     __end_of_InitTris:
+   513                           	opt stack 0
+   514                           postinc0	equ	0xFEE
+   515                           wreg	equ	0xFE8
+   516                           
+   517 ;; *************** function _InitTimer *****************
+   518 ;; Defined at:
+   519 ;;		line 130 in file "init.c"
+   520 ;; Parameters:    Size  Location     Type
+   521 ;;		None
+   522 ;; Auto vars:     Size  Location     Type
+   523 ;;		None
+   524 ;; Return value:  Size  Location     Type
+   525 ;;		None               void
+   526 ;; Registers used:
+   527 ;;		wreg, status,2
+   528 ;; Tracked objects:
+   529 ;;		On entry : 0/0
+   530 ;;		On exit  : 0/0
+   531 ;;		Unchanged: 0/0
+   532 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   573 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   533 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   574 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   534 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   575 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   535 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   576 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   536 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   577 ;;Total ram usage:        0 bytes
-   578 ;; Hardware stack levels used:    1
-   579 ;; Hardware stack levels required when called:    4
-   580 ;; This function calls:
-   581 ;;		Nothing
-   582 ;; This function is called by:
-   583 ;;		_Init
-   584 ;; This function uses a non-reentrant model
-   585 ;;
-   586                           
-   587                           	psect	text5
-   588  0002AA                     __ptext5:
-   589                           	opt stack 0
-   590  0002AA                     _InitSpi:
-   591                           	opt stack 25
-   592                           
-   593                           ;init.c: 112: SSP1STAT = 0b00000000;
-   594                           
-   595                           ; BSR set to: 15
-   596                           ;incstack = 0
-   597  0002AA  0E00               	movlw	0
-   598  0002AC  6EC7               	movwf	4039,c	;volatile
-   599                           
-   600                           ;init.c: 113: SSP1CON1 = 0b00100001;
-   601  0002AE  0E21               	movlw	33
-   602  0002B0  6EC6               	movwf	4038,c	;volatile
-   603  0002B2  0012               	return		;funcret
-   604  0002B4                     __end_of_InitSpi:
-   605                           	opt stack 0
-   606                           postinc0	equ	0xFEE
-   607                           wreg	equ	0xFE8
+   537 ;;Total ram usage:        0 bytes
+   538 ;; Hardware stack levels used:    1
+   539 ;; Hardware stack levels required when called:    4
+   540 ;; This function calls:
+   541 ;;		Nothing
+   542 ;; This function is called by:
+   543 ;;		_Init
+   544 ;; This function uses a non-reentrant model
+   545 ;;
+   546                           
+   547                           	psect	text5
+   548  00018E                     __ptext5:
+   549                           	opt stack 0
+   550  00018E                     _InitTimer:
+   551                           	opt stack 25
+   552                           
+   553                           ;init.c: 133: T3GCONbits.TMR3GE = 1;
+   554                           
+   555                           ;incstack = 0
+   556  00018E  8EB4               	bsf	4020,7,c	;volatile
+   557                           
+   558                           ;init.c: 134: T3GCONbits.T3GSPM = 0;
+   559  000190  98B4               	bcf	4020,4,c	;volatile
+   560                           
+   561                           ;init.c: 135: T3GCONbits.T3GTM = 0;
+   562  000192  9AB4               	bcf	4020,5,c	;volatile
+   563                           
+   564                           ;init.c: 136: T3GCONbits.T3GPOL = 1;
+   565  000194  8CB4               	bsf	4020,6,c	;volatile
+   566                           
+   567                           ;init.c: 137: T3GCONbits.T3GSS = 0b00;
+   568  000196  0EFC               	movlw	-4
+   569  000198  16B4               	andwf	4020,f,c	;volatile
+   570                           
+   571                           ;init.c: 139: T3CONbits.TMR3CS = 0b00;
+   572  00019A  0E3F               	movlw	-193
+   573  00019C  16B1               	andwf	4017,f,c	;volatile
+   574                           
+   575                           ;init.c: 140: T3CONbits.T3CKPS = 0b00;
+   576  00019E  0ECF               	movlw	-49
+   577  0001A0  16B1               	andwf	4017,f,c	;volatile
+   578                           
+   579                           ;init.c: 141: T3CONbits.nT3SYNC = 1;
+   580  0001A2  84B1               	bsf	4017,2,c	;volatile
+   581                           
+   582                           ;init.c: 142: T3CONbits.TMR3ON = 1;
+   583  0001A4  80B1               	bsf	4017,0,c	;volatile
+   584                           
+   585                           ;init.c: 146: T5GCONbits.TMR5GE = 1;
+   586  0001A6  010F               	movlb	15	; () banked
+   587  0001A8  8F4D               	bsf	77,7,b	;volatile
+   588                           
+   589                           ; BSR set to: 15
+   590                           ;init.c: 147: T5GCONbits.T5GSPM = 0;
+   591  0001AA  010F               	movlb	15	; () banked
+   592  0001AC  994D               	bcf	77,4,b	;volatile
+   593                           
+   594                           ; BSR set to: 15
+   595                           ;init.c: 148: T5GCONbits.T5GTM = 0;
+   596  0001AE  010F               	movlb	15	; () banked
+   597  0001B0  9B4D               	bcf	77,5,b	;volatile
+   598                           
+   599                           ; BSR set to: 15
+   600                           ;init.c: 149: T5GCONbits.T5GPOL = 1;
+   601  0001B2  010F               	movlb	15	; () banked
+   602  0001B4  8D4D               	bsf	77,6,b	;volatile
+   603                           
+   604                           ;init.c: 150: T5GCONbits.T5GSS = 0b00;
+   605  0001B6  0EFC               	movlw	-4
+   606  0001B8  010F               	movlb	15	; () banked
+   607  0001BA  174D               	andwf	77,f,b	;volatile
    608                           
-   609 ;; *************** function _InitPort *****************
-   610 ;; Defined at:
-   611 ;;		line 43 in file "init.c"
-   612 ;; Parameters:    Size  Location     Type
-   613 ;;		None
-   614 ;; Auto vars:     Size  Location     Type
-   615 ;;		None
-   616 ;; Return value:  Size  Location     Type
-   617 ;;		None               void
-   618 ;; Registers used:
-   619 ;;		wreg, status,2
-   620 ;; Tracked objects:
-   621 ;;		On entry : 0/0
-   622 ;;		On exit  : 0/0
-   623 ;;		Unchanged: 0/0
-   624 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   609                           ;init.c: 152: T5CONbits.TMR5CS = 0b00;
+   610  0001BC  0E3F               	movlw	-193
+   611  0001BE  010F               	movlb	15	; () banked
+   612  0001C0  174E               	andwf	78,f,b	;volatile
+   613                           
+   614                           ;init.c: 153: T5CONbits.T5CKPS = 0b00;
+   615  0001C2  0ECF               	movlw	-49
+   616  0001C4  010F               	movlb	15	; () banked
+   617  0001C6  174E               	andwf	78,f,b	;volatile
+   618                           
+   619                           ; BSR set to: 15
+   620                           ;init.c: 154: T5CONbits.nT5SYNC = 1;
+   621  0001C8  010F               	movlb	15	; () banked
+   622  0001CA  854E               	bsf	78,2,b	;volatile
+   623                           
+   624                           ; BSR set to: 15
+   625                           ;init.c: 155: T5CONbits.TMR5ON = 1;
+   626  0001CC  010F               	movlb	15	; () banked
+   627  0001CE  814E               	bsf	78,0,b	;volatile
+   628                           
+   629                           ; BSR set to: 15
+   630  0001D0  0012               	return		;funcret
+   631  0001D2                     __end_of_InitTimer:
+   632                           	opt stack 0
+   633                           postinc0	equ	0xFEE
+   634                           wreg	equ	0xFE8
+   635                           
+   636 ;; *************** function _InitSpi *****************
+   637 ;; Defined at:
+   638 ;;		line 112 in file "init.c"
+   639 ;; Parameters:    Size  Location     Type
+   640 ;;		None
+   641 ;; Auto vars:     Size  Location     Type
+   642 ;;		None
+   643 ;; Return value:  Size  Location     Type
+   644 ;;		None               void
+   645 ;; Registers used:
+   646 ;;		wreg, status,2
+   647 ;; Tracked objects:
+   648 ;;		On entry : 0/0
+   649 ;;		On exit  : 0/0
+   650 ;;		Unchanged: 0/0
+   651 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   625 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   652 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   626 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   653 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   627 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   654 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   628 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   655 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   629 ;;Total ram usage:        0 bytes
-   630 ;; Hardware stack levels used:    1
-   631 ;; Hardware stack levels required when called:    4
-   632 ;; This function calls:
-   633 ;;		Nothing
-   634 ;; This function is called by:
-   635 ;;		_Init
-   636 ;; This function uses a non-reentrant model
-   637 ;;
-   638                           
-   639                           	psect	text6
-   640  000276                     __ptext6:
-   641                           	opt stack 0
-   642  000276                     _InitPort:
-   643                           	opt stack 25
-   644                           
-   645                           ;init.c: 44: PORTA = 0b00010000;
-   646                           
-   647                           ;incstack = 0
-   648  000276  0E10               	movlw	16
-   649  000278  6E80               	movwf	3968,c	;volatile
-   650                           
-   651                           ;init.c: 45: PORTB = 0b00001000;
-   652  00027A  0E08               	movlw	8
-   653  00027C  6E81               	movwf	3969,c	;volatile
-   654                           
-   655                           ;init.c: 46: PORTC = 0b00000000;
-   656  00027E  0E00               	movlw	0
-   657  000280  6E82               	movwf	3970,c	;volatile
-   658                           
-   659                           ;init.c: 47: PORTD = 0b00001000;
-   660  000282  0E08               	movlw	8
-   661  000284  6E83               	movwf	3971,c	;volatile
-   662                           
-   663                           ;init.c: 48: PORTE = 0b00000000;
-   664  000286  0E00               	movlw	0
-   665  000288  6E84               	movwf	3972,c	;volatile
-   666  00028A  0012               	return		;funcret
-   667  00028C                     __end_of_InitPort:
+   656 ;;Total ram usage:        0 bytes
+   657 ;; Hardware stack levels used:    1
+   658 ;; Hardware stack levels required when called:    4
+   659 ;; This function calls:
+   660 ;;		Nothing
+   661 ;; This function is called by:
+   662 ;;		_Init
+   663 ;; This function uses a non-reentrant model
+   664 ;;
+   665                           
+   666                           	psect	text6
+   667  0002D8                     __ptext6:
    668                           	opt stack 0
-   669                           postinc0	equ	0xFEE
-   670                           wreg	equ	0xFE8
+   669  0002D8                     _InitSpi:
+   670                           	opt stack 25
    671                           
-   672 ;; *************** function _InitOsc *****************
-   673 ;; Defined at:
-   674 ;;		line 73 in file "init.c"
-   675 ;; Parameters:    Size  Location     Type
-   676 ;;		None
-   677 ;; Auto vars:     Size  Location     Type
-   678 ;;		None
-   679 ;; Return value:  Size  Location     Type
-   680 ;;		None               void
-   681 ;; Registers used:
-   682 ;;		wreg, status,2
-   683 ;; Tracked objects:
-   684 ;;		On entry : 0/0
-   685 ;;		On exit  : 0/0
-   686 ;;		Unchanged: 0/0
-   687 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   672                           ;init.c: 113: SSP1STAT = 0b00000000;
+   673                           
+   674                           ; BSR set to: 15
+   675                           ;incstack = 0
+   676  0002D8  0E00               	movlw	0
+   677  0002DA  6EC7               	movwf	4039,c	;volatile
+   678                           
+   679                           ;init.c: 114: SSP1CON1 = 0b00100001;
+   680  0002DC  0E21               	movlw	33
+   681  0002DE  6EC6               	movwf	4038,c	;volatile
+   682  0002E0  0012               	return		;funcret
+   683  0002E2                     __end_of_InitSpi:
+   684                           	opt stack 0
+   685                           postinc0	equ	0xFEE
+   686                           wreg	equ	0xFE8
+   687                           
+   688 ;; *************** function _InitPort *****************
+   689 ;; Defined at:
+   690 ;;		line 44 in file "init.c"
+   691 ;; Parameters:    Size  Location     Type
+   692 ;;		None
+   693 ;; Auto vars:     Size  Location     Type
+   694 ;;		None
+   695 ;; Return value:  Size  Location     Type
+   696 ;;		None               void
+   697 ;; Registers used:
+   698 ;;		wreg, status,2
+   699 ;; Tracked objects:
+   700 ;;		On entry : 0/0
+   701 ;;		On exit  : 0/0
+   702 ;;		Unchanged: 0/0
+   703 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   688 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   704 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   689 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   705 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   690 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   706 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   691 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   707 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   692 ;;Total ram usage:        0 bytes
-   693 ;; Hardware stack levels used:    1
-   694 ;; Hardware stack levels required when called:    4
-   695 ;; This function calls:
-   696 ;;		Nothing
-   697 ;; This function is called by:
-   698 ;;		_Init
-   699 ;; This function uses a non-reentrant model
-   700 ;;
-   701                           
-   702                           	psect	text7
-   703  0002D4                     __ptext7:
-   704                           	opt stack 0
-   705  0002D4                     _InitOsc:
-   706                           	opt stack 25
-   707                           
-   708                           ;init.c: 74: OSCCON = 0b01110111;
-   709                           
-   710                           ;incstack = 0
-   711  0002D4  0E77               	movlw	119
-   712  0002D6  6ED3               	movwf	4051,c	;volatile
-   713  0002D8  0012               	return		;funcret
-   714  0002DA                     __end_of_InitOsc:
-   715                           	opt stack 0
-   716                           postinc0	equ	0xFEE
-   717                           wreg	equ	0xFE8
-   718                           
-   719 ;; *************** function _InitInterrupt *****************
-   720 ;; Defined at:
-   721 ;;		line 163 in file "init.c"
-   722 ;; Parameters:    Size  Location     Type
-   723 ;;		None
-   724 ;; Auto vars:     Size  Location     Type
-   725 ;;		None
-   726 ;; Return value:  Size  Location     Type
-   727 ;;		None               void
-   728 ;; Registers used:
-   729 ;;		None
-   730 ;; Tracked objects:
-   731 ;;		On entry : 0/0
-   732 ;;		On exit  : 0/0
-   733 ;;		Unchanged: 0/0
-   734 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   708 ;;Total ram usage:        0 bytes
+   709 ;; Hardware stack levels used:    1
+   710 ;; Hardware stack levels required when called:    4
+   711 ;; This function calls:
+   712 ;;		Nothing
+   713 ;; This function is called by:
+   714 ;;		_Init
+   715 ;; This function uses a non-reentrant model
+   716 ;;
+   717                           
+   718                           	psect	text7
+   719  0002B6                     __ptext7:
+   720                           	opt stack 0
+   721  0002B6                     _InitPort:
+   722                           	opt stack 25
+   723                           
+   724                           ;init.c: 45: PORTA = 0b00010000;
+   725                           
+   726                           ;incstack = 0
+   727  0002B6  0E10               	movlw	16
+   728  0002B8  6E80               	movwf	3968,c	;volatile
+   729                           
+   730                           ;init.c: 46: PORTB = 0b00001000;
+   731  0002BA  0E08               	movlw	8
+   732  0002BC  6E81               	movwf	3969,c	;volatile
+   733                           
+   734                           ;init.c: 47: PORTC = 0b00000000;
+   735  0002BE  0E00               	movlw	0
+   736  0002C0  6E82               	movwf	3970,c	;volatile
+   737                           
+   738                           ;init.c: 48: PORTD = 0b00001000;
+   739  0002C2  0E08               	movlw	8
+   740  0002C4  6E83               	movwf	3971,c	;volatile
+   741                           
+   742                           ;init.c: 49: PORTE = 0b00000000;
+   743  0002C6  0E00               	movlw	0
+   744  0002C8  6E84               	movwf	3972,c	;volatile
+   745  0002CA  0012               	return		;funcret
+   746  0002CC                     __end_of_InitPort:
+   747                           	opt stack 0
+   748                           postinc0	equ	0xFEE
+   749                           wreg	equ	0xFE8
+   750                           
+   751 ;; *************** function _InitOsc *****************
+   752 ;; Defined at:
+   753 ;;		line 74 in file "init.c"
+   754 ;; Parameters:    Size  Location     Type
+   755 ;;		None
+   756 ;; Auto vars:     Size  Location     Type
+   757 ;;		None
+   758 ;; Return value:  Size  Location     Type
+   759 ;;		None               void
+   760 ;; Registers used:
+   761 ;;		wreg, status,2
+   762 ;; Tracked objects:
+   763 ;;		On entry : 0/0
+   764 ;;		On exit  : 0/0
+   765 ;;		Unchanged: 0/0
+   766 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   735 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   767 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   736 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   768 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   737 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   769 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   738 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   770 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   739 ;;Total ram usage:        0 bytes
-   740 ;; Hardware stack levels used:    1
-   741 ;; Hardware stack levels required when called:    4
-   742 ;; This function calls:
-   743 ;;		Nothing
-   744 ;; This function is called by:
-   745 ;;		_Init
-   746 ;; This function uses a non-reentrant model
-   747 ;;
-   748                           
-   749                           	psect	text8
-   750  0002B4                     __ptext8:
-   751                           	opt stack 0
-   752  0002B4                     _InitInterrupt:
-   753                           	opt stack 25
-   754                           
-   755                           ;init.c: 164: GIE = 1;
-   756                           
-   757                           ;incstack = 0
-   758  0002B4  8EF2               	bsf	intcon,7,c	;volatile
-   759                           
-   760                           ;init.c: 165: PEIE = 1;
-   761  0002B6  8CF2               	bsf	intcon,6,c	;volatile
-   762                           
-   763                           ;init.c: 167: TMR3GIE = 0;
-   764  0002B8  92A3               	bcf	4003,1,c	;volatile
-   765  0002BA  0012               	return		;funcret
-   766  0002BC                     __end_of_InitInterrupt:
-   767                           	opt stack 0
-   768                           intcon	equ	0xFF2
-   769                           postinc0	equ	0xFEE
-   770                           wreg	equ	0xFE8
-   771                           
-   772 ;; *************** function _InitAnsel *****************
-   773 ;; Defined at:
-   774 ;;		line 63 in file "init.c"
-   775 ;; Parameters:    Size  Location     Type
-   776 ;;		None
-   777 ;; Auto vars:     Size  Location     Type
-   778 ;;		None
-   779 ;; Return value:  Size  Location     Type
-   780 ;;		None               void
-   781 ;; Registers used:
-   782 ;;		wreg, status,2
-   783 ;; Tracked objects:
-   784 ;;		On entry : 0/0
-   785 ;;		On exit  : 0/0
-   786 ;;		Unchanged: 0/0
-   787 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   771 ;;Total ram usage:        0 bytes
+   772 ;; Hardware stack levels used:    1
+   773 ;; Hardware stack levels required when called:    4
+   774 ;; This function calls:
+   775 ;;		Nothing
+   776 ;; This function is called by:
+   777 ;;		_Init
+   778 ;; This function uses a non-reentrant model
+   779 ;;
+   780                           
+   781                           	psect	text8
+   782  000302                     __ptext8:
+   783                           	opt stack 0
+   784  000302                     _InitOsc:
+   785                           	opt stack 25
+   786                           
+   787                           ;init.c: 75: OSCCON = 0b01110111;
+   788                           
+   789                           ;incstack = 0
+   790  000302  0E77               	movlw	119
+   791  000304  6ED3               	movwf	4051,c	;volatile
+   792  000306  0012               	return		;funcret
+   793  000308                     __end_of_InitOsc:
+   794                           	opt stack 0
+   795                           postinc0	equ	0xFEE
+   796                           wreg	equ	0xFE8
+   797                           
+   798 ;; *************** function _InitInterrupt *****************
+   799 ;; Defined at:
+   800 ;;		line 164 in file "init.c"
+   801 ;; Parameters:    Size  Location     Type
+   802 ;;		None
+   803 ;; Auto vars:     Size  Location     Type
+   804 ;;		None
+   805 ;; Return value:  Size  Location     Type
+   806 ;;		None               void
+   807 ;; Registers used:
+   808 ;;		None
+   809 ;; Tracked objects:
+   810 ;;		On entry : 0/0
+   811 ;;		On exit  : 0/0
+   812 ;;		Unchanged: 0/0
+   813 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   788 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   814 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   789 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   815 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   790 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   816 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   791 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   817 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   792 ;;Total ram usage:        0 bytes
-   793 ;; Hardware stack levels used:    1
-   794 ;; Hardware stack levels required when called:    4
-   795 ;; This function calls:
-   796 ;;		Nothing
-   797 ;; This function is called by:
-   798 ;;		_Init
-   799 ;; This function uses a non-reentrant model
-   800 ;;
-   801                           
-   802                           	psect	text9
-   803  000212                     __ptext9:
-   804                           	opt stack 0
-   805  000212                     _InitAnsel:
-   806                           	opt stack 25
-   807                           
-   808                           ;init.c: 64: ANSELA = 0b00000000;
-   809                           
-   810                           ;incstack = 0
-   811  000212  0E00               	movlw	0
-   812  000214  010F               	movlb	15	; () banked
-   813  000216  6F38               	movwf	56,b	;volatile
-   814                           
-   815                           ;init.c: 65: ANSELB = 0b00000000;
-   816  000218  0E00               	movlw	0
-   817  00021A  010F               	movlb	15	; () banked
-   818  00021C  6F39               	movwf	57,b	;volatile
-   819                           
-   820                           ;init.c: 66: ANSELC = 0b00000000;
-   821  00021E  0E00               	movlw	0
-   822  000220  010F               	movlb	15	; () banked
-   823  000222  6F3A               	movwf	58,b	;volatile
-   824                           
-   825                           ;init.c: 67: ANSELD = 0b00000000;
-   826  000224  0E00               	movlw	0
-   827  000226  010F               	movlb	15	; () banked
-   828  000228  6F3B               	movwf	59,b	;volatile
-   829                           
-   830                           ;init.c: 68: ANSELE = 0b00000000;
-   831  00022A  0E00               	movlw	0
-   832  00022C  010F               	movlb	15	; () banked
-   833  00022E  6F3C               	movwf	60,b	;volatile
-   834                           
-   835                           ; BSR set to: 15
-   836  000230  0012               	return		;funcret
-   837  000232                     __end_of_InitAnsel:
-   838                           	opt stack 0
-   839                           intcon	equ	0xFF2
-   840                           postinc0	equ	0xFEE
-   841                           wreg	equ	0xFE8
-   842                           
-   843 ;; *************** function _isr *****************
-   844 ;; Defined at:
-   845 ;;		line 84 in file "main.c"
-   846 ;; Parameters:    Size  Location     Type
-   847 ;;		None
-   848 ;; Auto vars:     Size  Location     Type
-   849 ;;		None
-   850 ;; Return value:  Size  Location     Type
-   851 ;;		None               void
-   852 ;; Registers used:
-   853 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
-   854 ;; Tracked objects:
-   855 ;;		On entry : 0/0
-   856 ;;		On exit  : 0/0
-   857 ;;		Unchanged: 0/0
-   858 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   818 ;;Total ram usage:        0 bytes
+   819 ;; Hardware stack levels used:    1
+   820 ;; Hardware stack levels required when called:    4
+   821 ;; This function calls:
+   822 ;;		Nothing
+   823 ;; This function is called by:
+   824 ;;		_Init
+   825 ;; This function uses a non-reentrant model
+   826 ;;
+   827                           
+   828                           	psect	text9
+   829  0002E2                     __ptext9:
+   830                           	opt stack 0
+   831  0002E2                     _InitInterrupt:
+   832                           	opt stack 25
+   833                           
+   834                           ;init.c: 165: GIE = 1;
+   835                           
+   836                           ;incstack = 0
+   837  0002E2  8EF2               	bsf	intcon,7,c	;volatile
+   838                           
+   839                           ;init.c: 166: PEIE = 1;
+   840  0002E4  8CF2               	bsf	intcon,6,c	;volatile
+   841                           
+   842                           ;init.c: 168: TMR3GIE = 0;
+   843  0002E6  92A3               	bcf	4003,1,c	;volatile
+   844  0002E8  0012               	return		;funcret
+   845  0002EA                     __end_of_InitInterrupt:
+   846                           	opt stack 0
+   847                           intcon	equ	0xFF2
+   848                           postinc0	equ	0xFEE
+   849                           wreg	equ	0xFE8
+   850                           
+   851 ;; *************** function _InitAnsel *****************
+   852 ;; Defined at:
+   853 ;;		line 64 in file "init.c"
+   854 ;; Parameters:    Size  Location     Type
+   855 ;;		None
+   856 ;; Auto vars:     Size  Location     Type
+   857 ;;		None
+   858 ;; Return value:  Size  Location     Type
+   859 ;;		None               void
+   860 ;; Registers used:
+   861 ;;		wreg, status,2
+   862 ;; Tracked objects:
+   863 ;;		On entry : 0/0
+   864 ;;		On exit  : 0/0
+   865 ;;		Unchanged: 0/0
+   866 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   859 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   867 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   860 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   868 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   861 ;;      Temps:         14       0       0       0       0       0       0       0       0       0       0       0       
+   869 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   862 ;;      Totals:        14       0       0       0       0       0       0       0       0       0       0       0       
+   870 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   863 ;;Total ram usage:       14 bytes
-   864 ;; Hardware stack levels used:    1
-   865 ;; Hardware stack levels required when called:    3
-   866 ;; This function calls:
-   867 ;;		_UartDump
-   868 ;;		_UartStore
-   869 ;; This function is called by:
-   870 ;;		Interrupt level 2
-   871 ;; This function uses a non-reentrant model
-   872 ;;
-   873                           
-   874                           	psect	intcode
-   875  000008                     __pintcode:
-   876                           	opt stack 0
-   877  000008                     _isr:
-   878                           	opt stack 25
-   879                           
-   880                           ; BSR set to: 15
-   881                           ;incstack = 0
-   882  000008  8237               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
-   883  00000A  CFFA F028          	movff	pclath,??_isr
-   884  00000E  CFFB F029          	movff	pclatu,??_isr+1
-   885  000012  CFE9 F02A          	movff	fsr0l,??_isr+2
-   886  000016  CFEA F02B          	movff	fsr0h,??_isr+3
-   887  00001A  CFE1 F02C          	movff	fsr1l,??_isr+4
-   888  00001E  CFE2 F02D          	movff	fsr1h,??_isr+5
-   889  000022  CFD9 F02E          	movff	fsr2l,??_isr+6
-   890  000026  CFDA F02F          	movff	fsr2h,??_isr+7
-   891  00002A  CFF3 F030          	movff	prodl,??_isr+8
-   892  00002E  CFF4 F031          	movff	prodh,??_isr+9
-   893  000032  CFF6 F032          	movff	tblptrl,??_isr+10
-   894  000036  CFF7 F033          	movff	tblptrh,??_isr+11
-   895  00003A  CFF8 F034          	movff	tblptru,??_isr+12
-   896  00003E  CFF5 F035          	movff	tablat,??_isr+13
-   897                           
-   898                           ;main.c: 85: if(RC1IF == 1) {
-   899  000042  AA9E               	btfss	3998,5,c	;volatile
-   900  000044  D008               	goto	i2l172
-   901                           
-   902                           ;main.c: 86: RC1IF = 0;
-   903  000046  9A9E               	bcf	3998,5,c	;volatile
-   904                           
-   905                           ;main.c: 87: if(PORTDbits.RD4 == 1) {
-   906  000048  A883               	btfss	3971,4,c	;volatile
-   907  00004A  D003               	goto	i2l1124
+   871 ;;Total ram usage:        0 bytes
+   872 ;; Hardware stack levels used:    1
+   873 ;; Hardware stack levels required when called:    4
+   874 ;; This function calls:
+   875 ;;		Nothing
+   876 ;; This function is called by:
+   877 ;;		_Init
+   878 ;; This function uses a non-reentrant model
+   879 ;;
+   880                           
+   881                           	psect	text10
+   882  00021C                     __ptext10:
+   883                           	opt stack 0
+   884  00021C                     _InitAnsel:
+   885                           	opt stack 25
+   886                           
+   887                           ;init.c: 65: ANSELA = 0b00000000;
+   888                           
+   889                           ;incstack = 0
+   890  00021C  0E00               	movlw	0
+   891  00021E  010F               	movlb	15	; () banked
+   892  000220  6F38               	movwf	56,b	;volatile
+   893                           
+   894                           ;init.c: 66: ANSELB = 0b00000000;
+   895  000222  0E00               	movlw	0
+   896  000224  010F               	movlb	15	; () banked
+   897  000226  6F39               	movwf	57,b	;volatile
+   898                           
+   899                           ;init.c: 67: ANSELC = 0b00000000;
+   900  000228  0E00               	movlw	0
+   901  00022A  010F               	movlb	15	; () banked
+   902  00022C  6F3A               	movwf	58,b	;volatile
+   903                           
+   904                           ;init.c: 68: ANSELD = 0b00000000;
+   905  00022E  0E00               	movlw	0
+   906  000230  010F               	movlb	15	; () banked
+   907  000232  6F3B               	movwf	59,b	;volatile
    908                           
-   909                           ;main.c: 88: UartStore();
-   910  00004C  EC4B  F000         	call	_UartStore	;wreg free
-   911                           
-   912                           ;main.c: 89: }else {
-   913  000050  D002               	goto	i2l172
-   914  000052                     i2l1124:
-   915                           
-   916                           ;main.c: 90: UartDump();
-   917  000052  EC66  F001         	call	_UartDump	;wreg free
-   918  000056                     i2l172:
-   919  000056  C035  FFF5         	movff	??_isr+13,tablat
-   920  00005A  C034  FFF8         	movff	??_isr+12,tblptru
-   921  00005E  C033  FFF7         	movff	??_isr+11,tblptrh
-   922  000062  C032  FFF6         	movff	??_isr+10,tblptrl
-   923  000066  C031  FFF4         	movff	??_isr+9,prodh
-   924  00006A  C030  FFF3         	movff	??_isr+8,prodl
-   925  00006E  C02F  FFDA         	movff	??_isr+7,fsr2h
-   926  000072  C02E  FFD9         	movff	??_isr+6,fsr2l
-   927  000076  C02D  FFE2         	movff	??_isr+5,fsr1h
-   928  00007A  C02C  FFE1         	movff	??_isr+4,fsr1l
-   929  00007E  C02B  FFEA         	movff	??_isr+3,fsr0h
-   930  000082  C02A  FFE9         	movff	??_isr+2,fsr0l
-   931  000086  C029  FFFB         	movff	??_isr+1,pclatu
-   932  00008A  C028  FFFA         	movff	??_isr,pclath
-   933  00008E  9237               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
-   934  000090  0011               	retfie		f
-   935  000092                     __end_of_isr:
-   936                           	opt stack 0
-   937                           pclatu	equ	0xFFB
-   938                           pclath	equ	0xFFA
-   939                           tblptru	equ	0xFF8
-   940                           tblptrh	equ	0xFF7
-   941                           tblptrl	equ	0xFF6
-   942                           tablat	equ	0xFF5
-   943                           prodh	equ	0xFF4
-   944                           prodl	equ	0xFF3
-   945                           intcon	equ	0xFF2
-   946                           postinc0	equ	0xFEE
-   947                           fsr0h	equ	0xFEA
-   948                           fsr0l	equ	0xFE9
-   949                           wreg	equ	0xFE8
-   950                           fsr1h	equ	0xFE2
-   951                           fsr1l	equ	0xFE1
-   952                           fsr2h	equ	0xFDA
-   953                           fsr2l	equ	0xFD9
-   954                           
-   955 ;; *************** function _UartStore *****************
-   956 ;; Defined at:
-   957 ;;		line 10 in file "wlan.c"
-   958 ;; Parameters:    Size  Location     Type
-   959 ;;		None
-   960 ;; Auto vars:     Size  Location     Type
-   961 ;;		None
-   962 ;; Return value:  Size  Location     Type
-   963 ;;		None               void
-   964 ;; Registers used:
-   965 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
-   966 ;; Tracked objects:
-   967 ;;		On entry : 0/0
-   968 ;;		On exit  : 0/0
-   969 ;;		Unchanged: 0/0
-   970 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   909                           ;init.c: 69: ANSELE = 0b00000000;
+   910  000234  0E00               	movlw	0
+   911  000236  010F               	movlb	15	; () banked
+   912  000238  6F3C               	movwf	60,b	;volatile
+   913                           
+   914                           ; BSR set to: 15
+   915  00023A  0012               	return		;funcret
+   916  00023C                     __end_of_InitAnsel:
+   917                           	opt stack 0
+   918                           intcon	equ	0xFF2
+   919                           postinc0	equ	0xFEE
+   920                           wreg	equ	0xFE8
+   921                           
+   922 ;; *************** function _isr *****************
+   923 ;; Defined at:
+   924 ;;		line 84 in file "main.c"
+   925 ;; Parameters:    Size  Location     Type
+   926 ;;		None
+   927 ;; Auto vars:     Size  Location     Type
+   928 ;;		None
+   929 ;; Return value:  Size  Location     Type
+   930 ;;		None               void
+   931 ;; Registers used:
+   932 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+   933 ;; Tracked objects:
+   934 ;;		On entry : 0/0
+   935 ;;		On exit  : 0/0
+   936 ;;		Unchanged: 0/0
+   937 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   971 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   938 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   972 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   939 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   973 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   940 ;;      Temps:         14       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   974 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+   941 ;;      Totals:        14       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   975 ;;Total ram usage:        0 bytes
-   976 ;; Hardware stack levels used:    1
-   977 ;; Hardware stack levels required when called:    2
-   978 ;; This function calls:
-   979 ;;		_UartDump
-   980 ;;		_UartReceive
-   981 ;;		_UartSendError
-   982 ;;		_UartSendOverflow
-   983 ;; This function is called by:
-   984 ;;		_isr
-   985 ;; This function uses a non-reentrant model
-   986 ;;
+   942 ;;Total ram usage:       14 bytes
+   943 ;; Hardware stack levels used:    1
+   944 ;; Hardware stack levels required when called:    3
+   945 ;; This function calls:
+   946 ;;		_UartDump
+   947 ;;		_UartStore
+   948 ;; This function is called by:
+   949 ;;		Interrupt level 2
+   950 ;; This function uses a non-reentrant model
+   951 ;;
+   952                           
+   953                           	psect	intcode
+   954  000008                     __pintcode:
+   955                           	opt stack 0
+   956  000008                     _isr:
+   957                           	opt stack 25
+   958                           
+   959                           ; BSR set to: 15
+   960                           ;incstack = 0
+   961  000008  8237               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
+   962  00000A  CFFA F027          	movff	pclath,??_isr
+   963  00000E  CFFB F028          	movff	pclatu,??_isr+1
+   964  000012  CFE9 F029          	movff	fsr0l,??_isr+2
+   965  000016  CFEA F02A          	movff	fsr0h,??_isr+3
+   966  00001A  CFE1 F02B          	movff	fsr1l,??_isr+4
+   967  00001E  CFE2 F02C          	movff	fsr1h,??_isr+5
+   968  000022  CFD9 F02D          	movff	fsr2l,??_isr+6
+   969  000026  CFDA F02E          	movff	fsr2h,??_isr+7
+   970  00002A  CFF3 F02F          	movff	prodl,??_isr+8
+   971  00002E  CFF4 F030          	movff	prodh,??_isr+9
+   972  000032  CFF6 F031          	movff	tblptrl,??_isr+10
+   973  000036  CFF7 F032          	movff	tblptrh,??_isr+11
+   974  00003A  CFF8 F033          	movff	tblptru,??_isr+12
+   975  00003E  CFF5 F034          	movff	tablat,??_isr+13
+   976                           
+   977                           ;main.c: 85: if(RC1IF == 1) {
+   978  000042  AA9E               	btfss	3998,5,c	;volatile
+   979  000044  D008               	goto	i2l178
+   980                           
+   981                           ;main.c: 86: RC1IF = 0;
+   982  000046  9A9E               	bcf	3998,5,c	;volatile
+   983                           
+   984                           ;main.c: 87: if(PORTDbits.RD4 == 1) {
+   985  000048  A883               	btfss	3971,4,c	;volatile
+   986  00004A  D003               	goto	i2l1143
    987                           
-   988                           	psect	text11
-   989  000096                     __ptext11:
-   990                           	opt stack 0
-   991  000096                     _UartStore:
-   992                           	opt stack 25
-   993                           
-   994                           ;wlan.c: 11: received = UartReceive();
-   995                           
-   996                           ;incstack = 0
-   997  000096  EC4F  F001         	call	_UartReceive	;wreg free
-   998  00009A  6E26               	movwf	_received,c
-   999                           
-  1000                           ;wlan.c: 12: if(received == '<') {
-  1001  00009C  0E3C               	movlw	60
-  1002  00009E  1826               	xorwf	_received,w,c
-  1003  0000A0  A4D8               	btfss	status,2,c
-  1004  0000A2  D009               	goto	i2l1062
-  1005                           
-  1006                           ;wlan.c: 13: received = UartReceive();
-  1007  0000A4  EC4F  F001         	call	_UartReceive	;wreg free
-  1008  0000A8  6E26               	movwf	_received,c
-  1009                           
-  1010                           ;wlan.c: 14: if(received == '<') {
-  1011  0000AA  0E3C               	movlw	60
-  1012  0000AC  1826               	xorwf	_received,w,c
-  1013  0000AE  A4D8               	btfss	status,2,c
-  1014  0000B0  0012               	return	
-  1015                           
-  1016                           ;wlan.c: 15: receiving_ok = 1;
-  1017  0000B2  8236               	bsf	_receiving_ok/(0+8),_receiving_ok& (0+7),c
-  1018                           
-  1019                           ;wlan.c: 16: }
-  1020                           ;wlan.c: 17: }else if(received == 0x04) {
-  1021  0000B4  0012               	return	
-  1022  0000B6                     i2l1062:
-  1023  0000B6  0E04               	movlw	4
-  1024  0000B8  1826               	xorwf	_received,w,c
-  1025  0000BA  A4D8               	btfss	status,2,c
-  1026  0000BC  D005               	goto	i2l1070
-  1027                           
-  1028                           ;wlan.c: 19: c_path = 0;
-  1029  0000BE  0E00               	movlw	0
-  1030  0000C0  6E23               	movwf	_c_path,c
-  1031                           
-  1032                           ;wlan.c: 20: path_name = 0;
-  1033  0000C2  9036               	bcf	_path_name/(0+8),_path_name& (0+7),c
-  1034                           
-  1035                           ;wlan.c: 21: receiving_ok = 0;
-  1036  0000C4  9236               	bcf	_receiving_ok/(0+8),_receiving_ok& (0+7),c
-  1037                           
-  1038                           ;wlan.c: 22: }else if(received == 0x17){
-  1039  0000C6  0012               	return	
-  1040  0000C8                     i2l1070:
-  1041  0000C8  0E17               	movlw	23
-  1042  0000CA  1826               	xorwf	_received,w,c
-  1043  0000CC  A4D8               	btfss	status,2,c
-  1044  0000CE  D004               	goto	i2l1076
-  1045                           
-  1046                           ;wlan.c: 24: c_name = 0;
-  1047                           
-  1048                           ;wlan.c: 23: NAME:
-  1049  0000D0  0E00               	movlw	0
-  1050  0000D2  6E22               	movwf	_c_name,c
-  1051                           
-  1052                           ;wlan.c: 25: path_name = 1;
-  1053  0000D4  8036               	bsf	_path_name/(0+8),_path_name& (0+7),c
-  1054                           
-  1055                           ;wlan.c: 26: }else if(received == '>') {
-  1056  0000D6  0012               	return	
-  1057  0000D8                     i2l1076:
-  1058  0000D8  0E3E               	movlw	62
-  1059  0000DA  1826               	xorwf	_received,w,c
-  1060  0000DC  A4D8               	btfss	status,2,c
-  1061  0000DE  D00D               	goto	i2l1086
-  1062                           
-  1063                           ;wlan.c: 28: received = UartReceive();
-  1064  0000E0  EC4F  F001         	call	_UartReceive	;wreg free
-  1065  0000E4  6E26               	movwf	_received,c
+   988                           ;main.c: 88: UartStore();
+   989  00004C  EC4B  F000         	call	_UartStore	;wreg free
+   990                           
+   991                           ;main.c: 89: }else {
+   992  000050  D002               	goto	i2l178
+   993  000052                     i2l1143:
+   994                           
+   995                           ;main.c: 90: UartDump();
+   996  000052  EC7D  F001         	call	_UartDump	;wreg free
+   997  000056                     i2l178:
+   998  000056  C034  FFF5         	movff	??_isr+13,tablat
+   999  00005A  C033  FFF8         	movff	??_isr+12,tblptru
+  1000  00005E  C032  FFF7         	movff	??_isr+11,tblptrh
+  1001  000062  C031  FFF6         	movff	??_isr+10,tblptrl
+  1002  000066  C030  FFF4         	movff	??_isr+9,prodh
+  1003  00006A  C02F  FFF3         	movff	??_isr+8,prodl
+  1004  00006E  C02E  FFDA         	movff	??_isr+7,fsr2h
+  1005  000072  C02D  FFD9         	movff	??_isr+6,fsr2l
+  1006  000076  C02C  FFE2         	movff	??_isr+5,fsr1h
+  1007  00007A  C02B  FFE1         	movff	??_isr+4,fsr1l
+  1008  00007E  C02A  FFEA         	movff	??_isr+3,fsr0h
+  1009  000082  C029  FFE9         	movff	??_isr+2,fsr0l
+  1010  000086  C028  FFFB         	movff	??_isr+1,pclatu
+  1011  00008A  C027  FFFA         	movff	??_isr,pclath
+  1012  00008E  9237               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
+  1013  000090  0011               	retfie		f
+  1014  000092                     __end_of_isr:
+  1015                           	opt stack 0
+  1016                           pclatu	equ	0xFFB
+  1017                           pclath	equ	0xFFA
+  1018                           tblptru	equ	0xFF8
+  1019                           tblptrh	equ	0xFF7
+  1020                           tblptrl	equ	0xFF6
+  1021                           tablat	equ	0xFF5
+  1022                           prodh	equ	0xFF4
+  1023                           prodl	equ	0xFF3
+  1024                           intcon	equ	0xFF2
+  1025                           postinc0	equ	0xFEE
+  1026                           fsr0h	equ	0xFEA
+  1027                           fsr0l	equ	0xFE9
+  1028                           wreg	equ	0xFE8
+  1029                           fsr1h	equ	0xFE2
+  1030                           fsr1l	equ	0xFE1
+  1031                           fsr2h	equ	0xFDA
+  1032                           fsr2l	equ	0xFD9
+  1033                           
+  1034 ;; *************** function _UartStore *****************
+  1035 ;; Defined at:
+  1036 ;;		line 10 in file "wlan.c"
+  1037 ;; Parameters:    Size  Location     Type
+  1038 ;;		None
+  1039 ;; Auto vars:     Size  Location     Type
+  1040 ;;		None
+  1041 ;; Return value:  Size  Location     Type
+  1042 ;;		None               void
+  1043 ;; Registers used:
+  1044 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+  1045 ;; Tracked objects:
+  1046 ;;		On entry : 0/0
+  1047 ;;		On exit  : 0/0
+  1048 ;;		Unchanged: 0/0
+  1049 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14  BANK15
+  1050 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1051 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1052 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1053 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1054 ;;Total ram usage:        0 bytes
+  1055 ;; Hardware stack levels used:    1
+  1056 ;; Hardware stack levels required when called:    2
+  1057 ;; This function calls:
+  1058 ;;		_UartDump
+  1059 ;;		_UartReceive
+  1060 ;;		_UartSendError
+  1061 ;;		_UartSendOverflow
+  1062 ;; This function is called by:
+  1063 ;;		_isr
+  1064 ;; This function uses a non-reentrant model
+  1065 ;;
   1066                           
-  1067                           ;wlan.c: 29: if(received == '>'){
-  1068  0000E6  0E3E               	movlw	62
-  1069  0000E8  1826               	xorwf	_received,w,c
-  1070  0000EA  A4D8               	btfss	status,2,c
-  1071  0000EC  D003               	goto	i2l1084
+  1067                           	psect	text12
+  1068  000096                     __ptext12:
+  1069                           	opt stack 0
+  1070  000096                     _UartStore:
+  1071                           	opt stack 25
   1072                           
-  1073                           ;wlan.c: 31: numb_cc = c_path;
-  1074  0000EE  C023  F024         	movff	_c_path,_numb_cc
-  1075                           
-  1076                           ;wlan.c: 32: }else {
-  1077  0000F2  0012               	return	
-  1078  0000F4                     i2l1084:
-  1079                           
-  1080                           ;wlan.c: 33: UartSendError();
-  1081  0000F4  EC62  F001         	call	_UartSendError	;wreg free
-  1082                           
-  1083                           ;wlan.c: 34: }
-  1084                           ;wlan.c: 35: }else if(received == 0x1D) {
-  1085  0000F8  0012               	return	
-  1086  0000FA                     i2l1086:
-  1087  0000FA  0E1D               	movlw	29
-  1088  0000FC  1826               	xorwf	_received,w,c
-  1089  0000FE  A4D8               	btfss	status,2,c
-  1090  000100  D003               	goto	i2l260
-  1091                           
-  1092                           ;wlan.c: 36: numb_cc_table = c_path;
-  1093  000102  C023  F025         	movff	_c_path,_numb_cc_table
+  1073                           ;wlan.c: 11: received = UartReceive();
+  1074                           
+  1075                           ;incstack = 0
+  1076  000096  EC66  F001         	call	_UartReceive	;wreg free
+  1077  00009A  6E25               	movwf	_received,c
+  1078                           
+  1079                           ;wlan.c: 12: if(received == '<') {
+  1080  00009C  0E3C               	movlw	60
+  1081  00009E  1825               	xorwf	_received,w,c
+  1082  0000A0  A4D8               	btfss	status,2,c
+  1083  0000A2  D00B               	goto	i2l1081
+  1084                           
+  1085                           ;wlan.c: 13: received = UartReceive();
+  1086  0000A4  EC66  F001         	call	_UartReceive	;wreg free
+  1087  0000A8  6E25               	movwf	_received,c
+  1088                           
+  1089                           ;wlan.c: 14: if(received == '<') {
+  1090  0000AA  0E3C               	movlw	60
+  1091  0000AC  1825               	xorwf	_received,w,c
+  1092  0000AE  A4D8               	btfss	status,2,c
+  1093  0000B0  0012               	return	
   1094                           
-  1095                           ;wlan.c: 37: }else if(receiving_ok == 1){
-  1096  000106  0012               	return	
-  1097  000108                     i2l260:
-  1098  000108  A236               	btfss	_receiving_ok/(0+8),_receiving_ok& (0+7),c
-  1099  00010A  D03B               	goto	i2l1116
-  1100                           
-  1101                           ;wlan.c: 38: if(path_name == 0) {
-  1102  00010C  B036               	btfsc	_path_name/(0+8),_path_name& (0+7),c
-  1103  00010E  D024               	goto	i2l263
-  1104                           
-  1105                           ;wlan.c: 39: a_path[c_path].lower_cc = received;
-  1106  000110  5023               	movf	_c_path,w,c
-  1107  000112  0D02               	mullw	2
-  1108  000114  0E60               	movlw	low _a_path
-  1109  000116  24F3               	addwf	prodl,w,c
-  1110  000118  6ED9               	movwf	fsr2l,c
-  1111  00011A  0E00               	movlw	high _a_path
-  1112  00011C  20F4               	addwfc	prodh,w,c
-  1113  00011E  6EDA               	movwf	fsr2h,c
-  1114  000120  C026  FFDF         	movff	_received,indf2
-  1115                           
-  1116                           ;wlan.c: 40: received = UartReceive();
-  1117  000124  EC4F  F001         	call	_UartReceive	;wreg free
-  1118  000128  6E26               	movwf	_received,c
-  1119                           
-  1120                           ;wlan.c: 41: a_path[c_path].higher_cc = received;
-  1121  00012A  5023               	movf	_c_path,w,c
-  1122  00012C  0D02               	mullw	2
-  1123  00012E  0E01               	movlw	1
-  1124  000130  26F3               	addwf	prodl,f,c
-  1125  000132  0E00               	movlw	0
-  1126  000134  22F4               	addwfc	prodh,f,c
-  1127  000136  0E60               	movlw	low _a_path
-  1128  000138  24F3               	addwf	prodl,w,c
-  1129  00013A  6ED9               	movwf	fsr2l,c
-  1130  00013C  0E00               	movlw	high _a_path
-  1131  00013E  20F4               	addwfc	prodh,w,c
-  1132  000140  6EDA               	movwf	fsr2h,c
-  1133  000142  C026  FFDF         	movff	_received,indf2
+  1095                           ;wlan.c: 15: receiving_ok = 1;
+  1096  0000B2  8236               	bsf	_receiving_ok/(0+8),_receiving_ok& (0+7),c
+  1097                           
+  1098                           ;wlan.c: 16: c_path = 0;
+  1099  0000B4  0E00               	movlw	0
+  1100  0000B6  6E22               	movwf	_c_path,c
+  1101                           
+  1102                           ;wlan.c: 17: }
+  1103                           ;wlan.c: 18: }else if(received == 0x04) {
+  1104  0000B8  0012               	return	
+  1105  0000BA                     i2l1081:
+  1106  0000BA  0E04               	movlw	4
+  1107  0000BC  1825               	xorwf	_received,w,c
+  1108  0000BE  A4D8               	btfss	status,2,c
+  1109  0000C0  D005               	goto	i2l1089
+  1110                           
+  1111                           ;wlan.c: 20: c_path = 0;
+  1112  0000C2  0E00               	movlw	0
+  1113  0000C4  6E22               	movwf	_c_path,c
+  1114                           
+  1115                           ;wlan.c: 21: path_name = 0;
+  1116  0000C6  9036               	bcf	_path_name/(0+8),_path_name& (0+7),c
+  1117                           
+  1118                           ;wlan.c: 22: receiving_ok = 0;
+  1119  0000C8  9236               	bcf	_receiving_ok/(0+8),_receiving_ok& (0+7),c
+  1120                           
+  1121                           ;wlan.c: 23: }else if(received == 0x17){
+  1122  0000CA  0012               	return	
+  1123  0000CC                     i2l1089:
+  1124  0000CC  0E17               	movlw	23
+  1125  0000CE  1825               	xorwf	_received,w,c
+  1126  0000D0  A4D8               	btfss	status,2,c
+  1127  0000D2  D004               	goto	i2l1095
+  1128                           
+  1129                           ;wlan.c: 25: c_name = 0;
+  1130                           
+  1131                           ;wlan.c: 24: NAME:
+  1132  0000D4  0E00               	movlw	0
+  1133  0000D6  6E21               	movwf	_c_name,c
   1134                           
-  1135                           ;wlan.c: 42: c_path++;
-  1136  000146  2A23               	incf	_c_path,f,c
+  1135                           ;wlan.c: 26: path_name = 1;
+  1136  0000D8  8036               	bsf	_path_name/(0+8),_path_name& (0+7),c
   1137                           
-  1138                           ;wlan.c: 43: if(c_path > 20) {
-  1139  000148  0E14               	movlw	20
-  1140  00014A  6423               	cpfsgt	_c_path,c
-  1141  00014C  0012               	return	
-  1142                           
-  1143                           ;wlan.c: 44: UartSendOverflow();
-  1144  00014E  EC5E  F001         	call	_UartSendOverflow	;wreg free
+  1138                           ;wlan.c: 27: }else if(received == '>') {
+  1139  0000DA  0012               	return	
+  1140  0000DC                     i2l1095:
+  1141  0000DC  0E3E               	movlw	62
+  1142  0000DE  1825               	xorwf	_received,w,c
+  1143  0000E0  A4D8               	btfss	status,2,c
+  1144  0000E2  D00E               	goto	i2l1105
   1145                           
-  1146                           ;wlan.c: 45: c_path = 0;
-  1147  000152  0E00               	movlw	0
-  1148  000154  6E23               	movwf	_c_path,c
+  1146                           ;wlan.c: 29: received = UartReceive();
+  1147  0000E4  EC66  F001         	call	_UartReceive	;wreg free
+  1148  0000E8  6E25               	movwf	_received,c
   1149                           
-  1150                           ;wlan.c: 46: }
-  1151                           ;wlan.c: 47: }else if(path_name == 1) {
-  1152  000156  0012               	return	
-  1153  000158                     i2l263:
-  1154  000158  A036               	btfss	_path_name/(0+8),_path_name& (0+7),c
-  1155  00015A  0012               	return	
-  1156                           
-  1157                           ;wlan.c: 48: a_name[c_name] = received;
-  1158  00015C  5022               	movf	_c_name,w,c
-  1159  00015E  0D01               	mullw	1
-  1160  000160  0E01               	movlw	low _a_name
-  1161  000162  24F3               	addwf	prodl,w,c
-  1162  000164  6ED9               	movwf	fsr2l,c
-  1163  000166  0E00               	movlw	high _a_name
-  1164  000168  20F4               	addwfc	prodh,w,c
-  1165  00016A  6EDA               	movwf	fsr2h,c
-  1166  00016C  C026  FFDF         	movff	_received,indf2
-  1167                           
-  1168                           ;wlan.c: 49: c_name++;
-  1169  000170  2A22               	incf	_c_name,f,c
-  1170                           
-  1171                           ;wlan.c: 50: if(c_name > 32) {
-  1172  000172  0E20               	movlw	32
-  1173  000174  6422               	cpfsgt	_c_name,c
-  1174  000176  0012               	return	
-  1175                           
-  1176                           ;wlan.c: 51: UartSendOverflow();
-  1177  000178  EC5E  F001         	call	_UartSendOverflow	;wreg free
-  1178                           
-  1179                           ;wlan.c: 52: c_name = 0;
-  1180  00017C  0E00               	movlw	0
-  1181  00017E  6E22               	movwf	_c_name,c
-  1182                           
-  1183                           ;wlan.c: 53: }
-  1184                           ;wlan.c: 54: }
-  1185                           ;wlan.c: 55: }else {
-  1186  000180  0012               	return	
-  1187  000182                     i2l1116:
-  1188                           
-  1189                           ;wlan.c: 56: UartDump();
-  1190  000182  EC66  F001         	call	_UartDump	;wreg free
-  1191  000186  0012               	return	
-  1192  000188                     __end_of_UartStore:
-  1193                           	opt stack 0
-  1194                           pclatu	equ	0xFFB
-  1195                           pclath	equ	0xFFA
-  1196                           tblptru	equ	0xFF8
-  1197                           tblptrh	equ	0xFF7
-  1198                           tblptrl	equ	0xFF6
-  1199                           tablat	equ	0xFF5
-  1200                           prodh	equ	0xFF4
-  1201                           prodl	equ	0xFF3
-  1202                           intcon	equ	0xFF2
-  1203                           postinc0	equ	0xFEE
-  1204                           fsr0h	equ	0xFEA
-  1205                           fsr0l	equ	0xFE9
-  1206                           wreg	equ	0xFE8
-  1207                           fsr1h	equ	0xFE2
-  1208                           fsr1l	equ	0xFE1
-  1209                           indf2	equ	0xFDF
-  1210                           fsr2h	equ	0xFDA
-  1211                           fsr2l	equ	0xFD9
-  1212                           status	equ	0xFD8
-  1213                           
-  1214 ;; *************** function _UartSendOverflow *****************
-  1215 ;; Defined at:
-  1216 ;;		line 63 in file "wlan.c"
-  1217 ;; Parameters:    Size  Location     Type
-  1218 ;;		None
-  1219 ;; Auto vars:     Size  Location     Type
-  1220 ;;		None
-  1221 ;; Return value:  Size  Location     Type
-  1222 ;;		None               void
-  1223 ;; Registers used:
-  1224 ;;		wreg, status,2, cstack
-  1225 ;; Tracked objects:
-  1226 ;;		On entry : 0/0
-  1227 ;;		On exit  : 0/0
-  1228 ;;		Unchanged: 0/0
-  1229 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+  1150                           ;wlan.c: 30: if(received == '>'){
+  1151  0000EA  0E3E               	movlw	62
+  1152  0000EC  1825               	xorwf	_received,w,c
+  1153  0000EE  A4D8               	btfss	status,2,c
+  1154  0000F0  D004               	goto	i2l1103
+  1155                           
+  1156                           ;wlan.c: 32: numb_cc = c_path;
+  1157  0000F2  C022  F023         	movff	_c_path,_numb_cc
+  1158                           
+  1159                           ;wlan.c: 33: receiving_ok = 0;
+  1160  0000F6  9236               	bcf	_receiving_ok/(0+8),_receiving_ok& (0+7),c
+  1161                           
+  1162                           ;wlan.c: 34: }else {
+  1163  0000F8  0012               	return	
+  1164  0000FA                     i2l1103:
+  1165                           
+  1166                           ;wlan.c: 35: UartSendError();
+  1167  0000FA  EC79  F001         	call	_UartSendError	;wreg free
+  1168                           
+  1169                           ;wlan.c: 36: }
+  1170                           ;wlan.c: 37: }else if(received == 0x1D) {
+  1171  0000FE  0012               	return	
+  1172  000100                     i2l1105:
+  1173  000100  0E1D               	movlw	29
+  1174  000102  1825               	xorwf	_received,w,c
+  1175  000104  A4D8               	btfss	status,2,c
+  1176  000106  D003               	goto	i2l267
+  1177                           
+  1178                           ;wlan.c: 38: numb_cc_table = c_path;
+  1179  000108  C022  F024         	movff	_c_path,_numb_cc_table
+  1180                           
+  1181                           ;wlan.c: 39: }else if(receiving_ok == 1){
+  1182  00010C  0012               	return	
+  1183  00010E                     i2l267:
+  1184  00010E  A236               	btfss	_receiving_ok/(0+8),_receiving_ok& (0+7),c
+  1185  000110  D03B               	goto	i2l1135
+  1186                           
+  1187                           ;wlan.c: 40: if(path_name == 0) {
+  1188  000112  B036               	btfsc	_path_name/(0+8),_path_name& (0+7),c
+  1189  000114  D024               	goto	i2l270
+  1190                           
+  1191                           ;wlan.c: 41: a_path[c_path].lower_cc = received;
+  1192  000116  5022               	movf	_c_path,w,c
+  1193  000118  0D02               	mullw	2
+  1194  00011A  0E60               	movlw	low _a_path
+  1195  00011C  24F3               	addwf	prodl,w,c
+  1196  00011E  6ED9               	movwf	fsr2l,c
+  1197  000120  0E00               	movlw	high _a_path
+  1198  000122  20F4               	addwfc	prodh,w,c
+  1199  000124  6EDA               	movwf	fsr2h,c
+  1200  000126  C025  FFDF         	movff	_received,indf2
+  1201                           
+  1202                           ;wlan.c: 42: received = UartReceive();
+  1203  00012A  EC66  F001         	call	_UartReceive	;wreg free
+  1204  00012E  6E25               	movwf	_received,c
+  1205                           
+  1206                           ;wlan.c: 43: a_path[c_path].higher_cc = received;
+  1207  000130  5022               	movf	_c_path,w,c
+  1208  000132  0D02               	mullw	2
+  1209  000134  0E01               	movlw	1
+  1210  000136  26F3               	addwf	prodl,f,c
+  1211  000138  0E00               	movlw	0
+  1212  00013A  22F4               	addwfc	prodh,f,c
+  1213  00013C  0E60               	movlw	low _a_path
+  1214  00013E  24F3               	addwf	prodl,w,c
+  1215  000140  6ED9               	movwf	fsr2l,c
+  1216  000142  0E00               	movlw	high _a_path
+  1217  000144  20F4               	addwfc	prodh,w,c
+  1218  000146  6EDA               	movwf	fsr2h,c
+  1219  000148  C025  FFDF         	movff	_received,indf2
+  1220                           
+  1221                           ;wlan.c: 44: c_path++;
+  1222  00014C  2A22               	incf	_c_path,f,c
+  1223                           
+  1224                           ;wlan.c: 45: if(c_path > 20) {
+  1225  00014E  0E14               	movlw	20
+  1226  000150  6422               	cpfsgt	_c_path,c
+  1227  000152  0012               	return	
+  1228                           
+  1229                           ;wlan.c: 46: UartSendOverflow();
+  1230  000154  EC75  F001         	call	_UartSendOverflow	;wreg free
+  1231                           
+  1232                           ;wlan.c: 47: c_path = 0;
+  1233  000158  0E00               	movlw	0
+  1234  00015A  6E22               	movwf	_c_path,c
+  1235                           
+  1236                           ;wlan.c: 48: }
+  1237                           ;wlan.c: 49: }else if(path_name == 1) {
+  1238  00015C  0012               	return	
+  1239  00015E                     i2l270:
+  1240  00015E  A036               	btfss	_path_name/(0+8),_path_name& (0+7),c
+  1241  000160  0012               	return	
+  1242                           
+  1243                           ;wlan.c: 50: a_name[c_name] = received;
+  1244  000162  5021               	movf	_c_name,w,c
+  1245  000164  0D01               	mullw	1
+  1246  000166  0E01               	movlw	low _a_name
+  1247  000168  24F3               	addwf	prodl,w,c
+  1248  00016A  6ED9               	movwf	fsr2l,c
+  1249  00016C  0E00               	movlw	high _a_name
+  1250  00016E  20F4               	addwfc	prodh,w,c
+  1251  000170  6EDA               	movwf	fsr2h,c
+  1252  000172  C025  FFDF         	movff	_received,indf2
+  1253                           
+  1254                           ;wlan.c: 51: c_name++;
+  1255  000176  2A21               	incf	_c_name,f,c
+  1256                           
+  1257                           ;wlan.c: 52: if(c_name > 32) {
+  1258  000178  0E20               	movlw	32
+  1259  00017A  6421               	cpfsgt	_c_name,c
+  1260  00017C  0012               	return	
+  1261                           
+  1262                           ;wlan.c: 53: UartSendOverflow();
+  1263  00017E  EC75  F001         	call	_UartSendOverflow	;wreg free
+  1264                           
+  1265                           ;wlan.c: 54: c_name = 0;
+  1266  000182  0E00               	movlw	0
+  1267  000184  6E21               	movwf	_c_name,c
+  1268                           
+  1269                           ;wlan.c: 55: }
+  1270                           ;wlan.c: 56: }
+  1271                           ;wlan.c: 57: }else {
+  1272  000186  0012               	return	
+  1273  000188                     i2l1135:
+  1274                           
+  1275                           ;wlan.c: 58: UartDump();
+  1276  000188  EC7D  F001         	call	_UartDump	;wreg free
+  1277  00018C  0012               	return	
+  1278  00018E                     __end_of_UartStore:
+  1279                           	opt stack 0
+  1280                           pclatu	equ	0xFFB
+  1281                           pclath	equ	0xFFA
+  1282                           tblptru	equ	0xFF8
+  1283                           tblptrh	equ	0xFF7
+  1284                           tblptrl	equ	0xFF6
+  1285                           tablat	equ	0xFF5
+  1286                           prodh	equ	0xFF4
+  1287                           prodl	equ	0xFF3
+  1288                           intcon	equ	0xFF2
+  1289                           postinc0	equ	0xFEE
+  1290                           fsr0h	equ	0xFEA
+  1291                           fsr0l	equ	0xFE9
+  1292                           wreg	equ	0xFE8
+  1293                           fsr1h	equ	0xFE2
+  1294                           fsr1l	equ	0xFE1
+  1295                           indf2	equ	0xFDF
+  1296                           fsr2h	equ	0xFDA
+  1297                           fsr2l	equ	0xFD9
+  1298                           status	equ	0xFD8
+  1299                           
+  1300 ;; *************** function _UartSendOverflow *****************
+  1301 ;; Defined at:
+  1302 ;;		line 65 in file "wlan.c"
+  1303 ;; Parameters:    Size  Location     Type
+  1304 ;;		None
+  1305 ;; Auto vars:     Size  Location     Type
+  1306 ;;		None
+  1307 ;; Return value:  Size  Location     Type
+  1308 ;;		None               void
+  1309 ;; Registers used:
+  1310 ;;		wreg, status,2, cstack
+  1311 ;; Tracked objects:
+  1312 ;;		On entry : 0/0
+  1313 ;;		On exit  : 0/0
+  1314 ;;		Unchanged: 0/0
+  1315 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-  1230 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1316 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1231 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1317 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1232 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+  1318 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1233 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1319 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1234 ;;Total ram usage:        0 bytes
-  1235 ;; Hardware stack levels used:    1
-  1236 ;; Hardware stack levels required when called:    1
-  1237 ;; This function calls:
-  1238 ;;		_UartSend
-  1239 ;; This function is called by:
-  1240 ;;		_UartStore
-  1241 ;; This function uses a non-reentrant model
-  1242 ;;
-  1243                           
-  1244                           	psect	text12
-  1245  0002BC                     __ptext12:
-  1246                           	opt stack 0
-  1247  0002BC                     _UartSendOverflow:
-  1248                           	opt stack 25
-  1249                           
-  1250                           ;wlan.c: 64: UartSend(0x11);
-  1251                           
-  1252                           ;incstack = 0
-  1253  0002BC  0E11               	movlw	17
-  1254  0002BE  EC19  F001         	call	_UartSend
-  1255  0002C2  0012               	return		;funcret
-  1256  0002C4                     __end_of_UartSendOverflow:
-  1257                           	opt stack 0
-  1258                           pclatu	equ	0xFFB
-  1259                           pclath	equ	0xFFA
-  1260                           tblptru	equ	0xFF8
-  1261                           tblptrh	equ	0xFF7
-  1262                           tblptrl	equ	0xFF6
-  1263                           tablat	equ	0xFF5
-  1264                           prodh	equ	0xFF4
-  1265                           prodl	equ	0xFF3
-  1266                           intcon	equ	0xFF2
-  1267                           postinc0	equ	0xFEE
-  1268                           fsr0h	equ	0xFEA
-  1269                           fsr0l	equ	0xFE9
-  1270                           wreg	equ	0xFE8
-  1271                           fsr1h	equ	0xFE2
-  1272                           fsr1l	equ	0xFE1
-  1273                           indf2	equ	0xFDF
-  1274                           fsr2h	equ	0xFDA
-  1275                           fsr2l	equ	0xFD9
-  1276                           status	equ	0xFD8
-  1277                           
-  1278 ;; *************** function _UartSendError *****************
-  1279 ;; Defined at:
-  1280 ;;		line 67 in file "wlan.c"
-  1281 ;; Parameters:    Size  Location     Type
-  1282 ;;		None
-  1283 ;; Auto vars:     Size  Location     Type
-  1284 ;;		None
-  1285 ;; Return value:  Size  Location     Type
-  1286 ;;		None               void
-  1287 ;; Registers used:
-  1288 ;;		wreg, status,2, cstack
-  1289 ;; Tracked objects:
-  1290 ;;		On entry : 0/0
-  1291 ;;		On exit  : 0/0
-  1292 ;;		Unchanged: 0/0
-  1293 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+  1320 ;;Total ram usage:        0 bytes
+  1321 ;; Hardware stack levels used:    1
+  1322 ;; Hardware stack levels required when called:    1
+  1323 ;; This function calls:
+  1324 ;;		_UartSend
+  1325 ;; This function is called by:
+  1326 ;;		_UartStore
+  1327 ;; This function uses a non-reentrant model
+  1328 ;;
+  1329                           
+  1330                           	psect	text13
+  1331  0002EA                     __ptext13:
+  1332                           	opt stack 0
+  1333  0002EA                     _UartSendOverflow:
+  1334                           	opt stack 25
+  1335                           
+  1336                           ;wlan.c: 66: UartSend(0x11);
+  1337                           
+  1338                           ;incstack = 0
+  1339  0002EA  0E11               	movlw	17
+  1340  0002EC  EC39  F001         	call	_UartSend
+  1341  0002F0  0012               	return		;funcret
+  1342  0002F2                     __end_of_UartSendOverflow:
+  1343                           	opt stack 0
+  1344                           pclatu	equ	0xFFB
+  1345                           pclath	equ	0xFFA
+  1346                           tblptru	equ	0xFF8
+  1347                           tblptrh	equ	0xFF7
+  1348                           tblptrl	equ	0xFF6
+  1349                           tablat	equ	0xFF5
+  1350                           prodh	equ	0xFF4
+  1351                           prodl	equ	0xFF3
+  1352                           intcon	equ	0xFF2
+  1353                           postinc0	equ	0xFEE
+  1354                           fsr0h	equ	0xFEA
+  1355                           fsr0l	equ	0xFE9
+  1356                           wreg	equ	0xFE8
+  1357                           fsr1h	equ	0xFE2
+  1358                           fsr1l	equ	0xFE1
+  1359                           indf2	equ	0xFDF
+  1360                           fsr2h	equ	0xFDA
+  1361                           fsr2l	equ	0xFD9
+  1362                           status	equ	0xFD8
+  1363                           
+  1364 ;; *************** function _UartSendError *****************
+  1365 ;; Defined at:
+  1366 ;;		line 69 in file "wlan.c"
+  1367 ;; Parameters:    Size  Location     Type
+  1368 ;;		None
+  1369 ;; Auto vars:     Size  Location     Type
+  1370 ;;		None
+  1371 ;; Return value:  Size  Location     Type
+  1372 ;;		None               void
+  1373 ;; Registers used:
+  1374 ;;		wreg, status,2, cstack
+  1375 ;; Tracked objects:
+  1376 ;;		On entry : 0/0
+  1377 ;;		On exit  : 0/0
+  1378 ;;		Unchanged: 0/0
+  1379 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-  1294 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1380 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1295 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1381 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1296 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+  1382 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1297 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1383 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1298 ;;Total ram usage:        0 bytes
-  1299 ;; Hardware stack levels used:    1
-  1300 ;; Hardware stack levels required when called:    1
-  1301 ;; This function calls:
-  1302 ;;		_UartSend
-  1303 ;; This function is called by:
-  1304 ;;		_UartStore
-  1305 ;; This function uses a non-reentrant model
-  1306 ;;
-  1307                           
-  1308                           	psect	text13
-  1309  0002C4                     __ptext13:
-  1310                           	opt stack 0
-  1311  0002C4                     _UartSendError:
-  1312                           	opt stack 25
-  1313                           
-  1314                           ;wlan.c: 68: UartSend(0x15);
-  1315                           
-  1316                           ;incstack = 0
-  1317  0002C4  0E15               	movlw	21
-  1318  0002C6  EC19  F001         	call	_UartSend
-  1319  0002CA  0012               	return		;funcret
-  1320  0002CC                     __end_of_UartSendError:
-  1321                           	opt stack 0
-  1322                           pclatu	equ	0xFFB
-  1323                           pclath	equ	0xFFA
-  1324                           tblptru	equ	0xFF8
-  1325                           tblptrh	equ	0xFF7
-  1326                           tblptrl	equ	0xFF6
-  1327                           tablat	equ	0xFF5
-  1328                           prodh	equ	0xFF4
-  1329                           prodl	equ	0xFF3
-  1330                           intcon	equ	0xFF2
-  1331                           postinc0	equ	0xFEE
-  1332                           fsr0h	equ	0xFEA
-  1333                           fsr0l	equ	0xFE9
-  1334                           wreg	equ	0xFE8
-  1335                           fsr1h	equ	0xFE2
-  1336                           fsr1l	equ	0xFE1
-  1337                           indf2	equ	0xFDF
-  1338                           fsr2h	equ	0xFDA
-  1339                           fsr2l	equ	0xFD9
-  1340                           status	equ	0xFD8
-  1341                           
-  1342 ;; *************** function _UartSend *****************
-  1343 ;; Defined at:
-  1344 ;;		line 4 in file "communication.c"
-  1345 ;; Parameters:    Size  Location     Type
-  1346 ;;  data            1    wreg     unsigned char 
-  1347 ;; Auto vars:     Size  Location     Type
-  1348 ;;  data            1    0[COMRAM] unsigned char 
-  1349 ;; Return value:  Size  Location     Type
-  1350 ;;		None               void
-  1351 ;; Registers used:
-  1352 ;;		wreg, status,2, cstack
-  1353 ;; Tracked objects:
-  1354 ;;		On entry : 0/0
-  1355 ;;		On exit  : 0/0
-  1356 ;;		Unchanged: 0/0
-  1357 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
-      +1  BANK12  BANK13  BANK14  BANK15
-  1358 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1359 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1360 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1361 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
-      +0       0       0       0       0
-  1362 ;;Total ram usage:        1 bytes
-  1363 ;; Hardware stack levels used:    1
-  1364 ;; This function calls:
-  1365 ;;		Nothing
-  1366 ;; This function is called by:
-  1367 ;;		_UartSendOverflow
-  1368 ;;		_UartSendError
-  1369 ;; This function uses a non-reentrant model
-  1370 ;;
-  1371                           
-  1372                           	psect	text14
-  1373  000232                     __ptext14:
-  1374                           	opt stack 0
-  1375  000232                     _UartSend:
-  1376                           	opt stack 25
-  1377                           
-  1378                           ;incstack = 0
-  1379                           ;UartSend@data stored from wreg
-  1380  000232  6E27               	movwf	UartSend@data,c
-  1381                           
-  1382                           ;communication.c: 5: if(TX1IF == 1) {
-  1383  000234  A89E               	btfss	3998,4,c	;volatile
-  1384  000236  D004               	goto	i2l1036
-  1385                           
-  1386                           ;communication.c: 6: _delay((unsigned long)((200)*(16000000/4000000.0)));
-  1387  000238  0EC8               	movlw	200
-  1388  00023A                     i2u38_47:
-  1389  00023A  F000               	nop	
-  1390  00023C  2EE8               	decfsz	wreg,f,c
-  1391  00023E  D7FD               	goto	i2u38_47
-  1392  000240                     i2l1036:
+  1384 ;;Total ram usage:        0 bytes
+  1385 ;; Hardware stack levels used:    1
+  1386 ;; Hardware stack levels required when called:    1
+  1387 ;; This function calls:
+  1388 ;;		_UartSend
+  1389 ;; This function is called by:
+  1390 ;;		_UartStore
+  1391 ;; This function uses a non-reentrant model
+  1392 ;;
   1393                           
-  1394                           ;communication.c: 7: }
-  1395                           ;communication.c: 8: TXREG1 = data;
-  1396  000240  C027  FFAD         	movff	UartSend@data,4013	;volatile
-  1397  000244                     i2l210:
-  1398  000244  A89E               	btfss	3998,4,c	;volatile
-  1399  000246  0012               	return	
-  1400  000248  D7FD               	goto	i2l210
-  1401  00024A                     __end_of_UartSend:
-  1402                           	opt stack 0
-  1403                           pclatu	equ	0xFFB
-  1404                           pclath	equ	0xFFA
-  1405                           tblptru	equ	0xFF8
-  1406                           tblptrh	equ	0xFF7
-  1407                           tblptrl	equ	0xFF6
-  1408                           tablat	equ	0xFF5
-  1409                           prodh	equ	0xFF4
-  1410                           prodl	equ	0xFF3
-  1411                           intcon	equ	0xFF2
-  1412                           postinc0	equ	0xFEE
-  1413                           fsr0h	equ	0xFEA
-  1414                           fsr0l	equ	0xFE9
-  1415                           wreg	equ	0xFE8
-  1416                           fsr1h	equ	0xFE2
-  1417                           fsr1l	equ	0xFE1
-  1418                           indf2	equ	0xFDF
-  1419                           fsr2h	equ	0xFDA
-  1420                           fsr2l	equ	0xFD9
-  1421                           status	equ	0xFD8
-  1422                           
-  1423 ;; *************** function _UartDump *****************
-  1424 ;; Defined at:
-  1425 ;;		line 72 in file "wlan.c"
-  1426 ;; Parameters:    Size  Location     Type
-  1427 ;;		None
-  1428 ;; Auto vars:     Size  Location     Type
-  1429 ;;  dumpdata        1    0[COMRAM] unsigned char 
-  1430 ;; Return value:  Size  Location     Type
-  1431 ;;		None               void
-  1432 ;; Registers used:
-  1433 ;;		wreg, status,2, cstack
-  1434 ;; Tracked objects:
-  1435 ;;		On entry : 0/0
-  1436 ;;		On exit  : 0/0
-  1437 ;;		Unchanged: 0/0
-  1438 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+  1394                           	psect	text14
+  1395  0002F2                     __ptext14:
+  1396                           	opt stack 0
+  1397  0002F2                     _UartSendError:
+  1398                           	opt stack 25
+  1399                           
+  1400                           ;wlan.c: 70: UartSend(0x15);
+  1401                           
+  1402                           ;incstack = 0
+  1403  0002F2  0E15               	movlw	21
+  1404  0002F4  EC39  F001         	call	_UartSend
+  1405  0002F8  0012               	return		;funcret
+  1406  0002FA                     __end_of_UartSendError:
+  1407                           	opt stack 0
+  1408                           pclatu	equ	0xFFB
+  1409                           pclath	equ	0xFFA
+  1410                           tblptru	equ	0xFF8
+  1411                           tblptrh	equ	0xFF7
+  1412                           tblptrl	equ	0xFF6
+  1413                           tablat	equ	0xFF5
+  1414                           prodh	equ	0xFF4
+  1415                           prodl	equ	0xFF3
+  1416                           intcon	equ	0xFF2
+  1417                           postinc0	equ	0xFEE
+  1418                           fsr0h	equ	0xFEA
+  1419                           fsr0l	equ	0xFE9
+  1420                           wreg	equ	0xFE8
+  1421                           fsr1h	equ	0xFE2
+  1422                           fsr1l	equ	0xFE1
+  1423                           indf2	equ	0xFDF
+  1424                           fsr2h	equ	0xFDA
+  1425                           fsr2l	equ	0xFD9
+  1426                           status	equ	0xFD8
+  1427                           
+  1428 ;; *************** function _UartSend *****************
+  1429 ;; Defined at:
+  1430 ;;		line 4 in file "communication.c"
+  1431 ;; Parameters:    Size  Location     Type
+  1432 ;;  data            1    wreg     unsigned char 
+  1433 ;; Auto vars:     Size  Location     Type
+  1434 ;;  data            1    0[COMRAM] unsigned char 
+  1435 ;; Return value:  Size  Location     Type
+  1436 ;;		None               void
+  1437 ;; Registers used:
+  1438 ;;		wreg, status,2, cstack
+  1439 ;; Tracked objects:
+  1440 ;;		On entry : 0/0
+  1441 ;;		On exit  : 0/0
+  1442 ;;		Unchanged: 0/0
+  1443 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-  1439 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1444 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1440 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
+  1445 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1441 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+  1446 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1442 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
+  1447 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1443 ;;Total ram usage:        1 bytes
-  1444 ;; Hardware stack levels used:    1
-  1445 ;; Hardware stack levels required when called:    1
-  1446 ;; This function calls:
-  1447 ;;		_UartReceive
-  1448 ;; This function is called by:
-  1449 ;;		_isr
-  1450 ;;		_UartStore
-  1451 ;; This function uses a non-reentrant model
-  1452 ;;
-  1453                           
-  1454                           	psect	text15
-  1455  0002CC                     __ptext15:
-  1456                           	opt stack 0
-  1457  0002CC                     _UartDump:
-  1458                           	opt stack 25
-  1459                           
-  1460                           ;wlan.c: 73: unsigned char dumpdata;
-  1461                           ;wlan.c: 74: dumpdata = UartReceive();
-  1462                           
-  1463                           ;incstack = 0
-  1464  0002CC  EC4F  F001         	call	_UartReceive	;wreg free
-  1465  0002D0  6E27               	movwf	UartDump@dumpdata,c
-  1466  0002D2  0012               	return		;funcret
-  1467  0002D4                     __end_of_UartDump:
-  1468                           	opt stack 0
-  1469                           pclatu	equ	0xFFB
-  1470                           pclath	equ	0xFFA
-  1471                           tblptru	equ	0xFF8
-  1472                           tblptrh	equ	0xFF7
-  1473                           tblptrl	equ	0xFF6
-  1474                           tablat	equ	0xFF5
-  1475                           prodh	equ	0xFF4
-  1476                           prodl	equ	0xFF3
-  1477                           intcon	equ	0xFF2
-  1478                           postinc0	equ	0xFEE
-  1479                           fsr0h	equ	0xFEA
-  1480                           fsr0l	equ	0xFE9
-  1481                           wreg	equ	0xFE8
-  1482                           fsr1h	equ	0xFE2
-  1483                           fsr1l	equ	0xFE1
-  1484                           indf2	equ	0xFDF
-  1485                           fsr2h	equ	0xFDA
-  1486                           fsr2l	equ	0xFD9
-  1487                           status	equ	0xFD8
-  1488                           
-  1489 ;; *************** function _UartReceive *****************
-  1490 ;; Defined at:
-  1491 ;;		line 12 in file "communication.c"
-  1492 ;; Parameters:    Size  Location     Type
-  1493 ;;		None
-  1494 ;; Auto vars:     Size  Location     Type
-  1495 ;;		None
-  1496 ;; Return value:  Size  Location     Type
-  1497 ;;                  1    wreg      unsigned char 
-  1498 ;; Registers used:
-  1499 ;;		wreg, status,2
-  1500 ;; Tracked objects:
-  1501 ;;		On entry : 0/0
-  1502 ;;		On exit  : 0/0
-  1503 ;;		Unchanged: 0/0
-  1504 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+  1448 ;;Total ram usage:        1 bytes
+  1449 ;; Hardware stack levels used:    1
+  1450 ;; This function calls:
+  1451 ;;		Nothing
+  1452 ;; This function is called by:
+  1453 ;;		_UartSendOverflow
+  1454 ;;		_UartSendError
+  1455 ;; This function uses a non-reentrant model
+  1456 ;;
+  1457                           
+  1458                           	psect	text15
+  1459  000272                     __ptext15:
+  1460                           	opt stack 0
+  1461  000272                     _UartSend:
+  1462                           	opt stack 25
+  1463                           
+  1464                           ;incstack = 0
+  1465                           ;UartSend@data stored from wreg
+  1466  000272  6E26               	movwf	UartSend@data,c
+  1467                           
+  1468                           ;communication.c: 5: if(TX1IF == 1) {
+  1469  000274  A89E               	btfss	3998,4,c	;volatile
+  1470  000276  D004               	goto	i2l1053
+  1471                           
+  1472                           ;communication.c: 6: _delay((unsigned long)((200)*(16000000/4000000.0)));
+  1473  000278  0EC8               	movlw	200
+  1474  00027A                     i2u40_47:
+  1475  00027A  F000               	nop	
+  1476  00027C  2EE8               	decfsz	wreg,f,c
+  1477  00027E  D7FD               	goto	i2u40_47
+  1478  000280                     i2l1053:
+  1479                           
+  1480                           ;communication.c: 7: }
+  1481                           ;communication.c: 8: TXREG1 = data;
+  1482  000280  C026  FFAD         	movff	UartSend@data,4013	;volatile
+  1483  000284                     i2l217:
+  1484  000284  A89E               	btfss	3998,4,c	;volatile
+  1485  000286  0012               	return	
+  1486  000288  D7FD               	goto	i2l217
+  1487  00028A                     __end_of_UartSend:
+  1488                           	opt stack 0
+  1489                           pclatu	equ	0xFFB
+  1490                           pclath	equ	0xFFA
+  1491                           tblptru	equ	0xFF8
+  1492                           tblptrh	equ	0xFF7
+  1493                           tblptrl	equ	0xFF6
+  1494                           tablat	equ	0xFF5
+  1495                           prodh	equ	0xFF4
+  1496                           prodl	equ	0xFF3
+  1497                           intcon	equ	0xFF2
+  1498                           postinc0	equ	0xFEE
+  1499                           fsr0h	equ	0xFEA
+  1500                           fsr0l	equ	0xFE9
+  1501                           wreg	equ	0xFE8
+  1502                           fsr1h	equ	0xFE2
+  1503                           fsr1l	equ	0xFE1
+  1504                           indf2	equ	0xFDF
+  1505                           fsr2h	equ	0xFDA
+  1506                           fsr2l	equ	0xFD9
+  1507                           status	equ	0xFD8
+  1508                           
+  1509 ;; *************** function _UartDump *****************
+  1510 ;; Defined at:
+  1511 ;;		line 74 in file "wlan.c"
+  1512 ;; Parameters:    Size  Location     Type
+  1513 ;;		None
+  1514 ;; Auto vars:     Size  Location     Type
+  1515 ;;  dumpdata        1    0[COMRAM] unsigned char 
+  1516 ;; Return value:  Size  Location     Type
+  1517 ;;		None               void
+  1518 ;; Registers used:
+  1519 ;;		wreg, status,2, cstack
+  1520 ;; Tracked objects:
+  1521 ;;		On entry : 0/0
+  1522 ;;		On exit  : 0/0
+  1523 ;;		Unchanged: 0/0
+  1524 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-  1505 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1525 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1506 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1526 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1507 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+  1527 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1508 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+  1528 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-  1509 ;;Total ram usage:        0 bytes
-  1510 ;; Hardware stack levels used:    1
-  1511 ;; This function calls:
-  1512 ;;		Nothing
-  1513 ;; This function is called by:
-  1514 ;;		_UartStore
-  1515 ;;		_UartDump
-  1516 ;; This function uses a non-reentrant model
-  1517 ;;
-  1518                           
-  1519                           	psect	text16
-  1520  00029E                     __ptext16:
-  1521                           	opt stack 0
-  1522  00029E                     _UartReceive:
-  1523                           	opt stack 26
-  1524                           
-  1525                           ;communication.c: 13: if(RCSTA1bits.OERR == 1) {
-  1526                           
-  1527                           ;incstack = 0
-  1528  00029E  A2AB               	btfss	4011,1,c	;volatile
-  1529  0002A0  D002               	goto	i2l1042
-  1530                           
-  1531                           ;communication.c: 14: RCSTA1bits.CREN = 0;
-  1532  0002A2  98AB               	bcf	4011,4,c	;volatile
-  1533                           
-  1534                           ;communication.c: 15: RCSTA1bits.CREN = 1;
-  1535  0002A4  88AB               	bsf	4011,4,c	;volatile
-  1536  0002A6                     i2l1042:
-  1537                           
-  1538                           ;communication.c: 16: }
-  1539                           ;communication.c: 17: return RCREG1;
-  1540  0002A6  50AE               	movf	4014,w,c	;volatile
-  1541  0002A8  0012               	return	
-  1542  0002AA                     __end_of_UartReceive:
-  1543                           	opt stack 0
-  1544  0000                     pclatu	equ	0xFFB
-  1545                           pclath	equ	0xFFA
-  1546                           tblptru	equ	0xFF8
-  1547                           tblptrh	equ	0xFF7
-  1548                           tblptrl	equ	0xFF6
-  1549                           tablat	equ	0xFF5
-  1550                           prodh	equ	0xFF4
-  1551                           prodl	equ	0xFF3
-  1552                           intcon	equ	0xFF2
-  1553                           postinc0	equ	0xFEE
-  1554                           fsr0h	equ	0xFEA
-  1555                           fsr0l	equ	0xFE9
-  1556                           wreg	equ	0xFE8
-  1557                           fsr1h	equ	0xFE2
-  1558                           fsr1l	equ	0xFE1
-  1559                           indf2	equ	0xFDF
-  1560                           fsr2h	equ	0xFDA
-  1561                           fsr2l	equ	0xFD9
-  1562                           status	equ	0xFD8
-  1563                           pclatu	equ	0xFFB
-  1564                           pclath	equ	0xFFA
-  1565                           tblptru	equ	0xFF8
-  1566                           tblptrh	equ	0xFF7
-  1567                           tblptrl	equ	0xFF6
-  1568                           tablat	equ	0xFF5
-  1569                           prodh	equ	0xFF4
-  1570                           prodl	equ	0xFF3
-  1571                           intcon	equ	0xFF2
-  1572                           postinc0	equ	0xFEE
-  1573                           fsr0h	equ	0xFEA
-  1574                           fsr0l	equ	0xFE9
-  1575                           wreg	equ	0xFE8
-  1576                           fsr1h	equ	0xFE2
-  1577                           fsr1l	equ	0xFE1
-  1578                           indf2	equ	0xFDF
-  1579                           fsr2h	equ	0xFDA
-  1580                           fsr2l	equ	0xFD9
-  1581                           status	equ	0xFD8
-  1582                           
-  1583                           	psect	rparam
-  1584  0000                     pclatu	equ	0xFFB
-  1585                           pclath	equ	0xFFA
-  1586                           tblptru	equ	0xFF8
-  1587                           tblptrh	equ	0xFF7
-  1588                           tblptrl	equ	0xFF6
-  1589                           tablat	equ	0xFF5
-  1590                           prodh	equ	0xFF4
-  1591                           prodl	equ	0xFF3
-  1592                           intcon	equ	0xFF2
-  1593                           postinc0	equ	0xFEE
-  1594                           fsr0h	equ	0xFEA
-  1595                           fsr0l	equ	0xFE9
-  1596                           wreg	equ	0xFE8
-  1597                           fsr1h	equ	0xFE2
-  1598                           fsr1l	equ	0xFE1
-  1599                           indf2	equ	0xFDF
-  1600                           fsr2h	equ	0xFDA
-  1601                           fsr2l	equ	0xFD9
-  1602                           status	equ	0xFD8
-  1603                           
-  1604                           	psect	temp
-  1605  000037                     btemp:
-  1606                           	opt stack 0
-  1607  000037                     	ds	1
-  1608  0000                     int$flags	set	btemp
-  1609                           pclatu	equ	0xFFB
-  1610                           pclath	equ	0xFFA
-  1611                           tblptru	equ	0xFF8
-  1612                           tblptrh	equ	0xFF7
-  1613                           tblptrl	equ	0xFF6
-  1614                           tablat	equ	0xFF5
-  1615                           prodh	equ	0xFF4
-  1616                           prodl	equ	0xFF3
-  1617                           intcon	equ	0xFF2
-  1618                           postinc0	equ	0xFEE
-  1619                           fsr0h	equ	0xFEA
-  1620                           fsr0l	equ	0xFE9
-  1621                           wreg	equ	0xFE8
-  1622                           fsr1h	equ	0xFE2
-  1623                           fsr1l	equ	0xFE1
-  1624                           indf2	equ	0xFDF
-  1625                           fsr2h	equ	0xFDA
-  1626                           fsr2l	equ	0xFD9
-  1627                           status	equ	0xFD8
+  1529 ;;Total ram usage:        1 bytes
+  1530 ;; Hardware stack levels used:    1
+  1531 ;; Hardware stack levels required when called:    1
+  1532 ;; This function calls:
+  1533 ;;		_UartReceive
+  1534 ;; This function is called by:
+  1535 ;;		_isr
+  1536 ;;		_UartStore
+  1537 ;; This function uses a non-reentrant model
+  1538 ;;
+  1539                           
+  1540                           	psect	text16
+  1541  0002FA                     __ptext16:
+  1542                           	opt stack 0
+  1543  0002FA                     _UartDump:
+  1544                           	opt stack 25
+  1545                           
+  1546                           ;wlan.c: 75: unsigned char dumpdata;
+  1547                           ;wlan.c: 76: dumpdata = UartReceive();
+  1548                           
+  1549                           ;incstack = 0
+  1550  0002FA  EC66  F001         	call	_UartReceive	;wreg free
+  1551  0002FE  6E26               	movwf	UartDump@dumpdata,c
+  1552  000300  0012               	return		;funcret
+  1553  000302                     __end_of_UartDump:
+  1554                           	opt stack 0
+  1555                           pclatu	equ	0xFFB
+  1556                           pclath	equ	0xFFA
+  1557                           tblptru	equ	0xFF8
+  1558                           tblptrh	equ	0xFF7
+  1559                           tblptrl	equ	0xFF6
+  1560                           tablat	equ	0xFF5
+  1561                           prodh	equ	0xFF4
+  1562                           prodl	equ	0xFF3
+  1563                           intcon	equ	0xFF2
+  1564                           postinc0	equ	0xFEE
+  1565                           fsr0h	equ	0xFEA
+  1566                           fsr0l	equ	0xFE9
+  1567                           wreg	equ	0xFE8
+  1568                           fsr1h	equ	0xFE2
+  1569                           fsr1l	equ	0xFE1
+  1570                           indf2	equ	0xFDF
+  1571                           fsr2h	equ	0xFDA
+  1572                           fsr2l	equ	0xFD9
+  1573                           status	equ	0xFD8
+  1574                           
+  1575 ;; *************** function _UartReceive *****************
+  1576 ;; Defined at:
+  1577 ;;		line 12 in file "communication.c"
+  1578 ;; Parameters:    Size  Location     Type
+  1579 ;;		None
+  1580 ;; Auto vars:     Size  Location     Type
+  1581 ;;		None
+  1582 ;; Return value:  Size  Location     Type
+  1583 ;;                  1    wreg      unsigned char 
+  1584 ;; Registers used:
+  1585 ;;		wreg, status,2
+  1586 ;; Tracked objects:
+  1587 ;;		On entry : 0/0
+  1588 ;;		On exit  : 0/0
+  1589 ;;		Unchanged: 0/0
+  1590 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+      +1  BANK12  BANK13  BANK14  BANK15
+  1591 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1592 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1593 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1594 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+      +0       0       0       0       0
+  1595 ;;Total ram usage:        0 bytes
+  1596 ;; Hardware stack levels used:    1
+  1597 ;; This function calls:
+  1598 ;;		Nothing
+  1599 ;; This function is called by:
+  1600 ;;		_UartStore
+  1601 ;;		_UartDump
+  1602 ;; This function uses a non-reentrant model
+  1603 ;;
+  1604                           
+  1605                           	psect	text17
+  1606  0002CC                     __ptext17:
+  1607                           	opt stack 0
+  1608  0002CC                     _UartReceive:
+  1609                           	opt stack 26
+  1610                           
+  1611                           ;communication.c: 13: if(RCSTA1bits.OERR == 1) {
+  1612                           
+  1613                           ;incstack = 0
+  1614  0002CC  A2AB               	btfss	4011,1,c	;volatile
+  1615  0002CE  D002               	goto	i2l1059
+  1616                           
+  1617                           ;communication.c: 14: RCSTA1bits.CREN = 0;
+  1618  0002D0  98AB               	bcf	4011,4,c	;volatile
+  1619                           
+  1620                           ;communication.c: 15: RCSTA1bits.CREN = 1;
+  1621  0002D2  88AB               	bsf	4011,4,c	;volatile
+  1622  0002D4                     i2l1059:
+  1623                           
+  1624                           ;communication.c: 16: }
+  1625                           ;communication.c: 17: return RCREG1;
+  1626  0002D4  50AE               	movf	4014,w,c	;volatile
+  1627  0002D6  0012               	return	
+  1628  0002D8                     __end_of_UartReceive:
+  1629                           	opt stack 0
+  1630  0000                     pclatu	equ	0xFFB
+  1631                           pclath	equ	0xFFA
+  1632                           tblptru	equ	0xFF8
+  1633                           tblptrh	equ	0xFF7
+  1634                           tblptrl	equ	0xFF6
+  1635                           tablat	equ	0xFF5
+  1636                           prodh	equ	0xFF4
+  1637                           prodl	equ	0xFF3
+  1638                           intcon	equ	0xFF2
+  1639                           postinc0	equ	0xFEE
+  1640                           fsr0h	equ	0xFEA
+  1641                           fsr0l	equ	0xFE9
+  1642                           wreg	equ	0xFE8
+  1643                           fsr1h	equ	0xFE2
+  1644                           fsr1l	equ	0xFE1
+  1645                           indf2	equ	0xFDF
+  1646                           fsr2h	equ	0xFDA
+  1647                           fsr2l	equ	0xFD9
+  1648                           status	equ	0xFD8
+  1649                           pclatu	equ	0xFFB
+  1650                           pclath	equ	0xFFA
+  1651                           tblptru	equ	0xFF8
+  1652                           tblptrh	equ	0xFF7
+  1653                           tblptrl	equ	0xFF6
+  1654                           tablat	equ	0xFF5
+  1655                           prodh	equ	0xFF4
+  1656                           prodl	equ	0xFF3
+  1657                           intcon	equ	0xFF2
+  1658                           postinc0	equ	0xFEE
+  1659                           fsr0h	equ	0xFEA
+  1660                           fsr0l	equ	0xFE9
+  1661                           wreg	equ	0xFE8
+  1662                           fsr1h	equ	0xFE2
+  1663                           fsr1l	equ	0xFE1
+  1664                           indf2	equ	0xFDF
+  1665                           fsr2h	equ	0xFDA
+  1666                           fsr2l	equ	0xFD9
+  1667                           status	equ	0xFD8
+  1668                           
+  1669                           	psect	rparam
+  1670  0000                     pclatu	equ	0xFFB
+  1671                           pclath	equ	0xFFA
+  1672                           tblptru	equ	0xFF8
+  1673                           tblptrh	equ	0xFF7
+  1674                           tblptrl	equ	0xFF6
+  1675                           tablat	equ	0xFF5
+  1676                           prodh	equ	0xFF4
+  1677                           prodl	equ	0xFF3
+  1678                           intcon	equ	0xFF2
+  1679                           postinc0	equ	0xFEE
+  1680                           fsr0h	equ	0xFEA
+  1681                           fsr0l	equ	0xFE9
+  1682                           wreg	equ	0xFE8
+  1683                           fsr1h	equ	0xFE2
+  1684                           fsr1l	equ	0xFE1
+  1685                           indf2	equ	0xFDF
+  1686                           fsr2h	equ	0xFDA
+  1687                           fsr2l	equ	0xFD9
+  1688                           status	equ	0xFD8
+  1689                           
+  1690                           	psect	temp
+  1691  000037                     btemp:
+  1692                           	opt stack 0
+  1693  000037                     	ds	1
+  1694  0000                     int$flags	set	btemp
+  1695                           pclatu	equ	0xFFB
+  1696                           pclath	equ	0xFFA
+  1697                           tblptru	equ	0xFF8
+  1698                           tblptrh	equ	0xFF7
+  1699                           tblptrl	equ	0xFF6
+  1700                           tablat	equ	0xFF5
+  1701                           prodh	equ	0xFF4
+  1702                           prodl	equ	0xFF3
+  1703                           intcon	equ	0xFF2
+  1704                           postinc0	equ	0xFEE
+  1705                           fsr0h	equ	0xFEA
+  1706                           fsr0l	equ	0xFE9
+  1707                           wreg	equ	0xFE8
+  1708                           fsr1h	equ	0xFE2
+  1709                           fsr1l	equ	0xFE1
+  1710                           indf2	equ	0xFDF
+  1711                           fsr2h	equ	0xFDA
+  1712                           fsr2l	equ	0xFD9
+  1713                           status	equ	0xFD8
 
 
 Data Sizes:
     Strings     0
     Constant    0
     Data        0
-    BSS         80
+    BSS         79
     Persistent  0
     Stack       0
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMRAM           94     15      54
+    COMRAM           94     16      54
     BANK0           160      0      42
     BANK1           256      0       0
     BANK2           256      0       0
@@ -1752,7 +1843,8 @@ Pointer List with Targets:
 
 Critical Paths under _main in COMRAM
 
-    None.
+    _main->_InitWlan
+    _Init->_InitWlan
 
 Critical Paths under _isr in COMRAM
 
@@ -1896,6 +1988,7 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (0) _main                                                 0     0      0       0
                                _Init
+                           _InitWlan
  ---------------------------------------------------------------------------------
  (1) _Init                                                 0     0      0       0
                           _InitAnsel
@@ -1906,6 +1999,10 @@ Call Graph Tables:
                           _InitTimer
                            _InitTris
                            _InitUart
+                           _InitWlan
+ ---------------------------------------------------------------------------------
+ (1) _InitWlan                                             1     1      0       0
+                                             15 COMRAM     1     1      0
  ---------------------------------------------------------------------------------
  (2) _InitUart                                             0     0      0       0
  ---------------------------------------------------------------------------------
@@ -1968,6 +2065,8 @@ Call Graph Tables:
      _InitTimer
      _InitTris
      _InitUart
+     _InitWlan
+   _InitWlan
 
  _isr (ROOT)
    _UartDump
@@ -2016,7 +2115,7 @@ BANK1              100      0       0       7        0.0%
 BITBANK0            A0      0       0       4        0.0%
 BANK0               A0      0      2A       5       26.3%
 BITCOMRAM           5E      0       1       0        1.1%
-COMRAM              5E      F      36       1       57.4%
+COMRAM              5E     10      36       1       57.4%
 BITBANK15           38      0       0      35        0.0%
 BANK15              38      0       0      36        0.0%
 BITSFR_1             0      0       0      40        0.0%
@@ -2031,25 +2130,26 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Fri Jan 08 20:10:11 2016
+Symbol Table                                                                                   Tue Jan 12 11:25:17 2016
 
              __CFG_CP0$OFF 000000               __CFG_CP1$OFF 000000               __CFG_CP2$OFF 000000  
-             __CFG_CP3$OFF 000000                        _GIE 007F97               __CFG_CPB$OFF 000000  
-                      u205 029A                        u207 029C               __CFG_CPD$OFF 000000  
+             __CFG_CP3$OFF 000000                        l132 023C                        l135 0252  
+                      _GIE 007F97               __CFG_CPB$OFF 000000                        u205 0266  
+                      u207 0268               __CFG_CPD$OFF 000000                        u397 0248  
                       _isr 0008                        prod 000FF3                        wreg 000FE8  
-               _TXSTA1bits 000FAC   __end_of_UartSendOverflow 02C4               __CFG_LVP$OFF 000000  
-                     l1028 0290                       ?_isr 0027                       _PEIE 007F96  
-                     _Init 01F0                       _main 028C                       fsr0h 000FEA  
+               _TXSTA1bits 000FAC   __end_of_UartSendOverflow 02F2               __CFG_LVP$OFF 000000  
+                     l1041 025C                       ?_isr 0026                       _PEIE 007F96  
+                     _Init 01D2                       _main 0258                       fsr0h 000FEA  
                      fsr1h 000FE2                       fsr0l 000FE9                       fsr2h 000FDA  
                      fsr1l 000FE1                       indf2 000FDF                       fsr2l 000FD9  
                      btemp 0037              __CFG_BORV$190 000000                       pclat 000FFA  
                      prodh 000FF4                       prodl 000FF3                       start 0092  
-            __CFG_IESO$OFF 000000               ___param_bank 000010              _InitInterrupt 02B4  
-          __end_of_InitOsc 02DA            __end_of_InitSpi 02B4                      ??_isr 0028  
-             _BAUDCON1bits 000FB8                      ?_Init 0027                      ?_main 0027  
+            __CFG_IESO$OFF 000000               ___param_bank 000010              _InitInterrupt 02E2  
+          __end_of_InitOsc 0308            __end_of_InitSpi 02E2                      ??_isr 0027  
+             _BAUDCON1bits 000FB8                      ?_Init 0026                      ?_main 0026  
                     _RC1IE 007CED                      _RC1IF 007CF5             __CFG_DEBUG$OFF 000000  
-                    i2l210 0244                      i2l260 0108                      i2l172 0056  
-                    i2l263 0158                      _TX1IF 007CF4                      _PORTA 000F80  
+                    i2l217 0284                      i2l270 015E                      i2l178 0056  
+                    i2l267 010E                      _TX1IF 007CF4                      _PORTA 000F80  
                     _PORTB 000F81                      _PORTC 000F82                      _PORTD 000F83  
                     _PORTE 000F84                      _TRISA 000F92                      _TRISB 000F93  
                     _TRISC 000F94                      _TRISD 000F95                      _TRISE 000F96  
@@ -2059,60 +2159,62 @@ Symbol Table                                                                    
             __CFG_WRTB$OFF 000000              __CFG_WRTC$OFF 000000              __CFG_WRTD$OFF 000000  
            __CFG_EBTRB$OFF 000000         __CFG_MCLRE$EXTMCLR 000000             __pbitbssCOMRAM 01B0  
                     tablat 000FF5                      status 000FD8             __CFG_HFOFST$ON 000000  
-           __CFG_PBADEN$ON 000000      __end_of_UartSendError 02CC             ?_InitInterrupt 0027  
-          __initialization 01CC               __end_of_Init 0212               __end_of_main 029E  
-         __end_of_InitUart 0260           __end_of_InitPort 028C           __end_of_InitTris 0276  
-                   ??_Init 0036                     ??_main 0036              __activetblptr 000000  
-         __end_of_UartDump 02D4           __end_of_UartSend 024A                     _ANSELA 000F38  
-                   _ANSELB 000F39                     _ANSELC 000F3A                     _ANSELD 000F3B  
-                   _ANSELE 000F3C                     i2l1042 02A6                     i2l1036 0240  
-                   i2l1116 0182                     i2l1124 0052                     i2l1070 00C8  
-                   i2l1062 00B6                     i2l1084 00F4                     i2l1076 00D8  
-                   i2l1086 00FA             __CFG_WDTEN$OFF 000000                     _RCREG1 000FAE  
-                   _OSCCON 000FD3         __size_of_InitAnsel 0020                     _SPBRG1 000FAF  
-       __size_of_InitTimer 0044                     _TXREG1 000FAD                  ??_InitOsc 0036  
-                ??_InitSpi 0036              ??_UartReceive 0027             __CFG_XINST$OFF 000000  
-                   _a_name 0001                     _a_path 0060                     _c_name 0022  
-                   _c_path 0023             __CFG_STVREN$ON 000000                     clear_0 01D2  
-                   clear_1 01E0         __size_of_UartStore 00F2                     tblptrh 000FF7  
-                   tblptrl 000FF6                     tblptru 000FF8                 __accesstop 0060  
-  __end_of__initialization 01E6            ??_InitInterrupt 0036              ___rparam_used 000001  
-           __pcstackCOMRAM 0027        __end_of_UartReceive 02AA          __end_of_InitAnsel 0232  
-        __end_of_InitTimer 01CC           UartDump@dumpdata 0027          ?_UartSendOverflow 0027  
-               __pbssBANK0 0060            __CFG_PLLCFG$OFF 000000         ??_UartSendOverflow 0028  
-                ?_InitUart 0027                  ?_InitPort 0027                  ?_InitTris 0027  
-        __end_of_UartStore 0188                  ?_UartDump 0027         __CFG_CCP2MX$PORTC1 000000  
-                ?_UartSend 0027         __CFG_CCP3MX$PORTB5 000000          __CFG_PRICLKEN$OFF 000000  
-                  i2u38_47 023A                    _TMR3GIE 007D19                 ??_InitUart 0036  
-               ??_InitPort 0036                 ??_InitTris 0036                    _InitOsc 02D4  
-                  _InitSpi 02AA            __CFG_PWRTEN$OFF 000000                    __Hparam 0000  
-              _UartReceive 029E                    __Lparam 0000                 ??_UartDump 0027  
-               ??_UartSend 0027                    __pcinit 01CC                    __ramtop 1000  
-                  __ptext0 028C                    __ptext1 01F0                    __ptext2 024A  
-                  __ptext3 0260                    __ptext4 0188                    __ptext5 02AA  
-                  __ptext6 0276                    __ptext7 02D4                    __ptext8 02B4  
-                  __ptext9 0212               __size_of_isr 008A                  _T3CONbits 000FB1  
-                _T5CONbits 000F4E                    _numb_cc 0024       end_of_initialization 01E6  
+           __CFG_PBADEN$ON 000000      __end_of_UartSendError 02FA             ?_InitInterrupt 0026  
+          __initialization 01F8               __end_of_Init 01F8               __end_of_main 0272  
+         __end_of_InitUart 02A0           __end_of_InitPort 02CC           __end_of_InitWlan 0258  
+         __end_of_InitTris 02B6                     ??_Init 0036                     ??_main 0036  
+            __activetblptr 000000           __end_of_UartDump 0302           __end_of_UartSend 028A  
+                   _ANSELA 000F38                     _ANSELB 000F39                     _ANSELC 000F3A  
+                   _ANSELD 000F3B                     _ANSELE 000F3C                     i2l1103 00FA  
+                   i2l1105 0100                     i2l1053 0280                     i2l1135 0188  
+                   i2l1143 0052                     i2l1081 00BA                     i2l1059 02D4  
+                   i2l1095 00DC                     i2l1089 00CC             __CFG_WDTEN$OFF 000000  
+                   _RCREG1 000FAE                     _OSCCON 000FD3         __size_of_InitAnsel 0020  
+                   _SPBRG1 000FAF         __size_of_InitTimer 0044                     _TXREG1 000FAD  
+                ??_InitOsc 0035                  ??_InitSpi 0035              ??_UartReceive 0026  
+           __CFG_XINST$OFF 000000                     _a_name 0001                     _a_path 0060  
+                   _c_name 0021                     _c_path 0022             __CFG_STVREN$ON 000000  
+                   clear_0 01FE                     clear_1 020C         __size_of_UartStore 00F8  
+                   tblptrh 000FF7                     tblptrl 000FF6                     tblptru 000FF8  
+               __accesstop 0060    __end_of__initialization 0212            ??_InitInterrupt 0035  
+            ___rparam_used 000001             __pcstackCOMRAM 0026        __end_of_UartReceive 02D8  
+        __end_of_InitAnsel 023C          __end_of_InitTimer 01D2           UartDump@dumpdata 0026  
+        ?_UartSendOverflow 0026                 __pbssBANK0 0060            __CFG_PLLCFG$OFF 000000  
+       ??_UartSendOverflow 0027                  ?_InitUart 0026                  ?_InitPort 0026  
+                ?_InitWlan 0026                  ?_InitTris 0026          __end_of_UartStore 018E  
+                ?_UartDump 0026         __CFG_CCP2MX$PORTC1 000000                  ?_UartSend 0026  
+       __CFG_CCP3MX$PORTB5 000000                    i2u40_47 027A          __CFG_PRICLKEN$OFF 000000  
+                  _TMR3GIE 007D19                 ??_InitUart 0035                 ??_InitPort 0035  
+               ??_InitWlan 0035                 ??_InitTris 0035                    _InitOsc 0302  
+                  _InitSpi 02D8            __CFG_PWRTEN$OFF 000000                    __Hparam 0000  
+              _UartReceive 02CC                    __Lparam 0000                 ??_UartDump 0026  
+               ??_UartSend 0026                    __pcinit 01F8                    __ramtop 1000  
+                  __ptext0 0258                    __ptext1 01D2                    __ptext2 023C  
+                  __ptext3 028A                    __ptext4 02A0                    __ptext5 018E  
+                  __ptext6 02D8                    __ptext7 02B6                    __ptext8 0302  
+                  __ptext9 02E2               __size_of_isr 008A                  _T3CONbits 000FB1  
+                _T5CONbits 000F4E                    _numb_cc 0023       end_of_initialization 0212  
                   postinc0 000FEE                  _PORTBbits 000F81                  _PORTDbits 000F83  
-   __size_of_UartSendError 0008        start_initialization 01CC                  _InitAnsel 0212  
-                _InitTimer 0188                __end_of_isr 0092          __size_of_InitUart 0016  
-        __size_of_InitPort 0016          __size_of_InitTris 0016              _UartSendError 02C4  
-    __end_of_InitInterrupt 02BC                  _UartStore 0096  __size_of_UartSendOverflow 0008  
-        __size_of_UartDump 0008          __size_of_UartSend 0018                __pbssCOMRAM 0001  
-               ?_InitAnsel 0027                 ?_InitTimer 0027                   ?_InitOsc 0027  
-                 ?_InitSpi 0027             ?_UartSendError 0027               ?_UartReceive 0027  
-               ?_UartStore 0027                  __pintcode 0008                  _path_name 01B0  
-             _receiving_ok 01B1               UartSend@data 0027           __CFG_WDTPS$32768 000000  
-                 _SSP1CON1 000FC6                   _SSP1STAT 000FC7                ??_InitAnsel 0036  
-              ??_InitTimer 0036              _numb_cc_table 0025                   _InitUart 024A  
-                 _InitPort 0276                   _InitTris 0260            ??_UartSendError 0028  
-                 __Hrparam 0000           __size_of_InitOsc 0006           __size_of_InitSpi 000A  
-                 _UartDump 02CC                   _UartSend 0232                   __Lrparam 0000  
-              ??_UartStore 0028         __CFG_BOREN$SBORDIS 000000           _UartSendOverflow 02BC  
-        __CFG_P2BMX$PORTD2 000000                   __ptext11 0096                   __ptext12 02BC  
-                 __ptext13 02C4                   __ptext14 0232                   __ptext15 02CC  
-                 __ptext16 029E                 _T3GCONbits 000FB4              __size_of_Init 0022  
-            __size_of_main 0012                 _T5GCONbits 000F4D                   _received 0026  
+   __size_of_UartSendError 0008        start_initialization 01F8                  _InitAnsel 021C  
+                _InitTimer 018E                __end_of_isr 0092          __size_of_InitUart 0016  
+        __size_of_InitPort 0016          __size_of_InitWlan 001C          __size_of_InitTris 0016  
+            _UartSendError 02F2      __end_of_InitInterrupt 02EA                  _UartStore 0096  
+__size_of_UartSendOverflow 0008          __size_of_UartDump 0008          __size_of_UartSend 0018  
+              __pbssCOMRAM 0001                 ?_InitAnsel 0026                 ?_InitTimer 0026  
+                 ?_InitOsc 0026                   ?_InitSpi 0026             ?_UartSendError 0026  
+             ?_UartReceive 0026                 ?_UartStore 0026                  __pintcode 0008  
+                _path_name 01B0               _receiving_ok 01B1               UartSend@data 0026  
+         __CFG_WDTPS$32768 000000                   _SSP1CON1 000FC6                   _SSP1STAT 000FC7  
+              ??_InitAnsel 0035                ??_InitTimer 0035              _numb_cc_table 0024  
+                 _InitUart 028A                   _InitPort 02B6                   _InitWlan 023C  
+                 _InitTris 02A0            ??_UartSendError 0027                   __Hrparam 0000  
+         __size_of_InitOsc 0006           __size_of_InitSpi 000A                   _UartDump 02FA  
+                 _UartSend 0272                   __Lrparam 0000                ??_UartStore 0027  
+       __CFG_BOREN$SBORDIS 000000           _UartSendOverflow 02EA          __CFG_P2BMX$PORTD2 000000  
+                 __ptext10 021C                   __ptext12 0096                   __ptext13 02EA  
+                 __ptext14 02F2                   __ptext15 0272                   __ptext16 02FA  
+                 __ptext17 02CC                 _T3GCONbits 000FB4              __size_of_Init 0026  
+            __size_of_main 001A                 _T5GCONbits 000F4D                   _received 0025  
      __size_of_UartReceive 000C                   int$flags 0037                   intlevel2 0000  
                _RCSTA1bits 000FAB          __CFG_T3CMX$PORTC0 000000     __size_of_InitInterrupt 0008  
         __CFG_FOSC$INTIO67 000000  

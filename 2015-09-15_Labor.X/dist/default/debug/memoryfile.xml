@@ -2,16 +2,16 @@
 <project>
   <executable name="dist/default/debug\2015-09-15_Labor.X.debug.hex">
     <memory name="program">
-      <units>words</units>
-      <length>4096</length>
-      <used>740</used>
-      <free>3356</free>
+      <units>bytes</units>
+      <length>65536</length>
+      <used>1270</used>
+      <free>64266</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
-      <length>384</length>
-      <used>57</used>
-      <free>327</free>
+      <length>3896</length>
+      <used>52</used>
+      <free>3844</free>
     </memory>
   </executable>
 </project>
