@@ -27,7 +27,9 @@ bit receiving_ok = 0;   /* States if startkondition appeared or not if not,
 typedef struct t_path{
     unsigned char lower_cc;
     unsigned char higher_cc;
-}a_path[21];
+}a_path[21], a_path_old[21];
+
+/* !!! schwer: WENN * statt 5 verwendet wird, kann das array dynamisch verwenet werden*/
 
 
 unsigned char a_name[32];
