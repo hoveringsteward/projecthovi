@@ -379,7 +379,6 @@ void CheckRudderAhead(void) {
 }
 // </editor-fold>
 
-
 // <editor-fold defaultstate="collapsed" desc="Check Rudder Back">
 
 /* The rotation is checked, if it's over 175 and under -175, if not,
