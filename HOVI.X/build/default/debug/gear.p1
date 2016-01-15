@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"32 actors.h
+"34 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
 "26 pixy.h
@@ -50,6 +50,53 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S415 . . . . . . . . . ]
 "6726
 [v _PORTBbits `VS415 ~T0 @X0 0 e@3969 ]
+"6376
+[s S401 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S401 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
+"6386
+[s S402 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S402 . AN0 AN1 AN2 AN3 . AN4 ]
+"6394
+[s S403 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S403 . C12IN0M C12IN1M C2INP C1INP C1OUT C2OUT ]
+"6402
+[s S404 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S404 . C12IN0N C12IN1N VREFM VREFP T0CKI SS ]
+"6410
+[s S405 :5 `uc 1 :1 `uc 1 ]
+[n S405 . . NOT_SS ]
+"6414
+[s S406 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S406 . . VREFN . SRQ nSS ]
+"6421
+[s S407 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S407 . . CVREF . LVDIN ]
+"6427
+[s S408 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S408 . . DACOUT . HLVDIN ]
+"6433
+[s S409 :5 `uc 1 :1 `uc 1 ]
+[n S409 . . SS1 ]
+"6437
+[s S410 :5 `uc 1 :1 `uc 1 ]
+[n S410 . . NOT_SS1 ]
+"6441
+[s S411 :5 `uc 1 :1 `uc 1 ]
+[n S411 . . nSS1 ]
+"6445
+[s S412 :5 `uc 1 :1 `uc 1 ]
+[n S412 . . SRNQ ]
+"6449
+[s S413 :7 `uc 1 :1 `uc 1 ]
+[n S413 . . RJPU ]
+"6453
+[s S414 :1 `uc 1 ]
+[n S414 . ULPWUIN ]
+"6375
+[u S400 `S401 1 `S402 1 `S403 1 `S404 1 `S405 1 `S406 1 `S407 1 `S408 1 `S409 1 `S410 1 `S411 1 `S412 1 `S413 1 `S414 1 ]
+[n S400 . . . . . . . . . . . . . . . ]
+"6457
+[v _PORTAbits `VS400 ~T0 @X0 0 e@3968 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7547,15 +7594,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 22: void ActElevator(unsigned char change);
 [; ;actors.h: 23: void ActThrottle(unsigned char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
-[; ;actors.h: 32: typedef struct act_out {
-[; ;actors.h: 33: unsigned int aile;
-[; ;actors.h: 34: unsigned int elev;
-[; ;actors.h: 35: unsigned int thro;
-[; ;actors.h: 36: unsigned int rudd;
-[; ;actors.h: 37: } t_actors;
-"39 actors.h
+[; ;actors.h: 25: void SignalOut(void);
+[; ;actors.h: 26: void Delay(unsigned int del);
+[; ;actors.h: 34: typedef struct act_out {
+[; ;actors.h: 35: unsigned int aile;
+[; ;actors.h: 36: unsigned int elev;
+[; ;actors.h: 37: unsigned int thro;
+[; ;actors.h: 38: unsigned int rudd;
+[; ;actors.h: 39: } t_actors;
+"41 actors.h
 [v _a_actors `S1147 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;actors.h: 39: t_actors a_actors[1];
+[; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;init.h: 27: void Init(void);
@@ -7701,7 +7750,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr(void);
+[; ;main.h: 33: interrupt void Isr();
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7714,15 +7763,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _CalcTime ]
 [f ]
 "17
-[v _time_gear `ui ~T0 @X0 1 a ]
-[; ;gear.c: 17: unsigned int time_gear = TMR3H;
-[e = _time_gear -> _TMR3H `ui ]
-[; ;gear.c: 18: time_gear <<= 8;
+[v _time_gear_meas `ui ~T0 @X0 1 a ]
+[; ;gear.c: 17: unsigned int time_gear_meas = TMR3H;
+[e = _time_gear_meas -> _TMR3H `ui ]
+[; ;gear.c: 18: time_gear_meas <<= 8;
 "18
-[e =<< _time_gear -> 8 `i ]
-[; ;gear.c: 19: time_gear |= TMR3L;
+[e =<< _time_gear_meas -> 8 `i ]
+[; ;gear.c: 19: time_gear_meas |= TMR3L;
 "19
-[e =| _time_gear -> _TMR3L `ui ]
+[e =| _time_gear_meas -> _TMR3L `ui ]
 [; ;gear.c: 20: TMR3H = 0;
 "20
 [e = _TMR3H -> -> 0 `i `uc ]
@@ -7732,9 +7781,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 22: __nop();
 "22
 [e ( ___nop ..  ]
-[; ;gear.c: 23: return time_gear;
+[; ;gear.c: 23: return time_gear_meas;
 "23
-[e ) _time_gear ]
+[e ) _time_gear_meas ]
 [e $UE 1152  ]
 [; ;gear.c: 24: }
 "24
@@ -7754,38 +7803,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 "32
 [e $ ! < _time_gear -> -> 6800 `i `ui 1154  ]
 {
-[; ;gear.c: 33: PORTBbits.RB2 = 0;
-"33
-[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
-[; ;gear.c: 34: set_ret = 0;
+[; ;gear.c: 34: PORTBbits.RB2 = 0;
 "34
-[e = _set_ret -> -> 0 `i `b ]
+[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
+[; ;gear.c: 35: PORTAbits.RA5 = 1;
 "35
+[e = . . _PORTAbits 0 5 -> -> 1 `i `uc ]
+[; ;gear.c: 36: set_ret = 0;
+"36
+[e = _set_ret -> -> 0 `i `b ]
+"37
 }
-[; ;gear.c: 35: }else if(time_gear >= 6800) {
+[; ;gear.c: 37: }else if(time_gear >= 6800) {
 [e $U 1155  ]
 [e :U 1154 ]
 [e $ ! >= _time_gear -> -> 6800 `i `ui 1156  ]
 {
-[; ;gear.c: 36: PORTBbits.RB2 = 1;
-"36
-[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
-[; ;gear.c: 37: set_ret = 1;
-"37
-[e = _set_ret -> -> 1 `i `b ]
+[; ;gear.c: 38: PORTBbits.RB2 = 1;
 "38
+[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
+[; ;gear.c: 39: PORTAbits.RA5 = 0;
+"39
+[e = . . _PORTAbits 0 5 -> -> 0 `i `uc ]
+[; ;gear.c: 40: set_ret = 1;
+"40
+[e = _set_ret -> -> 1 `i `b ]
+"41
 }
 [e :U 1156 ]
-"39
+"42
 [e :U 1155 ]
-[; ;gear.c: 38: }
-[; ;gear.c: 39: __nop();
+[; ;gear.c: 41: }
+[; ;gear.c: 42: __nop();
 [e ( ___nop ..  ]
-[; ;gear.c: 40: return set_ret;
-"40
+[; ;gear.c: 43: return set_ret;
+"43
 [e ) -> -> _set_ret `i `b ]
 [e $UE 1153  ]
-[; ;gear.c: 41: }
-"41
+[; ;gear.c: 44: }
+"44
 [e :UE 1153 ]
 }

@@ -9414,8 +9414,10 @@ void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
 void ActThrottle(unsigned char change);
 void ActRudder(unsigned char change);
+void SignalOut(void);
+void Delay(unsigned int del);
 
-# 32
+# 34
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9537,21 +9539,24 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
 
 # 30 "interrupt.c"
 interrupt void Isr() {
+__nop();
+__nop();
 __nop();
 if(TMR3GIF == 1) {
 TMR3GIF = 0;
 ModeCheck();
 StartHeightMeasure();
-ReadObject(1,3,5);
-CompareFrames();
+
+
 ReadHeight();
 CheckThrottle();
 
-}else if (TMR3IF == 1) {
+SignalOut();
+}if (TMR3IF == 1) {
 TMR3IF = 0;
 }
 }

@@ -36,12 +36,13 @@ void Init(void) {
     InitSpi();
     InitTimer();
     InitInterrupt();
+    InitActors();
 }
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="PORT">
 void InitPort(void) {
-    PORTA = 0b00010000;
+    PORTA = 0b00000000;
     PORTB = 0b00001000;
     PORTC = 0b00000000;
     PORTD = 0b00001000;
@@ -145,7 +146,7 @@ void InitInterrupt(void) {
     GIE = 1;
     PEIE = 1;
     /* Enabling interrupt for Timer 3 gate                              */
-    TMR3GIE = 1;        // Direct access due to conflicts with PIE3bits.TMR3GIE    
+    TMR3GIE = 1;    // Direct access due to conflicts with PIE3bits.TMR3GIE    
 }
 // </editor-fold>
 

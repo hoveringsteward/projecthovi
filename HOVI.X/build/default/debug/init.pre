@@ -9414,8 +9414,10 @@ void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
 void ActThrottle(unsigned char change);
 void ActRudder(unsigned char change);
+void SignalOut(void);
+void Delay(unsigned int del);
 
-# 32
+# 34
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9537,7 +9539,7 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
 
 # 30 "init.c"
 void Init(void) {
@@ -9549,12 +9551,13 @@ InitUart();
 InitSpi();
 InitTimer();
 InitInterrupt();
+InitActors();
 }
 
 
 
 void InitPort(void) {
-PORTA = 0b00010000;
+PORTA = 0b00000000;
 PORTB = 0b00001000;
 PORTC = 0b00000000;
 PORTD = 0b00001000;
@@ -9593,13 +9596,13 @@ void InitUart(void) {
 
 }
 
-# 92
+# 93
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 110
+# 111
 void InitTimer(void) {
 
 
@@ -9629,7 +9632,7 @@ T5CONbits.TMR5ON = 1;
 
 }
 
-# 144
+# 145
 void InitInterrupt(void) {
 GIE = 1;
 PEIE = 1;
@@ -9637,7 +9640,7 @@ PEIE = 1;
 TMR3GIE = 1;
 }
 
-# 155
+# 156
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;

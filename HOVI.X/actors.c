@@ -17,6 +17,31 @@
 #include <xc.h>
 #include "main.h"
 
+void Delay(unsigned int del) {
+    del >>= 2;
+    for(unsigned int c_del = 0; c_del < del; del++) {
+        __delay_us(4);
+    }
+}
+
+// <editor-fold defaultstate="collapsed" desc="Signal Out">
+void SignalOut(void) {
+    A = 1;
+    Delay(a_actors[0].aile);
+    A = 0;
+    E = 1;
+    Delay(a_actors[0].elev);
+    E = 0;
+    T = 1;
+    Delay(a_actors[0].thro);
+    T = 0;
+    R = 1;
+    Delay(a_actors[0].rudd);
+    R = 0;
+}
+// </editor-fold>
+
+
 // <editor-fold defaultstate="collapsed" desc="Act Ailerons">
 /* ActAilerons                                                      */
 /* roll = rollen -> links/rechts                                    */
@@ -52,4 +77,3 @@ void ActRudder(unsigned char change){
     a_actors[0].rudd += change;
 }
 // </editor-fold>
-

@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"32 actors.h
+"34 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
 "26 pixy.h
@@ -7531,15 +7531,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 22: void ActElevator(unsigned char change);
 [; ;actors.h: 23: void ActThrottle(unsigned char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
-[; ;actors.h: 32: typedef struct act_out {
-[; ;actors.h: 33: unsigned int aile;
-[; ;actors.h: 34: unsigned int elev;
-[; ;actors.h: 35: unsigned int thro;
-[; ;actors.h: 36: unsigned int rudd;
-[; ;actors.h: 37: } t_actors;
-"39 actors.h
+[; ;actors.h: 25: void SignalOut(void);
+[; ;actors.h: 26: void Delay(unsigned int del);
+[; ;actors.h: 34: typedef struct act_out {
+[; ;actors.h: 35: unsigned int aile;
+[; ;actors.h: 36: unsigned int elev;
+[; ;actors.h: 37: unsigned int thro;
+[; ;actors.h: 38: unsigned int rudd;
+[; ;actors.h: 39: } t_actors;
+"41 actors.h
 [v _a_actors `S1147 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;actors.h: 39: t_actors a_actors[1];
+[; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
@@ -7690,7 +7692,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr(void);
+[; ;main.h: 33: interrupt void Isr();
 "32 position.c
 [v _CompareFrames `(v ~T0 @X0 1 ef ]
 {

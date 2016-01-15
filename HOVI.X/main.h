@@ -30,7 +30,7 @@
 /* Prototypes of userroutines.                                      */ 
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userrroutines">
-interrupt void Isr(void);
+interrupt void Isr();
 // </editor-fold>
 
 /*------------------------------------------------------------------*/
@@ -77,6 +77,7 @@ interrupt void Isr(void);
 #define T       PORTAbits.RA3
 #define R       PORTAbits.RA2
 #define Gate    PORTAbits.RA4
+#define ManNAut PORTAbits.RA5
 #define Trigger PORTBbits.RB3
 #define Connect PORTDbits.RD5
 // </editor-fold>

@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"32 actors.h
+"34 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
 "26 pixy.h
@@ -23,14 +23,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ModeCheck `(b ~T0 @X0 0 ef ]
 "20 ultrasonic.h
 [v _StartHeightMeasure `(v ~T0 @X0 0 ef ]
-"20 pixy.h
-[v _ReadObject `(uc ~T0 @X0 0 ef3`uc`ui`uc ]
-"18 position.h
-[v _CompareFrames `(v ~T0 @X0 0 ef ]
-"21 ultrasonic.h
+"21
 [v _ReadHeight `(v ~T0 @X0 0 ef ]
 "23 position.h
 [v _CheckThrottle `(v ~T0 @X0 0 ef ]
+"25 actors.h
+[v _SignalOut `(v ~T0 @X0 0 ef ]
 "20112 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _TMR3IF `Vb ~T0 @X0 0 e@32009 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -7530,15 +7528,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 22: void ActElevator(unsigned char change);
 [; ;actors.h: 23: void ActThrottle(unsigned char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
-[; ;actors.h: 32: typedef struct act_out {
-[; ;actors.h: 33: unsigned int aile;
-[; ;actors.h: 34: unsigned int elev;
-[; ;actors.h: 35: unsigned int thro;
-[; ;actors.h: 36: unsigned int rudd;
-[; ;actors.h: 37: } t_actors;
-"39 actors.h
+[; ;actors.h: 25: void SignalOut(void);
+[; ;actors.h: 26: void Delay(unsigned int del);
+[; ;actors.h: 34: typedef struct act_out {
+[; ;actors.h: 35: unsigned int aile;
+[; ;actors.h: 36: unsigned int elev;
+[; ;actors.h: 37: unsigned int thro;
+[; ;actors.h: 38: unsigned int rudd;
+[; ;actors.h: 39: } t_actors;
+"41 actors.h
 [v _a_actors `S1147 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;actors.h: 39: t_actors a_actors[1];
+[; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
@@ -7689,10 +7689,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr(void);
-[v F8084 `(v ~T0 @X0 1 tf ]
+[; ;main.h: 33: interrupt void Isr();
+[v F8087 `(v ~T0 @X0 1 tf ]
 "30 interrupt.c
-[v _Isr `IF8084 ~T0 @X0 1 e ]
+[v _Isr `IF8087 ~T0 @X0 1 e ]
 {
 [; ;interrupt.c: 30: interrupt void Isr() {
 [e :U _Isr ]
@@ -7700,47 +7700,48 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupt.c: 31: __nop();
 "31
 [e ( ___nop ..  ]
-[; ;interrupt.c: 32: if(TMR3GIF == 1) {
+[; ;interrupt.c: 32: __nop();
 "32
+[e ( ___nop ..  ]
+[; ;interrupt.c: 33: __nop();
+"33
+[e ( ___nop ..  ]
+[; ;interrupt.c: 34: if(TMR3GIF == 1) {
+"34
 [e $ ! == -> _TMR3GIF `i -> 1 `i 1153  ]
 {
-[; ;interrupt.c: 33: TMR3GIF = 0;
-"33
-[e = _TMR3GIF -> -> 0 `i `b ]
-[; ;interrupt.c: 34: ModeCheck();
-"34
-[e ( _ModeCheck ..  ]
-[; ;interrupt.c: 35: StartHeightMeasure();
+[; ;interrupt.c: 35: TMR3GIF = 0;
 "35
-[e ( _StartHeightMeasure ..  ]
-[; ;interrupt.c: 36: ReadObject(1,3,5);
+[e = _TMR3GIF -> -> 0 `i `b ]
+[; ;interrupt.c: 36: ModeCheck();
 "36
-[e ( _ReadObject (3 , , -> -> 1 `i `uc -> -> 3 `i `ui -> -> 5 `i `uc ]
-[; ;interrupt.c: 37: CompareFrames();
+[e ( _ModeCheck ..  ]
+[; ;interrupt.c: 37: StartHeightMeasure();
 "37
-[e ( _CompareFrames ..  ]
-[; ;interrupt.c: 38: ReadHeight();
-"38
+[e ( _StartHeightMeasure ..  ]
+[; ;interrupt.c: 40: ReadHeight();
+"40
 [e ( _ReadHeight ..  ]
-[; ;interrupt.c: 39: CheckThrottle();
-"39
-[e ( _CheckThrottle ..  ]
+[; ;interrupt.c: 41: CheckThrottle();
 "41
-}
-[; ;interrupt.c: 41: }else if (TMR3IF == 1) {
-[e $U 1154  ]
-[e :U 1153 ]
-[e $ ! == -> _TMR3IF `i -> 1 `i 1155  ]
-{
-[; ;interrupt.c: 42: TMR3IF = 0;
-"42
-[e = _TMR3IF -> -> 0 `i `b ]
+[e ( _CheckThrottle ..  ]
+[; ;interrupt.c: 43: SignalOut();
 "43
-}
-[e :U 1155 ]
+[e ( _SignalOut ..  ]
 "44
+}
+[e :U 1153 ]
+[; ;interrupt.c: 44: }if (TMR3IF == 1) {
+[e $ ! == -> _TMR3IF `i -> 1 `i 1154  ]
+{
+[; ;interrupt.c: 45: TMR3IF = 0;
+"45
+[e = _TMR3IF -> -> 0 `i `b ]
+"46
+}
 [e :U 1154 ]
-[; ;interrupt.c: 43: }
-[; ;interrupt.c: 44: }
+[; ;interrupt.c: 46: }
+[; ;interrupt.c: 47: }
+"47
 [e :UE 1152 ]
 }

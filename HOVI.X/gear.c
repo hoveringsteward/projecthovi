@@ -14,13 +14,13 @@
 /* Returns by TMR3 measured time                                             */
 /*---------------------------------------------------------------------------*/
 unsigned int CalcTime(void) {
-    unsigned int time_gear = TMR3H;
-    time_gear <<= 8;
-    time_gear |= TMR3L;
+    unsigned int time_gear_meas = TMR3H;
+    time_gear_meas <<= 8;
+    time_gear_meas |= TMR3L;
     TMR3H = 0;
     TMR3L = 0;
     NOP();
-    return time_gear;
+    return time_gear_meas;
 }
 
 /* Calls Fkt_CalcTime to get count of TMR3                                   */
@@ -30,10 +30,13 @@ unsigned int CalcTime(void) {
 bit ModeCheck(void) {
     unsigned int time_gear = CalcTime();
     if(time_gear < GEAR_TIME){
+        /* Manual Mode */
         LED = 0;
+        ManNAut = 1;
         set_ret = 0;
     }else if(time_gear >= GEAR_TIME) {
         LED = 1;
+        ManNAut = 0;
         set_ret = 1;
     }
     NOP();

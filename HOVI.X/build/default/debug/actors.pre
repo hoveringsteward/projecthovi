@@ -9414,8 +9414,10 @@ void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
 void ActThrottle(unsigned char change);
 void ActRudder(unsigned char change);
+void SignalOut(void);
+void Delay(unsigned int del);
 
-# 32
+# 34
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9537,24 +9539,48 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
 
-# 24 "actors.c"
+# 20 "actors.c"
+void Delay(unsigned int del) {
+del >>= 2;
+for(unsigned int c_del = 0; c_del < del; del++) {
+_delay((unsigned long)((4)*(16000000/4000000.0)));
+}
+}
+
+
+void SignalOut(void) {
+PORTAbits.RA0 = 1;
+Delay(a_actors[0].aile);
+PORTAbits.RA0 = 0;
+PORTAbits.RA1 = 1;
+Delay(a_actors[0].elev);
+PORTAbits.RA1 = 0;
+PORTAbits.RA3 = 1;
+Delay(a_actors[0].thro);
+PORTAbits.RA3 = 0;
+PORTAbits.RA2 = 1;
+Delay(a_actors[0].rudd);
+PORTAbits.RA2 = 0;
+}
+
+# 49
 void ActAileron(unsigned char change){
 a_actors[0].aile += change;
 }
 
-# 33
+# 58
 void ActElevator(unsigned char change){
 a_actors[0].elev += change;
 }
 
-# 42
+# 67
 void ActThrottle(unsigned char change){
 a_actors[0].thro += change;
 }
 
-# 51
+# 76
 void ActRudder(unsigned char change){
 a_actors[0].rudd += change;
 }

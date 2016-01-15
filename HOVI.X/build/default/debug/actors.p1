@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"32 actors.h
+"34 actors.h
 [s S1147 `ui 1 `ui 1 `ui 1 `ui 1 ]
 [n S1147 act_out aile elev thro rudd ]
 "26 pixy.h
@@ -14,6 +14,57 @@ Version 3.2 HI-TECH Software Intermediate Code
 "79
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
+[v F7833 `(v ~T0 @X0 1 tf1`ul ]
+"152 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
+[v __delay `JF7833 ~T0 @X0 0 e ]
+[p i __delay ]
+"6376 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[s S401 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S401 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
+"6386
+[s S402 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S402 . AN0 AN1 AN2 AN3 . AN4 ]
+"6394
+[s S403 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S403 . C12IN0M C12IN1M C2INP C1INP C1OUT C2OUT ]
+"6402
+[s S404 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S404 . C12IN0N C12IN1N VREFM VREFP T0CKI SS ]
+"6410
+[s S405 :5 `uc 1 :1 `uc 1 ]
+[n S405 . . NOT_SS ]
+"6414
+[s S406 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S406 . . VREFN . SRQ nSS ]
+"6421
+[s S407 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S407 . . CVREF . LVDIN ]
+"6427
+[s S408 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S408 . . DACOUT . HLVDIN ]
+"6433
+[s S409 :5 `uc 1 :1 `uc 1 ]
+[n S409 . . SS1 ]
+"6437
+[s S410 :5 `uc 1 :1 `uc 1 ]
+[n S410 . . NOT_SS1 ]
+"6441
+[s S411 :5 `uc 1 :1 `uc 1 ]
+[n S411 . . nSS1 ]
+"6445
+[s S412 :5 `uc 1 :1 `uc 1 ]
+[n S412 . . SRNQ ]
+"6449
+[s S413 :7 `uc 1 :1 `uc 1 ]
+[n S413 . . RJPU ]
+"6453
+[s S414 :1 `uc 1 ]
+[n S414 . ULPWUIN ]
+"6375
+[u S400 `S401 1 `S402 1 `S403 1 `S404 1 `S405 1 `S406 1 `S407 1 `S408 1 `S409 1 `S410 1 `S411 1 `S412 1 `S413 1 `S414 1 ]
+[n S400 . . . . . . . . . . . . . . . ]
+"6457
+[v _PORTAbits `VS400 ~T0 @X0 0 e@3968 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7511,15 +7562,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 22: void ActElevator(unsigned char change);
 [; ;actors.h: 23: void ActThrottle(unsigned char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
-[; ;actors.h: 32: typedef struct act_out {
-[; ;actors.h: 33: unsigned int aile;
-[; ;actors.h: 34: unsigned int elev;
-[; ;actors.h: 35: unsigned int thro;
-[; ;actors.h: 36: unsigned int rudd;
-[; ;actors.h: 37: } t_actors;
-"39 actors.h
+[; ;actors.h: 25: void SignalOut(void);
+[; ;actors.h: 26: void Delay(unsigned int del);
+[; ;actors.h: 34: typedef struct act_out {
+[; ;actors.h: 35: unsigned int aile;
+[; ;actors.h: 36: unsigned int elev;
+[; ;actors.h: 37: unsigned int thro;
+[; ;actors.h: 38: unsigned int rudd;
+[; ;actors.h: 39: } t_actors;
+"41 actors.h
 [v _a_actors `S1147 ~T0 @X0 -> -> 1 `i `ux e ]
-[; ;actors.h: 39: t_actors a_actors[1];
+[; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;gear.h: 20: unsigned int CalcTime(void);
@@ -7670,60 +7723,141 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr(void);
-"24 actors.c
+[; ;main.h: 33: interrupt void Isr();
+"20 actors.c
+[v _Delay `(v ~T0 @X0 1 ef1`ui ]
+{
+[; ;actors.c: 20: void Delay(unsigned int del) {
+[e :U _Delay ]
+[v _del `ui ~T0 @X0 1 r1 ]
+[f ]
+[; ;actors.c: 21: del >>= 2;
+"21
+[e =>> _del -> 2 `i ]
+[; ;actors.c: 22: for(unsigned int c_del = 0; c_del < del; del++) {
+"22
+{
+[v _c_del `ui ~T0 @X0 1 a ]
+[e = _c_del -> -> 0 `i `ui ]
+[e $U 1156  ]
+[e :U 1153 ]
+{
+[; ;actors.c: 23: _delay((unsigned long)((4)*(16000000/4000000.0)));
+"23
+[e ( __delay (1 -> * -> -> 4 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+"24
+}
+"22
+[e ++ _del -> -> 1 `i `ui ]
+[e :U 1156 ]
+[e $ < _c_del _del 1153  ]
+[e :U 1154 ]
+"24
+}
+[; ;actors.c: 24: }
+[; ;actors.c: 25: }
+"25
+[e :UE 1152 ]
+}
+"28
+[v _SignalOut `(v ~T0 @X0 1 ef ]
+{
+[; ;actors.c: 28: void SignalOut(void) {
+[e :U _SignalOut ]
+[f ]
+[; ;actors.c: 29: PORTAbits.RA0 = 1;
+"29
+[e = . . _PORTAbits 0 0 -> -> 1 `i `uc ]
+[; ;actors.c: 30: Delay(a_actors[0].aile);
+"30
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 ]
+[; ;actors.c: 31: PORTAbits.RA0 = 0;
+"31
+[e = . . _PORTAbits 0 0 -> -> 0 `i `uc ]
+[; ;actors.c: 32: PORTAbits.RA1 = 1;
+"32
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+[; ;actors.c: 33: Delay(a_actors[0].elev);
+"33
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 ]
+[; ;actors.c: 34: PORTAbits.RA1 = 0;
+"34
+[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
+[; ;actors.c: 35: PORTAbits.RA3 = 1;
+"35
+[e = . . _PORTAbits 0 3 -> -> 1 `i `uc ]
+[; ;actors.c: 36: Delay(a_actors[0].thro);
+"36
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 ]
+[; ;actors.c: 37: PORTAbits.RA3 = 0;
+"37
+[e = . . _PORTAbits 0 3 -> -> 0 `i `uc ]
+[; ;actors.c: 38: PORTAbits.RA2 = 1;
+"38
+[e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
+[; ;actors.c: 39: Delay(a_actors[0].rudd);
+"39
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 ]
+[; ;actors.c: 40: PORTAbits.RA2 = 0;
+"40
+[e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
+[; ;actors.c: 41: }
+"41
+[e :UE 1157 ]
+}
+"49
 [v _ActAileron `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 24: void ActAileron(unsigned char change){
+[; ;actors.c: 49: void ActAileron(unsigned char change){
 [e :U _ActAileron ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 25: a_actors[0].aile += change;
-"25
+[; ;actors.c: 50: a_actors[0].aile += change;
+"50
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 -> _change `ui ]
-[; ;actors.c: 26: }
-"26
-[e :UE 1152 ]
+[; ;actors.c: 51: }
+"51
+[e :UE 1158 ]
 }
-"33
+"58
 [v _ActElevator `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 33: void ActElevator(unsigned char change){
+[; ;actors.c: 58: void ActElevator(unsigned char change){
 [e :U _ActElevator ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 34: a_actors[0].elev += change;
-"34
+[; ;actors.c: 59: a_actors[0].elev += change;
+"59
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 -> _change `ui ]
-[; ;actors.c: 35: }
-"35
-[e :UE 1153 ]
+[; ;actors.c: 60: }
+"60
+[e :UE 1159 ]
 }
-"42
+"67
 [v _ActThrottle `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 42: void ActThrottle(unsigned char change){
+[; ;actors.c: 67: void ActThrottle(unsigned char change){
 [e :U _ActThrottle ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 43: a_actors[0].thro += change;
-"43
+[; ;actors.c: 68: a_actors[0].thro += change;
+"68
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> _change `ui ]
-[; ;actors.c: 44: }
-"44
-[e :UE 1154 ]
+[; ;actors.c: 69: }
+"69
+[e :UE 1160 ]
 }
-"51
+"76
 [v _ActRudder `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 51: void ActRudder(unsigned char change){
+[; ;actors.c: 76: void ActRudder(unsigned char change){
 [e :U _ActRudder ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 52: a_actors[0].rudd += change;
-"52
+[; ;actors.c: 77: a_actors[0].rudd += change;
+"77
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 -> _change `ui ]
-[; ;actors.c: 53: }
-"53
-[e :UE 1155 ]
+[; ;actors.c: 78: }
+"78
+[e :UE 1161 ]
 }

@@ -31,12 +31,17 @@ void StartHeightMeasure(void) {
 }
 
 void ReadHeight(void) {
-    while(TMR5IF == 0);
-    TMR5IF = 0;
+    while(TMR5GIF == 0);
+    TMR5GIF = 0;
+    time_height = 0;
     time_height = TMR5H;
     time_height <<= 8;
     time_height |= TMR5L;
+    TMR5L = 0;
+    TMR5H = 0;
     a_frame[0].height = time_height;
+    a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
+    Trigger = 1;
 }
 
 // <editor-fold defaultstate="collapsed" desc="not used: Filter">

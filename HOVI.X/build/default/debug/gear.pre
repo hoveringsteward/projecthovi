@@ -9414,8 +9414,10 @@ void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
 void ActThrottle(unsigned char change);
 void ActRudder(unsigned char change);
+void SignalOut(void);
+void Delay(unsigned int del);
 
-# 32
+# 34
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9532,7 +9534,7 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
 
 # 20 "gear.h"
 unsigned int CalcTime(void);
@@ -9541,23 +9543,26 @@ bit set_ret;
 
 # 16 "gear.c"
 unsigned int CalcTime(void) {
-unsigned int time_gear = TMR3H;
-time_gear <<= 8;
-time_gear |= TMR3L;
+unsigned int time_gear_meas = TMR3H;
+time_gear_meas <<= 8;
+time_gear_meas |= TMR3L;
 TMR3H = 0;
 TMR3L = 0;
 __nop();
-return time_gear;
+return time_gear_meas;
 }
 
 # 30
 bit ModeCheck(void) {
 unsigned int time_gear = CalcTime();
 if(time_gear < 6800){
+
 PORTBbits.RB2 = 0;
+PORTAbits.RA5 = 1;
 set_ret = 0;
 }else if(time_gear >= 6800) {
 PORTBbits.RB2 = 1;
+PORTAbits.RA5 = 0;
 set_ret = 1;
 }
 __nop();

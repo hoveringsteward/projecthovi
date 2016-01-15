@@ -29,16 +29,19 @@
 
 interrupt void Isr() {
     NOP();
+    NOP();
+    NOP();
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
         ModeCheck();
         StartHeightMeasure();
-        ReadObject(1,3,5);
-        CompareFrames();
+        //ReadObject(1,10,5);
+        //CompareFrames();
         ReadHeight();
         CheckThrottle();
         // Funktion für Ausgabe von Steuersignalen fehlt
-    }else if (TMR3IF == 1) {
+        SignalOut();
+    }if (TMR3IF == 1) {
         TMR3IF = 0;
     }
 }

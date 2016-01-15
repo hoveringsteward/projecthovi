@@ -29,7 +29,7 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
     unsigned char c = 0;    // Counter for following while loop
     for(unsigned char c_obj = 0; c_obj < max_obj; c_obj++) {
         /* Routine for getting startcondition                                    */
-        /* Returns 0 after 254 cycles without detecting an object                 */
+        /* Returns 0 and exits functioon after 254 cycles without detecting an object*/
         /*-----------------------------------------------------------------------*/
         if(frame == 1) {
             w = ExchangeSpiWord(PIXY_SYNC, DUMMY);
@@ -68,12 +68,13 @@ unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsig
         a_color[c_obj].obj_height = ExchangeSpiWord(PIXY_SYNC, DUMMY);
         a_color[c_obj].angle =  ExchangeSpiWord(PIXY_SYNC, DUMMY);
         
-        a_frame[0].num = a_color[c_obj].num;
-        a_frame[0].pos_x = a_color[c_obj].pos_x;
-        a_frame[0].pos_y = a_color[c_obj].pos_y;
-        a_frame[0].angle = a_color[c_obj].angle;
-                
+        if(a_color[c_obj].num == des_obj) {
+            a_frame[0].num = a_color[c_obj].num;
+            a_frame[0].pos_x = a_color[c_obj].pos_x;
+            a_frame[0].pos_y = a_color[c_obj].pos_y;
+            a_frame[0].angle = a_color[c_obj].angle;
+            return 1;       //******Succesfull EXIT function
+        }
     }
-    return 1;
 }
 // </editor-fold>

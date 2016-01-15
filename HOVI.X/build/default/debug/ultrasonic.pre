@@ -9414,8 +9414,10 @@ void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
 void ActThrottle(unsigned char change);
 void ActRudder(unsigned char change);
+void SignalOut(void);
+void Delay(unsigned int del);
 
-# 32
+# 34
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9537,7 +9539,7 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
 
 # 27 "ultrasonic.c"
 void StartHeightMeasure(void) {
@@ -9547,15 +9549,20 @@ PORTBbits.RB3 = 0;
 }
 
 void ReadHeight(void) {
-while(TMR5IF == 0);
-TMR5IF = 0;
+while(TMR5GIF == 0);
+TMR5GIF = 0;
+time_height = 0;
 time_height = TMR5H;
 time_height <<= 8;
 time_height |= TMR5L;
+TMR5L = 0;
+TMR5H = 0;
 a_frame[0].height = time_height;
+a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
+PORTBbits.RB3 = 1;
 }
 
-# 45
+# 50
 unsigned int Filter(unsigned int entry){
 changerate = 0.2;
 if(highpassallowed){

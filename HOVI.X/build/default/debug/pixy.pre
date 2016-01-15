@@ -9414,8 +9414,10 @@ void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
 void ActThrottle(unsigned char change);
 void ActRudder(unsigned char change);
+void SignalOut(void);
+void Delay(unsigned int del);
 
-# 32
+# 34
 typedef struct act_out {
 unsigned int aile;
 unsigned int elev;
@@ -9537,7 +9539,7 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
 
 # 27 "pixy.c"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
@@ -9584,12 +9586,13 @@ a_color[c_obj].obj_width = ExchangeSpiWord(0x5a, 0);
 a_color[c_obj].obj_height = ExchangeSpiWord(0x5a, 0);
 a_color[c_obj].angle = ExchangeSpiWord(0x5a, 0);
 
+if(a_color[c_obj].num == des_obj) {
 a_frame[0].num = a_color[c_obj].num;
 a_frame[0].pos_x = a_color[c_obj].pos_x;
 a_frame[0].pos_y = a_color[c_obj].pos_y;
 a_frame[0].angle = a_color[c_obj].angle;
-
-}
 return 1;
+}
+}
 }
 
