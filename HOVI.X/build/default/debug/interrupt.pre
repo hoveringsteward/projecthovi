@@ -9435,6 +9435,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear;
 
 # 27 "init.h"
 void Init(void);
@@ -9543,20 +9544,15 @@ interrupt void Isr();
 
 # 30 "interrupt.c"
 interrupt void Isr() {
-__nop();
-__nop();
-__nop();
 if(TMR3GIF == 1) {
 TMR3GIF = 0;
-ModeCheck();
-StartHeightMeasure();
-
-
-ReadHeight();
-CheckThrottle();
+time_gear = TMR3H;
+time_gear <<= 8;
+time_gear = TMR3L;
+TMR3H = 0;
+TMR3L = 0;
 
 SignalOut();
-}if (TMR3IF == 1) {
-TMR3IF = 0;
+
 }
 }

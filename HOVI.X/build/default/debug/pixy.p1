@@ -7531,6 +7531,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
 [; ;gear.h: 22: bit set_ret;
+"23
+[v _time_gear `ui ~T0 @X0 1 e ]
+[; ;gear.h: 23: unsigned int time_gear;
 [; ;init.h: 27: void Init(void);
 [; ;init.h: 28: void InitPort(void);
 [; ;init.h: 29: void InitTris(void);

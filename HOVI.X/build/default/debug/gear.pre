@@ -9540,6 +9540,7 @@ interrupt void Isr();
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear;
 
 # 16 "gear.c"
 unsigned int CalcTime(void) {

@@ -28,20 +28,15 @@
 #include "main.h"
 
 interrupt void Isr() {
-    NOP();
-    NOP();
-    NOP();
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
-        ModeCheck();
-        StartHeightMeasure();
-        //ReadObject(1,10,5);
-        //CompareFrames();
-        ReadHeight();
-        CheckThrottle();
+        time_gear = TMR3H;
+        time_gear <<= 8;
+        time_gear = TMR3L;
+        TMR3H = 0;
+        TMR3L = 0;
         // Funktion für Ausgabe von Steuersignalen fehlt
         SignalOut();
-    }if (TMR3IF == 1) {
-        TMR3IF = 0;
+        
     }
 }

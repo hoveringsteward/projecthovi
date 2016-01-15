@@ -45,8 +45,6 @@
 [v _ExchangeSpiWord ExchangeSpiWord `(ui  1 e 2 0 ]
 "16 C:\projecthovi\HOVI.X\gear.c
 [v _CalcTime CalcTime `(ui  1 e 2 0 ]
-"30
-[v _ModeCheck ModeCheck `(b  1 e 0 0 ]
 "30 C:\projecthovi\HOVI.X\init.c
 [v _Init Init `(v  1 e 0 0 ]
 "44
@@ -79,16 +77,10 @@
 [v _BeneathTable BeneathTable `(v  1 e 0 0 ]
 "216
 [v _BeneathFloor BeneathFloor `(v  1 e 0 0 ]
-"237
-[v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
 "333
 [v _CheckRudderAhead CheckRudderAhead `(v  1 e 0 0 ]
-"392
+"391
 [v _CheckRudderBack CheckRudderBack `(v  1 e 0 0 ]
-"27 C:\projecthovi\HOVI.X\ultrasonic.c
-[v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
-"33
-[v _ReadHeight ReadHeight `(v  1 e 0 0 ]
 [s S21 act_out 8 `ui 1 aile 2 0 `ui 1 elev 2 2 `ui 1 thro 2 4 `ui 1 rudd 2 6 ]
 "41 C:\projecthovi\HOVI.X\actors.h
 [v _a_actors a_actors `[1]S21  1 e 8 0 ]
@@ -102,11 +94,11 @@
 [v _ANSELD ANSELD `VEuc  1 e 1 @3899 ]
 "253
 [v _ANSELE ANSELE `VEuc  1 e 1 @3900 ]
-[s S762 . 1 `uc 1 . 1 0 :3:0 
+[s S765 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T5GGO_NOT_DONE 1 0 :1:3 
 ]
 "1583
-[s S765 . 1 `uc 1 T5GSS 1 0 :2:0 
+[s S768 . 1 `uc 1 T5GSS 1 0 :2:0 
 `uc 1 T5GVAL 1 0 :1:2 
 `uc 1 T5GGO_nDONE 1 0 :1:3 
 `uc 1 T5GSPM 1 0 :1:4 
@@ -114,28 +106,28 @@
 `uc 1 T5GPOL 1 0 :1:6 
 `uc 1 TMR5GE 1 0 :1:7 
 ]
-[s S773 . 1 `uc 1 T5GSS0 1 0 :1:0 
+[s S776 . 1 `uc 1 T5GSS0 1 0 :1:0 
 `uc 1 T5GSS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T5GGO 1 0 :1:3 
 ]
-[s S778 . 1 `uc 1 . 1 0 :3:0 
+[s S781 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T5G_DONE 1 0 :1:3 
 ]
-[u S781 . 1 `S762 1 . 1 0 `S765 1 . 1 0 `S773 1 . 1 0 `S778 1 . 1 0 ]
-[v _T5GCONbits T5GCONbits `VES781  1 e 1 @3917 ]
-[s S806 . 1 `uc 1 . 1 0 :2:0 
+[u S784 . 1 `S765 1 . 1 0 `S768 1 . 1 0 `S776 1 . 1 0 `S781 1 . 1 0 ]
+[v _T5GCONbits T5GCONbits `VES784  1 e 1 @3917 ]
+[s S809 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_T5SYNC 1 0 :1:2 
 ]
 "1683
-[s S809 . 1 `uc 1 TMR5ON 1 0 :1:0 
+[s S812 . 1 `uc 1 TMR5ON 1 0 :1:0 
 `uc 1 T5RD16 1 0 :1:1 
 `uc 1 nT5SYNC 1 0 :1:2 
 `uc 1 T5SOSCEN 1 0 :1:3 
 `uc 1 T5CKPS 1 0 :2:4 
 `uc 1 TMR5CS 1 0 :2:6 
 ]
-[s S816 . 1 `uc 1 . 1 0 :2:0 
+[s S819 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T5SYNC 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 T5CKPS0 1 0 :1:4 
@@ -143,14 +135,14 @@
 `uc 1 TMR5CS0 1 0 :1:6 
 `uc 1 TMR5CS1 1 0 :1:7 
 ]
-[s S824 . 1 `uc 1 . 1 0 :1:0 
+[s S827 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RD165 1 0 :1:1 
 ]
-[s S827 . 1 `uc 1 . 1 0 :3:0 
+[s S830 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SOSCEN5 1 0 :1:3 
 ]
-[u S830 . 1 `S806 1 . 1 0 `S809 1 . 1 0 `S816 1 . 1 0 `S824 1 . 1 0 `S827 1 . 1 0 ]
-[v _T5CONbits T5CONbits `VES830  1 e 1 @3918 ]
+[u S833 . 1 `S809 1 . 1 0 `S812 1 . 1 0 `S819 1 . 1 0 `S827 1 . 1 0 `S830 1 . 1 0 ]
+[v _T5CONbits T5CONbits `VES833  1 e 1 @3918 ]
 "1763
 [v _TMR5L TMR5L `VEuc  1 e 1 @3919 ]
 "1782
@@ -228,7 +220,7 @@
 [v _PORTAbits PORTAbits `VES121  1 e 1 @3968 ]
 "6656
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
-[s S342 . 1 `uc 1 RB0 1 0 :1:0 
+[s S344 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -238,7 +230,7 @@
 `uc 1 RB7 1 0 :1:7 
 ]
 "6726
-[s S351 . 1 `uc 1 INT0 1 0 :1:0 
+[s S353 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 CCP2 1 0 :1:3 
@@ -247,7 +239,7 @@
 `uc 1 KBI2 1 0 :1:6 
 `uc 1 KBI3 1 0 :1:7 
 ]
-[s S360 . 1 `uc 1 AN12 1 0 :1:0 
+[s S362 . 1 `uc 1 AN12 1 0 :1:0 
 `uc 1 AN10 1 0 :1:1 
 `uc 1 AN8 1 0 :1:2 
 `uc 1 AN9 1 0 :1:3 
@@ -256,36 +248,36 @@
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S369 . 1 `uc 1 FLT0 1 0 :1:0 
+[s S371 . 1 `uc 1 FLT0 1 0 :1:0 
 `uc 1 C12IN3M 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 C12IN2M 1 0 :1:3 
 `uc 1 T5G 1 0 :1:4 
 `uc 1 T1G 1 0 :1:5 
 ]
-[s S376 . 1 `uc 1 SRI 1 0 :1:0 
+[s S378 . 1 `uc 1 SRI 1 0 :1:0 
 `uc 1 C12IN3N 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 C12IN2N 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 CCP3 1 0 :1:5 
 ]
-[s S383 . 1 `uc 1 . 1 0 :2:0 
+[s S385 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 CTED1 1 0 :1:2 
 `uc 1 CTED2 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 T3CKI 1 0 :1:5 
 ]
-[s S389 . 1 `uc 1 . 1 0 :3:0 
+[s S391 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 P2A 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 P3A 1 0 :1:5 
 ]
-[s S394 . 1 `uc 1 . 1 0 :3:0 
+[s S396 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S397 . 1 `S342 1 . 1 0 `S351 1 . 1 0 `S360 1 . 1 0 `S369 1 . 1 0 `S376 1 . 1 0 `S383 1 . 1 0 `S389 1 . 1 0 `S394 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES397  1 e 1 @3969 ]
+[u S399 . 1 `S344 1 . 1 0 `S353 1 . 1 0 `S362 1 . 1 0 `S371 1 . 1 0 `S378 1 . 1 0 `S385 1 . 1 0 `S391 1 . 1 0 `S396 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES399  1 e 1 @3969 ]
 "6925
 [v _PORTC PORTC `VEuc  1 e 1 @3970 ]
 "7234
@@ -302,41 +294,41 @@
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 "9290
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S709 . 1 `uc 1 . 1 0 :2:0 
+[s S712 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_T3SYNC 1 0 :1:2 
 ]
 "11906
-[s S712 . 1 `uc 1 TMR3ON 1 0 :1:0 
+[s S715 . 1 `uc 1 TMR3ON 1 0 :1:0 
 `uc 1 T3RD16 1 0 :1:1 
 `uc 1 nT3SYNC 1 0 :1:2 
 `uc 1 T3SOSCEN 1 0 :1:3 
 `uc 1 T3CKPS 1 0 :2:4 
 `uc 1 TMR3CS 1 0 :2:6 
 ]
-[s S719 . 1 `uc 1 . 1 0 :3:0 
+[s S722 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T3OSCEN 1 0 :1:3 
 `uc 1 T3CKPS0 1 0 :1:4 
 `uc 1 T3CKPS1 1 0 :1:5 
 `uc 1 TMR3CS0 1 0 :1:6 
 `uc 1 TMR3CS1 1 0 :1:7 
 ]
-[s S726 . 1 `uc 1 . 1 0 :7:0 
+[s S729 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 RD163 1 0 :1:7 
 ]
-[s S729 . 1 `uc 1 . 1 0 :3:0 
+[s S732 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SOSCEN3 1 0 :1:3 
 ]
-[u S732 . 1 `S709 1 . 1 0 `S712 1 . 1 0 `S719 1 . 1 0 `S726 1 . 1 0 `S729 1 . 1 0 ]
-[v _T3CONbits T3CONbits `VES732  1 e 1 @4017 ]
+[u S735 . 1 `S712 1 . 1 0 `S715 1 . 1 0 `S722 1 . 1 0 `S729 1 . 1 0 `S732 1 . 1 0 ]
+[v _T3CONbits T3CONbits `VES735  1 e 1 @4017 ]
 "11986
 [v _TMR3L TMR3L `VEuc  1 e 1 @4018 ]
 "12005
 [v _TMR3H TMR3H `VEuc  1 e 1 @4019 ]
-[s S665 . 1 `uc 1 . 1 0 :3:0 
+[s S668 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T3GGO_NOT_DONE 1 0 :1:3 
 ]
 "12054
-[s S668 . 1 `uc 1 T3GSS 1 0 :2:0 
+[s S671 . 1 `uc 1 T3GSS 1 0 :2:0 
 `uc 1 T3GVAL 1 0 :1:2 
 `uc 1 T3GGO_nDONE 1 0 :1:3 
 `uc 1 T3GSPM 1 0 :1:4 
@@ -344,16 +336,16 @@
 `uc 1 T3GPOL 1 0 :1:6 
 `uc 1 TMR3GE 1 0 :1:7 
 ]
-[s S676 . 1 `uc 1 T3GSS0 1 0 :1:0 
+[s S679 . 1 `uc 1 T3GSS0 1 0 :1:0 
 `uc 1 T3GSS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T3G_DONE 1 0 :1:3 
 ]
-[s S681 . 1 `uc 1 . 1 0 :3:0 
+[s S684 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T3GGO 1 0 :1:3 
 ]
-[u S684 . 1 `S665 1 . 1 0 `S668 1 . 1 0 `S676 1 . 1 0 `S681 1 . 1 0 ]
-[v _T3GCONbits T3GCONbits `VES684  1 e 1 @4020 ]
+[u S687 . 1 `S668 1 . 1 0 `S671 1 . 1 0 `S679 1 . 1 0 `S684 1 . 1 0 ]
+[v _T3GCONbits T3GCONbits `VES687  1 e 1 @4020 ]
 "14695
 [v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @4038 ]
 "14974
@@ -372,12 +364,12 @@
 [v _TMR3GIE TMR3GIE `VEb  1 e 0 @32025 ]
 "20106
 [v _TMR3GIF TMR3GIF `VEb  1 e 0 @32033 ]
-"20112
-[v _TMR3IF TMR3IF `VEb  1 e 0 @32009 ]
 "20138
 [v _TMR5GIF TMR5GIF `VEb  1 e 0 @32034 ]
 "22 C:\projecthovi\HOVI.X\gear.h
 [v _set_ret set_ret `b  1 e 0 0 ]
+"23
+[v _time_gear time_gear `ui  1 e 2 0 ]
 [s S26 colorobject 14 `ui 1 type 2 0 `ui 1 num 2 2 `ui 1 pos_x 2 4 `ui 1 pos_y 2 6 `ui 1 obj_width 2 8 `ui 1 obj_height 2 10 `ui 1 angle 2 12 ]
 "38 C:\projecthovi\HOVI.X\pixy.h
 [v _a_color a_color `[5]S26  1 e 70 0 ]
@@ -487,12 +479,7 @@
 "30 C:\projecthovi\HOVI.X\interrupt.c
 [v _Isr Isr `II(v  1 e 0 0 ]
 {
-"47
-} 0
-"27 C:\projecthovi\HOVI.X\ultrasonic.c
-[v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
-{
-"31
+"42
 } 0
 "28 C:\projecthovi\HOVI.X\actors.c
 [v _SignalOut SignalOut `(v  1 e 0 0 ]
@@ -507,54 +494,4 @@
 "20
 [v Delay@del del `ui  1 p 2 0 ]
 "25
-} 0
-"33 C:\projecthovi\HOVI.X\ultrasonic.c
-[v _ReadHeight ReadHeight `(v  1 e 0 0 ]
-{
-"45
-} 0
-"30 C:\projecthovi\HOVI.X\gear.c
-[v _ModeCheck ModeCheck `(b  1 e 0 0 ]
-{
-"31
-[v ModeCheck@time_gear time_gear `ui  1 a 2 4 ]
-"44
-} 0
-"16
-[v _CalcTime CalcTime `(ui  1 e 2 0 ]
-{
-"17
-[v CalcTime@time_gear_meas time_gear_meas `ui  1 a 2 2 ]
-"24
-} 0
-"237 C:\projecthovi\HOVI.X\position.c
-[v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
-{
-"315
-[v CheckThrottle@i_1482 i `i  1 a 2 6 ]
-"310
-[v CheckThrottle@i_1481 i `i  1 a 2 12 ]
-"306
-[v CheckThrottle@i i `i  1 a 2 10 ]
-"305
-[v CheckThrottle@tmp tmp `i  1 a 2 8 ]
-"321
-} 0
-"196
-[v _BeneathTable BeneathTable `(v  1 e 0 0 ]
-{
-"208
-} 0
-"216
-[v _BeneathFloor BeneathFloor `(v  1 e 0 0 ]
-{
-"228
-} 0
-"67 C:\projecthovi\HOVI.X\actors.c
-[v _ActThrottle ActThrottle `(v  1 e 0 0 ]
-{
-[v ActThrottle@change change `uc  1 a 1 wreg ]
-[v ActThrottle@change change `uc  1 a 1 wreg ]
-[v ActThrottle@change change `uc  1 a 1 0 ]
-"69
 } 0
