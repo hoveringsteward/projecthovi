@@ -118,7 +118,7 @@ void InitTimer(void) {
     T3GCONbits.T3GSS =  0b00;
     //Timer 3 Controlregister
     T3CONbits.TMR3CS =  0b00;
-    T3CONbits.T3CKPS =  0b00;
+    T3CONbits.T3CKPS =  0b10;
     T3CONbits.nT3SYNC = 1;
     T3CONbits.TMR3ON =  1;
     // </editor-fold>
@@ -131,7 +131,7 @@ void InitTimer(void) {
     T5GCONbits.T5GSS =  0b00;
     //Timer 5 Controlregister
     T5CONbits.TMR5CS =  0b00;
-    T5CONbits.T5CKPS =  0b00;
+    T5CONbits.T5CKPS =  0b10;
     T5CONbits.nT5SYNC = 1;
     T5CONbits.TMR5ON =  1;
     // </editor-fold>

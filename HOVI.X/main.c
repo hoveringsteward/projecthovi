@@ -19,7 +19,7 @@
 // Configuration bits: selected in the GUI
 // CONFIG1H
 #pragma config IESO = OFF    // Internal/External Oscillator Switchover bit->Oscillator Switchover mode disabled
-#pragma config PLLCFG = OFF    // 4X PLL Enable->Oscillator used directly
+#pragma config PLLCFG = ON      // 4X PLL Enable (Oscillator multiplied by 4)
 #pragma config PRICLKEN = OFF    // Primary clock enable bit->Primary clock can be disabled by software
 #pragma config FOSC = INTIO67    // Oscillator Selection bits->Internal oscillator block
 #pragma config FCMEN = OFF    // Fail-Safe Clock Monitor Enable bit->Fail-Safe Clock Monitor disabled
