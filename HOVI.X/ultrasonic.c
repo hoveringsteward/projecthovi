@@ -3,13 +3,7 @@
 /*                                                                 */
 /* Created: 2015-12-25                                             */
 /* Project: HOVI.X                                                 */
-/*                                                                 */
-/* This file is for the ultrasonic sensor(s)                       */
-/*                                                                 
-/* -> da darf dein Text noch rein :b
- * Something with measurements :D
- * 
- * summary: check, ignore and smooth
+/* summary: check, ignore and smooth
 /* after getting data from the sensor(s), the programm has
 /* to check if the value has no special characters and is 
 /* incorrect measurement (= irgendwelche Sonderzeichen oder 

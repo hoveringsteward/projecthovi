@@ -22,7 +22,7 @@
 /* Searches for specific objecttype by des_obj_type, desired object type     */
 /*      des_obj_type = 0 => searches for normal objects                      */
 /*      des_obj_type = 1 => searches for colorcodeobjects                    */
-/* Maximum Objectss to dedect declared by max_obj                            */
+/* Maximum Objects to dedect declared by max_obj                            */
 /*---------------------------------------------------------------------------*/
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj){
     frame = 0;
