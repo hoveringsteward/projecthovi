@@ -37,7 +37,7 @@ interrupt void Isr();
 /* User defined Variables                                           */
 /*------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Variables">
-#define _XTAL_FREQ      16000000
+#define _XTAL_FREQ      64000000
 #define GEAR_TIME       6800        /* 1700 µs / 0.25 µs = 6800 pulses on TMR3*/
 #define DUMMY           0           /* Dummydata for Pixy */
 #define PIXY_SYNC       0x5a        /* Syncbyte, dummy data followed */
@@ -64,7 +64,9 @@ interrupt void Isr();
 #define THR_MIN         23          /* Minimum Velocity, Unit: 343 m/s * 250 ns */
 #define THR_MAX         46          /* Maximum Velocity, Unit: 343 m/s * 250 ns */
 #define W_MAX           2           /* OMEGA -> Maximum of degree difference per frame */
-#define W_MIN           1           /* OMEGA -> Minimum of degee difference per frame*/
+#define W_MIN           1           /* OMEGA -> Minimum of degree difference per frame*/
+
+unsigned char pulsecounter = 0;     /* Counter for gearpulse to estimate speed */
 // </editor-fold>
 
 /*------------------------------------------------------------------*/

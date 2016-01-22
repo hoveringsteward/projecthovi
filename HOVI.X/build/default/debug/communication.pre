@@ -9437,7 +9437,7 @@ bit ModeCheck(void);
 bit set_ret;
 unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9446,8 +9446,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9542,10 +9546,13 @@ bit highpassallowed;
 # 33 "main.h"
 interrupt void Isr();
 
+# 69
+unsigned char pulsecounter = 0;
+
 # 16 "communication.c"
 unsigned char ExchangeSpiByte(unsigned char byte1) {
 if(SSP1IF == 1) {
-_delay((unsigned long)((100)*(16000000/4000000.0)));
+_delay((unsigned long)((100)*(64000000/4000000.0)));
 SSP1IF = 0;
 }
 SSP1BUF = byte1;
@@ -9558,7 +9565,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2) {
 __nop();
 unsigned int SPI_word = 0;
 if(SSP1IF == 1) {
-_delay((unsigned long)((100)*(16000000/4000000.0)));
+_delay((unsigned long)((100)*(64000000/4000000.0)));
 SSP1IF = 0;
 }
 SSP1BUF = byte1;

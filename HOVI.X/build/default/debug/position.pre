@@ -9437,7 +9437,7 @@ bit ModeCheck(void);
 bit set_ret;
 unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9446,8 +9446,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9541,6 +9545,9 @@ bit highpassallowed;
 
 # 33 "main.h"
 interrupt void Isr();
+
+# 69
+unsigned char pulsecounter = 0;
 
 # 32 "position.c"
 void CompareFrames(void) {
@@ -9783,7 +9790,7 @@ a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
 }
 
 for (int i = 0; i <= 10000; i++) {
-_delay((unsigned long)((3)*(16000000/4000.0)));
+_delay((unsigned long)((3)*(64000000/4000.0)));
 }
 
 }

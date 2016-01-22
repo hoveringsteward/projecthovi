@@ -7607,16 +7607,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
-[; ;init.h: 27: void Init(void);
-[; ;init.h: 28: void InitPort(void);
-[; ;init.h: 29: void InitTris(void);
-[; ;init.h: 30: void InitAnsel(void);
-[; ;init.h: 31: void InitOsc(void);
-[; ;init.h: 32: void InitUart(void);
-[; ;init.h: 33: void InitSpi(void);
-[; ;init.h: 34: void InitTimer(void);
-[; ;init.h: 35: void InitInterrupt(void);
-[; ;init.h: 36: void InitActors(void);
+[; ;init.h: 28: void Init(void);
+[; ;init.h: 29: void InitPort(void);
+[; ;init.h: 30: void InitTris(void);
+[; ;init.h: 31: void InitAnsel(void);
+[; ;init.h: 32: void InitOsc(void);
+[; ;init.h: 33: void InitUart(void);
+[; ;init.h: 34: void InitSpi(void);
+[; ;init.h: 35: void InitTimer(void);
+[; ;init.h: 36: void InitComp(void);
+[; ;init.h: 37: void InitInterrupt(void);
+[; ;init.h: 38: void InitActors(void);
+"45 init.h
+[v _pin_out `uc ~T0 @X0 1 e ]
+[i _pin_out
+-> -> 65 `ui `uc
+]
+[; ;init.h: 45: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7751,6 +7758,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr();
+"69 main.h
+[v _pulsecounter `uc ~T0 @X0 1 e ]
+[i _pulsecounter
+-> -> 0 `i `uc
+]
+[; ;main.h: 69: unsigned char pulsecounter = 0;
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7798,52 +7811,48 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 30: bit ModeCheck(void) {
 [e :U _ModeCheck ]
 [f ]
-[v _time_gear `ui ~T0 @X0 1 a ]
-[; ;gear.c: 31: unsigned int time_gear = CalcTime();
+[; ;gear.c: 31: if(time_gear < 6800){
 "31
-[e = _time_gear ( _CalcTime ..  ]
-[; ;gear.c: 32: if(time_gear < 6800){
-"32
 [e $ ! < _time_gear -> -> 6800 `i `ui 1154  ]
 {
-[; ;gear.c: 34: PORTBbits.RB2 = 0;
-"34
+[; ;gear.c: 33: PORTBbits.RB2 = 0;
+"33
 [e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
-[; ;gear.c: 35: PORTAbits.RA5 = 1;
-"35
+[; ;gear.c: 34: PORTAbits.RA5 = 1;
+"34
 [e = . . _PORTAbits 0 5 -> -> 1 `i `uc ]
-[; ;gear.c: 36: set_ret = 0;
-"36
+[; ;gear.c: 35: set_ret = 0;
+"35
 [e = _set_ret -> -> 0 `i `b ]
-"37
+"36
 }
-[; ;gear.c: 37: }else if(time_gear >= 6800) {
+[; ;gear.c: 36: }else if(time_gear >= 6800) {
 [e $U 1155  ]
 [e :U 1154 ]
 [e $ ! >= _time_gear -> -> 6800 `i `ui 1156  ]
 {
-[; ;gear.c: 38: PORTBbits.RB2 = 1;
-"38
+[; ;gear.c: 37: PORTBbits.RB2 = 1;
+"37
 [e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
-[; ;gear.c: 39: PORTAbits.RA5 = 0;
-"39
+[; ;gear.c: 38: PORTAbits.RA5 = 0;
+"38
 [e = . . _PORTAbits 0 5 -> -> 0 `i `uc ]
-[; ;gear.c: 40: set_ret = 1;
-"40
+[; ;gear.c: 39: set_ret = 1;
+"39
 [e = _set_ret -> -> 1 `i `b ]
-"41
+"40
 }
 [e :U 1156 ]
-"42
+"41
 [e :U 1155 ]
-[; ;gear.c: 41: }
-[; ;gear.c: 42: __nop();
+[; ;gear.c: 40: }
+[; ;gear.c: 41: __nop();
 [e ( ___nop ..  ]
-[; ;gear.c: 43: return set_ret;
-"43
+[; ;gear.c: 42: return set_ret;
+"42
 [e ) -> -> _set_ret `i `b ]
 [e $UE 1153  ]
-[; ;gear.c: 44: }
-"44
+[; ;gear.c: 43: }
+"43
 [e :UE 1153 ]
 }

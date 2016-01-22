@@ -9437,7 +9437,7 @@ bit ModeCheck(void);
 bit set_ret;
 unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9446,8 +9446,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9542,7 +9546,10 @@ bit highpassallowed;
 # 33 "main.h"
 interrupt void Isr();
 
-# 27 "ultrasonic.c"
+# 69
+unsigned char pulsecounter = 0;
+
+# 21 "ultrasonic.c"
 void StartHeightMeasure(void) {
 TMR5L = 0;
 TMR5H = 0;
@@ -9563,7 +9570,7 @@ a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
 PORTBbits.RB3 = 1;
 }
 
-# 50
+# 44
 unsigned int Filter(unsigned int entry){
 changerate = 0.2;
 if(highpassallowed){

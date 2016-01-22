@@ -35,6 +35,7 @@ void Init(void) {
     InitUart();
     InitSpi();
     InitTimer();
+    InitComp();
     InitInterrupt();
     InitActors();
 }
@@ -72,7 +73,8 @@ void InitAnsel(void) {
 
 // <editor-fold defaultstate="collapsed" desc="OSC">
 void InitOsc(void) {
-    OSCCON = 0b01110111;    // 16MHz, INTOSC, stable HFOSC, Internal osc-block
+    OSCCON = 0b01110111;    /* PLL enabled 16x4MHz, INTOSC, 
+                             * stable HFOSC, Internal osc-block */
 }
 // </editor-fold>
 
@@ -97,6 +99,12 @@ void InitSpi(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Timer">
+/* Timer 1, used to measure the time of the outputs                     */
+/*  gate control disabled                                               */
+/*  FOSC/4                                                              */
+/*  Prescaler 1:8                                                       */
+/*  Timer disabled                                                      */
+/*  1 Impulse: 0.5 µs                                                   */
 /* Timer 3, used to measure time of gaer signal                         */
 /* Timer 5, used to measure the ultrasonic echo                         */
 /*  high active                                                         */
@@ -104,11 +112,19 @@ void InitSpi(void) {
 /*  no single pulse mode                                                */
 /*  gatepin                                                             */
 /*  FOSC/4                                                              */
-/*  Prescale 1:1                                                        */
+/*  Prescaler 1:4                                                       */
 /*  no sync                                                             */
-/*  16-Bit disabled                                                      */
+/*  16-Bit disabled                                                     */
+/*  Timer activated                                                     */
+/*  1 Impulse: 0.25 µs                                                  */
 /*----------------------------------------------------------------------*/
 void InitTimer(void) {
+    // <editor-fold defaultstate="collapsed" desc="TMR1">
+    T1CONbits.TMR1CS = 0b00;
+    T1CONbits.T1CKPS = 0b11;
+    T1CONbits.nT1SYNC = 1;
+    T1CONbits.TMR1ON = 0;
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="TMR3">
     //Timer 3 Gatecontrolregister
     T3GCONbits.TMR3GE = 1;
@@ -138,15 +154,29 @@ void InitTimer(void) {
 }
 // </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="Comparator">
+/* CCP1 used to stop time counted by timer 1                            */
+/*  Interrupt on match                                                  */
+/*  Output disabled                                                     */
+/*----------------------------------------------------------------------*/
+void InitComp(void) {
+    CCP1CONbits.CCP1M = 0b1010;
+}
+// </editor-fold>
+
 // <editor-fold defaultstate="collapsed" desc="Interrupt">
-/* Interrupts from:                                                      */
-/*  Timer 3 Gate                                                         */
-/*-----------------------------------------------------------------------*/
+/* Interrupts from:                                                     */
+/*  Timer 3 Gate                                                        */
+/*  Compareunit 1                                                       */
+/*----------------------------------------------------------------------*/
 void InitInterrupt(void) {
-    GIE = 1;
-    PEIE = 1;
     /* Enabling interrupt for Timer 3 gate                              */
-    TMR3GIE = 1;    // Direct access due to conflicts with PIE3bits.TMR3GIE    
+    TMR3GIE = 1;
+    /* Enabling interrupt for Compareunit 1                             */
+    CCP1IE = 1;
+    /* Enabling interrupts in general                                   */
+    PEIE = 1;
+    GIE = 1;
 }
 // </editor-fold>
 

@@ -9437,7 +9437,7 @@ bit ModeCheck(void);
 bit set_ret;
 unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9446,8 +9446,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9542,46 +9546,71 @@ bit highpassallowed;
 # 33 "main.h"
 interrupt void Isr();
 
+# 69
+unsigned char pulsecounter = 0;
+
 # 20 "actors.c"
 void Delay(unsigned int del) {
-del >>= 2;
-for(unsigned int c_del = 0; c_del < del; del++) {
-_delay((unsigned long)((4)*(16000000/4000000.0)));
-}
+del = 1000 + del;
+del <<= 1;
+TMR1L = 0;
+TMR1H = 0;
+CCPR1L = del;
+del >>= 8;
+CCPR1H = del;
+T1CONbits.TMR1ON = 1;
 }
 
 
 void SignalOut(void) {
+switch(pin_out) {
+case 'A': {
 PORTAbits.RA0 = 1;
 Delay(a_actors[0].aile);
+pin_out = 'E';
+break;
+}case 'E': {
 PORTAbits.RA0 = 0;
 PORTAbits.RA1 = 1;
 Delay(a_actors[0].elev);
+pin_out = 'T';
+break;
+}case 'T': {
 PORTAbits.RA1 = 0;
 PORTAbits.RA3 = 1;
 Delay(a_actors[0].thro);
-PORTAbits.RA3 = 0;
+pin_out = 'R';
+break;
+}case 'R': {
+PORTAbits.RA2 = 0;
 PORTAbits.RA2 = 1;
 Delay(a_actors[0].rudd);
+pin_out = 0;
+break;
+}case 0: {
 PORTAbits.RA2 = 0;
+pin_out = 'A';
+break;
+}
+}
 }
 
-# 49
+# 71
 void ActAileron(unsigned char change){
 a_actors[0].aile += change;
 }
 
-# 58
+# 80
 void ActElevator(unsigned char change){
 a_actors[0].elev += change;
 }
 
-# 67
+# 89
 void ActThrottle(unsigned char change){
 a_actors[0].thro += change;
 }
 
-# 76
+# 98
 void ActRudder(unsigned char change){
 a_actors[0].rudd += change;
 }

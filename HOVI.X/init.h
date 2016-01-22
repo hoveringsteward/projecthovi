@@ -24,6 +24,7 @@
 /*---------------------------------------------------------------------------*/
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Userroutines">
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -32,8 +33,16 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+// </editor-fold>
+
+/*------------------------------------------------------------------*/
+/* User defined Variables                                           */
+/*------------------------------------------------------------------*/
+// <editor-fold defaultstate="collapsed" desc="Variables">
+unsigned char pin_out = 'A';
+// </editor-fold>
 
 #endif	/* INIT_H */
-

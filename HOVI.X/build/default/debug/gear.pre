@@ -9431,7 +9431,7 @@ t_actors a_actors[1];
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9440,8 +9440,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9536,6 +9540,9 @@ bit highpassallowed;
 # 33 "main.h"
 interrupt void Isr();
 
+# 69
+unsigned char pulsecounter = 0;
+
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
@@ -9555,7 +9562,6 @@ return time_gear_meas;
 
 # 30
 bit ModeCheck(void) {
-unsigned int time_gear = CalcTime();
 if(time_gear < 6800){
 
 PORTBbits.RB2 = 0;

@@ -19,7 +19,7 @@
 /* The function declared in this file reacts to the occouring
  * interrupts. For an interrupt the peripheral interrupt must be
  * enabled.
- * The function declared hear should only do the first steps of the
+ * The function declared here should only do the first steps of the
  * reaction to the interrupt. The major part of it should happen
  * in an extra function.
  */
@@ -28,6 +28,11 @@
 #include "main.h"
 
 interrupt void Isr() {
+    if(CCP1IF == 1) {
+        CCP1IF = 0;
+        T1CONbits.TMR1ON = 0;
+        SignalOut();
+    }
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
         time_gear = TMR3H;
@@ -35,8 +40,11 @@ interrupt void Isr() {
         time_gear = TMR3L;
         TMR3H = 0;
         TMR3L = 0;
-        // Funktion für Ausgabe von Steuersignalen fehlt
-        SignalOut();
-        
+        ModeCheck();
+        SignalOut();    /* initial call after remaining break to 20 ms
+                         * starts with Aileron (needs to be set in last
+                         * case statement, case 0) following delays will
+                         * be processed by the previous routine */
+        pulsecounter++;
     }
 }

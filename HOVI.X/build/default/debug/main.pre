@@ -9340,7 +9340,7 @@ extern __nonreentrant void _delay3(unsigned char);
 
 # 21 "main.c"
 #pragma config IESO = OFF
-#pragma config PLLCFG = OFF
+#pragma config PLLCFG = ON
 #pragma config PRICLKEN = OFF
 #pragma config FOSC = INTIO67
 #pragma config FCMEN = OFF
@@ -9499,7 +9499,7 @@ bit ModeCheck(void);
 bit set_ret;
 unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9508,8 +9508,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9604,11 +9608,20 @@ bit highpassallowed;
 # 33 "main.h"
 interrupt void Isr();
 
+# 69
+unsigned char pulsecounter = 0;
+
 # 85 "main.c"
 void main(void) {
 Init();
 while(1) {
-
+StartHeightMeasure();
+ModeCheck();
+ReadObject(1, 10, 5);
+CompareFrames();
+ReadHeight();
+CheckThrottle();
+StoreAsOld();
 }
 return;
 }

@@ -9437,7 +9437,7 @@ bit ModeCheck(void);
 bit set_ret;
 unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9446,8 +9446,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9542,6 +9546,9 @@ bit highpassallowed;
 # 33 "main.h"
 interrupt void Isr();
 
+# 69
+unsigned char pulsecounter = 0;
+
 # 30 "init.c"
 void Init(void) {
 InitPort();
@@ -9551,6 +9558,7 @@ InitOsc();
 InitUart();
 InitSpi();
 InitTimer();
+InitComp();
 InitInterrupt();
 InitActors();
 }
@@ -9589,6 +9597,8 @@ ANSELE = 0b00000000;
 
 void InitOsc(void) {
 OSCCON = 0b01110111;
+
+# 78
 }
 
 
@@ -9597,14 +9607,20 @@ void InitUart(void) {
 
 }
 
-# 93
+# 95
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 111
+# 121
 void InitTimer(void) {
+
+T1CONbits.TMR1CS = 0b00;
+T1CONbits.T1CKPS = 0b11;
+T1CONbits.nT1SYNC = 1;
+T1CONbits.TMR1ON = 0;
+
 
 
 T3GCONbits.TMR3GE = 1;
@@ -9614,7 +9630,7 @@ T3GCONbits.T3GPOL = 1;
 T3GCONbits.T3GSS = 0b00;
 
 T3CONbits.TMR3CS = 0b00;
-T3CONbits.T3CKPS = 0b00;
+T3CONbits.T3CKPS = 0b10;
 T3CONbits.nT3SYNC = 1;
 T3CONbits.TMR3ON = 1;
 
@@ -9627,21 +9643,29 @@ T5GCONbits.T5GPOL = 1;
 T5GCONbits.T5GSS = 0b00;
 
 T5CONbits.TMR5CS = 0b00;
-T5CONbits.T5CKPS = 0b00;
+T5CONbits.T5CKPS = 0b10;
 T5CONbits.nT5SYNC = 1;
 T5CONbits.TMR5ON = 1;
 
 }
 
-# 145
-void InitInterrupt(void) {
-GIE = 1;
-PEIE = 1;
-
-TMR3GIE = 1;
+# 162
+void InitComp(void) {
+CCP1CONbits.CCP1M = 0b1010;
 }
 
-# 156
+# 172
+void InitInterrupt(void) {
+
+TMR3GIE = 1;
+
+CCP1IE = 1;
+
+PEIE = 1;
+GIE = 1;
+}
+
+# 186
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;

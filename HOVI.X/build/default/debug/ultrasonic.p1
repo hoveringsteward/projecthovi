@@ -7567,16 +7567,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
-[; ;init.h: 27: void Init(void);
-[; ;init.h: 28: void InitPort(void);
-[; ;init.h: 29: void InitTris(void);
-[; ;init.h: 30: void InitAnsel(void);
-[; ;init.h: 31: void InitOsc(void);
-[; ;init.h: 32: void InitUart(void);
-[; ;init.h: 33: void InitSpi(void);
-[; ;init.h: 34: void InitTimer(void);
-[; ;init.h: 35: void InitInterrupt(void);
-[; ;init.h: 36: void InitActors(void);
+[; ;init.h: 28: void Init(void);
+[; ;init.h: 29: void InitPort(void);
+[; ;init.h: 30: void InitTris(void);
+[; ;init.h: 31: void InitAnsel(void);
+[; ;init.h: 32: void InitOsc(void);
+[; ;init.h: 33: void InitUart(void);
+[; ;init.h: 34: void InitSpi(void);
+[; ;init.h: 35: void InitTimer(void);
+[; ;init.h: 36: void InitComp(void);
+[; ;init.h: 37: void InitInterrupt(void);
+[; ;init.h: 38: void InitActors(void);
+"45 init.h
+[v _pin_out `uc ~T0 @X0 1 e ]
+[i _pin_out
+-> -> 65 `ui `uc
+]
+[; ;init.h: 45: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7711,104 +7718,110 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr();
-"27 ultrasonic.c
+"69 main.h
+[v _pulsecounter `uc ~T0 @X0 1 e ]
+[i _pulsecounter
+-> -> 0 `i `uc
+]
+[; ;main.h: 69: unsigned char pulsecounter = 0;
+"21 ultrasonic.c
 [v _StartHeightMeasure `(v ~T0 @X0 1 ef ]
 {
-[; ;ultrasonic.c: 27: void StartHeightMeasure(void) {
+[; ;ultrasonic.c: 21: void StartHeightMeasure(void) {
 [e :U _StartHeightMeasure ]
 [f ]
-[; ;ultrasonic.c: 28: TMR5L = 0;
-"28
+[; ;ultrasonic.c: 22: TMR5L = 0;
+"22
 [e = _TMR5L -> -> 0 `i `uc ]
-[; ;ultrasonic.c: 29: TMR5H = 0;
-"29
+[; ;ultrasonic.c: 23: TMR5H = 0;
+"23
 [e = _TMR5H -> -> 0 `i `uc ]
-[; ;ultrasonic.c: 30: PORTBbits.RB3 = 0;
-"30
+[; ;ultrasonic.c: 24: PORTBbits.RB3 = 0;
+"24
 [e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
-[; ;ultrasonic.c: 31: }
-"31
+[; ;ultrasonic.c: 25: }
+"25
 [e :UE 1152 ]
 }
-"33
+"27
 [v _ReadHeight `(v ~T0 @X0 1 ef ]
 {
-[; ;ultrasonic.c: 33: void ReadHeight(void) {
+[; ;ultrasonic.c: 27: void ReadHeight(void) {
 [e :U _ReadHeight ]
 [f ]
-[; ;ultrasonic.c: 34: while(TMR5GIF == 0);
-"34
+[; ;ultrasonic.c: 28: while(TMR5GIF == 0);
+"28
 [e $U 1154  ]
 [e :U 1155 ]
 [e :U 1154 ]
 [e $ == -> _TMR5GIF `i -> 0 `i 1155  ]
 [e :U 1156 ]
-[; ;ultrasonic.c: 35: TMR5GIF = 0;
-"35
+[; ;ultrasonic.c: 29: TMR5GIF = 0;
+"29
 [e = _TMR5GIF -> -> 0 `i `b ]
-[; ;ultrasonic.c: 36: time_height = 0;
-"36
+[; ;ultrasonic.c: 30: time_height = 0;
+"30
 [e = _time_height -> -> 0 `i `ui ]
-[; ;ultrasonic.c: 37: time_height = TMR5H;
-"37
+[; ;ultrasonic.c: 31: time_height = TMR5H;
+"31
 [e = _time_height -> _TMR5H `ui ]
-[; ;ultrasonic.c: 38: time_height <<= 8;
-"38
+[; ;ultrasonic.c: 32: time_height <<= 8;
+"32
 [e =<< _time_height -> 8 `i ]
-[; ;ultrasonic.c: 39: time_height |= TMR5L;
-"39
+[; ;ultrasonic.c: 33: time_height |= TMR5L;
+"33
 [e =| _time_height -> _TMR5L `ui ]
-[; ;ultrasonic.c: 40: TMR5L = 0;
-"40
+[; ;ultrasonic.c: 34: TMR5L = 0;
+"34
 [e = _TMR5L -> -> 0 `i `uc ]
-[; ;ultrasonic.c: 41: TMR5H = 0;
-"41
+[; ;ultrasonic.c: 35: TMR5H = 0;
+"35
 [e = _TMR5H -> -> 0 `i `uc ]
-[; ;ultrasonic.c: 42: a_frame[0].height = time_height;
-"42
+[; ;ultrasonic.c: 36: a_frame[0].height = time_height;
+"36
 [e = . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 _time_height ]
-[; ;ultrasonic.c: 43: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
-"43
+[; ;ultrasonic.c: 37: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
+"37
 [e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 3 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 `i ]
-[; ;ultrasonic.c: 44: PORTBbits.RB3 = 1;
-"44
+[; ;ultrasonic.c: 38: PORTBbits.RB3 = 1;
+"38
 [e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
-[; ;ultrasonic.c: 45: }
-"45
+[; ;ultrasonic.c: 39: }
+"39
 [e :UE 1153 ]
 }
-"50
+"44
 [v _Filter `(ui ~T0 @X0 1 ef1`ui ]
 {
-[; ;ultrasonic.c: 50: unsigned int Filter(unsigned int entry){
+[; ;ultrasonic.c: 44: unsigned int Filter(unsigned int entry){
 [e :U _Filter ]
 [v _entry `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ultrasonic.c: 51: changerate = 0.2;
-"51
+[; ;ultrasonic.c: 45: changerate = 0.2;
+"45
 [e = _changerate -> .0.2 `f ]
-[; ;ultrasonic.c: 52: if(highpassallowed){
-"52
+[; ;ultrasonic.c: 46: if(highpassallowed){
+"46
 [e $ ! _highpassallowed 1158  ]
 {
-"54
+"48
 }
-[; ;ultrasonic.c: 54: }else{
+[; ;ultrasonic.c: 48: }else{
 [e $U 1159  ]
 [e :U 1158 ]
 {
-[; ;ultrasonic.c: 55: outgoing = outgoing + (entry - outgoing) * changerate;
-"55
+[; ;ultrasonic.c: 49: outgoing = outgoing + (entry - outgoing) * changerate;
+"49
 [e = _outgoing + _outgoing * - -> _entry `f _outgoing _changerate ]
-"56
+"50
 }
 [e :U 1159 ]
-[; ;ultrasonic.c: 56: }
-[; ;ultrasonic.c: 57: return (int) outgoing;
-"57
+[; ;ultrasonic.c: 50: }
+[; ;ultrasonic.c: 51: return (int) outgoing;
+"51
 [e ) -> -> _outgoing `i `ui ]
 [e $UE 1157  ]
-[; ;ultrasonic.c: 58: }
-"58
+[; ;ultrasonic.c: 52: }
+"52
 [e :UE 1157 ]
 }

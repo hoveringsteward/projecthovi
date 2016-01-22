@@ -9437,7 +9437,7 @@ bit ModeCheck(void);
 bit set_ret;
 unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9446,8 +9446,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9542,8 +9546,16 @@ bit highpassallowed;
 # 33 "main.h"
 interrupt void Isr();
 
+# 69
+unsigned char pulsecounter = 0;
+
 # 30 "interrupt.c"
 interrupt void Isr() {
+if(CCP1IF == 1) {
+CCP1IF = 0;
+T1CONbits.TMR1ON = 0;
+SignalOut();
+}
 if(TMR3GIF == 1) {
 TMR3GIF = 0;
 time_gear = TMR3H;
@@ -9551,8 +9563,10 @@ time_gear <<= 8;
 time_gear = TMR3L;
 TMR3H = 0;
 TMR3L = 0;
-
+ModeCheck();
 SignalOut();
 
+# 48
+pulsecounter++;
 }
 }

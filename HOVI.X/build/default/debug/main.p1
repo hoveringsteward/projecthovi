@@ -15,8 +15,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
 [p mainexit ]
-"27 init.h
+"28 init.h
 [v _Init `(v ~T0 @X0 0 ef ]
+"20 ultrasonic.h
+[v _StartHeightMeasure `(v ~T0 @X0 0 ef ]
+"21 gear.h
+[v _ModeCheck `(b ~T0 @X0 0 ef ]
+"20 pixy.h
+[v _ReadObject `(uc ~T0 @X0 0 ef3`uc`ui`uc ]
+"18 position.h
+[v _CompareFrames `(v ~T0 @X0 0 ef ]
+"21 ultrasonic.h
+[v _ReadHeight `(v ~T0 @X0 0 ef ]
+"23 position.h
+[v _CheckThrottle `(v ~T0 @X0 0 ef ]
+"26
+[v _StoreAsOld `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7462,7 +7476,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "21 main.c
 [p x IESO=OFF ]
 "22
-[p x PLLCFG=OFF ]
+[p x PLLCFG=ON ]
 "23
 [p x PRICLKEN=OFF ]
 "24
@@ -7613,16 +7627,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
-[; ;init.h: 27: void Init(void);
-[; ;init.h: 28: void InitPort(void);
-[; ;init.h: 29: void InitTris(void);
-[; ;init.h: 30: void InitAnsel(void);
-[; ;init.h: 31: void InitOsc(void);
-[; ;init.h: 32: void InitUart(void);
-[; ;init.h: 33: void InitSpi(void);
-[; ;init.h: 34: void InitTimer(void);
-[; ;init.h: 35: void InitInterrupt(void);
-[; ;init.h: 36: void InitActors(void);
+[; ;init.h: 28: void Init(void);
+[; ;init.h: 29: void InitPort(void);
+[; ;init.h: 30: void InitTris(void);
+[; ;init.h: 31: void InitAnsel(void);
+[; ;init.h: 32: void InitOsc(void);
+[; ;init.h: 33: void InitUart(void);
+[; ;init.h: 34: void InitSpi(void);
+[; ;init.h: 35: void InitTimer(void);
+[; ;init.h: 36: void InitComp(void);
+[; ;init.h: 37: void InitInterrupt(void);
+[; ;init.h: 38: void InitActors(void);
+"45 init.h
+[v _pin_out `uc ~T0 @X0 1 e ]
+[i _pin_out
+-> -> 65 `ui `uc
+]
+[; ;init.h: 45: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7757,6 +7778,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr();
+"69 main.h
+[v _pulsecounter `uc ~T0 @X0 1 e ]
+[i _pulsecounter
+-> -> 0 `i `uc
+]
+[; ;main.h: 69: unsigned char pulsecounter = 0;
 "85 main.c
 [v _main `(v ~T0 @X0 1 ef ]
 {
@@ -7770,17 +7797,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 "87
 [e :U 1154 ]
 {
+[; ;main.c: 88: StartHeightMeasure();
+"88
+[e ( _StartHeightMeasure ..  ]
+[; ;main.c: 89: ModeCheck();
 "89
+[e ( _ModeCheck ..  ]
+[; ;main.c: 90: ReadObject(1, 10, 5);
+"90
+[e ( _ReadObject (3 , , -> -> 1 `i `uc -> -> 10 `i `ui -> -> 5 `i `uc ]
+[; ;main.c: 91: CompareFrames();
+"91
+[e ( _CompareFrames ..  ]
+[; ;main.c: 92: ReadHeight();
+"92
+[e ( _ReadHeight ..  ]
+[; ;main.c: 93: CheckThrottle();
+"93
+[e ( _CheckThrottle ..  ]
+[; ;main.c: 94: StoreAsOld();
+"94
+[e ( _StoreAsOld ..  ]
+"95
 }
 [e :U 1153 ]
 "87
 [e $U 1154  ]
 [e :U 1155 ]
-[; ;main.c: 89: }
-[; ;main.c: 90: return;
-"90
+[; ;main.c: 95: }
+[; ;main.c: 96: return;
+"96
 [e $UE 1152  ]
-[; ;main.c: 91: }
-"91
+[; ;main.c: 97: }
+"97
 [e :UE 1152 ]
 }

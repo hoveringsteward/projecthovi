@@ -18,26 +18,48 @@
 #include "main.h"
 
 void Delay(unsigned int del) {
-    del >>= 2;
-    for(unsigned int c_del = 0; c_del < del; del++) {
-        __delay_us(4);
-    }
+    del = 1000 + del;
+    del <<= 1;      // x2
+    TMR1L = 0;
+    TMR1H = 0;
+    CCPR1L = del;   // writing lower 8 bits to CCPR1 register
+    del >>= 8;
+    CCPR1H = del;   // writing upper 8 bits to CCPR1 register
+    T1CONbits.TMR1ON = 1;
 }
 
 // <editor-fold defaultstate="collapsed" desc="Signal Out">
 void SignalOut(void) {
-    A = 1;
-    Delay(a_actors[0].aile);
-    A = 0;
-    E = 1;
-    Delay(a_actors[0].elev);
-    E = 0;
-    T = 1;
-    Delay(a_actors[0].thro);
-    T = 0;
-    R = 1;
-    Delay(a_actors[0].rudd);
-    R = 0;
+    switch(pin_out) {
+        case 'A': {
+            A = 1;
+            Delay(a_actors[0].aile);
+            pin_out = 'E';
+            break;
+        }case 'E': {
+            A = 0;
+            E = 1;
+            Delay(a_actors[0].elev);
+            pin_out = 'T';
+            break;
+        }case 'T': {
+            E = 0;
+            T = 1;
+            Delay(a_actors[0].thro);
+            pin_out = 'R';
+            break;
+        }case 'R': {
+            R = 0;
+            R = 1;
+            Delay(a_actors[0].rudd);
+            pin_out = 0;
+            break;
+        }case 0: {
+            R = 0;
+            pin_out = 'A';
+            break;
+        }
+    }
 }
 // </editor-fold>
 

@@ -14,14 +14,35 @@ Version 3.2 HI-TECH Software Intermediate Code
 "79
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
+"18478 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _CCP1IF `Vb ~T0 @X0 0 e@31986 ]
+"16417
+[s S1028 :2 `uc 1 :1 `uc 1 ]
+[n S1028 . . NOT_T1SYNC ]
+"16421
+[s S1029 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :2 `uc 1 ]
+[n S1029 . TMR1ON T1RD16 nT1SYNC T1SOSCEN T1CKPS TMR1CS ]
+"16429
+[s S1030 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1030 . . RD16 T1SYNC T1OSCEN T1CKPS0 T1CKPS1 TMR1CS0 TMR1CS1 ]
+"16439
+[s S1031 :3 `uc 1 :1 `uc 1 ]
+[n S1031 . . SOSCEN ]
+"16416
+[u S1027 `S1028 1 `S1029 1 `S1030 1 `S1031 1 ]
+[n S1027 . . . . . ]
+"16444
+[v _T1CONbits `VS1027 ~T0 @X0 0 e@4045 ]
+"25 actors.h
+[v _SignalOut `(v ~T0 @X0 0 ef ]
 "20106 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _TMR3GIF `Vb ~T0 @X0 0 e@32033 ]
 "12005
 [v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
 "11986
 [v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
-"25 actors.h
-[v _SignalOut `(v ~T0 @X0 0 ef ]
+"21 gear.h
+[v _ModeCheck `(b ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7540,16 +7561,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
-[; ;init.h: 27: void Init(void);
-[; ;init.h: 28: void InitPort(void);
-[; ;init.h: 29: void InitTris(void);
-[; ;init.h: 30: void InitAnsel(void);
-[; ;init.h: 31: void InitOsc(void);
-[; ;init.h: 32: void InitUart(void);
-[; ;init.h: 33: void InitSpi(void);
-[; ;init.h: 34: void InitTimer(void);
-[; ;init.h: 35: void InitInterrupt(void);
-[; ;init.h: 36: void InitActors(void);
+[; ;init.h: 28: void Init(void);
+[; ;init.h: 29: void InitPort(void);
+[; ;init.h: 30: void InitTris(void);
+[; ;init.h: 31: void InitAnsel(void);
+[; ;init.h: 32: void InitOsc(void);
+[; ;init.h: 33: void InitUart(void);
+[; ;init.h: 34: void InitSpi(void);
+[; ;init.h: 35: void InitTimer(void);
+[; ;init.h: 36: void InitComp(void);
+[; ;init.h: 37: void InitInterrupt(void);
+[; ;init.h: 38: void InitActors(void);
+"45 init.h
+[v _pin_out `uc ~T0 @X0 1 e ]
+[i _pin_out
+-> -> 65 `ui `uc
+]
+[; ;init.h: 45: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7684,43 +7712,72 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr();
-[v F8088 `(v ~T0 @X0 1 tf ]
+"69 main.h
+[v _pulsecounter `uc ~T0 @X0 1 e ]
+[i _pulsecounter
+-> -> 0 `i `uc
+]
+[; ;main.h: 69: unsigned char pulsecounter = 0;
+[v F8091 `(v ~T0 @X0 1 tf ]
 "30 interrupt.c
-[v _Isr `IF8088 ~T0 @X0 1 e ]
+[v _Isr `IF8091 ~T0 @X0 1 e ]
 {
 [; ;interrupt.c: 30: interrupt void Isr() {
 [e :U _Isr ]
 [f ]
-[; ;interrupt.c: 31: if(TMR3GIF == 1) {
+[; ;interrupt.c: 31: if(CCP1IF == 1) {
 "31
-[e $ ! == -> _TMR3GIF `i -> 1 `i 1153  ]
+[e $ ! == -> _CCP1IF `i -> 1 `i 1153  ]
 {
-[; ;interrupt.c: 32: TMR3GIF = 0;
+[; ;interrupt.c: 32: CCP1IF = 0;
 "32
-[e = _TMR3GIF -> -> 0 `i `b ]
-[; ;interrupt.c: 33: time_gear = TMR3H;
+[e = _CCP1IF -> -> 0 `i `b ]
+[; ;interrupt.c: 33: T1CONbits.TMR1ON = 0;
 "33
-[e = _time_gear -> _TMR3H `ui ]
-[; ;interrupt.c: 34: time_gear <<= 8;
+[e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
+[; ;interrupt.c: 34: SignalOut();
 "34
-[e =<< _time_gear -> 8 `i ]
-[; ;interrupt.c: 35: time_gear = TMR3L;
-"35
-[e = _time_gear -> _TMR3L `ui ]
-[; ;interrupt.c: 36: TMR3H = 0;
-"36
-[e = _TMR3H -> -> 0 `i `uc ]
-[; ;interrupt.c: 37: TMR3L = 0;
-"37
-[e = _TMR3L -> -> 0 `i `uc ]
-[; ;interrupt.c: 39: SignalOut();
-"39
 [e ( _SignalOut ..  ]
-"41
+"35
 }
 [e :U 1153 ]
-[; ;interrupt.c: 41: }
-[; ;interrupt.c: 42: }
+[; ;interrupt.c: 35: }
+[; ;interrupt.c: 36: if(TMR3GIF == 1) {
+"36
+[e $ ! == -> _TMR3GIF `i -> 1 `i 1154  ]
+{
+[; ;interrupt.c: 37: TMR3GIF = 0;
+"37
+[e = _TMR3GIF -> -> 0 `i `b ]
+[; ;interrupt.c: 38: time_gear = TMR3H;
+"38
+[e = _time_gear -> _TMR3H `ui ]
+[; ;interrupt.c: 39: time_gear <<= 8;
+"39
+[e =<< _time_gear -> 8 `i ]
+[; ;interrupt.c: 40: time_gear = TMR3L;
+"40
+[e = _time_gear -> _TMR3L `ui ]
+[; ;interrupt.c: 41: TMR3H = 0;
+"41
+[e = _TMR3H -> -> 0 `i `uc ]
+[; ;interrupt.c: 42: TMR3L = 0;
 "42
+[e = _TMR3L -> -> 0 `i `uc ]
+[; ;interrupt.c: 43: ModeCheck();
+"43
+[e ( _ModeCheck ..  ]
+[; ;interrupt.c: 44: SignalOut();
+"44
+[e ( _SignalOut ..  ]
+[; ;interrupt.c: 48: pulsecounter++;
+"48
+[e ++ _pulsecounter -> -> 1 `i `uc ]
+"49
+}
+[e :U 1154 ]
+[; ;interrupt.c: 49: }
+[; ;interrupt.c: 50: }
+"50
 [e :UE 1152 ]
 }
