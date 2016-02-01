@@ -9558,22 +9558,13 @@ CCP1IF = 0;
 T1CONbits.TMR1ON = 0;
 SignalOut();
 __nop();
-__nop();
 }
-if(TMR3GIF == 1 && pin_out =='A') {
+if(TMR3GIF == 1) {
 TMR3GIF = 0;
-time_gear = 0;
-time_gear = TMR3H;
-time_gear <<= 8;
-time_gear |= TMR3L;
-__nop();
-__nop();
-TMR3H = 0;
-TMR3L = 0;
 ModeCheck();
 SignalOut();
 
-# 53
+# 44
 pulsecounter++;
 }
 }

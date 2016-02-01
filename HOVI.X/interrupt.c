@@ -33,18 +33,9 @@ interrupt void Isr() {
         T1CONbits.TMR1ON = 0;
         SignalOut();
         NOP();
-        NOP();
     }
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
-        time_gear = 0;
-        time_gear = TMR3H;
-        time_gear <<= 8;
-        time_gear |= TMR3L;
-        NOP();
-        NOP();
-        TMR3H = 0;
-        TMR3L = 0;
         ModeCheck();
         SignalOut();    /* initial call after remaining break to 20 ms
                          * starts with Aileron (needs to be set in last

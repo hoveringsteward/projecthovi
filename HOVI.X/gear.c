@@ -29,6 +29,7 @@ unsigned int CalcTime(void) {
 /*      returns 1 for automatic mode, gearswitch position 0                  */
 bit ModeCheck(void) {
     NOP();
+    time_gear = CalcTime();
     if(time_gear < GEAR_TIME){
         /* Manual Mode */
         LED = 0;

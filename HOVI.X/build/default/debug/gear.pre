@@ -9565,6 +9565,7 @@ return time_gear_meas;
 # 30
 bit ModeCheck(void) {
 __nop();
+time_gear = CalcTime();
 if(time_gear < 6800){
 
 PORTBbits.RB2 = 0;

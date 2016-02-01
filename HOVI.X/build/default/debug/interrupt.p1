@@ -40,10 +40,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p i ___nop ]
 "20106 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _TMR3GIF `Vb ~T0 @X0 0 e@32033 ]
-"12005
-[v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
-"11986
-[v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
 "21 gear.h
 [v _ModeCheck `(b ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -7747,58 +7743,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupt.c: 35: __nop();
 "35
 [e ( ___nop ..  ]
-[; ;interrupt.c: 36: __nop();
 "36
-[e ( ___nop ..  ]
-"37
 }
 [e :U 1153 ]
-[; ;interrupt.c: 37: }
-[; ;interrupt.c: 38: if(TMR3GIF == 1 && pin_out =='A') {
-"38
-[e $ ! && == -> _TMR3GIF `i -> 1 `i == -> _pin_out `ui -> 65 `ui 1154  ]
+[; ;interrupt.c: 36: }
+[; ;interrupt.c: 37: if(TMR3GIF == 1) {
+"37
+[e $ ! == -> _TMR3GIF `i -> 1 `i 1154  ]
 {
-[; ;interrupt.c: 39: TMR3GIF = 0;
-"39
+[; ;interrupt.c: 38: TMR3GIF = 0;
+"38
 [e = _TMR3GIF -> -> 0 `i `b ]
-[; ;interrupt.c: 40: time_gear = 0;
-"40
-[e = _time_gear -> -> 0 `i `ui ]
-[; ;interrupt.c: 41: time_gear = TMR3H;
-"41
-[e = _time_gear -> _TMR3H `ui ]
-[; ;interrupt.c: 42: time_gear <<= 8;
-"42
-[e =<< _time_gear -> 8 `i ]
-[; ;interrupt.c: 43: time_gear |= TMR3L;
-"43
-[e =| _time_gear -> _TMR3L `ui ]
-[; ;interrupt.c: 44: __nop();
-"44
-[e ( ___nop ..  ]
-[; ;interrupt.c: 45: __nop();
-"45
-[e ( ___nop ..  ]
-[; ;interrupt.c: 46: TMR3H = 0;
-"46
-[e = _TMR3H -> -> 0 `i `uc ]
-[; ;interrupt.c: 47: TMR3L = 0;
-"47
-[e = _TMR3L -> -> 0 `i `uc ]
-[; ;interrupt.c: 48: ModeCheck();
-"48
+[; ;interrupt.c: 39: ModeCheck();
+"39
 [e ( _ModeCheck ..  ]
-[; ;interrupt.c: 49: SignalOut();
-"49
+[; ;interrupt.c: 40: SignalOut();
+"40
 [e ( _SignalOut ..  ]
-[; ;interrupt.c: 53: pulsecounter++;
-"53
+[; ;interrupt.c: 44: pulsecounter++;
+"44
 [e ++ _pulsecounter -> -> 1 `i `uc ]
-"54
+"45
 }
 [e :U 1154 ]
-[; ;interrupt.c: 54: }
-[; ;interrupt.c: 55: }
-"55
+[; ;interrupt.c: 45: }
+[; ;interrupt.c: 46: }
+"46
 [e :UE 1152 ]
 }
