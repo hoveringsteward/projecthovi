@@ -11,7 +11,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "55
 [s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
 [n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height dif_angle ]
-"79
+"81
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
 "19
@@ -7549,16 +7549,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
 [; ;gear.h: 22: bit set_ret;
-[; ;init.h: 27: void Init(void);
-[; ;init.h: 28: void InitPort(void);
-[; ;init.h: 29: void InitTris(void);
-[; ;init.h: 30: void InitAnsel(void);
-[; ;init.h: 31: void InitOsc(void);
-[; ;init.h: 32: void InitUart(void);
-[; ;init.h: 33: void InitSpi(void);
-[; ;init.h: 34: void InitTimer(void);
-[; ;init.h: 35: void InitInterrupt(void);
-[; ;init.h: 36: void InitActors(void);
+"23
+[v _time_gear `ui ~T0 @X0 1 e ]
+[; ;gear.h: 23: unsigned int time_gear;
+[; ;init.h: 28: void Init(void);
+[; ;init.h: 29: void InitPort(void);
+[; ;init.h: 30: void InitTris(void);
+[; ;init.h: 31: void InitAnsel(void);
+[; ;init.h: 32: void InitOsc(void);
+[; ;init.h: 33: void InitUart(void);
+[; ;init.h: 34: void InitSpi(void);
+[; ;init.h: 35: void InitTimer(void);
+[; ;init.h: 36: void InitComp(void);
+[; ;init.h: 37: void InitInterrupt(void);
+[; ;init.h: 38: void InitActors(void);
+"45 init.h
+[v _pin_out `uc ~T0 @X0 1 e ]
+[i _pin_out
+-> -> 65 `ui `uc
+]
+[; ;init.h: 45: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7619,65 +7629,65 @@ Version 3.2 HI-TECH Software Intermediate Code
 "67
 [v _direction `b ~T0 @X0 1 e ]
 [; ;position.h: 67: bit direction;
-"69
+"71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
--> -> 41982 `l `ui
+-> -> 20991 `i `ui
 ]
-[; ;position.h: 69: unsigned int cm180 = 41982;
-"70
+[; ;position.h: 71: unsigned int cm180 = 20991;
+"72
 [v _cm220 `ui ~T0 @X0 1 e ]
 [i _cm220
--> -> 51310 `l `ui
+-> -> 25655 `i `ui
 ]
-[; ;position.h: 70: unsigned int cm220 = 51310;
-"71
+[; ;position.h: 72: unsigned int cm220 = 25655;
+"73
 [v _cm100 `ui ~T0 @X0 1 e ]
 [i _cm100
 -> -> 23323 `i `ui
 ]
-[; ;position.h: 71: unsigned int cm100 = 23323;
-"72
+[; ;position.h: 73: unsigned int cm100 = 23323;
+"74
 [v _cm120 `ui ~T0 @X0 1 e ]
 [i _cm120
 -> -> 27987 `i `ui
 ]
-[; ;position.h: 72: unsigned int cm120 = 27987;
-"73
+[; ;position.h: 74: unsigned int cm120 = 27987;
+"75
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
 -> -> 18659 `i `ui
 ]
-[; ;position.h: 73: unsigned int cm80 = 18659;
-"74
+[; ;position.h: 75: unsigned int cm80 = 18659;
+"76
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
 -> -> 11662 `i `ui
 ]
-[; ;position.h: 74: unsigned int cm50 = 11662;
-"77
+[; ;position.h: 76: unsigned int cm50 = 11662;
+"79
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
 -> 10 `i
 ]
-[; ;position.h: 77: int c_path = 10;
-"78
+[; ;position.h: 79: int c_path = 10;
+"80
 [v _id_current_cc `i ~T0 @X0 1 e ]
-[; ;position.h: 78: int id_current_cc;
-[; ;position.h: 79: typedef struct nt_path{
-[; ;position.h: 80: unsigned char lower_cc;
-[; ;position.h: 81: unsigned char higher_cc;
-[; ;position.h: 82: } t_path;
-"84
+[; ;position.h: 80: int id_current_cc;
+[; ;position.h: 81: typedef struct nt_path{
+[; ;position.h: 82: unsigned char lower_cc;
+[; ;position.h: 83: unsigned char higher_cc;
+[; ;position.h: 84: } t_path;
+"86
 [v _a_path `S1151 ~T0 @X0 -> 21 `i e ]
 [v _a_path_old `S1151 ~T0 @X0 -> 21 `i e ]
-[; ;position.h: 84: t_path a_path[21], a_path_old[21];
-"86
+[; ;position.h: 86: t_path a_path[21], a_path_old[21];
+"88
 [v _storedif `b ~T0 @X0 1 e ]
-[; ;position.h: 86: bit storedif;
-"87
+[; ;position.h: 88: bit storedif;
+"89
 [v _table `b ~T0 @X0 1 e ]
-[; ;position.h: 87: bit table;
+[; ;position.h: 89: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
@@ -7692,7 +7702,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr(void);
+[; ;main.h: 33: interrupt void Isr();
+"69 main.h
+[v _pulsecounter `uc ~T0 @X0 1 e ]
+[i _pulsecounter
+-> -> 0 `i `uc
+]
+[; ;main.h: 69: unsigned char pulsecounter = 0;
 "32 position.c
 [v _CompareFrames `(v ~T0 @X0 1 ef ]
 {
@@ -8463,9 +8479,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 1243  ]
 [e :U 1242 ]
 {
-[; ;position.c: 316: _delay((unsigned long)((3)*(16000000/4000.0)));
+[; ;position.c: 316: _delay((unsigned long)((3)*(64000000/4000.0)));
 "316
-[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "317
 }
 "315
@@ -8636,175 +8652,175 @@ Version 3.2 HI-TECH Software Intermediate Code
 "379
 [e :UE 1245 ]
 }
-"392
+"391
 [v _CheckRudderBack `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 392: void CheckRudderBack(void) {
+[; ;position.c: 391: void CheckRudderBack(void) {
 [e :U _CheckRudderBack ]
 [f ]
-[; ;position.c: 395: if (a_frame[0].angle <= -175 || a_frame[0].angle >= 175) {
-"395
+[; ;position.c: 394: if (a_frame[0].angle <= -175 || a_frame[0].angle >= 175) {
+"394
 [e $ ! || <= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -U -> 175 `i >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -> 175 `i 1263  ]
 {
-[; ;position.c: 396: ActRudder(0);
-"396
+[; ;position.c: 395: ActRudder(0);
+"395
 [e ( _ActRudder (1 -> -> 0 `i `uc ]
-"397
+"396
 }
-[; ;position.c: 397: }
+[; ;position.c: 396: }
 [e $U 1264  ]
-"399
+"398
 [e :U 1263 ]
-[; ;position.c: 399: else if (a_frame[0].angle > -175) {
+[; ;position.c: 398: else if (a_frame[0].angle > -175) {
 [e $ ! > . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -U -> 175 `i 1265  ]
 {
-[; ;position.c: 401: if (a_frame[1].angle > a_frame[0].angle) {
-"401
+[; ;position.c: 400: if (a_frame[1].angle > a_frame[0].angle) {
+"400
 [e $ ! > . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 1266  ]
 {
-[; ;position.c: 403: if (a_frame_dif[0].dif_angle <= 2) {
-"403
+[; ;position.c: 402: if (a_frame_dif[0].dif_angle <= 2) {
+"402
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -> 2 `i 1267  ]
 {
-[; ;position.c: 404: if (a_frame_dif[0].dif_angle <= 1) {
-"404
+[; ;position.c: 403: if (a_frame_dif[0].dif_angle <= 1) {
+"403
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -> 1 `i 1268  ]
 {
-[; ;position.c: 405: ActRudder(-3);
-"405
+[; ;position.c: 404: ActRudder(-3);
+"404
 [e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"406
+"405
 }
-[; ;position.c: 406: } else {
+[; ;position.c: 405: } else {
 [e $U 1269  ]
 [e :U 1268 ]
 {
-[; ;position.c: 407: ActRudder(0);
-"407
+[; ;position.c: 406: ActRudder(0);
+"406
 [e ( _ActRudder (1 -> -> 0 `i `uc ]
-"408
+"407
 }
 [e :U 1269 ]
-"409
+"408
 }
-[; ;position.c: 408: }
-[; ;position.c: 409: } else {
+[; ;position.c: 407: }
+[; ;position.c: 408: } else {
 [e $U 1270  ]
 [e :U 1267 ]
 {
-[; ;position.c: 411: ActRudder(3);
-"411
+[; ;position.c: 410: ActRudder(3);
+"410
 [e ( _ActRudder (1 -> -> 3 `i `uc ]
-"412
+"411
 }
 [e :U 1270 ]
-"413
+"412
 }
-[; ;position.c: 412: }
-[; ;position.c: 413: } else {
+[; ;position.c: 411: }
+[; ;position.c: 412: } else {
 [e $U 1271  ]
 [e :U 1266 ]
 {
-[; ;position.c: 415: ActRudder(-3);
-"415
+[; ;position.c: 414: ActRudder(-3);
+"414
 [e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"416
+"415
 }
 [e :U 1271 ]
-"417
+"416
 }
+[; ;position.c: 415: }
 [; ;position.c: 416: }
-[; ;position.c: 417: }
 [e $U 1272  ]
-"419
+"418
 [e :U 1265 ]
-[; ;position.c: 419: else {
+[; ;position.c: 418: else {
 {
-[; ;position.c: 421: if (a_frame[1].angle < a_frame[0].angle) {
-"421
+[; ;position.c: 420: if (a_frame[1].angle < a_frame[0].angle) {
+"420
 [e $ ! < . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 1273  ]
+{
+[; ;position.c: 422: if (a_frame_dif[0].dif_angle <= -2) {
+"422
+[e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -U -> 2 `i 1274  ]
 {
 [; ;position.c: 423: if (a_frame_dif[0].dif_angle <= -2) {
 "423
-[e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -U -> 2 `i 1274  ]
-{
-[; ;position.c: 424: if (a_frame_dif[0].dif_angle <= -2) {
-"424
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -U -> 2 `i 1275  ]
 {
-[; ;position.c: 425: ActRudder(3);
-"425
+[; ;position.c: 424: ActRudder(3);
+"424
 [e ( _ActRudder (1 -> -> 3 `i `uc ]
-"426
+"425
 }
-[; ;position.c: 426: } else {
+[; ;position.c: 425: } else {
 [e $U 1276  ]
 [e :U 1275 ]
 {
-[; ;position.c: 427: ActRudder(0);
-"427
+[; ;position.c: 426: ActRudder(0);
+"426
 [e ( _ActRudder (1 -> -> 0 `i `uc ]
-"428
+"427
 }
 [e :U 1276 ]
-"429
+"428
 }
-[; ;position.c: 428: }
-[; ;position.c: 429: } else {
+[; ;position.c: 427: }
+[; ;position.c: 428: } else {
 [e $U 1277  ]
 [e :U 1274 ]
 {
-[; ;position.c: 431: ActRudder(-3);
-"431
+[; ;position.c: 430: ActRudder(-3);
+"430
 [e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"432
+"431
 }
 [e :U 1277 ]
-"433
+"432
 }
-[; ;position.c: 432: }
-[; ;position.c: 433: } else {
+[; ;position.c: 431: }
+[; ;position.c: 432: } else {
 [e $U 1278  ]
 [e :U 1273 ]
 {
-[; ;position.c: 435: ActRudder(3);
-"435
+[; ;position.c: 434: ActRudder(3);
+"434
 [e ( _ActRudder (1 -> -> 3 `i `uc ]
-"436
+"435
 }
 [e :U 1278 ]
-"437
+"436
 }
 [e :U 1272 ]
 [e :U 1264 ]
+[; ;position.c: 435: }
 [; ;position.c: 436: }
-[; ;position.c: 437: }
-[; ;position.c: 441: }
-"441
+[; ;position.c: 440: }
+"440
 [e :UE 1262 ]
 }
-"448
+"447
 [v _StoreAsOld `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 448: void StoreAsOld(void) {
+[; ;position.c: 447: void StoreAsOld(void) {
 [e :U _StoreAsOld ]
 [f ]
-[; ;position.c: 449: a_frame[1].num = a_frame[0].num;
-"449
+[; ;position.c: 448: a_frame[1].num = a_frame[0].num;
+"448
 [e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 ]
-[; ;position.c: 450: a_frame[1].pos_x = a_frame[0].pos_x;
-"450
+[; ;position.c: 449: a_frame[1].pos_x = a_frame[0].pos_x;
+"449
 [e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 ]
-[; ;position.c: 451: a_frame[1].pos_y = a_frame[0].pos_y;
-"451
+[; ;position.c: 450: a_frame[1].pos_y = a_frame[0].pos_y;
+"450
 [e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 ]
-[; ;position.c: 452: a_frame[1].height = a_frame[0].height;
-"452
+[; ;position.c: 451: a_frame[1].height = a_frame[0].height;
+"451
 [e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 ]
-[; ;position.c: 453: a_frame[1].angle = a_frame[0].angle;
-"453
+[; ;position.c: 452: a_frame[1].angle = a_frame[0].angle;
+"452
 [e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 ]
-[; ;position.c: 454: }
-"454
+[; ;position.c: 453: }
+"453
 [e :UE 1279 ]
 }

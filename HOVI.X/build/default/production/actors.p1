@@ -11,14 +11,35 @@ Version 3.2 HI-TECH Software Intermediate Code
 "55
 [s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
 [n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height dif_angle ]
-"79
+"81
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
-[v F7833 `(v ~T0 @X0 1 tf1`ul ]
-"152 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
-[v __delay `JF7833 ~T0 @X0 0 e ]
-[p i __delay ]
-"6376 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+"16529 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
+"16548
+[v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
+"13909
+[v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
+"13928
+[v _CCPR1H `Vuc ~T0 @X0 0 e@4031 ]
+"16417
+[s S1028 :2 `uc 1 :1 `uc 1 ]
+[n S1028 . . NOT_T1SYNC ]
+"16421
+[s S1029 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :2 `uc 1 ]
+[n S1029 . TMR1ON T1RD16 nT1SYNC T1SOSCEN T1CKPS TMR1CS ]
+"16429
+[s S1030 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1030 . . RD16 T1SYNC T1OSCEN T1CKPS0 T1CKPS1 TMR1CS0 TMR1CS1 ]
+"16439
+[s S1031 :3 `uc 1 :1 `uc 1 ]
+[n S1031 . . SOSCEN ]
+"16416
+[u S1027 `S1028 1 `S1029 1 `S1030 1 `S1031 1 ]
+[n S1027 . . . . . ]
+"16444
+[v _T1CONbits `VS1027 ~T0 @X0 0 e@4045 ]
+"6376
 [s S401 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S401 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
 "6386
@@ -7580,16 +7601,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
 [; ;gear.h: 22: bit set_ret;
-[; ;init.h: 27: void Init(void);
-[; ;init.h: 28: void InitPort(void);
-[; ;init.h: 29: void InitTris(void);
-[; ;init.h: 30: void InitAnsel(void);
-[; ;init.h: 31: void InitOsc(void);
-[; ;init.h: 32: void InitUart(void);
-[; ;init.h: 33: void InitSpi(void);
-[; ;init.h: 34: void InitTimer(void);
-[; ;init.h: 35: void InitInterrupt(void);
-[; ;init.h: 36: void InitActors(void);
+"23
+[v _time_gear `ui ~T0 @X0 1 e ]
+[; ;gear.h: 23: unsigned int time_gear;
+[; ;init.h: 28: void Init(void);
+[; ;init.h: 29: void InitPort(void);
+[; ;init.h: 30: void InitTris(void);
+[; ;init.h: 31: void InitAnsel(void);
+[; ;init.h: 32: void InitOsc(void);
+[; ;init.h: 33: void InitUart(void);
+[; ;init.h: 34: void InitSpi(void);
+[; ;init.h: 35: void InitTimer(void);
+[; ;init.h: 36: void InitComp(void);
+[; ;init.h: 37: void InitInterrupt(void);
+[; ;init.h: 38: void InitActors(void);
+"45 init.h
+[v _pin_out `uc ~T0 @X0 1 e ]
+[i _pin_out
+-> -> 65 `ui `uc
+]
+[; ;init.h: 45: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7650,65 +7681,65 @@ Version 3.2 HI-TECH Software Intermediate Code
 "67
 [v _direction `b ~T0 @X0 1 e ]
 [; ;position.h: 67: bit direction;
-"69
+"71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
--> -> 41982 `l `ui
+-> -> 20991 `i `ui
 ]
-[; ;position.h: 69: unsigned int cm180 = 41982;
-"70
+[; ;position.h: 71: unsigned int cm180 = 20991;
+"72
 [v _cm220 `ui ~T0 @X0 1 e ]
 [i _cm220
--> -> 51310 `l `ui
+-> -> 25655 `i `ui
 ]
-[; ;position.h: 70: unsigned int cm220 = 51310;
-"71
+[; ;position.h: 72: unsigned int cm220 = 25655;
+"73
 [v _cm100 `ui ~T0 @X0 1 e ]
 [i _cm100
 -> -> 23323 `i `ui
 ]
-[; ;position.h: 71: unsigned int cm100 = 23323;
-"72
+[; ;position.h: 73: unsigned int cm100 = 23323;
+"74
 [v _cm120 `ui ~T0 @X0 1 e ]
 [i _cm120
 -> -> 27987 `i `ui
 ]
-[; ;position.h: 72: unsigned int cm120 = 27987;
-"73
+[; ;position.h: 74: unsigned int cm120 = 27987;
+"75
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
 -> -> 18659 `i `ui
 ]
-[; ;position.h: 73: unsigned int cm80 = 18659;
-"74
+[; ;position.h: 75: unsigned int cm80 = 18659;
+"76
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
 -> -> 11662 `i `ui
 ]
-[; ;position.h: 74: unsigned int cm50 = 11662;
-"77
+[; ;position.h: 76: unsigned int cm50 = 11662;
+"79
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
 -> 10 `i
 ]
-[; ;position.h: 77: int c_path = 10;
-"78
+[; ;position.h: 79: int c_path = 10;
+"80
 [v _id_current_cc `i ~T0 @X0 1 e ]
-[; ;position.h: 78: int id_current_cc;
-[; ;position.h: 79: typedef struct nt_path{
-[; ;position.h: 80: unsigned char lower_cc;
-[; ;position.h: 81: unsigned char higher_cc;
-[; ;position.h: 82: } t_path;
-"84
+[; ;position.h: 80: int id_current_cc;
+[; ;position.h: 81: typedef struct nt_path{
+[; ;position.h: 82: unsigned char lower_cc;
+[; ;position.h: 83: unsigned char higher_cc;
+[; ;position.h: 84: } t_path;
+"86
 [v _a_path `S1151 ~T0 @X0 -> 21 `i e ]
 [v _a_path_old `S1151 ~T0 @X0 -> 21 `i e ]
-[; ;position.h: 84: t_path a_path[21], a_path_old[21];
-"86
+[; ;position.h: 86: t_path a_path[21], a_path_old[21];
+"88
 [v _storedif `b ~T0 @X0 1 e ]
-[; ;position.h: 86: bit storedif;
-"87
+[; ;position.h: 88: bit storedif;
+"89
 [v _table `b ~T0 @X0 1 e ]
-[; ;position.h: 87: bit table;
+[; ;position.h: 89: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
@@ -7723,7 +7754,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr(void);
+[; ;main.h: 33: interrupt void Isr();
+"69 main.h
+[v _pulsecounter `uc ~T0 @X0 1 e ]
+[i _pulsecounter
+-> -> 0 `i `uc
+]
+[; ;main.h: 69: unsigned char pulsecounter = 0;
 "20 actors.c
 [v _Delay `(v ~T0 @X0 1 ef1`ui ]
 {
@@ -7731,133 +7768,208 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _Delay ]
 [v _del `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 21: del >>= 2;
+[; ;actors.c: 21: del = 1000 + del;
 "21
-[e =>> _del -> 2 `i ]
-[; ;actors.c: 22: for(unsigned int c_del = 0; c_del < del; del++) {
+[e = _del + -> -> 1000 `i `ui _del ]
+[; ;actors.c: 22: del <<= 1;
 "22
-{
-[v _c_del `ui ~T0 @X0 1 a ]
-[e = _c_del -> -> 0 `i `ui ]
-[e $U 1156  ]
-[e :U 1153 ]
-{
-[; ;actors.c: 23: _delay((unsigned long)((4)*(16000000/4000000.0)));
+[e =<< _del -> 1 `i ]
+[; ;actors.c: 23: TMR1L = 0;
 "23
-[e ( __delay (1 -> * -> -> 4 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[e = _TMR1L -> -> 0 `i `uc ]
+[; ;actors.c: 24: TMR1H = 0;
 "24
-}
-"22
-[e ++ _del -> -> 1 `i `ui ]
-[e :U 1156 ]
-[e $ < _c_del _del 1153  ]
-[e :U 1154 ]
-"24
-}
-[; ;actors.c: 24: }
-[; ;actors.c: 25: }
+[e = _TMR1H -> -> 0 `i `uc ]
+[; ;actors.c: 25: CCPR1L = del;
 "25
+[e = _CCPR1L -> _del `uc ]
+[; ;actors.c: 26: del >>= 8;
+"26
+[e =>> _del -> 8 `i ]
+[; ;actors.c: 27: CCPR1H = del;
+"27
+[e = _CCPR1H -> _del `uc ]
+[; ;actors.c: 28: T1CONbits.TMR1ON = 1;
+"28
+[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
+[; ;actors.c: 29: }
+"29
 [e :UE 1152 ]
 }
-"28
+"32
 [v _SignalOut `(v ~T0 @X0 1 ef ]
 {
-[; ;actors.c: 28: void SignalOut(void) {
+[; ;actors.c: 32: void SignalOut(void) {
 [e :U _SignalOut ]
 [f ]
-[; ;actors.c: 29: PORTAbits.RA0 = 1;
-"29
-[e = . . _PORTAbits 0 0 -> -> 1 `i `uc ]
-[; ;actors.c: 30: Delay(a_actors[0].aile);
-"30
-[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 ]
-[; ;actors.c: 31: PORTAbits.RA0 = 0;
-"31
-[e = . . _PORTAbits 0 0 -> -> 0 `i `uc ]
-[; ;actors.c: 32: PORTAbits.RA1 = 1;
-"32
-[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
-[; ;actors.c: 33: Delay(a_actors[0].elev);
+[; ;actors.c: 33: switch(pin_out) {
 "33
-[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 ]
-[; ;actors.c: 34: PORTAbits.RA1 = 0;
+[e $U 1155  ]
+{
+[; ;actors.c: 34: case 'A': {
 "34
-[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
-[; ;actors.c: 35: PORTAbits.RA3 = 1;
+[e :U 1156 ]
+{
+[; ;actors.c: 35: PORTAbits.RA0 = 1;
 "35
-[e = . . _PORTAbits 0 3 -> -> 1 `i `uc ]
-[; ;actors.c: 36: Delay(a_actors[0].thro);
+[e = . . _PORTAbits 0 0 -> -> 1 `i `uc ]
+[; ;actors.c: 36: Delay(a_actors[0].aile);
 "36
-[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 ]
-[; ;actors.c: 37: PORTAbits.RA3 = 0;
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 ]
+[; ;actors.c: 37: pin_out = 'E';
 "37
-[e = . . _PORTAbits 0 3 -> -> 0 `i `uc ]
-[; ;actors.c: 38: PORTAbits.RA2 = 1;
+[e = _pin_out -> -> 69 `ui `uc ]
+[; ;actors.c: 38: break;
 "38
-[e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
-[; ;actors.c: 39: Delay(a_actors[0].rudd);
+[e $U 1154  ]
 "39
-[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 ]
-[; ;actors.c: 40: PORTAbits.RA2 = 0;
-"40
-[e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
-[; ;actors.c: 41: }
-"41
-[e :UE 1157 ]
 }
+[; ;actors.c: 39: }case 'E': {
+[e :U 1157 ]
+{
+[; ;actors.c: 40: PORTAbits.RA0 = 0;
+"40
+[e = . . _PORTAbits 0 0 -> -> 0 `i `uc ]
+[; ;actors.c: 41: PORTAbits.RA1 = 1;
+"41
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+[; ;actors.c: 42: Delay(a_actors[0].elev);
+"42
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 ]
+[; ;actors.c: 43: pin_out = 'T';
+"43
+[e = _pin_out -> -> 84 `ui `uc ]
+[; ;actors.c: 44: break;
+"44
+[e $U 1154  ]
+"45
+}
+[; ;actors.c: 45: }case 'T': {
+[e :U 1158 ]
+{
+[; ;actors.c: 46: PORTAbits.RA1 = 0;
+"46
+[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
+[; ;actors.c: 47: PORTAbits.RA3 = 1;
+"47
+[e = . . _PORTAbits 0 3 -> -> 1 `i `uc ]
+[; ;actors.c: 48: Delay(a_actors[0].thro);
+"48
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 ]
+[; ;actors.c: 49: pin_out = 'R';
 "49
+[e = _pin_out -> -> 82 `ui `uc ]
+[; ;actors.c: 50: break;
+"50
+[e $U 1154  ]
+"51
+}
+[; ;actors.c: 51: }case 'R': {
+[e :U 1159 ]
+{
+[; ;actors.c: 52: PORTAbits.RA2 = 0;
+"52
+[e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
+[; ;actors.c: 53: PORTAbits.RA2 = 1;
+"53
+[e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
+[; ;actors.c: 54: Delay(a_actors[0].rudd);
+"54
+[e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 ]
+[; ;actors.c: 55: pin_out = 0;
+"55
+[e = _pin_out -> -> 0 `i `uc ]
+[; ;actors.c: 56: break;
+"56
+[e $U 1154  ]
+"57
+}
+[; ;actors.c: 57: }case 0: {
+[e :U 1160 ]
+{
+[; ;actors.c: 58: PORTAbits.RA2 = 0;
+"58
+[e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
+[; ;actors.c: 59: pin_out = 'A';
+"59
+[e = _pin_out -> -> 65 `ui `uc ]
+[; ;actors.c: 60: break;
+"60
+[e $U 1154  ]
+"61
+}
+"62
+}
+[; ;actors.c: 61: }
+[; ;actors.c: 62: }
+[e $U 1154  ]
+"33
+[e :U 1155 ]
+[e [\ _pin_out , $ -> -> 65 `ui `uc 1156
+ , $ -> -> 69 `ui `uc 1157
+ , $ -> -> 84 `ui `uc 1158
+ , $ -> -> 82 `ui `uc 1159
+ , $ -> -> 0 `i `uc 1160
+ 1154 ]
+"62
+[e :U 1154 ]
+[; ;actors.c: 63: }
+"63
+[e :UE 1153 ]
+}
+"71
 [v _ActAileron `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 49: void ActAileron(unsigned char change){
+[; ;actors.c: 71: void ActAileron(unsigned char change){
 [e :U _ActAileron ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 50: a_actors[0].aile += change;
-"50
+[; ;actors.c: 72: a_actors[0].aile += change;
+"72
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 -> _change `ui ]
-[; ;actors.c: 51: }
-"51
-[e :UE 1158 ]
+[; ;actors.c: 73: }
+"73
+[e :UE 1161 ]
 }
-"58
+"80
 [v _ActElevator `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 58: void ActElevator(unsigned char change){
+[; ;actors.c: 80: void ActElevator(unsigned char change){
 [e :U _ActElevator ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 59: a_actors[0].elev += change;
-"59
+[; ;actors.c: 81: a_actors[0].elev += change;
+"81
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 -> _change `ui ]
-[; ;actors.c: 60: }
-"60
-[e :UE 1159 ]
+[; ;actors.c: 82: }
+"82
+[e :UE 1162 ]
 }
-"67
+"89
 [v _ActThrottle `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 67: void ActThrottle(unsigned char change){
+[; ;actors.c: 89: void ActThrottle(unsigned char change){
 [e :U _ActThrottle ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 68: a_actors[0].thro += change;
-"68
+[; ;actors.c: 90: a_actors[0].thro += change;
+"90
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> _change `ui ]
-[; ;actors.c: 69: }
-"69
-[e :UE 1160 ]
+[; ;actors.c: 91: }
+"91
+[e :UE 1163 ]
 }
-"76
+"98
 [v _ActRudder `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 76: void ActRudder(unsigned char change){
+[; ;actors.c: 98: void ActRudder(unsigned char change){
 [e :U _ActRudder ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 77: a_actors[0].rudd += change;
-"77
+[; ;actors.c: 99: a_actors[0].rudd += change;
+"99
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 -> _change `ui ]
-[; ;actors.c: 78: }
-"78
-[e :UE 1161 ]
+[; ;actors.c: 100: }
+"100
+[e :UE 1164 ]
 }

@@ -9496,7 +9496,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 
 # 28 "init.h"
@@ -9575,8 +9575,10 @@ t_frame_dif a_frame_dif[1];
 
 bit direction;
 
-unsigned int cm180 = 41982;
-unsigned int cm220 = 51310;
+
+
+unsigned int cm180 = 20991;
+unsigned int cm220 = 25655;
 unsigned int cm100 = 23323;
 unsigned int cm120 = 27987;
 unsigned int cm80 = 18659;
@@ -9616,7 +9618,6 @@ void main(void) {
 Init();
 while(1) {
 StartHeightMeasure();
-ModeCheck();
 ReadObject(1, 10, 5);
 CompareFrames();
 ReadHeight();

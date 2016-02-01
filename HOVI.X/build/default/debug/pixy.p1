@@ -11,7 +11,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "55
 [s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
 [n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height dif_angle ]
-"79
+"81
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
 "23 communication.h
@@ -7530,7 +7530,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
-[; ;gear.h: 22: bit set_ret;
+[i _set_ret
+-> 0 `i
+]
+[; ;gear.h: 22: bit set_ret = 0;
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
@@ -7611,65 +7614,65 @@ Version 3.2 HI-TECH Software Intermediate Code
 "67
 [v _direction `b ~T0 @X0 1 e ]
 [; ;position.h: 67: bit direction;
-"69
+"71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
--> -> 41982 `l `ui
+-> -> 20991 `i `ui
 ]
-[; ;position.h: 69: unsigned int cm180 = 41982;
-"70
+[; ;position.h: 71: unsigned int cm180 = 20991;
+"72
 [v _cm220 `ui ~T0 @X0 1 e ]
 [i _cm220
--> -> 51310 `l `ui
+-> -> 25655 `i `ui
 ]
-[; ;position.h: 70: unsigned int cm220 = 51310;
-"71
+[; ;position.h: 72: unsigned int cm220 = 25655;
+"73
 [v _cm100 `ui ~T0 @X0 1 e ]
 [i _cm100
 -> -> 23323 `i `ui
 ]
-[; ;position.h: 71: unsigned int cm100 = 23323;
-"72
+[; ;position.h: 73: unsigned int cm100 = 23323;
+"74
 [v _cm120 `ui ~T0 @X0 1 e ]
 [i _cm120
 -> -> 27987 `i `ui
 ]
-[; ;position.h: 72: unsigned int cm120 = 27987;
-"73
+[; ;position.h: 74: unsigned int cm120 = 27987;
+"75
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
 -> -> 18659 `i `ui
 ]
-[; ;position.h: 73: unsigned int cm80 = 18659;
-"74
+[; ;position.h: 75: unsigned int cm80 = 18659;
+"76
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
 -> -> 11662 `i `ui
 ]
-[; ;position.h: 74: unsigned int cm50 = 11662;
-"77
+[; ;position.h: 76: unsigned int cm50 = 11662;
+"79
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
 -> 10 `i
 ]
-[; ;position.h: 77: int c_path = 10;
-"78
+[; ;position.h: 79: int c_path = 10;
+"80
 [v _id_current_cc `i ~T0 @X0 1 e ]
-[; ;position.h: 78: int id_current_cc;
-[; ;position.h: 79: typedef struct nt_path{
-[; ;position.h: 80: unsigned char lower_cc;
-[; ;position.h: 81: unsigned char higher_cc;
-[; ;position.h: 82: } t_path;
-"84
+[; ;position.h: 80: int id_current_cc;
+[; ;position.h: 81: typedef struct nt_path{
+[; ;position.h: 82: unsigned char lower_cc;
+[; ;position.h: 83: unsigned char higher_cc;
+[; ;position.h: 84: } t_path;
+"86
 [v _a_path `S1151 ~T0 @X0 -> 21 `i e ]
 [v _a_path_old `S1151 ~T0 @X0 -> 21 `i e ]
-[; ;position.h: 84: t_path a_path[21], a_path_old[21];
-"86
+[; ;position.h: 86: t_path a_path[21], a_path_old[21];
+"88
 [v _storedif `b ~T0 @X0 1 e ]
-[; ;position.h: 86: bit storedif;
-"87
+[; ;position.h: 88: bit storedif;
+"89
 [v _table `b ~T0 @X0 1 e ]
-[; ;position.h: 87: bit table;
+[; ;position.h: 89: bit table;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h

@@ -19,7 +19,7 @@
 /*---------------------------------------------------------------------------*/
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 #endif	/* GEAR_H */
 

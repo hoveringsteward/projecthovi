@@ -66,8 +66,10 @@ t_frame_dif a_frame_dif[1];
 
 bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
 
-unsigned int cm180 = 41982;
-unsigned int cm220 = 51310;
+//unsigned int cm180 = 41982;
+//unsigned int cm220 = 51310;
+unsigned int cm180 = 20991;       //90 Test
+unsigned int cm220 = 25655;       //110 Test
 unsigned int cm100 = 23323;
 unsigned int cm120 = 27987;
 unsigned int cm80 = 18659;

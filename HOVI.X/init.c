@@ -75,6 +75,8 @@ void InitAnsel(void) {
 void InitOsc(void) {
     OSCCON = 0b01110111;    /* PLL enabled 16x4MHz, INTOSC, 
                              * stable HFOSC, Internal osc-block */
+    OSCCON2bits.PLLRDY = 1;
+    OSCTUNEbits.PLLEN = 1;
 }
 // </editor-fold>
 
@@ -102,7 +104,7 @@ void InitSpi(void) {
 /* Timer 1, used to measure the time of the outputs                     */
 /*  gate control disabled                                               */
 /*  FOSC/4                                                              */
-/*  Prescaler 1:8                                                       */
+/*  Prescaler 1:2                                                       */
 /*  Timer disabled                                                      */
 /*  1 Impulse: 0.5 µs                                                   */
 /* Timer 3, used to measure time of gaer signal                         */
@@ -112,7 +114,7 @@ void InitSpi(void) {
 /*  no single pulse mode                                                */
 /*  gatepin                                                             */
 /*  FOSC/4                                                              */
-/*  Prescaler 1:4                                                       */
+/*  Prescaler 1:1                                                       */
 /*  no sync                                                             */
 /*  16-Bit disabled                                                     */
 /*  Timer activated                                                     */
@@ -121,9 +123,11 @@ void InitSpi(void) {
 void InitTimer(void) {
     // <editor-fold defaultstate="collapsed" desc="TMR1">
     T1CONbits.TMR1CS = 0b00;
-    T1CONbits.T1CKPS = 0b11;
+    T1CONbits.T1CKPS = 0b01;
     T1CONbits.nT1SYNC = 1;
     T1CONbits.TMR1ON = 0;
+    TMR1H = 0;
+    TMR1L = 0;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="TMR3">
     //Timer 3 Gatecontrolregister
@@ -134,7 +138,7 @@ void InitTimer(void) {
     T3GCONbits.T3GSS =  0b00;
     //Timer 3 Controlregister
     T3CONbits.TMR3CS =  0b00;
-    T3CONbits.T3CKPS =  0b10;
+    T3CONbits.T3CKPS =  0b00;
     T3CONbits.nT3SYNC = 1;
     T3CONbits.TMR3ON =  1;
     // </editor-fold>
@@ -147,7 +151,7 @@ void InitTimer(void) {
     T5GCONbits.T5GSS =  0b00;
     //Timer 5 Controlregister
     T5CONbits.TMR5CS =  0b00;
-    T5CONbits.T5CKPS =  0b10;
+    T5CONbits.T5CKPS =  0b00;
     T5CONbits.nT5SYNC = 1;
     T5CONbits.TMR5ON =  1;
     // </editor-fold>
@@ -172,8 +176,10 @@ void InitComp(void) {
 void InitInterrupt(void) {
     /* Enabling interrupt for Timer 3 gate                              */
     TMR3GIE = 1;
+    TMR3IF = 0;
     /* Enabling interrupt for Compareunit 1                             */
     CCP1IE = 1;
+    CCP1IF = 0;
     /* Enabling interrupts in general                                   */
     PEIE = 1;
     GIE = 1;

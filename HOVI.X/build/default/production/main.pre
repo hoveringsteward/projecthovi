@@ -9340,7 +9340,7 @@ extern __nonreentrant void _delay3(unsigned char);
 
 # 21 "main.c"
 #pragma config IESO = OFF
-#pragma config PLLCFG = OFF
+#pragma config PLLCFG = ON
 #pragma config PRICLKEN = OFF
 #pragma config FOSC = INTIO67
 #pragma config FCMEN = OFF
@@ -9497,8 +9497,9 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9507,8 +9508,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9570,8 +9575,10 @@ t_frame_dif a_frame_dif[1];
 
 bit direction;
 
-unsigned int cm180 = 41982;
-unsigned int cm220 = 51310;
+
+
+unsigned int cm180 = 20991;
+unsigned int cm220 = 25655;
 unsigned int cm100 = 23323;
 unsigned int cm120 = 27987;
 unsigned int cm80 = 18659;
@@ -9601,13 +9608,22 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
+
+# 69
+unsigned char pulsecounter = 0;
 
 # 85 "main.c"
 void main(void) {
 Init();
 while(1) {
-__nop();
+StartHeightMeasure();
+ModeCheck();
+
+
+ReadHeight();
+CheckThrottle();
+StoreAsOld();
 }
 return;
 }

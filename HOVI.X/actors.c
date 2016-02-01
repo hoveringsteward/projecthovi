@@ -18,8 +18,8 @@
 #include "main.h"
 
 void Delay(unsigned int del) {
-    del = 1000 + del;
     del <<= 1;      // x2
+    del = 1000 + del;
     TMR1L = 0;
     TMR1H = 0;
     CCPR1L = del;   // writing lower 8 bits to CCPR1 register

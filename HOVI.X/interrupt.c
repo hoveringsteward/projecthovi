@@ -32,12 +32,17 @@ interrupt void Isr() {
         CCP1IF = 0;
         T1CONbits.TMR1ON = 0;
         SignalOut();
+        NOP();
+        NOP();
     }
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
+        time_gear = 0;
         time_gear = TMR3H;
         time_gear <<= 8;
-        time_gear = TMR3L;
+        time_gear |= TMR3L;
+        NOP();
+        NOP();
         TMR3H = 0;
         TMR3L = 0;
         ModeCheck();

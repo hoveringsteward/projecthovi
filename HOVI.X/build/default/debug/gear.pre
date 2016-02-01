@@ -9507,8 +9507,10 @@ t_frame_dif a_frame_dif[1];
 
 bit direction;
 
-unsigned int cm180 = 41982;
-unsigned int cm220 = 51310;
+
+
+unsigned int cm180 = 20991;
+unsigned int cm220 = 25655;
 unsigned int cm100 = 23323;
 unsigned int cm120 = 27987;
 unsigned int cm80 = 18659;
@@ -9546,7 +9548,7 @@ unsigned char pulsecounter = 0;
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 
 # 16 "gear.c"
@@ -9562,6 +9564,7 @@ return time_gear_meas;
 
 # 30
 bit ModeCheck(void) {
+__nop();
 if(time_gear < 6800){
 
 PORTBbits.RB2 = 0;

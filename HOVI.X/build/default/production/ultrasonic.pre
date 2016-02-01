@@ -9435,8 +9435,9 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear;
 
-# 27 "init.h"
+# 28 "init.h"
 void Init(void);
 void InitPort(void);
 void InitTris(void);
@@ -9445,8 +9446,12 @@ void InitOsc(void);
 void InitUart(void);
 void InitSpi(void);
 void InitTimer(void);
+void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+
+# 45
+unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
 unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
@@ -9508,8 +9513,10 @@ t_frame_dif a_frame_dif[1];
 
 bit direction;
 
-unsigned int cm180 = 41982;
-unsigned int cm220 = 51310;
+
+
+unsigned int cm180 = 20991;
+unsigned int cm220 = 25655;
 unsigned int cm100 = 23323;
 unsigned int cm120 = 27987;
 unsigned int cm80 = 18659;
@@ -9539,9 +9546,12 @@ float changerate;
 bit highpassallowed;
 
 # 33 "main.h"
-interrupt void Isr(void);
+interrupt void Isr();
 
-# 27 "ultrasonic.c"
+# 69
+unsigned char pulsecounter = 0;
+
+# 21 "ultrasonic.c"
 void StartHeightMeasure(void) {
 TMR5L = 0;
 TMR5H = 0;
@@ -9549,17 +9559,20 @@ PORTBbits.RB3 = 0;
 }
 
 void ReadHeight(void) {
-while(TMR5IF == 0);
-TMR5IF = 0;
+while(TMR5GIF == 0);
+TMR5GIF = 0;
+time_height = 0;
 time_height = TMR5H;
 time_height <<= 8;
 time_height |= TMR5L;
+TMR5L = 0;
+TMR5H = 0;
 a_frame[0].height = time_height;
 a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
 PORTBbits.RB3 = 1;
 }
 
-# 47
+# 44
 unsigned int Filter(unsigned int entry){
 changerate = 0.2;
 if(highpassallowed){

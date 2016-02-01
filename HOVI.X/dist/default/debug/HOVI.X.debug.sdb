@@ -45,7 +45,6 @@
 [v _ExchangeSpiWord ExchangeSpiWord `(ui  1 e 2 0 ]
 "30 C:\projecthovi\HOVI.X\gear.c
 [v _ModeCheck ModeCheck `(b  1 e 0 0 ]
-[v i2_ModeCheck ModeCheck `(b  1 e 0 0 ]
 "30 C:\projecthovi\HOVI.X\init.c
 [v _Init Init `(v  1 e 0 0 ]
 "45
@@ -56,17 +55,17 @@
 [v _InitAnsel InitAnsel `(v  1 e 0 0 ]
 "75
 [v _InitOsc InitOsc `(v  1 e 0 0 ]
-"82
+"84
 [v _InitUart InitUart `(v  1 e 0 0 ]
-"95
+"97
 [v _InitSpi InitSpi `(v  1 e 0 0 ]
-"121
+"123
 [v _InitTimer InitTimer `(v  1 e 0 0 ]
-"162
+"166
 [v _InitComp InitComp `(v  1 e 0 0 ]
-"172
+"176
 [v _InitInterrupt InitInterrupt `(v  1 e 0 0 ]
-"186
+"192
 [v _InitActors InitActors `(v  1 e 0 0 ]
 "30 C:\projecthovi\HOVI.X\interrupt.c
 [v _Isr Isr `II(v  1 e 0 0 ]
@@ -109,11 +108,11 @@
 [v _ANSELD ANSELD `VEuc  1 e 1 @3899 ]
 "253
 [v _ANSELE ANSELE `VEuc  1 e 1 @3900 ]
-[s S854 . 1 `uc 1 . 1 0 :3:0 
+[s S903 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T5GGO_NOT_DONE 1 0 :1:3 
 ]
 "1583
-[s S857 . 1 `uc 1 T5GSS 1 0 :2:0 
+[s S906 . 1 `uc 1 T5GSS 1 0 :2:0 
 `uc 1 T5GVAL 1 0 :1:2 
 `uc 1 T5GGO_nDONE 1 0 :1:3 
 `uc 1 T5GSPM 1 0 :1:4 
@@ -121,28 +120,28 @@
 `uc 1 T5GPOL 1 0 :1:6 
 `uc 1 TMR5GE 1 0 :1:7 
 ]
-[s S865 . 1 `uc 1 T5GSS0 1 0 :1:0 
+[s S914 . 1 `uc 1 T5GSS0 1 0 :1:0 
 `uc 1 T5GSS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T5GGO 1 0 :1:3 
 ]
-[s S870 . 1 `uc 1 . 1 0 :3:0 
+[s S919 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T5G_DONE 1 0 :1:3 
 ]
-[u S873 . 1 `S854 1 . 1 0 `S857 1 . 1 0 `S865 1 . 1 0 `S870 1 . 1 0 ]
-[v _T5GCONbits T5GCONbits `VES873  1 e 1 @3917 ]
-[s S898 . 1 `uc 1 . 1 0 :2:0 
+[u S922 . 1 `S903 1 . 1 0 `S906 1 . 1 0 `S914 1 . 1 0 `S919 1 . 1 0 ]
+[v _T5GCONbits T5GCONbits `VES922  1 e 1 @3917 ]
+[s S947 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_T5SYNC 1 0 :1:2 
 ]
 "1683
-[s S901 . 1 `uc 1 TMR5ON 1 0 :1:0 
+[s S950 . 1 `uc 1 TMR5ON 1 0 :1:0 
 `uc 1 T5RD16 1 0 :1:1 
 `uc 1 nT5SYNC 1 0 :1:2 
 `uc 1 T5SOSCEN 1 0 :1:3 
 `uc 1 T5CKPS 1 0 :2:4 
 `uc 1 TMR5CS 1 0 :2:6 
 ]
-[s S908 . 1 `uc 1 . 1 0 :2:0 
+[s S957 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T5SYNC 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 T5CKPS0 1 0 :1:4 
@@ -150,14 +149,14 @@
 `uc 1 TMR5CS0 1 0 :1:6 
 `uc 1 TMR5CS1 1 0 :1:7 
 ]
-[s S916 . 1 `uc 1 . 1 0 :1:0 
+[s S965 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RD165 1 0 :1:1 
 ]
-[s S919 . 1 `uc 1 . 1 0 :3:0 
+[s S968 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SOSCEN5 1 0 :1:3 
 ]
-[u S922 . 1 `S898 1 . 1 0 `S901 1 . 1 0 `S908 1 . 1 0 `S916 1 . 1 0 `S919 1 . 1 0 ]
-[v _T5CONbits T5CONbits `VES922  1 e 1 @3918 ]
+[u S971 . 1 `S947 1 . 1 0 `S950 1 . 1 0 `S957 1 . 1 0 `S965 1 . 1 0 `S968 1 . 1 0 ]
+[v _T5CONbits T5CONbits `VES971  1 e 1 @3918 ]
 "1763
 [v _TMR5L TMR5L `VEuc  1 e 1 @3919 ]
 "1782
@@ -309,41 +308,55 @@
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 "9290
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
-[s S801 . 1 `uc 1 . 1 0 :2:0 
+[s S748 . 1 `uc 1 TUN 1 0 :6:0 
+`uc 1 PLLEN 1 0 :1:6 
+`uc 1 INTSRC 1 0 :1:7 
+]
+"9425
+[s S752 . 1 `uc 1 TUN0 1 0 :1:0 
+`uc 1 TUN1 1 0 :1:1 
+`uc 1 TUN2 1 0 :1:2 
+`uc 1 TUN3 1 0 :1:3 
+`uc 1 TUN4 1 0 :1:4 
+`uc 1 TUN5 1 0 :1:5 
+]
+[u S759 . 1 `S748 1 . 1 0 `S752 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES759  1 e 1 @3995 ]
+[s S850 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_T3SYNC 1 0 :1:2 
 ]
 "11906
-[s S804 . 1 `uc 1 TMR3ON 1 0 :1:0 
+[s S853 . 1 `uc 1 TMR3ON 1 0 :1:0 
 `uc 1 T3RD16 1 0 :1:1 
 `uc 1 nT3SYNC 1 0 :1:2 
 `uc 1 T3SOSCEN 1 0 :1:3 
 `uc 1 T3CKPS 1 0 :2:4 
 `uc 1 TMR3CS 1 0 :2:6 
 ]
-[s S811 . 1 `uc 1 . 1 0 :3:0 
+[s S860 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T3OSCEN 1 0 :1:3 
 `uc 1 T3CKPS0 1 0 :1:4 
 `uc 1 T3CKPS1 1 0 :1:5 
 `uc 1 TMR3CS0 1 0 :1:6 
 `uc 1 TMR3CS1 1 0 :1:7 
 ]
-[s S818 . 1 `uc 1 . 1 0 :7:0 
+[s S867 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 RD163 1 0 :1:7 
 ]
-[s S821 . 1 `uc 1 . 1 0 :3:0 
+[s S870 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SOSCEN3 1 0 :1:3 
 ]
-[u S824 . 1 `S801 1 . 1 0 `S804 1 . 1 0 `S811 1 . 1 0 `S818 1 . 1 0 `S821 1 . 1 0 ]
-[v _T3CONbits T3CONbits `VES824  1 e 1 @4017 ]
+[u S873 . 1 `S850 1 . 1 0 `S853 1 . 1 0 `S860 1 . 1 0 `S867 1 . 1 0 `S870 1 . 1 0 ]
+[v _T3CONbits T3CONbits `VES873  1 e 1 @4017 ]
 "11986
 [v _TMR3L TMR3L `VEuc  1 e 1 @4018 ]
 "12005
 [v _TMR3H TMR3H `VEuc  1 e 1 @4019 ]
-[s S757 . 1 `uc 1 . 1 0 :3:0 
+[s S806 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T3GGO_NOT_DONE 1 0 :1:3 
 ]
 "12054
-[s S760 . 1 `uc 1 T3GSS 1 0 :2:0 
+[s S809 . 1 `uc 1 T3GSS 1 0 :2:0 
 `uc 1 T3GVAL 1 0 :1:2 
 `uc 1 T3GGO_nDONE 1 0 :1:3 
 `uc 1 T3GSPM 1 0 :1:4 
@@ -351,22 +364,22 @@
 `uc 1 T3GPOL 1 0 :1:6 
 `uc 1 TMR3GE 1 0 :1:7 
 ]
-[s S768 . 1 `uc 1 T3GSS0 1 0 :1:0 
+[s S817 . 1 `uc 1 T3GSS0 1 0 :1:0 
 `uc 1 T3GSS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T3G_DONE 1 0 :1:3 
 ]
-[s S773 . 1 `uc 1 . 1 0 :3:0 
+[s S822 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T3GGO 1 0 :1:3 
 ]
-[u S776 . 1 `S757 1 . 1 0 `S760 1 . 1 0 `S768 1 . 1 0 `S773 1 . 1 0 ]
-[v _T3GCONbits T3GCONbits `VES776  1 e 1 @4020 ]
-[s S953 . 1 `uc 1 CCP1M 1 0 :4:0 
+[u S825 . 1 `S806 1 . 1 0 `S809 1 . 1 0 `S817 1 . 1 0 `S822 1 . 1 0 ]
+[v _T3GCONbits T3GCONbits `VES825  1 e 1 @4020 ]
+[s S1002 . 1 `uc 1 CCP1M 1 0 :4:0 
 `uc 1 DC1B 1 0 :2:4 
 `uc 1 P1M 1 0 :2:6 
 ]
 "13844
-[s S957 . 1 `uc 1 CCP1M0 1 0 :1:0 
+[s S1006 . 1 `uc 1 CCP1M0 1 0 :1:0 
 `uc 1 CCP1M1 1 0 :1:1 
 `uc 1 CCP1M2 1 0 :1:2 
 `uc 1 CCP1M3 1 0 :1:3 
@@ -375,8 +388,8 @@
 `uc 1 P1M0 1 0 :1:6 
 `uc 1 P1M1 1 0 :1:7 
 ]
-[u S966 . 1 `S953 1 . 1 0 `S957 1 . 1 0 ]
-[v _CCP1CONbits CCP1CONbits `VES966  1 e 1 @4029 ]
+[u S1015 . 1 `S1002 1 . 1 0 `S1006 1 . 1 0 ]
+[v _CCP1CONbits CCP1CONbits `VES1015  1 e 1 @4029 ]
 "13909
 [v _CCPR1L CCPR1L `VEuc  1 e 1 @4030 ]
 "13928
@@ -416,6 +429,18 @@
 [v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
 "16548
 [v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
+[s S727 . 1 `uc 1 LFIOFS 1 0 :1:0 
+`uc 1 MFIOFS 1 0 :1:1 
+`uc 1 PRISD 1 0 :1:2 
+`uc 1 SOSCGO 1 0 :1:3 
+`uc 1 MFIOSEL 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 SOSCRUN 1 0 :1:6 
+`uc 1 PLLRDY 1 0 :1:7 
+]
+"16743
+[u S736 . 1 `S727 1 . 1 0 ]
+[v _OSCCON2bits OSCCON2bits `VES736  1 e 1 @4050 ]
 "16782
 [v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
 "18476
@@ -432,6 +457,8 @@
 [v _TMR3GIE TMR3GIE `VEb  1 e 0 @32025 ]
 "20106
 [v _TMR3GIF TMR3GIF `VEb  1 e 0 @32033 ]
+"20112
+[v _TMR3IF TMR3IF `VEb  1 e 0 @32009 ]
 "20138
 [v _TMR5GIF TMR5GIF `VEb  1 e 0 @32034 ]
 "22 C:\projecthovi\HOVI.X\gear.h
@@ -461,29 +488,29 @@
 [v _a_frame_dif a_frame_dif `[1]S40  1 e 10 0 ]
 "67
 [v _direction direction `b  1 e 0 0 ]
-"69
-[v _cm180 cm180 `ui  1 e 2 0 ]
-"70
-[v _cm220 cm220 `ui  1 e 2 0 ]
 "71
-[v _cm100 cm100 `ui  1 e 2 0 ]
+[v _cm180 cm180 `ui  1 e 2 0 ]
 "72
-[v _cm120 cm120 `ui  1 e 2 0 ]
+[v _cm220 cm220 `ui  1 e 2 0 ]
 "73
-[v _cm80 cm80 `ui  1 e 2 0 ]
+[v _cm100 cm100 `ui  1 e 2 0 ]
 "74
+[v _cm120 cm120 `ui  1 e 2 0 ]
+"75
+[v _cm80 cm80 `ui  1 e 2 0 ]
+"76
 [v _cm50 cm50 `ui  1 e 2 0 ]
-"77
+"79
 [v _c_path c_path `i  1 e 2 0 ]
-"78
+"80
 [v _id_current_cc id_current_cc `i  1 e 2 0 ]
 [s S46 nt_path 2 `uc 1 lower_cc 1 0 `uc 1 higher_cc 1 1 ]
-"84
+"86
 [v _a_path a_path `[21]S46  1 e 42 0 ]
 [v _a_path_old a_path_old `[21]S46  1 e 42 0 ]
-"86
+"88
 [v _storedif storedif `b  1 e 0 0 ]
-"87
+"89
 [v _table table `b  1 e 0 0 ]
 "28 C:\projecthovi\HOVI.X\ultrasonic.h
 [v _time_height time_height `ui  1 e 2 0 ]
@@ -496,7 +523,7 @@
 "85 C:\projecthovi\HOVI.X\main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"97
+"96
 } 0
 "447 C:\projecthovi\HOVI.X\position.c
 [v _StoreAsOld StoreAsOld `(v  1 e 0 0 ]
@@ -539,35 +566,30 @@
 {
 "39
 } 0
-"30 C:\projecthovi\HOVI.X\gear.c
-[v _ModeCheck ModeCheck `(b  1 e 0 0 ]
-{
-"43
-} 0
 "30 C:\projecthovi\HOVI.X\init.c
 [v _Init Init `(v  1 e 0 0 ]
 {
 "41
 } 0
-"82
+"84
 [v _InitUart InitUart `(v  1 e 0 0 ]
 {
-"84
+"86
 } 0
 "55
 [v _InitTris InitTris `(v  1 e 0 0 ]
 {
 "61
 } 0
-"121
+"123
 [v _InitTimer InitTimer `(v  1 e 0 0 ]
 {
-"154
+"158
 } 0
-"95
+"97
 [v _InitSpi InitSpi `(v  1 e 0 0 ]
 {
-"98
+"100
 } 0
 "45
 [v _InitPort InitPort `(v  1 e 0 0 ]
@@ -577,27 +599,27 @@
 "75
 [v _InitOsc InitOsc `(v  1 e 0 0 ]
 {
-"78
+"80
 } 0
-"172
+"176
 [v _InitInterrupt InitInterrupt `(v  1 e 0 0 ]
 {
-"180
+"186
 } 0
-"162
+"166
 [v _InitComp InitComp `(v  1 e 0 0 ]
 {
-"164
+"168
 } 0
 "65
 [v _InitAnsel InitAnsel `(v  1 e 0 0 ]
 {
 "71
 } 0
-"186
+"192
 [v _InitActors InitActors `(v  1 e 0 0 ]
 {
-"191
+"197
 } 0
 "32 C:\projecthovi\HOVI.X\position.c
 [v _CompareFrames CompareFrames `(v  1 e 0 0 ]
@@ -652,9 +674,9 @@
 [v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
 {
 "315
-[v CheckThrottle@i_1681 i `i  1 a 2 6 ]
+[v CheckThrottle@i_1743 i `i  1 a 2 6 ]
 "310
-[v CheckThrottle@i_1680 i `i  1 a 2 12 ]
+[v CheckThrottle@i_1742 i `i  1 a 2 12 ]
 "306
 [v CheckThrottle@i i `i  1 a 2 10 ]
 "305
@@ -682,12 +704,7 @@
 "30 C:\projecthovi\HOVI.X\interrupt.c
 [v _Isr Isr `II(v  1 e 0 0 ]
 {
-"50
-} 0
-"30 C:\projecthovi\HOVI.X\gear.c
-[v i2_ModeCheck ModeCheck `(b  1 e 0 0 ]
-{
-"43
+"55
 } 0
 "32 C:\projecthovi\HOVI.X\actors.c
 [v _SignalOut SignalOut `(v  1 e 0 0 ]
@@ -699,4 +716,9 @@
 {
 [v Delay@del del `ui  1 p 2 0 ]
 "29
+} 0
+"30 C:\projecthovi\HOVI.X\gear.c
+[v _ModeCheck ModeCheck `(b  1 e 0 0 ]
+{
+"44
 } 0
