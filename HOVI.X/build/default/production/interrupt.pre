@@ -9412,7 +9412,7 @@ extern char * ftoa(float f, int * status);
 # 21 "actors.h"
 void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
-void ActThrottle(unsigned char change);
+void ActThrottle(signed char change);
 void ActRudder(unsigned char change);
 void SignalOut(void);
 void Delay(unsigned int del);
@@ -9434,7 +9434,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 
 # 28 "init.h"
@@ -9557,18 +9557,14 @@ if(CCP1IF == 1) {
 CCP1IF = 0;
 T1CONbits.TMR1ON = 0;
 SignalOut();
+__nop();
 }
 if(TMR3GIF == 1) {
 TMR3GIF = 0;
-time_gear = TMR3H;
-time_gear <<= 8;
-time_gear = TMR3L;
-TMR3H = 0;
-TMR3L = 0;
 ModeCheck();
 SignalOut();
 
-# 48
+# 44
 pulsecounter++;
 }
 }

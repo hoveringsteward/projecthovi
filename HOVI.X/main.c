@@ -86,8 +86,8 @@ void main(void) {
     Init();
     while(1) {
         StartHeightMeasure();
-        ReadObject(1, 10, 5); // colorcodes, obj I want, maximum number of read objects
-        CompareFrames();
+//        ReadObject(1, 10, 5); // colorcodes, obj I want, maximum number of read objects
+//        CompareFrames();
         ReadHeight();
         CheckThrottle();
         StoreAsOld();

@@ -7511,7 +7511,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
 [; ;actors.h: 21: void ActAileron(unsigned char change);
 [; ;actors.h: 22: void ActElevator(unsigned char change);
-[; ;actors.h: 23: void ActThrottle(unsigned char change);
+[; ;actors.h: 23: void ActThrottle(signed char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
@@ -7530,7 +7530,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
-[; ;gear.h: 22: bit set_ret;
+[i _set_ret
+-> 0 `i
+]
+[; ;gear.h: 22: bit set_ret = 0;
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;

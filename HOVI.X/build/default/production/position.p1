@@ -27,7 +27,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "22
 [v _ActElevator `(v ~T0 @X0 0 ef1`uc ]
 "23
-[v _ActThrottle `(v ~T0 @X0 0 ef1`uc ]
+[v _ActThrottle `(v ~T0 @X0 0 ef1`c ]
 [v F7833 `(v ~T0 @X0 1 tf1`ul ]
 "152 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
 [v __delay `JF7833 ~T0 @X0 0 e ]
@@ -7529,7 +7529,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
 [; ;actors.h: 21: void ActAileron(unsigned char change);
 [; ;actors.h: 22: void ActElevator(unsigned char change);
-[; ;actors.h: 23: void ActThrottle(unsigned char change);
+[; ;actors.h: 23: void ActThrottle(signed char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
@@ -7548,7 +7548,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
-[; ;gear.h: 22: bit set_ret;
+[i _set_ret
+-> 0 `i
+]
+[; ;gear.h: 22: bit set_ret = 0;
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
@@ -8083,7 +8086,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 198: ActThrottle(0);
 "198
-[e ( _ActThrottle (1 -> -> 0 `i `uc ]
+[e ( _ActThrottle (1 -> -> 0 `i `c ]
 "199
 }
 [; ;position.c: 199: } else if (a_frame[0].height < cm80) {
@@ -8097,7 +8100,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 201: ActThrottle(6);
 "201
-[e ( _ActThrottle (1 -> -> 6 `i `uc ]
+[e ( _ActThrottle (1 -> -> 6 `i `c ]
 "202
 }
 [; ;position.c: 202: } else {
@@ -8106,7 +8109,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 203: ActThrottle(3);
 "203
-[e ( _ActThrottle (1 -> -> 3 `i `uc ]
+[e ( _ActThrottle (1 -> -> 3 `i `c ]
 "204
 }
 [e :U 1196 ]
@@ -8119,7 +8122,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 206: ActThrottle(-3);
 "206
-[e ( _ActThrottle (1 -> -U -> 3 `i `uc ]
+[e ( _ActThrottle (1 -> -U -> 3 `i `c ]
 "207
 }
 [e :U 1197 ]
@@ -8141,7 +8144,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 218: ActThrottle(0);
 "218
-[e ( _ActThrottle (1 -> -> 0 `i `uc ]
+[e ( _ActThrottle (1 -> -> 0 `i `c ]
 "219
 }
 [; ;position.c: 219: } else if (a_frame[0].height < cm180) {
@@ -8155,7 +8158,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 221: ActThrottle(6);
 "221
-[e ( _ActThrottle (1 -> -> 6 `i `uc ]
+[e ( _ActThrottle (1 -> -> 6 `i `c ]
 "222
 }
 [; ;position.c: 222: } else {
@@ -8164,7 +8167,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 223: ActThrottle(3);
 "223
-[e ( _ActThrottle (1 -> -> 3 `i `uc ]
+[e ( _ActThrottle (1 -> -> 3 `i `c ]
 "224
 }
 [e :U 1203 ]
@@ -8177,7 +8180,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 226: ActThrottle(-3);
 "226
-[e ( _ActThrottle (1 -> -U -> 3 `i `uc ]
+[e ( _ActThrottle (1 -> -U -> 3 `i `c ]
 "227
 }
 [e :U 1204 ]
@@ -8352,7 +8355,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 284: ActThrottle(-3);
 "284
-[e ( _ActThrottle (1 -> -U -> 3 `i `uc ]
+[e ( _ActThrottle (1 -> -U -> 3 `i `c ]
 "285
 }
 [; ;position.c: 285: } else {
@@ -8361,7 +8364,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 286: ActThrottle(0);
 "286
-[e ( _ActThrottle (1 -> -> 0 `i `uc ]
+[e ( _ActThrottle (1 -> -> 0 `i `c ]
 "287
 }
 [e :U 1228 ]
@@ -8374,7 +8377,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 289: ActThrottle(3);
 "289
-[e ( _ActThrottle (1 -> -> 3 `i `uc ]
+[e ( _ActThrottle (1 -> -> 3 `i `c ]
 "290
 }
 [e :U 1229 ]
@@ -8387,7 +8390,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;position.c: 293: ActThrottle(-3);
 "293
-[e ( _ActThrottle (1 -> -U -> 3 `i `uc ]
+[e ( _ActThrottle (1 -> -U -> 3 `i `c ]
 "294
 }
 [e :U 1230 ]

@@ -9412,7 +9412,7 @@ extern char * ftoa(float f, int * status);
 # 21 "actors.h"
 void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
-void ActThrottle(unsigned char change);
+void ActThrottle(signed char change);
 void ActRudder(unsigned char change);
 void SignalOut(void);
 void Delay(unsigned int del);
@@ -9434,7 +9434,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 
 # 28 "init.h"
@@ -9553,8 +9553,8 @@ unsigned char pulsecounter = 0;
 
 # 20 "actors.c"
 void Delay(unsigned int del) {
-del = 1000 + del;
 del <<= 1;
+del = 1000 + del;
 TMR1L = 0;
 TMR1H = 0;
 CCPR1L = del;
@@ -9584,7 +9584,7 @@ Delay(a_actors[0].thro);
 pin_out = 'R';
 break;
 }case 'R': {
-PORTAbits.RA2 = 0;
+PORTAbits.RA3 = 0;
 PORTAbits.RA2 = 1;
 Delay(a_actors[0].rudd);
 pin_out = 0;
@@ -9608,11 +9608,18 @@ a_actors[0].elev += change;
 }
 
 # 89
-void ActThrottle(unsigned char change){
+void ActThrottle(signed char change) {
+if(a_actors[0].thro <= 1000 || change < 0) {
 a_actors[0].thro += change;
+if(a_actors[0].thro > 1050) {
+a_actors[0].thro = 0;
+}
+}else {
+__nop();
+}
 }
 
-# 98
+# 105
 void ActRudder(unsigned char change){
 a_actors[0].rudd += change;
 }

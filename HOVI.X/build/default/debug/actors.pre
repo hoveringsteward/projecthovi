@@ -9608,11 +9608,18 @@ a_actors[0].elev += change;
 }
 
 # 89
-void ActThrottle(unsigned char change){
+void ActThrottle(signed char change) {
+if(a_actors[0].thro <= 1000 || change < 0) {
 a_actors[0].thro += change;
+if(a_actors[0].thro > 1050) {
+a_actors[0].thro = 0;
+}
+}else {
+__nop();
+}
 }
 
-# 98
+# 105
 void ActRudder(unsigned char change){
 a_actors[0].rudd += change;
 }

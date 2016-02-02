@@ -9412,7 +9412,7 @@ extern char * ftoa(float f, int * status);
 # 21 "actors.h"
 void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
-void ActThrottle(unsigned char change);
+void ActThrottle(signed char change);
 void ActRudder(unsigned char change);
 void SignalOut(void);
 void Delay(unsigned int del);
@@ -9548,7 +9548,7 @@ unsigned char pulsecounter = 0;
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 
 # 16 "gear.c"
@@ -9564,6 +9564,8 @@ return time_gear_meas;
 
 # 30
 bit ModeCheck(void) {
+__nop();
+time_gear = CalcTime();
 if(time_gear < 6800){
 
 PORTBbits.RB2 = 0;

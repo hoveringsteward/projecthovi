@@ -35,12 +35,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _T1CONbits `VS1027 ~T0 @X0 0 e@4045 ]
 "25 actors.h
 [v _SignalOut `(v ~T0 @X0 0 ef ]
+"43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
+[v ___nop `(v ~T0 @X0 0 ef ]
+[p i ___nop ]
 "20106 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _TMR3GIF `Vb ~T0 @X0 0 e@32033 ]
-"12005
-[v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
-"11986
-[v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
 "21 gear.h
 [v _ModeCheck `(b ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -7538,7 +7537,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
 [; ;actors.h: 21: void ActAileron(unsigned char change);
 [; ;actors.h: 22: void ActElevator(unsigned char change);
-[; ;actors.h: 23: void ActThrottle(unsigned char change);
+[; ;actors.h: 23: void ActThrottle(signed char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
@@ -7557,7 +7556,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
-[; ;gear.h: 22: bit set_ret;
+[i _set_ret
+-> 0 `i
+]
+[; ;gear.h: 22: bit set_ret = 0;
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
@@ -7738,46 +7740,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupt.c: 34: SignalOut();
 "34
 [e ( _SignalOut ..  ]
+[; ;interrupt.c: 35: __nop();
 "35
+[e ( ___nop ..  ]
+"36
 }
 [e :U 1153 ]
-[; ;interrupt.c: 35: }
-[; ;interrupt.c: 36: if(TMR3GIF == 1) {
-"36
+[; ;interrupt.c: 36: }
+[; ;interrupt.c: 37: if(TMR3GIF == 1) {
+"37
 [e $ ! == -> _TMR3GIF `i -> 1 `i 1154  ]
 {
-[; ;interrupt.c: 37: TMR3GIF = 0;
-"37
-[e = _TMR3GIF -> -> 0 `i `b ]
-[; ;interrupt.c: 38: time_gear = TMR3H;
+[; ;interrupt.c: 38: TMR3GIF = 0;
 "38
-[e = _time_gear -> _TMR3H `ui ]
-[; ;interrupt.c: 39: time_gear <<= 8;
+[e = _TMR3GIF -> -> 0 `i `b ]
+[; ;interrupt.c: 39: ModeCheck();
 "39
-[e =<< _time_gear -> 8 `i ]
-[; ;interrupt.c: 40: time_gear = TMR3L;
-"40
-[e = _time_gear -> _TMR3L `ui ]
-[; ;interrupt.c: 41: TMR3H = 0;
-"41
-[e = _TMR3H -> -> 0 `i `uc ]
-[; ;interrupt.c: 42: TMR3L = 0;
-"42
-[e = _TMR3L -> -> 0 `i `uc ]
-[; ;interrupt.c: 43: ModeCheck();
-"43
 [e ( _ModeCheck ..  ]
-[; ;interrupt.c: 44: SignalOut();
-"44
+[; ;interrupt.c: 40: SignalOut();
+"40
 [e ( _SignalOut ..  ]
-[; ;interrupt.c: 48: pulsecounter++;
-"48
+[; ;interrupt.c: 44: pulsecounter++;
+"44
 [e ++ _pulsecounter -> -> 1 `i `uc ]
-"49
+"45
 }
 [e :U 1154 ]
-[; ;interrupt.c: 49: }
-[; ;interrupt.c: 50: }
-"50
+[; ;interrupt.c: 45: }
+[; ;interrupt.c: 46: }
+"46
 [e :UE 1152 ]
 }

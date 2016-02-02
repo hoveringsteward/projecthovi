@@ -49,7 +49,7 @@ void SignalOut(void) {
             pin_out = 'R';
             break;
         }case 'R': {
-            R = 0;
+            T = 0;
             R = 1;
             Delay(a_actors[0].rudd);
             pin_out = 0;
@@ -86,8 +86,15 @@ void ActElevator(unsigned char change){
 /* ActThrottle                                                      */
 /* Height                                                           */
 /*------------------------------------------------------------------*/
-void ActThrottle(unsigned char change){
-    a_actors[0].thro += change;
+void ActThrottle(signed char change) {
+    if(a_actors[0].thro <= 1000 || change < 0) {
+        a_actors[0].thro += change;
+        if(a_actors[0].thro > 1050) {
+            a_actors[0].thro = 0;
+        }
+    }else {
+        NOP();
+    }
 }
 // </editor-fold>
 

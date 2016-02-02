@@ -9412,7 +9412,7 @@ extern char * ftoa(float f, int * status);
 # 21 "actors.h"
 void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
-void ActThrottle(unsigned char change);
+void ActThrottle(signed char change);
 void ActRudder(unsigned char change);
 void SignalOut(void);
 void Delay(unsigned int del);
@@ -9434,7 +9434,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 
 # 28 "init.h"
@@ -9601,6 +9601,8 @@ void InitOsc(void) {
 OSCCON = 0b01110111;
 
 # 78
+OSCCON2bits.PLLRDY = 1;
+OSCTUNEbits.PLLEN = 1;
 }
 
 
@@ -9609,17 +9611,17 @@ void InitUart(void) {
 
 }
 
-# 95
+# 97
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 121
+# 123
 void InitTimer(void) {
 
 T1CONbits.TMR1CS = 0b00;
-T1CONbits.T1CKPS = 0b11;
+T1CONbits.T1CKPS = 0b01;
 T1CONbits.nT1SYNC = 1;
 T1CONbits.TMR1ON = 0;
 TMR1H = 0;
@@ -9634,7 +9636,7 @@ T3GCONbits.T3GPOL = 1;
 T3GCONbits.T3GSS = 0b00;
 
 T3CONbits.TMR3CS = 0b00;
-T3CONbits.T3CKPS = 0b10;
+T3CONbits.T3CKPS = 0b00;
 T3CONbits.nT3SYNC = 1;
 T3CONbits.TMR3ON = 1;
 
@@ -9647,18 +9649,18 @@ T5GCONbits.T5GPOL = 1;
 T5GCONbits.T5GSS = 0b00;
 
 T5CONbits.TMR5CS = 0b00;
-T5CONbits.T5CKPS = 0b10;
+T5CONbits.T5CKPS = 0b00;
 T5CONbits.nT5SYNC = 1;
 T5CONbits.TMR5ON = 1;
 
 }
 
-# 164
+# 166
 void InitComp(void) {
 CCP1CONbits.CCP1M = 0b1010;
 }
 
-# 174
+# 176
 void InitInterrupt(void) {
 
 TMR3GIE = 1;
@@ -9671,7 +9673,7 @@ PEIE = 1;
 GIE = 1;
 }
 
-# 190
+# 192
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;

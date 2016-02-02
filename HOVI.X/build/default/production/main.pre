@@ -9474,7 +9474,7 @@ extern char * ftoa(float f, int * status);
 # 21 "actors.h"
 void ActAileron(unsigned char change);
 void ActElevator(unsigned char change);
-void ActThrottle(unsigned char change);
+void ActThrottle(signed char change);
 void ActRudder(unsigned char change);
 void SignalOut(void);
 void Delay(unsigned int del);
@@ -9496,7 +9496,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 # 20 "gear.h"
 unsigned int CalcTime(void);
 bit ModeCheck(void);
-bit set_ret;
+bit set_ret = 0;
 unsigned int time_gear;
 
 # 28 "init.h"
@@ -9618,7 +9618,6 @@ void main(void) {
 Init();
 while(1) {
 StartHeightMeasure();
-ModeCheck();
 
 
 ReadHeight();

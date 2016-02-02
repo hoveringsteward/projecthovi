@@ -7592,7 +7592,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
 [; ;actors.h: 21: void ActAileron(unsigned char change);
 [; ;actors.h: 22: void ActElevator(unsigned char change);
-[; ;actors.h: 23: void ActThrottle(unsigned char change);
+[; ;actors.h: 23: void ActThrottle(signed char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
@@ -7768,7 +7768,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
-[; ;gear.h: 22: bit set_ret;
+[i _set_ret
+-> 0 `i
+]
+[; ;gear.h: 22: bit set_ret = 0;
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
@@ -7811,48 +7814,54 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 30: bit ModeCheck(void) {
 [e :U _ModeCheck ]
 [f ]
-[; ;gear.c: 31: if(time_gear < 6800){
+[; ;gear.c: 31: __nop();
 "31
+[e ( ___nop ..  ]
+[; ;gear.c: 32: time_gear = CalcTime();
+"32
+[e = _time_gear ( _CalcTime ..  ]
+[; ;gear.c: 33: if(time_gear < 6800){
+"33
 [e $ ! < _time_gear -> -> 6800 `i `ui 1154  ]
 {
-[; ;gear.c: 33: PORTBbits.RB2 = 0;
-"33
-[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
-[; ;gear.c: 34: PORTAbits.RA5 = 1;
-"34
-[e = . . _PORTAbits 0 5 -> -> 1 `i `uc ]
-[; ;gear.c: 35: set_ret = 0;
+[; ;gear.c: 35: PORTBbits.RB2 = 0;
 "35
-[e = _set_ret -> -> 0 `i `b ]
+[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
+[; ;gear.c: 36: PORTAbits.RA5 = 1;
 "36
+[e = . . _PORTAbits 0 5 -> -> 1 `i `uc ]
+[; ;gear.c: 37: set_ret = 0;
+"37
+[e = _set_ret -> -> 0 `i `b ]
+"38
 }
-[; ;gear.c: 36: }else if(time_gear >= 6800) {
+[; ;gear.c: 38: }else if(time_gear >= 6800) {
 [e $U 1155  ]
 [e :U 1154 ]
 [e $ ! >= _time_gear -> -> 6800 `i `ui 1156  ]
 {
-[; ;gear.c: 37: PORTBbits.RB2 = 1;
-"37
-[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
-[; ;gear.c: 38: PORTAbits.RA5 = 0;
-"38
-[e = . . _PORTAbits 0 5 -> -> 0 `i `uc ]
-[; ;gear.c: 39: set_ret = 1;
+[; ;gear.c: 39: PORTBbits.RB2 = 1;
 "39
-[e = _set_ret -> -> 1 `i `b ]
+[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
+[; ;gear.c: 40: PORTAbits.RA5 = 0;
 "40
+[e = . . _PORTAbits 0 5 -> -> 0 `i `uc ]
+[; ;gear.c: 41: set_ret = 1;
+"41
+[e = _set_ret -> -> 1 `i `b ]
+"42
 }
 [e :U 1156 ]
-"41
+"43
 [e :U 1155 ]
-[; ;gear.c: 40: }
-[; ;gear.c: 41: __nop();
+[; ;gear.c: 42: }
+[; ;gear.c: 43: __nop();
 [e ( ___nop ..  ]
-[; ;gear.c: 42: return set_ret;
-"42
+[; ;gear.c: 44: return set_ret;
+"44
 [e ) -> -> _set_ret `i `b ]
 [e $UE 1153  ]
-[; ;gear.c: 43: }
-"43
+[; ;gear.c: 45: }
+"45
 [e :UE 1153 ]
 }

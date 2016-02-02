@@ -86,6 +86,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S400 . . . . . . . . . . . . . . . ]
 "6457
 [v _PORTAbits `VS400 ~T0 @X0 0 e@3968 ]
+"43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
+[v ___nop `(v ~T0 @X0 0 ef ]
+[p i ___nop ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7581,7 +7584,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
 [; ;actors.h: 21: void ActAileron(unsigned char change);
 [; ;actors.h: 22: void ActElevator(unsigned char change);
-[; ;actors.h: 23: void ActThrottle(unsigned char change);
+[; ;actors.h: 23: void ActThrottle(signed char change);
 [; ;actors.h: 24: void ActRudder(unsigned char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
@@ -7600,7 +7603,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
-[; ;gear.h: 22: bit set_ret;
+[i _set_ret
+-> 0 `i
+]
+[; ;gear.h: 22: bit set_ret = 0;
 "23
 [v _time_gear `ui ~T0 @X0 1 e ]
 [; ;gear.h: 23: unsigned int time_gear;
@@ -7768,12 +7774,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _Delay ]
 [v _del `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 21: del = 1000 + del;
+[; ;actors.c: 21: del <<= 1;
 "21
-[e = _del + -> -> 1000 `i `ui _del ]
-[; ;actors.c: 22: del <<= 1;
-"22
 [e =<< _del -> 1 `i ]
+[; ;actors.c: 22: del = 1000 + del;
+"22
+[e = _del + -> -> 1000 `i `ui _del ]
 [; ;actors.c: 23: TMR1L = 0;
 "23
 [e = _TMR1L -> -> 0 `i `uc ]
@@ -7867,9 +7873,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.c: 51: }case 'R': {
 [e :U 1159 ]
 {
-[; ;actors.c: 52: PORTAbits.RA2 = 0;
+[; ;actors.c: 52: PORTAbits.RA3 = 0;
 "52
-[e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
+[e = . . _PORTAbits 0 3 -> -> 0 `i `uc ]
 [; ;actors.c: 53: PORTAbits.RA2 = 1;
 "53
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
@@ -7946,30 +7952,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 1162 ]
 }
 "89
-[v _ActThrottle `(v ~T0 @X0 1 ef1`uc ]
+[v _ActThrottle `(v ~T0 @X0 1 ef1`c ]
 {
-[; ;actors.c: 89: void ActThrottle(unsigned char change){
+[; ;actors.c: 89: void ActThrottle(signed char change) {
 [e :U _ActThrottle ]
-[v _change `uc ~T0 @X0 1 r1 ]
+[v _change `c ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 90: a_actors[0].thro += change;
+[; ;actors.c: 90: if(a_actors[0].thro <= 1000 || change < 0) {
 "90
-[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> _change `ui ]
-[; ;actors.c: 91: }
+[e $ ! || <= . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 1000 `i `ui < -> _change `i -> 0 `i 1164  ]
+{
+[; ;actors.c: 91: a_actors[0].thro += change;
 "91
+[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> _change `i `ui ]
+[; ;actors.c: 92: if(a_actors[0].thro > 1050) {
+"92
+[e $ ! > . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 1050 `i `ui 1165  ]
+{
+[; ;actors.c: 93: a_actors[0].thro = 0;
+"93
+[e = . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 0 `i `ui ]
+"94
+}
+[e :U 1165 ]
+"95
+}
+[; ;actors.c: 94: }
+[; ;actors.c: 95: }else {
+[e $U 1166  ]
+[e :U 1164 ]
+{
+[; ;actors.c: 96: __nop();
+"96
+[e ( ___nop ..  ]
+"97
+}
+[e :U 1166 ]
+[; ;actors.c: 97: }
+[; ;actors.c: 98: }
+"98
 [e :UE 1163 ]
 }
-"98
+"105
 [v _ActRudder `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;actors.c: 98: void ActRudder(unsigned char change){
+[; ;actors.c: 105: void ActRudder(unsigned char change){
 [e :U _ActRudder ]
 [v _change `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 99: a_actors[0].rudd += change;
-"99
+[; ;actors.c: 106: a_actors[0].rudd += change;
+"106
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 -> _change `ui ]
-[; ;actors.c: 100: }
-"100
-[e :UE 1164 ]
+[; ;actors.c: 107: }
+"107
+[e :UE 1167 ]
 }
