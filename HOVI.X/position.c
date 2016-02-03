@@ -239,7 +239,7 @@ void CheckThrottle(void) {
     if (id_current_cc == 0) { // Table: start
         // check, if difference is more than 50cm, from table to floor
         if (a_frame_dif[0].dif_height < -cm50) {
-            if (storedif) {
+            if (storedif == 1) {
                 table = 0;
             } else {
                 storedif = 1;
@@ -247,7 +247,7 @@ void CheckThrottle(void) {
         }else{
             storedif = 0;
         }
-        if (table) {
+        if (table == 1) {
             BeneathTable();
         } else {
             BeneathFloor();
