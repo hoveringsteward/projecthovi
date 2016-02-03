@@ -9517,14 +9517,14 @@ bit direction;
 
 unsigned int cm180 = 20991;
 unsigned int cm220 = 25655;
-unsigned int cm100 = 23323;
-unsigned int cm120 = 27987;
-unsigned int cm80 = 18659;
-unsigned int cm50 = 11662;
+signed int cm100 = 23323;
+signed int cm120 = 27987;
+signed int cm80 = 18659;
+signed int cm50 = 11662;
 
 
 int c_path = 10;
-int id_current_cc;
+int id_current_cc = 0;
 typedef struct nt_path{
 unsigned char lower_cc;
 unsigned char higher_cc;
@@ -9533,7 +9533,7 @@ unsigned char higher_cc;
 t_path a_path[21], a_path_old[21];
 
 bit storedif;
-bit table;
+bit table = 0;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9601,8 +9601,6 @@ void InitOsc(void) {
 OSCCON = 0b01110111;
 
 # 78
-OSCCON2bits.PLLRDY = 1;
-OSCTUNEbits.PLLEN = 1;
 }
 
 
@@ -9611,13 +9609,13 @@ void InitUart(void) {
 
 }
 
-# 97
+# 95
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 123
+# 121
 void InitTimer(void) {
 
 T1CONbits.TMR1CS = 0b00;
@@ -9655,12 +9653,12 @@ T5CONbits.TMR5ON = 1;
 
 }
 
-# 166
+# 164
 void InitComp(void) {
 CCP1CONbits.CCP1M = 0b1010;
 }
 
-# 176
+# 174
 void InitInterrupt(void) {
 
 TMR3GIE = 1;
@@ -9673,7 +9671,7 @@ PEIE = 1;
 GIE = 1;
 }
 
-# 192
+# 190
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;

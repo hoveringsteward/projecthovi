@@ -7697,29 +7697,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;position.h: 72: unsigned int cm220 = 25655;
 "73
-[v _cm100 `ui ~T0 @X0 1 e ]
+[v _cm100 `i ~T0 @X0 1 e ]
 [i _cm100
--> -> 23323 `i `ui
+-> 23323 `i
 ]
-[; ;position.h: 73: unsigned int cm100 = 23323;
+[; ;position.h: 73: signed int cm100 = 23323;
 "74
-[v _cm120 `ui ~T0 @X0 1 e ]
+[v _cm120 `i ~T0 @X0 1 e ]
 [i _cm120
--> -> 27987 `i `ui
+-> 27987 `i
 ]
-[; ;position.h: 74: unsigned int cm120 = 27987;
+[; ;position.h: 74: signed int cm120 = 27987;
 "75
-[v _cm80 `ui ~T0 @X0 1 e ]
+[v _cm80 `i ~T0 @X0 1 e ]
 [i _cm80
--> -> 18659 `i `ui
+-> 18659 `i
 ]
-[; ;position.h: 75: unsigned int cm80 = 18659;
+[; ;position.h: 75: signed int cm80 = 18659;
 "76
-[v _cm50 `ui ~T0 @X0 1 e ]
+[v _cm50 `i ~T0 @X0 1 e ]
 [i _cm50
--> -> 11662 `i `ui
+-> 11662 `i
 ]
-[; ;position.h: 76: unsigned int cm50 = 11662;
+[; ;position.h: 76: signed int cm50 = 11662;
 "79
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
@@ -7728,7 +7728,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 79: int c_path = 10;
 "80
 [v _id_current_cc `i ~T0 @X0 1 e ]
-[; ;position.h: 80: int id_current_cc;
+[i _id_current_cc
+-> 0 `i
+]
+[; ;position.h: 80: int id_current_cc = 0;
 [; ;position.h: 81: typedef struct nt_path{
 [; ;position.h: 82: unsigned char lower_cc;
 [; ;position.h: 83: unsigned char higher_cc;
@@ -7742,7 +7745,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 88: bit storedif;
 "89
 [v _table `b ~T0 @X0 1 e ]
-[; ;position.h: 89: bit table;
+[i _table
+-> 0 `i
+]
+[; ;position.h: 89: bit table = 0;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h

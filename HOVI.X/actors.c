@@ -18,8 +18,8 @@
 #include "main.h"
 
 void Delay(unsigned int del) {
-    del <<= 1;      // x2
-    del = 1000 + del;
+    del <<= 1;      // x2, 1 times del equals 0.5 µs
+    del = 2000 + del;
     TMR1L = 0;
     TMR1H = 0;
     CCPR1L = del;   // writing lower 8 bits to CCPR1 register
@@ -62,7 +62,6 @@ void SignalOut(void) {
     }
 }
 // </editor-fold>
-
 
 // <editor-fold defaultstate="collapsed" desc="Act Ailerons">
 /* ActAilerons                                                      */

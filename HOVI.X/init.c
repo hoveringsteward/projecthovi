@@ -73,10 +73,8 @@ void InitAnsel(void) {
 
 // <editor-fold defaultstate="collapsed" desc="OSC">
 void InitOsc(void) {
-    OSCCON = 0b01110111;    /* PLL enabled 16x4MHz, INTOSC, 
+    OSCCON = 0b01110111;    /* 16 MHz, INTOSC, 
                              * stable HFOSC, Internal osc-block */
-    OSCCON2bits.PLLRDY = 1;
-    OSCTUNEbits.PLLEN = 1;
 }
 // </editor-fold>
 

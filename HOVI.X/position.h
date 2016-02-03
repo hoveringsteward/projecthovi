@@ -70,14 +70,14 @@ bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
 //unsigned int cm220 = 51310;
 unsigned int cm180 = 20991;       //90 Test
 unsigned int cm220 = 25655;       //110 Test
-unsigned int cm100 = 23323;
-unsigned int cm120 = 27987;
-unsigned int cm80 = 18659;
-unsigned int cm50 = 11662; // 11661.5
+signed int cm100 = 23323;
+signed int cm120 = 27987;
+signed int cm80 = 18659;
+signed int cm50 = 11662; // 11661.5
 
 // FÜRS WLAN !!!!!!!!!!!!!!! - gehört da nicht rein
 int c_path = 10; // 10 counter der farben
-int id_current_cc; // der wievielte Farbcode 0-9
+int id_current_cc = 0; // der wievielte Farbcode 0-9
 typedef struct nt_path{
     unsigned char lower_cc;
     unsigned char higher_cc;
@@ -86,7 +86,7 @@ typedef struct nt_path{
 t_path a_path[21], a_path_old[21];
 
 bit storedif; // table / floor: if the difference was over 50cm the last time, it's 1
-bit table; // 1 table; 0 floor
+bit table = 0; // 1 table; 0 floor
 
 // </editor-fold>
 #endif	/* POSITION_H */
