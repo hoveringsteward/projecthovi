@@ -9517,14 +9517,14 @@ bit direction;
 
 unsigned int cm180 = 20991;
 unsigned int cm220 = 25655;
-unsigned int cm100 = 23323;
-unsigned int cm120 = 27987;
-unsigned int cm80 = 18659;
-unsigned int cm50 = 11662;
+signed int cm100 = 23323;
+signed int cm120 = 27987;
+signed int cm80 = 18659;
+signed int cm50 = 11662;
 
 
 int c_path = 10;
-int id_current_cc;
+int id_current_cc = 0;
 typedef struct nt_path{
 unsigned char lower_cc;
 unsigned char higher_cc;
@@ -9533,7 +9533,7 @@ unsigned char higher_cc;
 t_path a_path[21], a_path_old[21];
 
 bit storedif;
-bit table;
+bit table = 0;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9597,17 +9597,17 @@ break;
 }
 }
 
-# 71
+# 70
 void ActAileron(unsigned char change){
 a_actors[0].aile += change;
 }
 
-# 80
+# 79
 void ActElevator(unsigned char change){
 a_actors[0].elev += change;
 }
 
-# 89
+# 88
 void ActThrottle(signed char change) {
 if(a_actors[0].thro <= 1000 || change < 0) {
 a_actors[0].thro += change;
@@ -9619,7 +9619,7 @@ __nop();
 }
 }
 
-# 105
+# 104
 void ActRudder(unsigned char change){
 a_actors[0].rudd += change;
 }

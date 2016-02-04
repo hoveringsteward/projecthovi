@@ -459,9 +459,9 @@ bssBANK0 60 E6 BANK0 60 1
 bssBANK1 100 129 BANK1 100 1
 text8 83C 85B CODE 83C 0
 %locals
-dist/default/production\HOVI.X.production.obj
+dist/default/debug\HOVI.X.debug.obj
 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-C:\Users\Lucas\AppData\Local\Temp\s5tc.
+C:\Users\Lucas\AppData\Local\Temp\s4m8.
 5982 494 0 CODE 0
 5984 494 0 CODE 0
 5987 494 0 CODE 0
