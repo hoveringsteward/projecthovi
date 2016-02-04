@@ -25,7 +25,8 @@
 // <editor-fold defaultstate="collapsed" desc="Compare Frames">
 
 /* compareFrames
- * compares the X and Y position of one colorobject in a frame with the same 
+ * compares the height of the hex-rotor of the old and the new frame
+ * compares the X and Y position and rotation of one colorobject in a frame with the same 
  * colorobject in the next frame
  * frame 1 - frame 0, respective old - new
 /*---------------------------------------------------------------------------*/
