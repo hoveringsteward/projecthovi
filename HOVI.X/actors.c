@@ -67,7 +67,7 @@ void SignalOut(void) {
 /* ActAilerons                                                      */
 /* roll = rollen -> links/rechts                                    */
 /*------------------------------------------------------------------*/
-void ActAileron(unsigned char change){
+void ActAileron(signed char change){
     a_actors[0].aile += change;
 }
 // </editor-fold>
@@ -76,7 +76,7 @@ void ActAileron(unsigned char change){
 /* ActElevator                                                      */
 /* pitch = nicken -> vor/zurück                                     */
 /*------------------------------------------------------------------*/
-void ActElevator(unsigned char change){
+void ActElevator(signed char change){
     a_actors[0].elev += change;
 }
 // </editor-fold>
@@ -101,7 +101,7 @@ void ActThrottle(signed char change) {
 /* ActRudder                                                        */
 /* yaw = gieren -> drehung an der hochachse                         */
 /*------------------------------------------------------------------*/
-void ActRudder(unsigned char change){
+void ActRudder(signed char change){
     a_actors[0].rudd += change;
 }
 // </editor-fold>

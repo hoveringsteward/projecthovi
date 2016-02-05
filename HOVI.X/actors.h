@@ -18,8 +18,8 @@
 /* Prototypes of userroutines.                                               */ 
 /*---------------------------------------------------------------------------*/
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
-void ActAileron(unsigned char change);
-void ActElevator(unsigned char change);
+void ActAileron(signed char change);
+void ActElevator(signed char change);
 void ActThrottle(signed char change);
 void ActRudder(unsigned char change);
 void SignalOut(void);
