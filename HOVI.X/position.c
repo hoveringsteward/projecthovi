@@ -25,7 +25,8 @@
 // <editor-fold defaultstate="collapsed" desc="Compare Frames">
 
 /* compareFrames
- * compares the X and Y position of one colorobject in a frame with the same 
+ * compares the height of the hex-rotor of the old and the new frame
+ * compares the X and Y position and rotation of one colorobject in a frame with the same 
  * colorobject in the next frame
  * frame 1 - frame 0, respective old - new
 /*---------------------------------------------------------------------------*/
@@ -33,7 +34,7 @@ void CompareFrames(void) {
 
     a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
 
-    if (a_frame[1].num == a_frame[0].num) {
+    if (a_frame[1].num == a_frame[0].num) { // ColorCode ID
         a_frame_dif[0].dif_pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
         a_frame_dif[0].dif_pos_y = a_frame[1].pos_y - a_frame[0].pos_y;
         a_frame_dif[0].dif_angle = a_frame[1].angle - a_frame[0].angle;
@@ -45,6 +46,7 @@ void CompareFrames(void) {
             CheckRudderBack();
         }
     } else {
+        // Überprüfen ob das nächste Farbobjekt passt
         return; // No changes should be taken on outputs
     }
 }
@@ -247,7 +249,7 @@ void CheckThrottle(void) {
         }else{
             storedif = 0;
         }
-        if (table) {
+        if (table == 1) {
             BeneathTable();
         } else {
             BeneathFloor();
@@ -297,7 +299,7 @@ void CheckThrottle(void) {
             /* old saves the path, which the hexrotor flied
              * the new way, is the old way reserved (=umgekehrte Reihenfolge)
              */
-            if(direction){ // if it was on the way back to the base 
+            if(direction == 1){ // if it was on the way back to the base 
                 direction = 0; // outgoing flight = fly to table
             }else{
                 direction = 1; // flies back to base

@@ -64,7 +64,7 @@ t_frame_dif a_frame_dif[1];
 
 /* a_frame_dif[0] = difference of a_frame[0] and a_frame[1] */
 
-bit direction;      /* Flightdirection, 0 == ahead, 1 == back */
+bit direction = 0;      /* Flightdirection, 0 == ahead, 1 == back */
 
 //unsigned int cm180 = 41982;
 //unsigned int cm220 = 51310;

@@ -6,11 +6,7 @@
 /*                                                                 */
 /* Actors are components like propellers
  * they have to act, after they get the information from sensors
- * for example: if the position is wrong, he has to nick
- * if the rotation is wrong, he has to gear
- * if everything is fine, he could fly forwards
- * he has to change the velocity, if he flys to high or to low
- * -> the commands for roll / pitch / yaw are in their c-files 
+ * (position.c)
  */
 
 
@@ -65,18 +61,18 @@ void SignalOut(void) {
 
 // <editor-fold defaultstate="collapsed" desc="Act Ailerons">
 /* ActAilerons                                                      */
-/* roll = rollen -> links/rechts                                    */
+/* roll = rollen -> left & right                                   */
 /*------------------------------------------------------------------*/
-void ActAileron(unsigned char change){
+void ActAileron(signed char change){
     a_actors[0].aile += change;
 }
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Act Elevator">
 /* ActElevator                                                      */
-/* pitch = nicken -> vor/zurück                                     */
+/* pitch = nicken -> front & back                                    */
 /*------------------------------------------------------------------*/
-void ActElevator(unsigned char change){
+void ActElevator(signed char change){
     a_actors[0].elev += change;
 }
 // </editor-fold>
@@ -99,9 +95,9 @@ void ActThrottle(signed char change) {
 
 // <editor-fold defaultstate="collapsed" desc="Act Rudder">
 /* ActRudder                                                        */
-/* yaw = gieren -> drehung an der hochachse                         */
+/* Yaw - Rotation on it's own high-axis                        */
 /*------------------------------------------------------------------*/
-void ActRudder(unsigned char change){
+void ActRudder(signed char change){
     a_actors[0].rudd += change;
 }
 // </editor-fold>
