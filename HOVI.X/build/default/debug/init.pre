@@ -9430,6 +9430,8 @@ t_actors a_actors[1];
 # 22 "communication.h"
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
+void UartSend(unsigned char data);
+unsigned char UartReceive(void);
 
 # 20 "gear.h"
 unsigned int CalcTime(void);
@@ -9450,7 +9452,9 @@ void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
 
-# 45
+void InitWlan(void);
+
+# 48
 unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
@@ -9545,10 +9549,16 @@ float outgoing;
 float changerate;
 bit highpassallowed;
 
-# 33 "main.h"
+# 19 "debug.h"
+void SendDebugInfo(unsigned int debug_info);
+
+# 26
+unsigned char send_info[5];
+
+# 40 "main.h"
 interrupt void Isr();
 
-# 69
+# 76
 unsigned char pulsecounter = 0;
 
 # 30 "init.c"
@@ -9563,6 +9573,9 @@ InitTimer();
 InitComp();
 InitInterrupt();
 InitActors();
+
+InitWlan();
+
 }
 
 
@@ -9600,7 +9613,7 @@ ANSELE = 0b00000000;
 void InitOsc(void) {
 OSCCON = 0b01110111;
 
-# 78
+# 81
 }
 
 
@@ -9609,13 +9622,13 @@ void InitUart(void) {
 
 }
 
-# 95
+# 98
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 121
+# 124
 void InitTimer(void) {
 
 T1CONbits.TMR1CS = 0b00;
@@ -9653,12 +9666,12 @@ T5CONbits.TMR5ON = 1;
 
 }
 
-# 164
+# 167
 void InitComp(void) {
 CCP1CONbits.CCP1M = 0b1010;
 }
 
-# 174
+# 177
 void InitInterrupt(void) {
 
 TMR3GIE = 1;
@@ -9671,11 +9684,20 @@ PEIE = 1;
 GIE = 1;
 }
 
-# 190
+# 193
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;
 a_actors[0].thro = 0;
 a_actors[0].rudd = 500;
+}
+
+
+
+void InitWlan(void) {
+while(PORTDbits.RD6 == 0);
+PORTDbits.RD5 = 1;
+_delay((unsigned long)((30)*(16000000/4000.0)));
+while(PORTDbits.RD4 == 0);
 }
 

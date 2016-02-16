@@ -25,6 +25,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 "43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
+"20258 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _TX1IF `Vb ~T0 @X0 0 e@31988 ]
+"11563
+[v _TXREG1 `Vuc ~T0 @X0 0 e@4013 ]
+"10737
+[s S613 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S613 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
+"10747
+[s S614 :3 `uc 1 :1 `uc 1 ]
+[n S614 . . ADEN ]
+"10751
+[s S615 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S615 . RX9D1 OERR1 FERR1 ADDEN1 CREN1 SREN1 RX91 SPEN1 ]
+"10761
+[s S616 :6 `uc 1 :1 `uc 1 ]
+[n S616 . . RC8_9 ]
+"10765
+[s S617 :6 `uc 1 :1 `uc 1 ]
+[n S617 . . RC9 ]
+"10769
+[s S618 :1 `uc 1 ]
+[n S618 . RCD8 ]
+"10772
+[s S619 :5 `uc 1 :1 `uc 1 ]
+[n S619 . . SRENA ]
+"10736
+[u S612 `S613 1 `S614 1 `S615 1 `S616 1 `S617 1 `S618 1 `S619 1 ]
+[n S612 . . . . . . . . ]
+"10777
+[v _RCSTA1bits `VS612 ~T0 @X0 0 e@4011 ]
+"11640
+[v _RCREG1 `Vuc ~T0 @X0 0 e@4014 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7535,6 +7567,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
+[; ;communication.h: 24: void UartSend(unsigned char data);
+[; ;communication.h: 25: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7557,12 +7591,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 36: void InitComp(void);
 [; ;init.h: 37: void InitInterrupt(void);
 [; ;init.h: 38: void InitActors(void);
-"45 init.h
+[; ;init.h: 40: void InitWlan(void);
+"48 init.h
 [v _pin_out `uc ~T0 @X0 1 e ]
 [i _pin_out
 -> -> 65 `ui `uc
 ]
-[; ;init.h: 45: unsigned char pin_out = 'A';
+[; ;init.h: 48: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7702,13 +7737,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr();
-"69 main.h
+[; ;debug.h: 19: void SendDebugInfo(unsigned int debug_info);
+"26 debug.h
+[v _send_info `uc ~T0 @X0 -> 5 `i e ]
+[; ;debug.h: 26: unsigned char send_info[5];
+[; ;main.h: 40: interrupt void Isr();
+"76 main.h
 [v _pulsecounter `uc ~T0 @X0 1 e ]
 [i _pulsecounter
 -> -> 0 `i `uc
 ]
-[; ;main.h: 69: unsigned char pulsecounter = 0;
+[; ;main.h: 76: unsigned char pulsecounter = 0;
 "16 communication.c
 [v _ExchangeSpiByte `(uc ~T0 @X0 1 ef1`uc ]
 {
@@ -7825,4 +7864,64 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.c: 45: }
 "45
 [e :UE 1157 ]
+}
+"48
+[v _UartSend `(v ~T0 @X0 1 ef1`uc ]
+{
+[; ;communication.c: 48: void UartSend(unsigned char data) {
+[e :U _UartSend ]
+[v _data `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;communication.c: 49: if(TX1IF == 1) {
+"49
+[e $ ! == -> _TX1IF `i -> 1 `i 1166  ]
+{
+[; ;communication.c: 50: _delay((unsigned long)((200)*(16000000/4000000.0)));
+"50
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+"51
+}
+[e :U 1166 ]
+[; ;communication.c: 51: }
+[; ;communication.c: 52: TXREG1 = data;
+"52
+[e = _TXREG1 _data ]
+[; ;communication.c: 53: while(TX1IF == 1);
+"53
+[e $U 1167  ]
+[e :U 1168 ]
+[e :U 1167 ]
+[e $ == -> _TX1IF `i -> 1 `i 1168  ]
+[e :U 1169 ]
+[; ;communication.c: 54: }
+"54
+[e :UE 1165 ]
+}
+"56
+[v _UartReceive `(uc ~T0 @X0 1 ef ]
+{
+[; ;communication.c: 56: unsigned char UartReceive(void) {
+[e :U _UartReceive ]
+[f ]
+[; ;communication.c: 57: if(RCSTA1bits.OERR == 1) {
+"57
+[e $ ! == -> . . _RCSTA1bits 0 1 `i -> 1 `i 1171  ]
+{
+[; ;communication.c: 58: RCSTA1bits.CREN = 0;
+"58
+[e = . . _RCSTA1bits 0 4 -> -> 0 `i `uc ]
+[; ;communication.c: 59: RCSTA1bits.CREN = 1;
+"59
+[e = . . _RCSTA1bits 0 4 -> -> 1 `i `uc ]
+"60
+}
+[e :U 1171 ]
+[; ;communication.c: 60: }
+[; ;communication.c: 61: return RCREG1;
+"61
+[e ) _RCREG1 ]
+[e $UE 1170  ]
+[; ;communication.c: 62: }
+"62
+[e :UE 1170 ]
 }

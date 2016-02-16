@@ -9430,6 +9430,8 @@ t_actors a_actors[1];
 # 22 "communication.h"
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
+void UartSend(unsigned char data);
+unsigned char UartReceive(void);
 
 # 20 "gear.h"
 unsigned int CalcTime(void);
@@ -9450,7 +9452,9 @@ void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
 
-# 45
+void InitWlan(void);
+
+# 48
 unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
@@ -9545,10 +9549,16 @@ float outgoing;
 float changerate;
 bit highpassallowed;
 
-# 33 "main.h"
+# 19 "debug.h"
+void SendDebugInfo(unsigned int debug_info);
+
+# 26
+unsigned char send_info[5];
+
+# 40 "main.h"
 interrupt void Isr();
 
-# 69
+# 76
 unsigned char pulsecounter = 0;
 
 # 21 "ultrasonic.c"
@@ -9568,11 +9578,14 @@ time_height |= TMR5L;
 TMR5L = 0;
 TMR5H = 0;
 a_frame[0].height = time_height;
+
+SendDebugInfo(time_height);
+
 a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
 PORTBbits.RB3 = 1;
 }
 
-# 44
+# 47
 unsigned int Filter(unsigned int entry){
 changerate = 0.2;
 if(highpassallowed){

@@ -7599,6 +7599,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
+[; ;communication.h: 24: void UartSend(unsigned char data);
+[; ;communication.h: 25: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7621,12 +7623,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 36: void InitComp(void);
 [; ;init.h: 37: void InitInterrupt(void);
 [; ;init.h: 38: void InitActors(void);
-"45 init.h
+[; ;init.h: 40: void InitWlan(void);
+"48 init.h
 [v _pin_out `uc ~T0 @X0 1 e ]
 [i _pin_out
 -> -> 65 `ui `uc
 ]
-[; ;init.h: 45: unsigned char pin_out = 'A';
+[; ;init.h: 48: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7766,13 +7769,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr();
-"69 main.h
+[; ;debug.h: 19: void SendDebugInfo(unsigned int debug_info);
+"26 debug.h
+[v _send_info `uc ~T0 @X0 -> 5 `i e ]
+[; ;debug.h: 26: unsigned char send_info[5];
+[; ;main.h: 40: interrupt void Isr();
+"76 main.h
 [v _pulsecounter `uc ~T0 @X0 1 e ]
 [i _pulsecounter
 -> -> 0 `i `uc
 ]
-[; ;main.h: 69: unsigned char pulsecounter = 0;
+[; ;main.h: 76: unsigned char pulsecounter = 0;
 "20 actors.c
 [v _Delay `(v ~T0 @X0 1 ef1`ui ]
 {
@@ -7783,9 +7790,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.c: 21: del <<= 1;
 "21
 [e =<< _del -> 1 `i ]
-[; ;actors.c: 22: del = 1000 + del;
+[; ;actors.c: 22: del = 2000 + del;
 "22
-[e = _del + -> -> 1000 `i `ui _del ]
+[e = _del + -> -> 2000 `i `ui _del ]
 [; ;actors.c: 23: TMR1L = 0;
 "23
 [e = _TMR1L -> -> 0 `i `uc ]
@@ -7964,9 +7971,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _ActThrottle ]
 [v _change `c ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 89: if(a_actors[0].thro <= 1000 || change < 0) {
+[; ;actors.c: 89: if(a_actors[0].thro <= 600 || change < 0) {
 "89
-[e $ ! || <= . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 1000 `i `ui < -> _change `i -> 0 `i 1164  ]
+[e $ ! || <= . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 600 `i `ui < -> _change `i -> 0 `i 1164  ]
 {
 [; ;actors.c: 90: a_actors[0].thro += change;
 "90

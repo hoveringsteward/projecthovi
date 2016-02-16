@@ -21,6 +21,8 @@
 // <editor-fold defaultstate="collapsed" desc="Userroutines">
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
+void UartSend(unsigned char data);
+unsigned char UartReceive(void);
 // </editor-fold>
 
 

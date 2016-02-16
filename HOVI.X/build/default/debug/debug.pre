@@ -1,5 +1,5 @@
 
-# 1 "interrupt.c"
+# 1 "debug.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.35\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9430,6 +9430,8 @@ t_actors a_actors[1];
 # 22 "communication.h"
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
+void UartSend(unsigned char data);
+unsigned char UartReceive(void);
 
 # 20 "gear.h"
 unsigned int CalcTime(void);
@@ -9450,7 +9452,9 @@ void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
 
-# 45
+void InitWlan(void);
+
+# 48
 unsigned char pin_out = 'A';
 
 # 20 "pixy.h"
@@ -9545,26 +9549,28 @@ float outgoing;
 float changerate;
 bit highpassallowed;
 
-# 33 "main.h"
+# 19 "debug.h"
+void SendDebugInfo(unsigned int debug_info);
+
+# 26
+unsigned char send_info[5];
+
+# 40 "main.h"
 interrupt void Isr();
 
-# 69
+# 76
 unsigned char pulsecounter = 0;
 
-# 30 "interrupt.c"
-interrupt void Isr() {
-if(CCP1IF == 1) {
-CCP1IF = 0;
-T1CONbits.TMR1ON = 0;
-SignalOut();
-__nop();
+# 13 "debug.c"
+void SendDebugInfo(unsigned int debug_info) {
+for(unsigned char debug_info_counter = 0; debug_info_counter < 5; debug_info_counter++) {
+send_info[debug_info_counter] = debug_info % ((debug_info_counter + 1) * 10);
+debug_info -= send_info[debug_info_counter];
 }
-if(TMR3GIF == 1) {
-TMR3GIF = 0;
-ModeCheck();
-SignalOut();
+for(signed char debug_send_counter = 4; debug_send_counter >= 0; debug_send_counter--) {
+unsigned char send = send_info[debug_send_counter];
+UartSend(send);
+}
+UartSend(';');
+}
 
-# 44
-pulsecounter++;
-}
-}

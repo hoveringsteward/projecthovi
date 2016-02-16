@@ -36,6 +36,9 @@ void InitTimer(void);
 void InitComp(void);
 void InitInterrupt(void);
 void InitActors(void);
+#ifdef WLAN
+void InitWlan(void);
+#endif
 // </editor-fold>
 
 /*------------------------------------------------------------------*/

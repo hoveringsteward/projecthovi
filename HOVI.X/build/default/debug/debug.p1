@@ -14,17 +14,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "81
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
-"19760 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-[v _SSP1IF `Vb ~T0 @X0 0 e@31987 ]
-[v F7833 `(v ~T0 @X0 1 tf1`ul ]
-"152 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
-[v __delay `JF7833 ~T0 @X0 0 e ]
-[p i __delay ]
-"16022 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
-[v _SSP1BUF `Vuc ~T0 @X0 0 e@4041 ]
-"43 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
+"24 communication.h
+[v _UartSend `(v ~T0 @X0 0 ef1`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7535,6 +7526,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;actors.h: 41: t_actors a_actors[1];
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
+[; ;communication.h: 24: void UartSend(unsigned char data);
+[; ;communication.h: 25: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7557,12 +7550,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 36: void InitComp(void);
 [; ;init.h: 37: void InitInterrupt(void);
 [; ;init.h: 38: void InitActors(void);
-"45 init.h
+[; ;init.h: 40: void InitWlan(void);
+"48 init.h
 [v _pin_out `uc ~T0 @X0 1 e ]
 [i _pin_out
 -> -> 65 `ui `uc
 ]
-[; ;init.h: 45: unsigned char pin_out = 'A';
+[; ;init.h: 48: unsigned char pin_out = 'A';
 [; ;pixy.h: 20: unsigned char ReadObject(unsigned char des_obj_type, unsigned int des_obj, unsigned char max_obj);
 [; ;pixy.h: 26: typedef struct colorobject {
 [; ;pixy.h: 27: unsigned int type;
@@ -7702,127 +7696,77 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
-[; ;main.h: 33: interrupt void Isr();
-"69 main.h
+[; ;debug.h: 19: void SendDebugInfo(unsigned int debug_info);
+"26 debug.h
+[v _send_info `uc ~T0 @X0 -> 5 `i e ]
+[; ;debug.h: 26: unsigned char send_info[5];
+[; ;main.h: 40: interrupt void Isr();
+"76 main.h
 [v _pulsecounter `uc ~T0 @X0 1 e ]
 [i _pulsecounter
 -> -> 0 `i `uc
 ]
-[; ;main.h: 69: unsigned char pulsecounter = 0;
-"16 communication.c
-[v _ExchangeSpiByte `(uc ~T0 @X0 1 ef1`uc ]
+[; ;main.h: 76: unsigned char pulsecounter = 0;
+"13 debug.c
+[v _SendDebugInfo `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;communication.c: 16: unsigned char ExchangeSpiByte(unsigned char byte1) {
-[e :U _ExchangeSpiByte ]
-[v _byte1 `uc ~T0 @X0 1 r1 ]
+[; ;debug.c: 13: void SendDebugInfo(unsigned int debug_info) {
+[e :U _SendDebugInfo ]
+[v _debug_info `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;communication.c: 17: if(SSP1IF == 1) {
-"17
-[e $ ! == -> _SSP1IF `i -> 1 `i 1153  ]
+[; ;debug.c: 14: for(unsigned char debug_info_counter = 0; debug_info_counter < 5; debug_info_counter++) {
+"14
 {
-[; ;communication.c: 18: _delay((unsigned long)((100)*(16000000/4000000.0)));
-"18
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;communication.c: 19: SSP1IF = 0;
-"19
-[e = _SSP1IF -> -> 0 `i `b ]
-"20
-}
-[e :U 1153 ]
-[; ;communication.c: 20: }
-[; ;communication.c: 21: SSP1BUF = byte1;
-"21
-[e = _SSP1BUF _byte1 ]
-[; ;communication.c: 22: while(SSP1IF == 0);
-"22
+[v _debug_info_counter `uc ~T0 @X0 1 a ]
+[e = _debug_info_counter -> -> 0 `i `uc ]
+[e $ < -> _debug_info_counter `i -> 5 `i 1153  ]
 [e $U 1154  ]
-[e :U 1155 ]
+[e :U 1153 ]
+{
+[; ;debug.c: 15: send_info[debug_info_counter] = debug_info % ((debug_info_counter + 1) * 10);
+"15
+[e = *U + &U _send_info * -> _debug_info_counter `ux -> -> # *U &U _send_info `ui `ux -> % _debug_info -> * + -> _debug_info_counter `i -> 1 `i -> 10 `i `ui `uc ]
+[; ;debug.c: 16: debug_info -= send_info[debug_info_counter];
+"16
+[e =- _debug_info -> *U + &U _send_info * -> _debug_info_counter `ux -> -> # *U &U _send_info `ui `ux `ui ]
+"17
+}
+"14
+[e ++ _debug_info_counter -> -> 1 `i `uc ]
+[e $ < -> _debug_info_counter `i -> 5 `i 1153  ]
 [e :U 1154 ]
-[e $ == -> _SSP1IF `i -> 0 `i 1155  ]
+"17
+}
+[; ;debug.c: 17: }
+[; ;debug.c: 18: for(signed char debug_send_counter = 4; debug_send_counter >= 0; debug_send_counter--) {
+"18
+{
+[v _debug_send_counter `c ~T0 @X0 1 a ]
+[e = _debug_send_counter -> -> 4 `i `c ]
+[e $ >= -> _debug_send_counter `i -> 0 `i 1156  ]
+[e $U 1157  ]
 [e :U 1156 ]
-[; ;communication.c: 23: SSP1IF = 0;
+{
+"19
+[v _send `uc ~T0 @X0 1 a ]
+[; ;debug.c: 19: unsigned char send = send_info[debug_send_counter];
+[e = _send *U + &U _send_info * -> -> _debug_send_counter `uc `ux -> -> # *U &U _send_info `ui `ux ]
+[; ;debug.c: 20: UartSend(send);
+"20
+[e ( _UartSend (1 _send ]
+"21
+}
+"18
+[e -- _debug_send_counter -> -> 1 `i `c ]
+[e $ >= -> _debug_send_counter `i -> 0 `i 1156  ]
+[e :U 1157 ]
+"21
+}
+[; ;debug.c: 21: }
+[; ;debug.c: 22: UartSend(';');
+"22
+[e ( _UartSend (1 -> -> 59 `ui `uc ]
+[; ;debug.c: 23: }
 "23
-[e = _SSP1IF -> -> 0 `i `b ]
-[; ;communication.c: 24: return (SSP1BUF);
-"24
-[e ) _SSP1BUF ]
-[e $UE 1152  ]
-[; ;communication.c: 25: }
-"25
 [e :UE 1152 ]
-}
-"27
-[v _ExchangeSpiWord `(ui ~T0 @X0 1 ef2`uc`uc ]
-{
-[; ;communication.c: 27: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2) {
-[e :U _ExchangeSpiWord ]
-[v _byte1 `uc ~T0 @X0 1 r1 ]
-[v _byte2 `uc ~T0 @X0 1 r2 ]
-[f ]
-[; ;communication.c: 28: __nop();
-"28
-[e ( ___nop ..  ]
-"29
-[v _SPI_word `ui ~T0 @X0 1 a ]
-[; ;communication.c: 29: unsigned int SPI_word = 0;
-[e = _SPI_word -> -> 0 `i `ui ]
-[; ;communication.c: 30: if(SSP1IF == 1) {
-"30
-[e $ ! == -> _SSP1IF `i -> 1 `i 1158  ]
-{
-[; ;communication.c: 31: _delay((unsigned long)((100)*(16000000/4000000.0)));
-"31
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;communication.c: 32: SSP1IF = 0;
-"32
-[e = _SSP1IF -> -> 0 `i `b ]
-"33
-}
-[e :U 1158 ]
-[; ;communication.c: 33: }
-[; ;communication.c: 34: SSP1BUF = byte1;
-"34
-[e = _SSP1BUF _byte1 ]
-[; ;communication.c: 35: while(SSP1IF == 0);
-"35
-[e $U 1159  ]
-[e :U 1160 ]
-[e :U 1159 ]
-[e $ == -> _SSP1IF `i -> 0 `i 1160  ]
-[e :U 1161 ]
-[; ;communication.c: 36: SSP1IF = 0;
-"36
-[e = _SSP1IF -> -> 0 `i `b ]
-[; ;communication.c: 37: SPI_word = SSP1BUF;
-"37
-[e = _SPI_word -> _SSP1BUF `ui ]
-[; ;communication.c: 38: SPI_word <<= 8;
-"38
-[e =<< _SPI_word -> 8 `i ]
-[; ;communication.c: 39: SSP1BUF = byte2;
-"39
-[e = _SSP1BUF _byte2 ]
-[; ;communication.c: 40: while(SSP1IF == 0);
-"40
-[e $U 1162  ]
-[e :U 1163 ]
-[e :U 1162 ]
-[e $ == -> _SSP1IF `i -> 0 `i 1163  ]
-[e :U 1164 ]
-[; ;communication.c: 41: SSP1IF = 0;
-"41
-[e = _SSP1IF -> -> 0 `i `b ]
-[; ;communication.c: 42: SPI_word |= SSP1BUF;
-"42
-[e =| _SPI_word -> _SSP1BUF `ui ]
-[; ;communication.c: 43: __nop();
-"43
-[e ( ___nop ..  ]
-[; ;communication.c: 44: return (SPI_word);
-"44
-[e ) _SPI_word ]
-[e $UE 1157  ]
-[; ;communication.c: 45: }
-"45
-[e :UE 1157 ]
 }

@@ -12,6 +12,10 @@
 #ifndef MAIN_H
 #define	MAIN_H
 
+/* Definitions for debugging and programm-options */
+#define DEBUG
+#define WLAN
+
 // <editor-fold defaultstate="collapsed" desc="Included Files">
 #include <stdlib.h>
 #include "actors.h"
@@ -23,6 +27,9 @@
 #include "position.h"
 #include "safety.h"
 #include "ultrasonic.h"
+#ifdef DEBUG
+#include "debug.h"
+#endif
 // </editor-fold>
 
 

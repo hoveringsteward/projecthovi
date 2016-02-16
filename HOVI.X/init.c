@@ -38,6 +38,9 @@ void Init(void) {
     InitComp();
     InitInterrupt();
     InitActors();
+#ifdef WLAN
+    InitWlan();
+#endif
 }
 // </editor-fold>
 
@@ -194,5 +197,15 @@ void InitActors (void) {
     a_actors[0].rudd = 500;
 }
 // </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="WLAN">
+void InitWlan(void) {
+    while(Associated == 0);
+    Connect = 1;
+    __delay_ms(30);
+    while(Connected == 0);
+}
+// </editor-fold>
+
 
 // </editor-fold>

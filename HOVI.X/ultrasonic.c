@@ -34,6 +34,9 @@ void ReadHeight(void) {
     TMR5L = 0;
     TMR5H = 0;
     a_frame[0].height = time_height;
+#ifdef DEBUG
+    SendDebugInfo(time_height);
+#endif
     a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
     Trigger = 1;
 }
