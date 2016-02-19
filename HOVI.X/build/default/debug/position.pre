@@ -9410,10 +9410,10 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 extern char * ftoa(float f, int * status);
 
 # 21 "actors.h"
-void ActAileron(unsigned char change);
-void ActElevator(unsigned char change);
+void ActAileron(signed char change);
+void ActElevator(signed char change);
 void ActThrottle(signed char change);
-void ActRudder(unsigned char change);
+void ActRudder(signed char change);
 void SignalOut(void);
 void Delay(unsigned int del);
 
@@ -9431,6 +9431,7 @@ t_actors a_actors[1];
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 void UartSend(unsigned char data);
+void UartSendAscii(unsigned char data);
 unsigned char UartReceive(void);
 
 # 20 "gear.h"
@@ -9515,7 +9516,7 @@ t_frame_dif a_frame_dif[1];
 
 
 
-bit direction;
+bit direction = 0;
 
 
 
@@ -9561,7 +9562,7 @@ interrupt void Isr();
 # 76
 unsigned char pulsecounter = 0;
 
-# 32 "position.c"
+# 33 "position.c"
 void CompareFrames(void) {
 
 a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
@@ -9578,11 +9579,12 @@ CheckRudderAhead();
 CheckRudderBack();
 }
 } else {
+
 return;
 }
 }
 
-# 59
+# 61
 void CheckAileron(void) {
 
 
@@ -9609,7 +9611,7 @@ ActAileron(3);
 }
 } else {
 
-# 89
+# 91
 ActAileron(-3);
 }
 }
@@ -9632,7 +9634,7 @@ ActAileron(-3);
 }
 } else {
 
-# 115
+# 117
 ActAileron(3);
 }
 }
@@ -9640,7 +9642,7 @@ ActAileron(3);
 return;
 }
 
-# 129
+# 131
 void CheckElevator(void) {
 
 if (a_frame[0].pos_y >= 90 && a_frame[0].pos_y <= 110) {
@@ -9666,7 +9668,7 @@ ActElevator(-3);
 }
 } else {
 
-# 158
+# 160
 ActElevator(3);
 }
 }
@@ -9689,14 +9691,14 @@ ActElevator(3);
 }
 } else {
 
-# 184
+# 186
 ActElevator(-3);
 }
 }
 
 }
 
-# 196
+# 198
 void BeneathTable(void) {
 if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) {
 ActThrottle(0);
@@ -9711,7 +9713,7 @@ ActThrottle(-3);
 }
 }
 
-# 216
+# 218
 void BeneathFloor(void) {
 if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
 ActThrottle(0);
@@ -9726,7 +9728,7 @@ ActThrottle(-3);
 }
 }
 
-# 237
+# 239
 void CheckThrottle(void) {
 
 if (id_current_cc == 0) {
@@ -9740,7 +9742,7 @@ storedif = 1;
 }else{
 storedif = 0;
 }
-if (table) {
+if (table == 1) {
 BeneathTable();
 } else {
 BeneathFloor();
@@ -9765,7 +9767,7 @@ BeneathFloor();
 }
 } else {
 
-# 278
+# 280
 if (a_frame[0].height >= 30) {
 if (a_frame[1].height > a_frame[0].height) {
 
@@ -9785,8 +9787,8 @@ ActThrottle(-3);
 }
 } else {
 
-# 300
-if(direction){
+# 302
+if(direction == 1){
 direction = 0;
 }else{
 direction = 1;
@@ -9809,7 +9811,7 @@ _delay((unsigned long)((3)*(16000000/4000.0)));
 }
 }
 
-# 333
+# 335
 void CheckRudderAhead(void) {
 
 if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
@@ -9858,7 +9860,7 @@ ActRudder(3);
 
 }
 
-# 391
+# 393
 void CheckRudderBack(void) {
 
 
@@ -9910,7 +9912,7 @@ ActRudder(3);
 
 }
 
-# 447
+# 449
 void StoreAsOld(void) {
 a_frame[1].num = a_frame[0].num;
 a_frame[1].pos_x = a_frame[0].pos_x;

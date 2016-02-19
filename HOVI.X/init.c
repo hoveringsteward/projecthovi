@@ -82,8 +82,26 @@ void InitOsc(void) {
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="UART">
+/* UART is used to communicate with the server over the WLAN module     */
+/*  Baudrate 57600                                                      */
+/*  Asynchronus mode                                                    */
+/*  Trnsmission and reception enabled                                   */
+/*  Interrupt on reception enabled                                      */
+/*----------------------------------------------------------------------*/
 void InitUart(void) {
-    
+    //Baudrate
+    SPBRG1 = 68;
+    TXSTA1bits.BRGH = 1;
+    BAUDCON1bits.BRG16 = 1;
+    //General
+    //Tris already set in InitTris()
+    TXSTA1bits.SYNC = 0;
+    RCSTA1bits.SPEN = 1;
+    //Transmission
+    TXSTA1bits.TXEN = 1;
+    TX1IF = 0;
+    //Reception
+    RCSTA1bits.CREN = 1;
 }
 // </editor-fold>
 

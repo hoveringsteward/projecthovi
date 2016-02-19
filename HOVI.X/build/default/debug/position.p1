@@ -23,9 +23,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "25
 [v _CheckRudderBack `(v ~T0 @X0 0 ef ]
 "21 actors.h
-[v _ActAileron `(v ~T0 @X0 0 ef1`uc ]
+[v _ActAileron `(v ~T0 @X0 0 ef1`c ]
 "22
-[v _ActElevator `(v ~T0 @X0 0 ef1`uc ]
+[v _ActElevator `(v ~T0 @X0 0 ef1`c ]
 "23
 [v _ActThrottle `(v ~T0 @X0 0 ef1`c ]
 [v F7833 `(v ~T0 @X0 1 tf1`ul ]
@@ -33,7 +33,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v __delay `JF7833 ~T0 @X0 0 e ]
 [p i __delay ]
 "24 actors.h
-[v _ActRudder `(v ~T0 @X0 0 ef1`uc ]
+[v _ActRudder `(v ~T0 @X0 0 ef1`c ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7527,10 +7527,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 21: void ActAileron(unsigned char change);
-[; ;actors.h: 22: void ActElevator(unsigned char change);
+[; ;actors.h: 21: void ActAileron(signed char change);
+[; ;actors.h: 22: void ActElevator(signed char change);
 [; ;actors.h: 23: void ActThrottle(signed char change);
-[; ;actors.h: 24: void ActRudder(unsigned char change);
+[; ;actors.h: 24: void ActRudder(signed char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
 [; ;actors.h: 34: typedef struct act_out {
@@ -7545,7 +7545,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;communication.h: 24: void UartSend(unsigned char data);
-[; ;communication.h: 25: unsigned char UartReceive(void);
+[; ;communication.h: 25: void UartSendAscii(unsigned char data);
+[; ;communication.h: 26: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7634,7 +7635,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 63: t_frame_dif a_frame_dif[1];
 "67
 [v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 67: bit direction;
+[i _direction
+-> 0 `i
+]
+[; ;position.h: 67: bit direction = 0;
 "71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
@@ -7725,769 +7729,769 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;main.h: 76: unsigned char pulsecounter = 0;
-"32 position.c
+"33 position.c
 [v _CompareFrames `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 32: void CompareFrames(void) {
+[; ;position.c: 33: void CompareFrames(void) {
 [e :U _CompareFrames ]
 [f ]
-[; ;position.c: 34: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
-"34
+[; ;position.c: 35: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
+"35
 [e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 3 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 `i ]
-[; ;position.c: 36: if (a_frame[1].num == a_frame[0].num) {
-"36
+[; ;position.c: 37: if (a_frame[1].num == a_frame[0].num) {
+"37
 [e $ ! == . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 1153  ]
 {
-[; ;position.c: 37: a_frame_dif[0].dif_pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
-"37
-[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 1 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 `i ]
-[; ;position.c: 38: a_frame_dif[0].dif_pos_y = a_frame[1].pos_y - a_frame[0].pos_y;
+[; ;position.c: 38: a_frame_dif[0].dif_pos_x = a_frame[1].pos_x - a_frame[0].pos_x;
 "38
-[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 2 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 `i ]
-[; ;position.c: 39: a_frame_dif[0].dif_angle = a_frame[1].angle - a_frame[0].angle;
+[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 1 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 `i ]
+[; ;position.c: 39: a_frame_dif[0].dif_pos_y = a_frame[1].pos_y - a_frame[0].pos_y;
 "39
-[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 ]
-[; ;position.c: 40: CheckAileron();
+[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 2 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 `i ]
+[; ;position.c: 40: a_frame_dif[0].dif_angle = a_frame[1].angle - a_frame[0].angle;
 "40
-[e ( _CheckAileron ..  ]
-[; ;position.c: 41: CheckElevator();
+[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 ]
+[; ;position.c: 41: CheckAileron();
 "41
-[e ( _CheckElevator ..  ]
-[; ;position.c: 42: if (direction == 0) {
+[e ( _CheckAileron ..  ]
+[; ;position.c: 42: CheckElevator();
 "42
+[e ( _CheckElevator ..  ]
+[; ;position.c: 43: if (direction == 0) {
+"43
 [e $ ! == -> _direction `i -> 0 `i 1154  ]
 {
-[; ;position.c: 43: CheckRudderAhead();
-"43
-[e ( _CheckRudderAhead ..  ]
+[; ;position.c: 44: CheckRudderAhead();
 "44
+[e ( _CheckRudderAhead ..  ]
+"45
 }
-[; ;position.c: 44: } else {
+[; ;position.c: 45: } else {
 [e $U 1155  ]
 [e :U 1154 ]
 {
-[; ;position.c: 45: CheckRudderBack();
-"45
-[e ( _CheckRudderBack ..  ]
+[; ;position.c: 46: CheckRudderBack();
 "46
-}
-[e :U 1155 ]
+[e ( _CheckRudderBack ..  ]
 "47
 }
-[; ;position.c: 46: }
-[; ;position.c: 47: } else {
+[e :U 1155 ]
+"48
+}
+[; ;position.c: 47: }
+[; ;position.c: 48: } else {
 [e $U 1156  ]
 [e :U 1153 ]
 {
-[; ;position.c: 48: return;
-"48
+[; ;position.c: 50: return;
+"50
 [e $UE 1152  ]
-"49
+"51
 }
 [e :U 1156 ]
-[; ;position.c: 49: }
-[; ;position.c: 50: }
-"50
+[; ;position.c: 51: }
+[; ;position.c: 52: }
+"52
 [e :UE 1152 ]
 }
-"59
+"61
 [v _CheckAileron `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 59: void CheckAileron(void) {
+[; ;position.c: 61: void CheckAileron(void) {
 [e :U _CheckAileron ]
 [f ]
-[; ;position.c: 62: if (a_frame[0].pos_x >= 150 && a_frame[0].pos_x <= 170) {
-"62
+[; ;position.c: 64: if (a_frame[0].pos_x >= 150 && a_frame[0].pos_x <= 170) {
+"64
 [e $ ! && >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 -> -> 150 `i `ui <= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 -> -> 170 `i `ui 1158  ]
 {
-[; ;position.c: 64: ActAileron(0);
-"64
-[e ( _ActAileron (1 -> -> 0 `i `uc ]
-"65
-}
-[; ;position.c: 65: }
-[e $U 1159  ]
+[; ;position.c: 66: ActAileron(0);
+"66
+[e ( _ActAileron (1 -> -> 0 `i `c ]
 "67
+}
+[; ;position.c: 67: }
+[e $U 1159  ]
+"69
 [e :U 1158 ]
-[; ;position.c: 67: else if (a_frame[0].pos_x > 170) {
+[; ;position.c: 69: else if (a_frame[0].pos_x > 170) {
 [e $ ! > . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 -> -> 170 `i `ui 1160  ]
 {
-[; ;position.c: 69: if (a_frame[1].pos_x > a_frame[0].pos_x) {
-"69
+[; ;position.c: 71: if (a_frame[1].pos_x > a_frame[0].pos_x) {
+"71
 [e $ ! > . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 1161  ]
 {
-[; ;position.c: 71: if (a_frame_dif[0].dif_pos_x <= 8) {
-"71
+[; ;position.c: 73: if (a_frame_dif[0].dif_pos_x <= 8) {
+"73
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 1 -> 8 `i 1162  ]
 {
-[; ;position.c: 72: if (a_frame_dif[0].dif_pos_x <= 1) {
-"72
+[; ;position.c: 74: if (a_frame_dif[0].dif_pos_x <= 1) {
+"74
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 1 -> 1 `i 1163  ]
 {
-[; ;position.c: 74: ActAileron(-3);
-"74
-[e ( _ActAileron (1 -> -U -> 3 `i `uc ]
-"75
+[; ;position.c: 76: ActAileron(-3);
+"76
+[e ( _ActAileron (1 -> -U -> 3 `i `c ]
+"77
 }
-[; ;position.c: 75: } else {
+[; ;position.c: 77: } else {
 [e $U 1164  ]
 [e :U 1163 ]
 {
-[; ;position.c: 77: ActAileron(0);
-"77
-[e ( _ActAileron (1 -> -> 0 `i `uc ]
-"78
+[; ;position.c: 79: ActAileron(0);
+"79
+[e ( _ActAileron (1 -> -> 0 `i `c ]
+"80
 }
 [e :U 1164 ]
-"79
+"81
 }
-[; ;position.c: 78: }
-[; ;position.c: 79: } else {
+[; ;position.c: 80: }
+[; ;position.c: 81: } else {
 [e $U 1165  ]
 [e :U 1162 ]
 {
-[; ;position.c: 81: ActAileron(3);
-"81
-[e ( _ActAileron (1 -> -> 3 `i `uc ]
-"82
+[; ;position.c: 83: ActAileron(3);
+"83
+[e ( _ActAileron (1 -> -> 3 `i `c ]
+"84
 }
 [e :U 1165 ]
-"83
+"85
 }
-[; ;position.c: 82: }
-[; ;position.c: 83: } else {
+[; ;position.c: 84: }
+[; ;position.c: 85: } else {
 [e $U 1166  ]
 [e :U 1161 ]
 {
-[; ;position.c: 89: ActAileron(-3);
-"89
-[e ( _ActAileron (1 -> -U -> 3 `i `uc ]
-"90
+[; ;position.c: 91: ActAileron(-3);
+"91
+[e ( _ActAileron (1 -> -U -> 3 `i `c ]
+"92
 }
 [e :U 1166 ]
-"91
-}
-[; ;position.c: 90: }
-[; ;position.c: 91: }
-[e $U 1167  ]
 "93
-[e :U 1160 ]
-[; ;position.c: 93: else {
-{
-[; ;position.c: 95: if (a_frame[1].pos_x < a_frame[0].pos_x) {
+}
+[; ;position.c: 92: }
+[; ;position.c: 93: }
+[e $U 1167  ]
 "95
+[e :U 1160 ]
+[; ;position.c: 95: else {
+{
+[; ;position.c: 97: if (a_frame[1].pos_x < a_frame[0].pos_x) {
+"97
 [e $ ! < . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 1168  ]
 {
-[; ;position.c: 97: if (a_frame_dif[0].dif_pos_x >= -8) {
-"97
+[; ;position.c: 99: if (a_frame_dif[0].dif_pos_x >= -8) {
+"99
 [e $ ! >= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 1 -U -> 8 `i 1169  ]
 {
-[; ;position.c: 98: if (a_frame_dif[0].dif_pos_x >= -1) {
-"98
+[; ;position.c: 100: if (a_frame_dif[0].dif_pos_x >= -1) {
+"100
 [e $ ! >= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 1 -U -> 1 `i 1170  ]
 {
-[; ;position.c: 100: ActAileron(3);
-"100
-[e ( _ActAileron (1 -> -> 3 `i `uc ]
-"101
+[; ;position.c: 102: ActAileron(3);
+"102
+[e ( _ActAileron (1 -> -> 3 `i `c ]
+"103
 }
-[; ;position.c: 101: } else {
+[; ;position.c: 103: } else {
 [e $U 1171  ]
 [e :U 1170 ]
 {
-[; ;position.c: 103: ActAileron(0);
-"103
-[e ( _ActAileron (1 -> -> 0 `i `uc ]
-"104
+[; ;position.c: 105: ActAileron(0);
+"105
+[e ( _ActAileron (1 -> -> 0 `i `c ]
+"106
 }
 [e :U 1171 ]
-"105
+"107
 }
-[; ;position.c: 104: }
-[; ;position.c: 105: } else {
+[; ;position.c: 106: }
+[; ;position.c: 107: } else {
 [e $U 1172  ]
 [e :U 1169 ]
 {
-[; ;position.c: 107: ActAileron(-3);
-"107
-[e ( _ActAileron (1 -> -U -> 3 `i `uc ]
-"108
+[; ;position.c: 109: ActAileron(-3);
+"109
+[e ( _ActAileron (1 -> -U -> 3 `i `c ]
+"110
 }
 [e :U 1172 ]
-"109
+"111
 }
-[; ;position.c: 108: }
-[; ;position.c: 109: } else {
+[; ;position.c: 110: }
+[; ;position.c: 111: } else {
 [e $U 1173  ]
 [e :U 1168 ]
 {
-[; ;position.c: 115: ActAileron(3);
-"115
-[e ( _ActAileron (1 -> -> 3 `i `uc ]
-"116
+[; ;position.c: 117: ActAileron(3);
+"117
+[e ( _ActAileron (1 -> -> 3 `i `c ]
+"118
 }
 [e :U 1173 ]
-"117
+"119
 }
 [e :U 1167 ]
 [e :U 1159 ]
-[; ;position.c: 116: }
-[; ;position.c: 117: }
-[; ;position.c: 119: return;
-"119
+[; ;position.c: 118: }
+[; ;position.c: 119: }
+[; ;position.c: 121: return;
+"121
 [e $UE 1157  ]
-[; ;position.c: 120: }
-"120
+[; ;position.c: 122: }
+"122
 [e :UE 1157 ]
 }
-"129
+"131
 [v _CheckElevator `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 129: void CheckElevator(void) {
+[; ;position.c: 131: void CheckElevator(void) {
 [e :U _CheckElevator ]
 [f ]
-[; ;position.c: 131: if (a_frame[0].pos_y >= 90 && a_frame[0].pos_y <= 110) {
-"131
+[; ;position.c: 133: if (a_frame[0].pos_y >= 90 && a_frame[0].pos_y <= 110) {
+"133
 [e $ ! && >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 -> -> 90 `i `ui <= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 -> -> 110 `i `ui 1175  ]
 {
-[; ;position.c: 133: ActElevator(0);
-"133
-[e ( _ActElevator (1 -> -> 0 `i `uc ]
-"134
-}
-[; ;position.c: 134: }
-[e $U 1176  ]
+[; ;position.c: 135: ActElevator(0);
+"135
+[e ( _ActElevator (1 -> -> 0 `i `c ]
 "136
+}
+[; ;position.c: 136: }
+[e $U 1176  ]
+"138
 [e :U 1175 ]
-[; ;position.c: 136: else if (a_frame[0].pos_y > 110) {
+[; ;position.c: 138: else if (a_frame[0].pos_y > 110) {
 [e $ ! > . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 -> -> 110 `i `ui 1177  ]
 {
-[; ;position.c: 138: if (a_frame[1].pos_y < a_frame[0].pos_y) {
-"138
+[; ;position.c: 140: if (a_frame[1].pos_y < a_frame[0].pos_y) {
+"140
 [e $ ! < . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 1178  ]
 {
-[; ;position.c: 140: if (a_frame_dif[0].dif_pos_y >= -8) {
-"140
+[; ;position.c: 142: if (a_frame_dif[0].dif_pos_y >= -8) {
+"142
 [e $ ! >= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 2 -U -> 8 `i 1179  ]
 {
-[; ;position.c: 141: if (a_frame_dif[0].dif_pos_y >= -1) {
-"141
+[; ;position.c: 143: if (a_frame_dif[0].dif_pos_y >= -1) {
+"143
 [e $ ! >= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 2 -U -> 1 `i 1180  ]
 {
-[; ;position.c: 143: ActElevator(3);
-"143
-[e ( _ActElevator (1 -> -> 3 `i `uc ]
-"144
+[; ;position.c: 145: ActElevator(3);
+"145
+[e ( _ActElevator (1 -> -> 3 `i `c ]
+"146
 }
-[; ;position.c: 144: } else {
+[; ;position.c: 146: } else {
 [e $U 1181  ]
 [e :U 1180 ]
 {
-[; ;position.c: 146: ActElevator(0);
-"146
-[e ( _ActElevator (1 -> -> 0 `i `uc ]
-"147
+[; ;position.c: 148: ActElevator(0);
+"148
+[e ( _ActElevator (1 -> -> 0 `i `c ]
+"149
 }
 [e :U 1181 ]
-"148
+"150
 }
-[; ;position.c: 147: }
-[; ;position.c: 148: } else {
+[; ;position.c: 149: }
+[; ;position.c: 150: } else {
 [e $U 1182  ]
 [e :U 1179 ]
 {
-[; ;position.c: 150: ActElevator(-3);
-"150
-[e ( _ActElevator (1 -> -U -> 3 `i `uc ]
-"151
+[; ;position.c: 152: ActElevator(-3);
+"152
+[e ( _ActElevator (1 -> -U -> 3 `i `c ]
+"153
 }
 [e :U 1182 ]
-"152
+"154
 }
-[; ;position.c: 151: }
-[; ;position.c: 152: } else {
+[; ;position.c: 153: }
+[; ;position.c: 154: } else {
 [e $U 1183  ]
 [e :U 1178 ]
 {
-[; ;position.c: 158: ActElevator(3);
-"158
-[e ( _ActElevator (1 -> -> 3 `i `uc ]
-"159
+[; ;position.c: 160: ActElevator(3);
+"160
+[e ( _ActElevator (1 -> -> 3 `i `c ]
+"161
 }
 [e :U 1183 ]
-"160
-}
-[; ;position.c: 159: }
-[; ;position.c: 160: }
-[e $U 1184  ]
 "162
-[e :U 1177 ]
-[; ;position.c: 162: else {
-{
-[; ;position.c: 164: if (a_frame[1].pos_y > a_frame[0].pos_y) {
+}
+[; ;position.c: 161: }
+[; ;position.c: 162: }
+[e $U 1184  ]
 "164
+[e :U 1177 ]
+[; ;position.c: 164: else {
+{
+[; ;position.c: 166: if (a_frame[1].pos_y > a_frame[0].pos_y) {
+"166
 [e $ ! > . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 1185  ]
 {
-[; ;position.c: 166: if (a_frame_dif[0].dif_pos_y <= 8) {
-"166
+[; ;position.c: 168: if (a_frame_dif[0].dif_pos_y <= 8) {
+"168
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 2 -> 8 `i 1186  ]
 {
-[; ;position.c: 167: if (a_frame_dif[0].dif_pos_y <= 1) {
-"167
+[; ;position.c: 169: if (a_frame_dif[0].dif_pos_y <= 1) {
+"169
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 2 -> 1 `i 1187  ]
 {
-[; ;position.c: 169: ActElevator(-3);
-"169
-[e ( _ActElevator (1 -> -U -> 3 `i `uc ]
-"170
+[; ;position.c: 171: ActElevator(-3);
+"171
+[e ( _ActElevator (1 -> -U -> 3 `i `c ]
+"172
 }
-[; ;position.c: 170: } else {
+[; ;position.c: 172: } else {
 [e $U 1188  ]
 [e :U 1187 ]
 {
-[; ;position.c: 172: ActElevator(0);
-"172
-[e ( _ActElevator (1 -> -> 0 `i `uc ]
-"173
+[; ;position.c: 174: ActElevator(0);
+"174
+[e ( _ActElevator (1 -> -> 0 `i `c ]
+"175
 }
 [e :U 1188 ]
-"174
+"176
 }
-[; ;position.c: 173: }
-[; ;position.c: 174: } else {
+[; ;position.c: 175: }
+[; ;position.c: 176: } else {
 [e $U 1189  ]
 [e :U 1186 ]
 {
-[; ;position.c: 176: ActElevator(3);
-"176
-[e ( _ActElevator (1 -> -> 3 `i `uc ]
-"177
+[; ;position.c: 178: ActElevator(3);
+"178
+[e ( _ActElevator (1 -> -> 3 `i `c ]
+"179
 }
 [e :U 1189 ]
-"178
+"180
 }
-[; ;position.c: 177: }
-[; ;position.c: 178: } else {
+[; ;position.c: 179: }
+[; ;position.c: 180: } else {
 [e $U 1190  ]
 [e :U 1185 ]
 {
-[; ;position.c: 184: ActElevator(-3);
-"184
-[e ( _ActElevator (1 -> -U -> 3 `i `uc ]
-"185
+[; ;position.c: 186: ActElevator(-3);
+"186
+[e ( _ActElevator (1 -> -U -> 3 `i `c ]
+"187
 }
 [e :U 1190 ]
-"186
+"188
 }
 [e :U 1184 ]
 [e :U 1176 ]
-[; ;position.c: 185: }
-[; ;position.c: 186: }
+[; ;position.c: 187: }
 [; ;position.c: 188: }
-"188
+[; ;position.c: 190: }
+"190
 [e :UE 1174 ]
 }
-"196
+"198
 [v _BeneathTable `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 196: void BeneathTable(void) {
+[; ;position.c: 198: void BeneathTable(void) {
 [e :U _BeneathTable ]
 [f ]
-[; ;position.c: 197: if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) {
-"197
+[; ;position.c: 199: if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) {
+"199
 [e $ ! && <= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 -> _cm120 `ui >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 -> _cm80 `ui 1192  ]
 {
-[; ;position.c: 198: ActThrottle(0);
-"198
+[; ;position.c: 200: ActThrottle(0);
+"200
 [e ( _ActThrottle (1 -> -> 0 `i `c ]
-"199
+"201
 }
-[; ;position.c: 199: } else if (a_frame[0].height < cm80) {
+[; ;position.c: 201: } else if (a_frame[0].height < cm80) {
 [e $U 1193  ]
 [e :U 1192 ]
 [e $ ! < . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 -> _cm80 `ui 1194  ]
 {
-[; ;position.c: 200: if (a_frame[0].height < cm50) {
-"200
+[; ;position.c: 202: if (a_frame[0].height < cm50) {
+"202
 [e $ ! < . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 -> _cm50 `ui 1195  ]
 {
-[; ;position.c: 201: ActThrottle(6);
-"201
+[; ;position.c: 203: ActThrottle(6);
+"203
 [e ( _ActThrottle (1 -> -> 6 `i `c ]
-"202
+"204
 }
-[; ;position.c: 202: } else {
+[; ;position.c: 204: } else {
 [e $U 1196  ]
 [e :U 1195 ]
 {
-[; ;position.c: 203: ActThrottle(3);
-"203
+[; ;position.c: 205: ActThrottle(3);
+"205
 [e ( _ActThrottle (1 -> -> 3 `i `c ]
-"204
+"206
 }
 [e :U 1196 ]
-"205
+"207
 }
-[; ;position.c: 204: }
-[; ;position.c: 205: } else {
+[; ;position.c: 206: }
+[; ;position.c: 207: } else {
 [e $U 1197  ]
 [e :U 1194 ]
 {
-[; ;position.c: 206: ActThrottle(-3);
-"206
+[; ;position.c: 208: ActThrottle(-3);
+"208
 [e ( _ActThrottle (1 -> -U -> 3 `i `c ]
-"207
+"209
 }
 [e :U 1197 ]
 [e :U 1193 ]
-[; ;position.c: 207: }
-[; ;position.c: 208: }
-"208
+[; ;position.c: 209: }
+[; ;position.c: 210: }
+"210
 [e :UE 1191 ]
 }
-"216
+"218
 [v _BeneathFloor `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 216: void BeneathFloor(void) {
+[; ;position.c: 218: void BeneathFloor(void) {
 [e :U _BeneathFloor ]
 [f ]
-[; ;position.c: 217: if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
-"217
+[; ;position.c: 219: if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
+"219
 [e $ ! && <= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 _cm220 >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 _cm180 1199  ]
 {
-[; ;position.c: 218: ActThrottle(0);
-"218
+[; ;position.c: 220: ActThrottle(0);
+"220
 [e ( _ActThrottle (1 -> -> 0 `i `c ]
-"219
+"221
 }
-[; ;position.c: 219: } else if (a_frame[0].height < cm180) {
+[; ;position.c: 221: } else if (a_frame[0].height < cm180) {
 [e $U 1200  ]
 [e :U 1199 ]
 [e $ ! < . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 _cm180 1201  ]
 {
-[; ;position.c: 220: if (a_frame[0].height < cm100) {
-"220
+[; ;position.c: 222: if (a_frame[0].height < cm100) {
+"222
 [e $ ! < . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 -> _cm100 `ui 1202  ]
 {
-[; ;position.c: 221: ActThrottle(6);
-"221
+[; ;position.c: 223: ActThrottle(6);
+"223
 [e ( _ActThrottle (1 -> -> 6 `i `c ]
-"222
+"224
 }
-[; ;position.c: 222: } else {
+[; ;position.c: 224: } else {
 [e $U 1203  ]
 [e :U 1202 ]
 {
-[; ;position.c: 223: ActThrottle(3);
-"223
+[; ;position.c: 225: ActThrottle(3);
+"225
 [e ( _ActThrottle (1 -> -> 3 `i `c ]
-"224
+"226
 }
 [e :U 1203 ]
-"225
+"227
 }
-[; ;position.c: 224: }
-[; ;position.c: 225: } else {
+[; ;position.c: 226: }
+[; ;position.c: 227: } else {
 [e $U 1204  ]
 [e :U 1201 ]
 {
-[; ;position.c: 226: ActThrottle(-3);
-"226
+[; ;position.c: 228: ActThrottle(-3);
+"228
 [e ( _ActThrottle (1 -> -U -> 3 `i `c ]
-"227
+"229
 }
 [e :U 1204 ]
 [e :U 1200 ]
-[; ;position.c: 227: }
-[; ;position.c: 228: }
-"228
+[; ;position.c: 229: }
+[; ;position.c: 230: }
+"230
 [e :UE 1198 ]
 }
-"237
+"239
 [v _CheckThrottle `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 237: void CheckThrottle(void) {
+[; ;position.c: 239: void CheckThrottle(void) {
 [e :U _CheckThrottle ]
 [f ]
-[; ;position.c: 239: if (id_current_cc == 0) {
-"239
+[; ;position.c: 241: if (id_current_cc == 0) {
+"241
 [e $ ! == _id_current_cc -> 0 `i 1206  ]
 {
-[; ;position.c: 241: if (a_frame_dif[0].dif_height < (-1 * cm50)) {
-"241
+[; ;position.c: 243: if (a_frame_dif[0].dif_height < (-1 * cm50)) {
+"243
 [e $ ! < . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 3 * -U -> 1 `i _cm50 1207  ]
 {
-[; ;position.c: 242: if (storedif) {
-"242
+[; ;position.c: 244: if (storedif) {
+"244
 [e $ ! _storedif 1208  ]
 {
-[; ;position.c: 243: table = 0;
-"243
+[; ;position.c: 245: table = 0;
+"245
 [e = _table -> -> 0 `i `b ]
-"244
+"246
 }
-[; ;position.c: 244: } else {
+[; ;position.c: 246: } else {
 [e $U 1209  ]
 [e :U 1208 ]
 {
-[; ;position.c: 245: storedif = 1;
-"245
+[; ;position.c: 247: storedif = 1;
+"247
 [e = _storedif -> -> 1 `i `b ]
-"246
+"248
 }
 [e :U 1209 ]
-"247
+"249
 }
-[; ;position.c: 246: }
-[; ;position.c: 247: }else{
+[; ;position.c: 248: }
+[; ;position.c: 249: }else{
 [e $U 1210  ]
 [e :U 1207 ]
 {
-[; ;position.c: 248: storedif = 0;
-"248
+[; ;position.c: 250: storedif = 0;
+"250
 [e = _storedif -> -> 0 `i `b ]
-"249
+"251
 }
 [e :U 1210 ]
-[; ;position.c: 249: }
-[; ;position.c: 250: if (table) {
-"250
-[e $ ! _table 1211  ]
-{
-[; ;position.c: 251: BeneathTable();
-"251
-[e ( _BeneathTable ..  ]
+[; ;position.c: 251: }
+[; ;position.c: 252: if (table == 1) {
 "252
+[e $ ! == -> _table `i -> 1 `i 1211  ]
+{
+[; ;position.c: 253: BeneathTable();
+"253
+[e ( _BeneathTable ..  ]
+"254
 }
-[; ;position.c: 252: } else {
+[; ;position.c: 254: } else {
 [e $U 1212  ]
 [e :U 1211 ]
 {
-[; ;position.c: 253: BeneathFloor();
-"253
+[; ;position.c: 255: BeneathFloor();
+"255
 [e ( _BeneathFloor ..  ]
-"254
+"256
 }
 [e :U 1212 ]
-"255
+"257
 }
-[; ;position.c: 254: }
-[; ;position.c: 255: } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) {
+[; ;position.c: 256: }
+[; ;position.c: 257: } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) {
 [e $U 1213  ]
 [e :U 1206 ]
 [e $ ! && > _id_current_cc -> 0 `i < _id_current_cc - _c_path -> 1 `i 1214  ]
 {
-[; ;position.c: 256: BeneathFloor();
-"256
+[; ;position.c: 258: BeneathFloor();
+"258
 [e ( _BeneathFloor ..  ]
-"257
+"259
 }
-[; ;position.c: 257: } else if (id_current_cc == (c_path - 1)) {
+[; ;position.c: 259: } else if (id_current_cc == (c_path - 1)) {
 [e $U 1215  ]
 [e :U 1214 ]
 [e $ ! == _id_current_cc - _c_path -> 1 `i 1216  ]
 {
-[; ;position.c: 259: if (a_frame_dif[0].dif_height > cm50) {
-"259
+[; ;position.c: 261: if (a_frame_dif[0].dif_height > cm50) {
+"261
 [e $ ! > . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 3 _cm50 1217  ]
 {
-[; ;position.c: 260: if (storedif) {
-"260
+[; ;position.c: 262: if (storedif) {
+"262
 [e $ ! _storedif 1218  ]
 {
-[; ;position.c: 261: table = 1;
-"261
+[; ;position.c: 263: table = 1;
+"263
 [e = _table -> -> 1 `i `b ]
-"262
+"264
 }
-[; ;position.c: 262: } else {
+[; ;position.c: 264: } else {
 [e $U 1219  ]
 [e :U 1218 ]
 {
-[; ;position.c: 263: storedif = 1;
-"263
+[; ;position.c: 265: storedif = 1;
+"265
 [e = _storedif -> -> 1 `i `b ]
-"264
+"266
 }
 [e :U 1219 ]
-"265
+"267
 }
-[; ;position.c: 264: }
-[; ;position.c: 265: }else{
+[; ;position.c: 266: }
+[; ;position.c: 267: }else{
 [e $U 1220  ]
 [e :U 1217 ]
 {
-[; ;position.c: 266: storedif = 0;
-"266
+[; ;position.c: 268: storedif = 0;
+"268
 [e = _storedif -> -> 0 `i `b ]
-"267
+"269
 }
 [e :U 1220 ]
-[; ;position.c: 267: }
-[; ;position.c: 268: if (table) {
-"268
+[; ;position.c: 269: }
+[; ;position.c: 270: if (table) {
+"270
 [e $ ! _table 1221  ]
 {
-[; ;position.c: 269: BeneathTable();
-"269
+[; ;position.c: 271: BeneathTable();
+"271
 [e ( _BeneathTable ..  ]
-"270
+"272
 }
-[; ;position.c: 270: } else {
+[; ;position.c: 272: } else {
 [e $U 1222  ]
 [e :U 1221 ]
 {
-[; ;position.c: 271: BeneathFloor();
-"271
+[; ;position.c: 273: BeneathFloor();
+"273
 [e ( _BeneathFloor ..  ]
-"272
+"274
 }
 [e :U 1222 ]
-"273
+"275
 }
-[; ;position.c: 272: }
-[; ;position.c: 273: } else {
+[; ;position.c: 274: }
+[; ;position.c: 275: } else {
 [e $U 1223  ]
 [e :U 1216 ]
 {
-[; ;position.c: 278: if (a_frame[0].height >= 30) {
-"278
+[; ;position.c: 280: if (a_frame[0].height >= 30) {
+"280
 [e $ ! >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 -> -> 30 `i `ui 1224  ]
 {
-[; ;position.c: 279: if (a_frame[1].height > a_frame[0].height) {
-"279
+[; ;position.c: 281: if (a_frame[1].height > a_frame[0].height) {
+"281
 [e $ ! > . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 1225  ]
 {
-[; ;position.c: 281: if (a_frame_dif[0].dif_height <= 46) {
-"281
+[; ;position.c: 283: if (a_frame_dif[0].dif_height <= 46) {
+"283
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 3 -> 46 `i 1226  ]
 {
-[; ;position.c: 282: if (a_frame_dif[0].dif_pos_x <= 23) {
-"282
+[; ;position.c: 284: if (a_frame_dif[0].dif_pos_x <= 23) {
+"284
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 1 -> 23 `i 1227  ]
 {
-[; ;position.c: 284: ActThrottle(-3);
-"284
+[; ;position.c: 286: ActThrottle(-3);
+"286
 [e ( _ActThrottle (1 -> -U -> 3 `i `c ]
-"285
+"287
 }
-[; ;position.c: 285: } else {
+[; ;position.c: 287: } else {
 [e $U 1228  ]
 [e :U 1227 ]
 {
-[; ;position.c: 286: ActThrottle(0);
-"286
+[; ;position.c: 288: ActThrottle(0);
+"288
 [e ( _ActThrottle (1 -> -> 0 `i `c ]
-"287
+"289
 }
 [e :U 1228 ]
-"288
+"290
 }
-[; ;position.c: 287: }
-[; ;position.c: 288: } else {
+[; ;position.c: 289: }
+[; ;position.c: 290: } else {
 [e $U 1229  ]
 [e :U 1226 ]
 {
-[; ;position.c: 289: ActThrottle(3);
-"289
+[; ;position.c: 291: ActThrottle(3);
+"291
 [e ( _ActThrottle (1 -> -> 3 `i `c ]
-"290
+"292
 }
 [e :U 1229 ]
-"291
+"293
 }
-[; ;position.c: 290: }
-[; ;position.c: 291: } else {
+[; ;position.c: 292: }
+[; ;position.c: 293: } else {
 [e $U 1230  ]
 [e :U 1225 ]
 {
-[; ;position.c: 293: ActThrottle(-3);
-"293
+[; ;position.c: 295: ActThrottle(-3);
+"295
 [e ( _ActThrottle (1 -> -U -> 3 `i `c ]
-"294
+"296
 }
 [e :U 1230 ]
-"295
+"297
 }
-[; ;position.c: 294: }
-[; ;position.c: 295: } else {
+[; ;position.c: 296: }
+[; ;position.c: 297: } else {
 [e $U 1231  ]
 [e :U 1224 ]
 {
-[; ;position.c: 300: if(direction){
-"300
-[e $ ! _direction 1232  ]
-{
-[; ;position.c: 301: direction = 0;
-"301
-[e = _direction -> -> 0 `i `b ]
+[; ;position.c: 302: if(direction == 1){
 "302
+[e $ ! == -> _direction `i -> 1 `i 1232  ]
+{
+[; ;position.c: 303: direction = 0;
+"303
+[e = _direction -> -> 0 `i `b ]
+"304
 }
-[; ;position.c: 302: }else{
+[; ;position.c: 304: }else{
 [e $U 1233  ]
 [e :U 1232 ]
 {
-[; ;position.c: 303: direction = 1;
-"303
+[; ;position.c: 305: direction = 1;
+"305
 [e = _direction -> -> 1 `i `b ]
-"304
+"306
 }
 [e :U 1233 ]
-"305
+"307
 [v _tmp `i ~T0 @X0 1 a ]
-[; ;position.c: 304: }
-[; ;position.c: 305: int tmp = c_path - 1;
+[; ;position.c: 306: }
+[; ;position.c: 307: int tmp = c_path - 1;
 [e = _tmp - _c_path -> 1 `i ]
-[; ;position.c: 306: for (int i = 0; i <= tmp; i++) {
-"306
+[; ;position.c: 308: for (int i = 0; i <= tmp; i++) {
+"308
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $U 1237  ]
 [e :U 1234 ]
 {
-[; ;position.c: 307: a_path_old[i].higher_cc = a_path[i].higher_cc;
-"307
-[e = . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 1 . *U + &U _a_path * -> -> _i `ui `ux -> -> # *U &U _a_path `ui `ux 1 ]
-[; ;position.c: 308: a_path_old[i].lower_cc = a_path[i].lower_cc;
-"308
-[e = . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 0 . *U + &U _a_path * -> -> _i `ui `ux -> -> # *U &U _a_path `ui `ux 0 ]
+[; ;position.c: 309: a_path_old[i].higher_cc = a_path[i].higher_cc;
 "309
+[e = . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 1 . *U + &U _a_path * -> -> _i `ui `ux -> -> # *U &U _a_path `ui `ux 1 ]
+[; ;position.c: 310: a_path_old[i].lower_cc = a_path[i].lower_cc;
+"310
+[e = . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 0 . *U + &U _a_path * -> -> _i `ui `ux -> -> # *U &U _a_path `ui `ux 0 ]
+"311
 }
-"306
+"308
 [e ++ _i -> 1 `i ]
 [e :U 1237 ]
 [e $ <= _i _tmp 1234  ]
 [e :U 1235 ]
-"309
+"311
 }
-[; ;position.c: 309: }
-[; ;position.c: 310: for (int i = 0; i <= tmp; i++) {
-"310
+[; ;position.c: 311: }
+[; ;position.c: 312: for (int i = 0; i <= tmp; i++) {
+"312
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $U 1241  ]
 [e :U 1238 ]
 {
-[; ;position.c: 311: a_path[(tmp - i)].higher_cc = a_path_old[i].higher_cc;
-"311
-[e = . *U + &U _a_path * -> -> - _tmp _i `ui `ux -> -> # *U &U _a_path `ui `ux 1 . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 1 ]
-[; ;position.c: 312: a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
-"312
-[e = . *U + &U _a_path * -> -> - _tmp _i `ui `ux -> -> # *U &U _a_path `ui `ux 0 . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 0 ]
+[; ;position.c: 313: a_path[(tmp - i)].higher_cc = a_path_old[i].higher_cc;
 "313
+[e = . *U + &U _a_path * -> -> - _tmp _i `ui `ux -> -> # *U &U _a_path `ui `ux 1 . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 1 ]
+[; ;position.c: 314: a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
+"314
+[e = . *U + &U _a_path * -> -> - _tmp _i `ui `ux -> -> # *U &U _a_path `ui `ux 0 . *U + &U _a_path_old * -> -> _i `ui `ux -> -> # *U &U _a_path_old `ui `ux 0 ]
+"315
 }
-"310
+"312
 [e ++ _i -> 1 `i ]
 [e :U 1241 ]
 [e $ <= _i _tmp 1238  ]
 [e :U 1239 ]
-"313
-}
-[; ;position.c: 313: }
-[; ;position.c: 315: for (int i = 0; i <= 10000; i++) {
 "315
+}
+[; ;position.c: 315: }
+[; ;position.c: 317: for (int i = 0; i <= 10000; i++) {
+"317
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -8495,348 +8499,348 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 1243  ]
 [e :U 1242 ]
 {
-[; ;position.c: 316: _delay((unsigned long)((3)*(16000000/4000.0)));
-"316
+[; ;position.c: 318: _delay((unsigned long)((3)*(16000000/4000.0)));
+"318
 [e ( __delay (1 -> * -> -> 3 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-"317
+"319
 }
-"315
+"317
 [e ++ _i -> 1 `i ]
 [e $ <= _i -> 10000 `i 1242  ]
 [e :U 1243 ]
-"317
-}
 "319
 }
+"321
+}
 [e :U 1231 ]
-"320
+"322
 }
 [e :U 1223 ]
 [e :U 1215 ]
 [e :U 1213 ]
-[; ;position.c: 317: }
 [; ;position.c: 319: }
-[; ;position.c: 320: }
 [; ;position.c: 321: }
-"321
+[; ;position.c: 322: }
+[; ;position.c: 323: }
+"323
 [e :UE 1205 ]
 }
-"333
+"335
 [v _CheckRudderAhead `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 333: void CheckRudderAhead(void) {
+[; ;position.c: 335: void CheckRudderAhead(void) {
 [e :U _CheckRudderAhead ]
 [f ]
-[; ;position.c: 335: if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
-"335
+[; ;position.c: 337: if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
+"337
 [e $ ! && >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -U -> 5 `i <= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -> 5 `i 1246  ]
 {
-[; ;position.c: 336: ActRudder(0);
-"336
-[e ( _ActRudder (1 -> -> 0 `i `uc ]
-"337
-}
-[; ;position.c: 337: }
-[e $U 1247  ]
+[; ;position.c: 338: ActRudder(0);
+"338
+[e ( _ActRudder (1 -> -> 0 `i `c ]
 "339
+}
+[; ;position.c: 339: }
+[e $U 1247  ]
+"341
 [e :U 1246 ]
-[; ;position.c: 339: else if (a_frame[0].angle > 5) {
+[; ;position.c: 341: else if (a_frame[0].angle > 5) {
 [e $ ! > . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -> 5 `i 1248  ]
 {
-[; ;position.c: 341: if (a_frame[1].angle > a_frame[0].angle) {
-"341
+[; ;position.c: 343: if (a_frame[1].angle > a_frame[0].angle) {
+"343
 [e $ ! > . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 1249  ]
 {
-[; ;position.c: 343: if (a_frame_dif[0].dif_angle <= 2) {
-"343
+[; ;position.c: 345: if (a_frame_dif[0].dif_angle <= 2) {
+"345
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -> 2 `i 1250  ]
 {
-[; ;position.c: 344: if (a_frame_dif[0].dif_angle <= 1) {
-"344
+[; ;position.c: 346: if (a_frame_dif[0].dif_angle <= 1) {
+"346
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -> 1 `i 1251  ]
 {
-[; ;position.c: 345: ActRudder(-3);
-"345
-[e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"346
+[; ;position.c: 347: ActRudder(-3);
+"347
+[e ( _ActRudder (1 -> -U -> 3 `i `c ]
+"348
 }
-[; ;position.c: 346: } else {
+[; ;position.c: 348: } else {
 [e $U 1252  ]
 [e :U 1251 ]
 {
-[; ;position.c: 347: ActRudder(0);
-"347
-[e ( _ActRudder (1 -> -> 0 `i `uc ]
-"348
+[; ;position.c: 349: ActRudder(0);
+"349
+[e ( _ActRudder (1 -> -> 0 `i `c ]
+"350
 }
 [e :U 1252 ]
-"349
+"351
 }
-[; ;position.c: 348: }
-[; ;position.c: 349: } else {
+[; ;position.c: 350: }
+[; ;position.c: 351: } else {
 [e $U 1253  ]
 [e :U 1250 ]
 {
-[; ;position.c: 351: ActRudder(3);
-"351
-[e ( _ActRudder (1 -> -> 3 `i `uc ]
-"352
+[; ;position.c: 353: ActRudder(3);
+"353
+[e ( _ActRudder (1 -> -> 3 `i `c ]
+"354
 }
 [e :U 1253 ]
-"353
+"355
 }
-[; ;position.c: 352: }
-[; ;position.c: 353: } else {
+[; ;position.c: 354: }
+[; ;position.c: 355: } else {
 [e $U 1254  ]
 [e :U 1249 ]
 {
-[; ;position.c: 355: ActRudder(-3);
-"355
-[e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"356
+[; ;position.c: 357: ActRudder(-3);
+"357
+[e ( _ActRudder (1 -> -U -> 3 `i `c ]
+"358
 }
 [e :U 1254 ]
-"357
-}
-[; ;position.c: 356: }
-[; ;position.c: 357: }
-[e $U 1255  ]
 "359
-[e :U 1248 ]
-[; ;position.c: 359: else {
-{
-[; ;position.c: 361: if (a_frame[1].angle < a_frame[0].angle) {
+}
+[; ;position.c: 358: }
+[; ;position.c: 359: }
+[e $U 1255  ]
 "361
+[e :U 1248 ]
+[; ;position.c: 361: else {
+{
+[; ;position.c: 363: if (a_frame[1].angle < a_frame[0].angle) {
+"363
 [e $ ! < . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 1256  ]
 {
-[; ;position.c: 363: if (a_frame_dif[0].dif_angle <= -2) {
-"363
+[; ;position.c: 365: if (a_frame_dif[0].dif_angle <= -2) {
+"365
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -U -> 2 `i 1257  ]
 {
-[; ;position.c: 364: if (a_frame_dif[0].dif_angle <= -2) {
-"364
+[; ;position.c: 366: if (a_frame_dif[0].dif_angle <= -2) {
+"366
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -U -> 2 `i 1258  ]
 {
-[; ;position.c: 365: ActRudder(3);
-"365
-[e ( _ActRudder (1 -> -> 3 `i `uc ]
-"366
+[; ;position.c: 367: ActRudder(3);
+"367
+[e ( _ActRudder (1 -> -> 3 `i `c ]
+"368
 }
-[; ;position.c: 366: } else {
+[; ;position.c: 368: } else {
 [e $U 1259  ]
 [e :U 1258 ]
 {
-[; ;position.c: 367: ActRudder(0);
-"367
-[e ( _ActRudder (1 -> -> 0 `i `uc ]
-"368
+[; ;position.c: 369: ActRudder(0);
+"369
+[e ( _ActRudder (1 -> -> 0 `i `c ]
+"370
 }
 [e :U 1259 ]
-"369
+"371
 }
-[; ;position.c: 368: }
-[; ;position.c: 369: } else {
+[; ;position.c: 370: }
+[; ;position.c: 371: } else {
 [e $U 1260  ]
 [e :U 1257 ]
 {
-[; ;position.c: 371: ActRudder(-3);
-"371
-[e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"372
+[; ;position.c: 373: ActRudder(-3);
+"373
+[e ( _ActRudder (1 -> -U -> 3 `i `c ]
+"374
 }
 [e :U 1260 ]
-"373
+"375
 }
-[; ;position.c: 372: }
-[; ;position.c: 373: } else {
+[; ;position.c: 374: }
+[; ;position.c: 375: } else {
 [e $U 1261  ]
 [e :U 1256 ]
 {
-[; ;position.c: 375: ActRudder(3);
-"375
-[e ( _ActRudder (1 -> -> 3 `i `uc ]
-"376
+[; ;position.c: 377: ActRudder(3);
+"377
+[e ( _ActRudder (1 -> -> 3 `i `c ]
+"378
 }
 [e :U 1261 ]
-"377
+"379
 }
 [e :U 1255 ]
 [e :U 1247 ]
-[; ;position.c: 376: }
-[; ;position.c: 377: }
+[; ;position.c: 378: }
 [; ;position.c: 379: }
-"379
+[; ;position.c: 381: }
+"381
 [e :UE 1245 ]
 }
-"391
+"393
 [v _CheckRudderBack `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 391: void CheckRudderBack(void) {
+[; ;position.c: 393: void CheckRudderBack(void) {
 [e :U _CheckRudderBack ]
 [f ]
-[; ;position.c: 394: if (a_frame[0].angle <= -175 || a_frame[0].angle >= 175) {
-"394
+[; ;position.c: 396: if (a_frame[0].angle <= -175 || a_frame[0].angle >= 175) {
+"396
 [e $ ! || <= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -U -> 175 `i >= . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -> 175 `i 1263  ]
 {
-[; ;position.c: 395: ActRudder(0);
-"395
-[e ( _ActRudder (1 -> -> 0 `i `uc ]
-"396
-}
-[; ;position.c: 396: }
-[e $U 1264  ]
+[; ;position.c: 397: ActRudder(0);
+"397
+[e ( _ActRudder (1 -> -> 0 `i `c ]
 "398
+}
+[; ;position.c: 398: }
+[e $U 1264  ]
+"400
 [e :U 1263 ]
-[; ;position.c: 398: else if (a_frame[0].angle > -175) {
+[; ;position.c: 400: else if (a_frame[0].angle > -175) {
 [e $ ! > . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 -U -> 175 `i 1265  ]
 {
-[; ;position.c: 400: if (a_frame[1].angle > a_frame[0].angle) {
-"400
+[; ;position.c: 402: if (a_frame[1].angle > a_frame[0].angle) {
+"402
 [e $ ! > . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 1266  ]
 {
-[; ;position.c: 402: if (a_frame_dif[0].dif_angle <= 2) {
-"402
+[; ;position.c: 404: if (a_frame_dif[0].dif_angle <= 2) {
+"404
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -> 2 `i 1267  ]
 {
-[; ;position.c: 403: if (a_frame_dif[0].dif_angle <= 1) {
-"403
+[; ;position.c: 405: if (a_frame_dif[0].dif_angle <= 1) {
+"405
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -> 1 `i 1268  ]
 {
-[; ;position.c: 404: ActRudder(-3);
-"404
-[e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"405
+[; ;position.c: 406: ActRudder(-3);
+"406
+[e ( _ActRudder (1 -> -U -> 3 `i `c ]
+"407
 }
-[; ;position.c: 405: } else {
+[; ;position.c: 407: } else {
 [e $U 1269  ]
 [e :U 1268 ]
 {
-[; ;position.c: 406: ActRudder(0);
-"406
-[e ( _ActRudder (1 -> -> 0 `i `uc ]
-"407
+[; ;position.c: 408: ActRudder(0);
+"408
+[e ( _ActRudder (1 -> -> 0 `i `c ]
+"409
 }
 [e :U 1269 ]
-"408
+"410
 }
-[; ;position.c: 407: }
-[; ;position.c: 408: } else {
+[; ;position.c: 409: }
+[; ;position.c: 410: } else {
 [e $U 1270  ]
 [e :U 1267 ]
 {
-[; ;position.c: 410: ActRudder(3);
-"410
-[e ( _ActRudder (1 -> -> 3 `i `uc ]
-"411
+[; ;position.c: 412: ActRudder(3);
+"412
+[e ( _ActRudder (1 -> -> 3 `i `c ]
+"413
 }
 [e :U 1270 ]
-"412
+"414
 }
-[; ;position.c: 411: }
-[; ;position.c: 412: } else {
+[; ;position.c: 413: }
+[; ;position.c: 414: } else {
 [e $U 1271  ]
 [e :U 1266 ]
 {
-[; ;position.c: 414: ActRudder(-3);
-"414
-[e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"415
+[; ;position.c: 416: ActRudder(-3);
+"416
+[e ( _ActRudder (1 -> -U -> 3 `i `c ]
+"417
 }
 [e :U 1271 ]
-"416
-}
-[; ;position.c: 415: }
-[; ;position.c: 416: }
-[e $U 1272  ]
 "418
-[e :U 1265 ]
-[; ;position.c: 418: else {
-{
-[; ;position.c: 420: if (a_frame[1].angle < a_frame[0].angle) {
+}
+[; ;position.c: 417: }
+[; ;position.c: 418: }
+[e $U 1272  ]
 "420
+[e :U 1265 ]
+[; ;position.c: 420: else {
+{
+[; ;position.c: 422: if (a_frame[1].angle < a_frame[0].angle) {
+"422
 [e $ ! < . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 1273  ]
 {
-[; ;position.c: 422: if (a_frame_dif[0].dif_angle <= -2) {
-"422
+[; ;position.c: 424: if (a_frame_dif[0].dif_angle <= -2) {
+"424
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -U -> 2 `i 1274  ]
 {
-[; ;position.c: 423: if (a_frame_dif[0].dif_angle <= -2) {
-"423
+[; ;position.c: 425: if (a_frame_dif[0].dif_angle <= -2) {
+"425
 [e $ ! <= . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 4 -U -> 2 `i 1275  ]
 {
-[; ;position.c: 424: ActRudder(3);
-"424
-[e ( _ActRudder (1 -> -> 3 `i `uc ]
-"425
+[; ;position.c: 426: ActRudder(3);
+"426
+[e ( _ActRudder (1 -> -> 3 `i `c ]
+"427
 }
-[; ;position.c: 425: } else {
+[; ;position.c: 427: } else {
 [e $U 1276  ]
 [e :U 1275 ]
 {
-[; ;position.c: 426: ActRudder(0);
-"426
-[e ( _ActRudder (1 -> -> 0 `i `uc ]
-"427
+[; ;position.c: 428: ActRudder(0);
+"428
+[e ( _ActRudder (1 -> -> 0 `i `c ]
+"429
 }
 [e :U 1276 ]
-"428
+"430
 }
-[; ;position.c: 427: }
-[; ;position.c: 428: } else {
+[; ;position.c: 429: }
+[; ;position.c: 430: } else {
 [e $U 1277  ]
 [e :U 1274 ]
 {
-[; ;position.c: 430: ActRudder(-3);
-"430
-[e ( _ActRudder (1 -> -U -> 3 `i `uc ]
-"431
+[; ;position.c: 432: ActRudder(-3);
+"432
+[e ( _ActRudder (1 -> -U -> 3 `i `c ]
+"433
 }
 [e :U 1277 ]
-"432
+"434
 }
-[; ;position.c: 431: }
-[; ;position.c: 432: } else {
+[; ;position.c: 433: }
+[; ;position.c: 434: } else {
 [e $U 1278  ]
 [e :U 1273 ]
 {
-[; ;position.c: 434: ActRudder(3);
-"434
-[e ( _ActRudder (1 -> -> 3 `i `uc ]
-"435
+[; ;position.c: 436: ActRudder(3);
+"436
+[e ( _ActRudder (1 -> -> 3 `i `c ]
+"437
 }
 [e :U 1278 ]
-"436
+"438
 }
 [e :U 1272 ]
 [e :U 1264 ]
-[; ;position.c: 435: }
-[; ;position.c: 436: }
-[; ;position.c: 440: }
-"440
+[; ;position.c: 437: }
+[; ;position.c: 438: }
+[; ;position.c: 442: }
+"442
 [e :UE 1262 ]
 }
-"447
+"449
 [v _StoreAsOld `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 447: void StoreAsOld(void) {
+[; ;position.c: 449: void StoreAsOld(void) {
 [e :U _StoreAsOld ]
 [f ]
-[; ;position.c: 448: a_frame[1].num = a_frame[0].num;
-"448
-[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 ]
-[; ;position.c: 449: a_frame[1].pos_x = a_frame[0].pos_x;
-"449
-[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 ]
-[; ;position.c: 450: a_frame[1].pos_y = a_frame[0].pos_y;
+[; ;position.c: 450: a_frame[1].num = a_frame[0].num;
 "450
-[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 ]
-[; ;position.c: 451: a_frame[1].height = a_frame[0].height;
+[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 0 ]
+[; ;position.c: 451: a_frame[1].pos_x = a_frame[0].pos_x;
 "451
-[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 ]
-[; ;position.c: 452: a_frame[1].angle = a_frame[0].angle;
+[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 1 ]
+[; ;position.c: 452: a_frame[1].pos_y = a_frame[0].pos_y;
 "452
-[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 ]
-[; ;position.c: 453: }
+[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 2 ]
+[; ;position.c: 453: a_frame[1].height = a_frame[0].height;
 "453
+[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 ]
+[; ;position.c: 454: a_frame[1].angle = a_frame[0].angle;
+"454
+[e = . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 4 ]
+[; ;position.c: 455: }
+"455
 [e :UE 1279 ]
 }

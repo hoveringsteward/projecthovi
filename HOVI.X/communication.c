@@ -46,11 +46,20 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2) {
 
 #ifdef WLAN
 void UartSend(unsigned char data) {
-    if(TX1IF == 1) {
+    if(TX1IF == 0) {
         __delay_us(200);
     }
     TXREG1 = data;
-    while(TX1IF == 1);
+    while(TX1IF == 0);
+}
+
+void UartSendAscii(unsigned char data) {
+    if(TX1IF == 0) {
+        __delay_us(200);
+    }
+    data += 48;
+    TXREG1 = data;
+    while(TX1IF == 0);
 }
 
 unsigned char UartReceive(void) {

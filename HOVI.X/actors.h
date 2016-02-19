@@ -21,7 +21,7 @@
 void ActAileron(signed char change);
 void ActElevator(signed char change);
 void ActThrottle(signed char change);
-void ActRudder(unsigned char change);
+void ActRudder(signed char change);
 void SignalOut(void);
 void Delay(unsigned int del);
 // </editor-fold>

@@ -7550,10 +7550,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 21: void ActAileron(unsigned char change);
-[; ;actors.h: 22: void ActElevator(unsigned char change);
+[; ;actors.h: 21: void ActAileron(signed char change);
+[; ;actors.h: 22: void ActElevator(signed char change);
 [; ;actors.h: 23: void ActThrottle(signed char change);
-[; ;actors.h: 24: void ActRudder(unsigned char change);
+[; ;actors.h: 24: void ActRudder(signed char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
 [; ;actors.h: 34: typedef struct act_out {
@@ -7568,7 +7568,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;communication.h: 24: void UartSend(unsigned char data);
-[; ;communication.h: 25: unsigned char UartReceive(void);
+[; ;communication.h: 25: void UartSendAscii(unsigned char data);
+[; ;communication.h: 26: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7657,7 +7658,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 63: t_frame_dif a_frame_dif[1];
 "67
 [v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 67: bit direction;
+[i _direction
+-> 0 `i
+]
+[; ;position.h: 67: bit direction = 0;
 "71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
@@ -7755,7 +7759,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _ExchangeSpiByte ]
 [v _byte1 `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;communication.c: 17: if(SSP1IF == 1) {
+[; ;communication.c: 17: if (SSP1IF == 1) {
 "17
 [e $ ! == -> _SSP1IF `i -> 1 `i 1153  ]
 {
@@ -7772,7 +7776,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.c: 21: SSP1BUF = byte1;
 "21
 [e = _SSP1BUF _byte1 ]
-[; ;communication.c: 22: while(SSP1IF == 0);
+[; ;communication.c: 22: while (SSP1IF == 0);
 "22
 [e $U 1154  ]
 [e :U 1155 ]
@@ -7805,7 +7809,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SPI_word `ui ~T0 @X0 1 a ]
 [; ;communication.c: 29: unsigned int SPI_word = 0;
 [e = _SPI_word -> -> 0 `i `ui ]
-[; ;communication.c: 30: if(SSP1IF == 1) {
+[; ;communication.c: 30: if (SSP1IF == 1) {
 "30
 [e $ ! == -> _SSP1IF `i -> 1 `i 1158  ]
 {
@@ -7822,7 +7826,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.c: 34: SSP1BUF = byte1;
 "34
 [e = _SSP1BUF _byte1 ]
-[; ;communication.c: 35: while(SSP1IF == 0);
+[; ;communication.c: 35: while (SSP1IF == 0);
 "35
 [e $U 1159  ]
 [e :U 1160 ]
@@ -7841,7 +7845,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.c: 39: SSP1BUF = byte2;
 "39
 [e = _SSP1BUF _byte2 ]
-[; ;communication.c: 40: while(SSP1IF == 0);
+[; ;communication.c: 40: while (SSP1IF == 0);
 "40
 [e $U 1162  ]
 [e :U 1163 ]
@@ -7898,30 +7902,65 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 1165 ]
 }
 "56
-[v _UartReceive `(uc ~T0 @X0 1 ef ]
+[v _UartSendAscii `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;communication.c: 56: unsigned char UartReceive(void) {
-[e :U _UartReceive ]
+[; ;communication.c: 56: void UartSendAscii(unsigned char data) {
+[e :U _UartSendAscii ]
+[v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;communication.c: 57: if(RCSTA1bits.OERR == 1) {
+[; ;communication.c: 57: if(TX1IF == 1) {
 "57
-[e $ ! == -> . . _RCSTA1bits 0 1 `i -> 1 `i 1171  ]
+[e $ ! == -> _TX1IF `i -> 1 `i 1171  ]
 {
-[; ;communication.c: 58: RCSTA1bits.CREN = 0;
+[; ;communication.c: 58: _delay((unsigned long)((200)*(16000000/4000000.0)));
 "58
-[e = . . _RCSTA1bits 0 4 -> -> 0 `i `uc ]
-[; ;communication.c: 59: RCSTA1bits.CREN = 1;
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
 "59
-[e = . . _RCSTA1bits 0 4 -> -> 1 `i `uc ]
-"60
 }
 [e :U 1171 ]
-[; ;communication.c: 60: }
-[; ;communication.c: 61: return RCREG1;
+[; ;communication.c: 59: }
+[; ;communication.c: 60: data += 48;
+"60
+[e =+ _data -> -> 48 `i `uc ]
+[; ;communication.c: 61: TXREG1 = data;
 "61
-[e ) _RCREG1 ]
-[e $UE 1170  ]
-[; ;communication.c: 62: }
+[e = _TXREG1 _data ]
+[; ;communication.c: 62: while(TX1IF == 0);
 "62
+[e $U 1172  ]
+[e :U 1173 ]
+[e :U 1172 ]
+[e $ == -> _TX1IF `i -> 0 `i 1173  ]
+[e :U 1174 ]
+[; ;communication.c: 63: }
+"63
 [e :UE 1170 ]
+}
+"65
+[v _UartReceive `(uc ~T0 @X0 1 ef ]
+{
+[; ;communication.c: 65: unsigned char UartReceive(void) {
+[e :U _UartReceive ]
+[f ]
+[; ;communication.c: 66: if(RCSTA1bits.OERR == 1) {
+"66
+[e $ ! == -> . . _RCSTA1bits 0 1 `i -> 1 `i 1176  ]
+{
+[; ;communication.c: 67: RCSTA1bits.CREN = 0;
+"67
+[e = . . _RCSTA1bits 0 4 -> -> 0 `i `uc ]
+[; ;communication.c: 68: RCSTA1bits.CREN = 1;
+"68
+[e = . . _RCSTA1bits 0 4 -> -> 1 `i `uc ]
+"69
+}
+[e :U 1176 ]
+[; ;communication.c: 69: }
+[; ;communication.c: 70: return RCREG1;
+"70
+[e ) _RCREG1 ]
+[e $UE 1175  ]
+[; ;communication.c: 71: }
+"71
+[e :UE 1175 ]
 }

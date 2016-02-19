@@ -14,7 +14,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "81
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
-"24 communication.h
+"25 communication.h
+[v _UartSendAscii `(v ~T0 @X0 0 ef1`uc ]
+"24
 [v _UartSend `(v ~T0 @X0 0 ef1`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -7509,10 +7511,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 21: void ActAileron(unsigned char change);
-[; ;actors.h: 22: void ActElevator(unsigned char change);
+[; ;actors.h: 21: void ActAileron(signed char change);
+[; ;actors.h: 22: void ActElevator(signed char change);
 [; ;actors.h: 23: void ActThrottle(signed char change);
-[; ;actors.h: 24: void ActRudder(unsigned char change);
+[; ;actors.h: 24: void ActRudder(signed char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
 [; ;actors.h: 34: typedef struct act_out {
@@ -7527,7 +7529,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;communication.h: 24: void UartSend(unsigned char data);
-[; ;communication.h: 25: unsigned char UartReceive(void);
+[; ;communication.h: 25: void UartSendAscii(unsigned char data);
+[; ;communication.h: 26: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7616,7 +7619,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 63: t_frame_dif a_frame_dif[1];
 "67
 [v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 67: bit direction;
+[i _direction
+-> 0 `i
+]
+[; ;position.h: 67: bit direction = 0;
 "71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
@@ -7723,9 +7729,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 1154  ]
 [e :U 1153 ]
 {
-[; ;debug.c: 15: send_info[debug_info_counter] = debug_info % ((debug_info_counter + 1) * 10);
+[; ;debug.c: 15: send_info[debug_info_counter] = (debug_info / (10 * debug_info_counter)) % 10;
 "15
-[e = *U + &U _send_info * -> _debug_info_counter `ux -> -> # *U &U _send_info `ui `ux -> % _debug_info -> * + -> _debug_info_counter `i -> 1 `i -> 10 `i `ui `uc ]
+[e = *U + &U _send_info * -> _debug_info_counter `ux -> -> # *U &U _send_info `ui `ux -> % / _debug_info -> * -> 10 `i -> _debug_info_counter `i `ui -> -> 10 `i `ui `uc ]
 [; ;debug.c: 16: debug_info -= send_info[debug_info_counter];
 "16
 [e =- _debug_info -> *U + &U _send_info * -> _debug_info_counter `ux -> -> # *U &U _send_info `ui `ux `ui ]
@@ -7751,9 +7757,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _send `uc ~T0 @X0 1 a ]
 [; ;debug.c: 19: unsigned char send = send_info[debug_send_counter];
 [e = _send *U + &U _send_info * -> -> _debug_send_counter `uc `ux -> -> # *U &U _send_info `ui `ux ]
-[; ;debug.c: 20: UartSend(send);
+[; ;debug.c: 20: UartSendAscii(send);
 "20
-[e ( _UartSend (1 _send ]
+[e ( _UartSendAscii (1 _send ]
 "21
 }
 "18

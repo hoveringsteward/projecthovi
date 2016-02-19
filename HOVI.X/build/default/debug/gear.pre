@@ -9410,10 +9410,10 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 extern char * ftoa(float f, int * status);
 
 # 21 "actors.h"
-void ActAileron(unsigned char change);
-void ActElevator(unsigned char change);
+void ActAileron(signed char change);
+void ActElevator(signed char change);
 void ActThrottle(signed char change);
-void ActRudder(unsigned char change);
+void ActRudder(signed char change);
 void SignalOut(void);
 void Delay(unsigned int del);
 
@@ -9431,6 +9431,7 @@ t_actors a_actors[1];
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 void UartSend(unsigned char data);
+void UartSendAscii(unsigned char data);
 unsigned char UartReceive(void);
 
 # 28 "init.h"
@@ -9509,7 +9510,7 @@ t_frame_dif a_frame_dif[1];
 
 
 
-bit direction;
+bit direction = 0;
 
 
 

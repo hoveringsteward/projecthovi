@@ -9410,10 +9410,10 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 extern char * ftoa(float f, int * status);
 
 # 21 "actors.h"
-void ActAileron(unsigned char change);
-void ActElevator(unsigned char change);
+void ActAileron(signed char change);
+void ActElevator(signed char change);
 void ActThrottle(signed char change);
-void ActRudder(unsigned char change);
+void ActRudder(signed char change);
 void SignalOut(void);
 void Delay(unsigned int del);
 
@@ -9431,6 +9431,7 @@ t_actors a_actors[1];
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 void UartSend(unsigned char data);
+void UartSendAscii(unsigned char data);
 unsigned char UartReceive(void);
 
 # 20 "gear.h"
@@ -9515,7 +9516,7 @@ t_frame_dif a_frame_dif[1];
 
 
 
-bit direction;
+bit direction = 0;
 
 
 
@@ -9616,19 +9617,30 @@ OSCCON = 0b01110111;
 # 81
 }
 
-
-
+# 91
 void InitUart(void) {
 
+SPBRG1 = 68;
+TXSTA1bits.BRGH = 1;
+BAUDCON1bits.BRG16 = 1;
+
+
+TXSTA1bits.SYNC = 0;
+RCSTA1bits.SPEN = 1;
+
+TXSTA1bits.TXEN = 1;
+TX1IF = 0;
+
+RCSTA1bits.CREN = 1;
 }
 
-# 98
+# 116
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 124
+# 142
 void InitTimer(void) {
 
 T1CONbits.TMR1CS = 0b00;
@@ -9666,12 +9678,12 @@ T5CONbits.TMR5ON = 1;
 
 }
 
-# 167
+# 185
 void InitComp(void) {
 CCP1CONbits.CCP1M = 0b1010;
 }
 
-# 177
+# 195
 void InitInterrupt(void) {
 
 TMR3GIE = 1;
@@ -9684,7 +9696,7 @@ PEIE = 1;
 GIE = 1;
 }
 
-# 193
+# 211
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;
