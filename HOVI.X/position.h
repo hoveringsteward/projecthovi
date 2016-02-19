@@ -18,8 +18,8 @@
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckElevator(void);
-void BeneathTable(void);
-void BeneathFloor(void);
+void AboveTable(void);
+void AboveFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);

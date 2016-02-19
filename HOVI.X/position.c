@@ -190,12 +190,12 @@ void CheckElevator(void) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="BeneathTable">
+// <editor-fold defaultstate="collapsed" desc="AboveTable">
 
-/* The Hexrotor flies beneath the table
+/* The Hexrotor flies above the table
  * the hexrotors height should be between 80 and 120cm
 /*-----------------------------------------------------------*/
-void BeneathTable(void) {
+void AboveTable(void) {
     if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) { // between 0.8 and 1.2
         ActThrottle(0);
     } else if (a_frame[0].height < cm80) { // under 0.8
@@ -210,12 +210,12 @@ void BeneathTable(void) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="BeneathFloor">
+// <editor-fold defaultstate="collapsed" desc="AboveFloor">
 
-/* Hexrotor flies beneath the floor
+/* Hexrotor flies above the floor
  * the hexrotors height should be between 180 and 220cm
 /*------------------------------------------------------------*/
-void BeneathFloor(void) {
+void AboveFloor(void) {
     if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) { // between 1.8 and 2.2
         ActThrottle(0);
     } else if (a_frame[0].height < cm180) { // under 1.8
@@ -250,12 +250,12 @@ void CheckThrottle(void) {
             storedif = 0;
         }
         if (table == 1) {
-            BeneathTable();
+            AboveTable();
         } else {
-            BeneathFloor();
+            AboveFloor();
         }
     } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
-        BeneathFloor();
+        AboveFloor();
     } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table (pre-last CC)
         // check, if difference is more than 50cm, from floor to table
         if (a_frame_dif[0].dif_height > cm50) {
@@ -268,9 +268,9 @@ void CheckThrottle(void) {
             storedif = 0;
         }
         if (table) {
-            BeneathTable();
+            AboveTable();
         } else {
-            BeneathFloor();
+            AboveFloor();
         }
     } else { // on the table -> last colorcode + landing
         /* Landing / Decreasing - has to check, if the height - difference is between
