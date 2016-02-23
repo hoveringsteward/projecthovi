@@ -7507,10 +7507,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 21: void ActAileron(unsigned char change);
-[; ;actors.h: 22: void ActElevator(unsigned char change);
+[; ;actors.h: 21: void ActAileron(signed char change);
+[; ;actors.h: 22: void ActElevator(signed char change);
 [; ;actors.h: 23: void ActThrottle(signed char change);
-[; ;actors.h: 24: void ActRudder(unsigned char change);
+[; ;actors.h: 24: void ActRudder(signed char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
 [; ;actors.h: 34: typedef struct act_out {
@@ -7525,7 +7525,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;communication.h: 24: void UartSend(unsigned char data);
-[; ;communication.h: 25: unsigned char UartReceive(void);
+[; ;communication.h: 25: void UartSendAscii(unsigned char data);
+[; ;communication.h: 26: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7614,7 +7615,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 63: t_frame_dif a_frame_dif[1];
 "67
 [v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 67: bit direction;
+[i _direction
+-> 0 `i
+]
+[; ;position.h: 67: bit direction = 0;
 "71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180

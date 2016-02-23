@@ -7582,10 +7582,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
-[; ;actors.h: 21: void ActAileron(unsigned char change);
-[; ;actors.h: 22: void ActElevator(unsigned char change);
+[; ;actors.h: 21: void ActAileron(signed char change);
+[; ;actors.h: 22: void ActElevator(signed char change);
 [; ;actors.h: 23: void ActThrottle(signed char change);
-[; ;actors.h: 24: void ActRudder(unsigned char change);
+[; ;actors.h: 24: void ActRudder(signed char change);
 [; ;actors.h: 25: void SignalOut(void);
 [; ;actors.h: 26: void Delay(unsigned int del);
 [; ;actors.h: 34: typedef struct act_out {
@@ -7600,7 +7600,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.h: 22: unsigned char ExchangeSpiByte(unsigned char byte1);
 [; ;communication.h: 23: unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 [; ;communication.h: 24: void UartSend(unsigned char data);
-[; ;communication.h: 25: unsigned char UartReceive(void);
+[; ;communication.h: 25: void UartSendAscii(unsigned char data);
+[; ;communication.h: 26: unsigned char UartReceive(void);
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h
@@ -7689,7 +7690,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 63: t_frame_dif a_frame_dif[1];
 "67
 [v _direction `b ~T0 @X0 1 e ]
-[; ;position.h: 67: bit direction;
+[i _direction
+-> 0 `i
+]
+[; ;position.h: 67: bit direction = 0;
 "71
 [v _cm180 `ui ~T0 @X0 1 e ]
 [i _cm180
@@ -7780,149 +7784,149 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;main.h: 76: unsigned char pulsecounter = 0;
-"20 actors.c
+"16 actors.c
 [v _Delay `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;actors.c: 20: void Delay(unsigned int del) {
+[; ;actors.c: 16: void Delay(unsigned int del) {
 [e :U _Delay ]
 [v _del `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 21: del <<= 1;
-"21
+[; ;actors.c: 17: del <<= 1;
+"17
 [e =<< _del -> 1 `i ]
-[; ;actors.c: 22: del = 2000 + del;
-"22
+[; ;actors.c: 18: del = 2000 + del;
+"18
 [e = _del + -> -> 2000 `i `ui _del ]
-[; ;actors.c: 23: TMR1L = 0;
-"23
+[; ;actors.c: 19: TMR1L = 0;
+"19
 [e = _TMR1L -> -> 0 `i `uc ]
-[; ;actors.c: 24: TMR1H = 0;
-"24
+[; ;actors.c: 20: TMR1H = 0;
+"20
 [e = _TMR1H -> -> 0 `i `uc ]
-[; ;actors.c: 25: CCPR1L = del;
-"25
+[; ;actors.c: 21: CCPR1L = del;
+"21
 [e = _CCPR1L -> _del `uc ]
-[; ;actors.c: 26: del >>= 8;
-"26
+[; ;actors.c: 22: del >>= 8;
+"22
 [e =>> _del -> 8 `i ]
-[; ;actors.c: 27: CCPR1H = del;
-"27
+[; ;actors.c: 23: CCPR1H = del;
+"23
 [e = _CCPR1H -> _del `uc ]
-[; ;actors.c: 28: T1CONbits.TMR1ON = 1;
-"28
+[; ;actors.c: 24: T1CONbits.TMR1ON = 1;
+"24
 [e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
-[; ;actors.c: 29: }
-"29
+[; ;actors.c: 25: }
+"25
 [e :UE 1152 ]
 }
-"32
+"28
 [v _SignalOut `(v ~T0 @X0 1 ef ]
 {
-[; ;actors.c: 32: void SignalOut(void) {
+[; ;actors.c: 28: void SignalOut(void) {
 [e :U _SignalOut ]
 [f ]
-[; ;actors.c: 33: switch(pin_out) {
-"33
+[; ;actors.c: 29: switch(pin_out) {
+"29
 [e $U 1155  ]
 {
-[; ;actors.c: 34: case 'A': {
-"34
+[; ;actors.c: 30: case 'A': {
+"30
 [e :U 1156 ]
 {
-[; ;actors.c: 35: PORTAbits.RA0 = 1;
-"35
+[; ;actors.c: 31: PORTAbits.RA0 = 1;
+"31
 [e = . . _PORTAbits 0 0 -> -> 1 `i `uc ]
-[; ;actors.c: 36: Delay(a_actors[0].aile);
-"36
+[; ;actors.c: 32: Delay(a_actors[0].aile);
+"32
 [e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 ]
-[; ;actors.c: 37: pin_out = 'E';
-"37
+[; ;actors.c: 33: pin_out = 'E';
+"33
 [e = _pin_out -> -> 69 `ui `uc ]
-[; ;actors.c: 38: break;
-"38
+[; ;actors.c: 34: break;
+"34
 [e $U 1154  ]
-"39
+"35
 }
-[; ;actors.c: 39: }case 'E': {
+[; ;actors.c: 35: }case 'E': {
 [e :U 1157 ]
 {
-[; ;actors.c: 40: PORTAbits.RA0 = 0;
-"40
+[; ;actors.c: 36: PORTAbits.RA0 = 0;
+"36
 [e = . . _PORTAbits 0 0 -> -> 0 `i `uc ]
-[; ;actors.c: 41: PORTAbits.RA1 = 1;
-"41
+[; ;actors.c: 37: PORTAbits.RA1 = 1;
+"37
 [e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
-[; ;actors.c: 42: Delay(a_actors[0].elev);
-"42
+[; ;actors.c: 38: Delay(a_actors[0].elev);
+"38
 [e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 ]
-[; ;actors.c: 43: pin_out = 'T';
-"43
+[; ;actors.c: 39: pin_out = 'T';
+"39
 [e = _pin_out -> -> 84 `ui `uc ]
-[; ;actors.c: 44: break;
-"44
+[; ;actors.c: 40: break;
+"40
 [e $U 1154  ]
-"45
+"41
 }
-[; ;actors.c: 45: }case 'T': {
+[; ;actors.c: 41: }case 'T': {
 [e :U 1158 ]
 {
-[; ;actors.c: 46: PORTAbits.RA1 = 0;
-"46
+[; ;actors.c: 42: PORTAbits.RA1 = 0;
+"42
 [e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
-[; ;actors.c: 47: PORTAbits.RA3 = 1;
-"47
+[; ;actors.c: 43: PORTAbits.RA3 = 1;
+"43
 [e = . . _PORTAbits 0 3 -> -> 1 `i `uc ]
-[; ;actors.c: 48: Delay(a_actors[0].thro);
-"48
+[; ;actors.c: 44: Delay(a_actors[0].thro);
+"44
 [e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 ]
-[; ;actors.c: 49: pin_out = 'R';
-"49
+[; ;actors.c: 45: pin_out = 'R';
+"45
 [e = _pin_out -> -> 82 `ui `uc ]
-[; ;actors.c: 50: break;
-"50
+[; ;actors.c: 46: break;
+"46
 [e $U 1154  ]
-"51
+"47
 }
-[; ;actors.c: 51: }case 'R': {
+[; ;actors.c: 47: }case 'R': {
 [e :U 1159 ]
 {
-[; ;actors.c: 52: PORTAbits.RA3 = 0;
-"52
+[; ;actors.c: 48: PORTAbits.RA3 = 0;
+"48
 [e = . . _PORTAbits 0 3 -> -> 0 `i `uc ]
-[; ;actors.c: 53: PORTAbits.RA2 = 1;
-"53
+[; ;actors.c: 49: PORTAbits.RA2 = 1;
+"49
 [e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
-[; ;actors.c: 54: Delay(a_actors[0].rudd);
-"54
+[; ;actors.c: 50: Delay(a_actors[0].rudd);
+"50
 [e ( _Delay (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 ]
-[; ;actors.c: 55: pin_out = 0;
-"55
+[; ;actors.c: 51: pin_out = 0;
+"51
 [e = _pin_out -> -> 0 `i `uc ]
+[; ;actors.c: 52: break;
+"52
+[e $U 1154  ]
+"53
+}
+[; ;actors.c: 53: }case 0: {
+[e :U 1160 ]
+{
+[; ;actors.c: 54: PORTAbits.RA2 = 0;
+"54
+[e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
+[; ;actors.c: 55: pin_out = 'A';
+"55
+[e = _pin_out -> -> 65 `ui `uc ]
 [; ;actors.c: 56: break;
 "56
 [e $U 1154  ]
 "57
 }
-[; ;actors.c: 57: }case 0: {
-[e :U 1160 ]
-{
-[; ;actors.c: 58: PORTAbits.RA2 = 0;
 "58
-[e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
-[; ;actors.c: 59: pin_out = 'A';
-"59
-[e = _pin_out -> -> 65 `ui `uc ]
-[; ;actors.c: 60: break;
-"60
-[e $U 1154  ]
-"61
 }
-"62
-}
-[; ;actors.c: 61: }
-[; ;actors.c: 62: }
+[; ;actors.c: 57: }
+[; ;actors.c: 58: }
 [e $U 1154  ]
-"33
+"29
 [e :U 1155 ]
 [e [\ _pin_out , $ -> -> 65 `ui `uc 1156
  , $ -> -> 69 `ui `uc 1157
@@ -7930,93 +7934,93 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 82 `ui `uc 1159
  , $ -> -> 0 `i `uc 1160
  1154 ]
-"62
+"58
 [e :U 1154 ]
-[; ;actors.c: 63: }
-"63
+[; ;actors.c: 59: }
+"59
 [e :UE 1153 ]
 }
-"70
-[v _ActAileron `(v ~T0 @X0 1 ef1`uc ]
+"66
+[v _ActAileron `(v ~T0 @X0 1 ef1`c ]
 {
-[; ;actors.c: 70: void ActAileron(unsigned char change){
+[; ;actors.c: 66: void ActAileron(signed char change){
 [e :U _ActAileron ]
-[v _change `uc ~T0 @X0 1 r1 ]
+[v _change `c ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 71: a_actors[0].aile += change;
-"71
-[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 -> _change `ui ]
-[; ;actors.c: 72: }
-"72
+[; ;actors.c: 67: a_actors[0].aile += change;
+"67
+[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 0 -> -> _change `i `ui ]
+[; ;actors.c: 68: }
+"68
 [e :UE 1161 ]
 }
-"79
-[v _ActElevator `(v ~T0 @X0 1 ef1`uc ]
+"75
+[v _ActElevator `(v ~T0 @X0 1 ef1`c ]
 {
-[; ;actors.c: 79: void ActElevator(unsigned char change){
+[; ;actors.c: 75: void ActElevator(signed char change){
 [e :U _ActElevator ]
-[v _change `uc ~T0 @X0 1 r1 ]
+[v _change `c ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 80: a_actors[0].elev += change;
-"80
-[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 -> _change `ui ]
-[; ;actors.c: 81: }
-"81
+[; ;actors.c: 76: a_actors[0].elev += change;
+"76
+[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 1 -> -> _change `i `ui ]
+[; ;actors.c: 77: }
+"77
 [e :UE 1162 ]
 }
-"88
+"84
 [v _ActThrottle `(v ~T0 @X0 1 ef1`c ]
 {
-[; ;actors.c: 88: void ActThrottle(signed char change) {
+[; ;actors.c: 84: void ActThrottle(signed char change) {
 [e :U _ActThrottle ]
 [v _change `c ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 89: if(a_actors[0].thro <= 600 || change < 0) {
-"89
+[; ;actors.c: 85: if(a_actors[0].thro <= 600 || change < 0) {
+"85
 [e $ ! || <= . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 600 `i `ui < -> _change `i -> 0 `i 1164  ]
 {
-[; ;actors.c: 90: a_actors[0].thro += change;
-"90
+[; ;actors.c: 86: a_actors[0].thro += change;
+"86
 [e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> _change `i `ui ]
-[; ;actors.c: 91: if(a_actors[0].thro > 1050) {
-"91
+[; ;actors.c: 87: if(a_actors[0].thro > 1050) {
+"87
 [e $ ! > . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 1050 `i `ui 1165  ]
 {
-[; ;actors.c: 92: a_actors[0].thro = 0;
-"92
+[; ;actors.c: 88: a_actors[0].thro = 0;
+"88
 [e = . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 0 `i `ui ]
-"93
+"89
 }
 [e :U 1165 ]
-"94
+"90
 }
-[; ;actors.c: 93: }
-[; ;actors.c: 94: }else {
+[; ;actors.c: 89: }
+[; ;actors.c: 90: }else {
 [e $U 1166  ]
 [e :U 1164 ]
 {
-[; ;actors.c: 95: __nop();
-"95
+[; ;actors.c: 91: __nop();
+"91
 [e ( ___nop ..  ]
-"96
+"92
 }
 [e :U 1166 ]
-[; ;actors.c: 96: }
-[; ;actors.c: 97: }
-"97
+[; ;actors.c: 92: }
+[; ;actors.c: 93: }
+"93
 [e :UE 1163 ]
 }
-"104
-[v _ActRudder `(v ~T0 @X0 1 ef1`uc ]
+"100
+[v _ActRudder `(v ~T0 @X0 1 ef1`c ]
 {
-[; ;actors.c: 104: void ActRudder(unsigned char change){
+[; ;actors.c: 100: void ActRudder(signed char change){
 [e :U _ActRudder ]
-[v _change `uc ~T0 @X0 1 r1 ]
+[v _change `c ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 105: a_actors[0].rudd += change;
-"105
-[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 -> _change `ui ]
-[; ;actors.c: 106: }
-"106
+[; ;actors.c: 101: a_actors[0].rudd += change;
+"101
+[e =+ . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 3 -> -> _change `i `ui ]
+[; ;actors.c: 102: }
+"102
 [e :UE 1167 ]
 }

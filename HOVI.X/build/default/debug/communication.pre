@@ -9410,10 +9410,10 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 extern char * ftoa(float f, int * status);
 
 # 21 "actors.h"
-void ActAileron(unsigned char change);
-void ActElevator(unsigned char change);
+void ActAileron(signed char change);
+void ActElevator(signed char change);
 void ActThrottle(signed char change);
-void ActRudder(unsigned char change);
+void ActRudder(signed char change);
 void SignalOut(void);
 void Delay(unsigned int del);
 
@@ -9431,6 +9431,7 @@ t_actors a_actors[1];
 unsigned char ExchangeSpiByte(unsigned char byte1);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 void UartSend(unsigned char data);
+void UartSendAscii(unsigned char data);
 unsigned char UartReceive(void);
 
 # 20 "gear.h"
@@ -9515,7 +9516,7 @@ t_frame_dif a_frame_dif[1];
 
 
 
-bit direction;
+bit direction = 0;
 
 
 
@@ -9563,12 +9564,12 @@ unsigned char pulsecounter = 0;
 
 # 16 "communication.c"
 unsigned char ExchangeSpiByte(unsigned char byte1) {
-if(SSP1IF == 1) {
+if (SSP1IF == 1) {
 _delay((unsigned long)((100)*(16000000/4000000.0)));
 SSP1IF = 0;
 }
 SSP1BUF = byte1;
-while(SSP1IF == 0);
+while (SSP1IF == 0);
 SSP1IF = 0;
 return (SSP1BUF);
 }
@@ -9576,17 +9577,17 @@ return (SSP1BUF);
 unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2) {
 __nop();
 unsigned int SPI_word = 0;
-if(SSP1IF == 1) {
+if (SSP1IF == 1) {
 _delay((unsigned long)((100)*(16000000/4000000.0)));
 SSP1IF = 0;
 }
 SSP1BUF = byte1;
-while(SSP1IF == 0);
+while (SSP1IF == 0);
 SSP1IF = 0;
 SPI_word = SSP1BUF;
 SPI_word <<= 8;
 SSP1BUF = byte2;
-while(SSP1IF == 0);
+while (SSP1IF == 0);
 SSP1IF = 0;
 SPI_word |= SSP1BUF;
 __nop();
@@ -9600,6 +9601,15 @@ _delay((unsigned long)((200)*(16000000/4000000.0)));
 }
 TXREG1 = data;
 while(TX1IF == 1);
+}
+
+void UartSendAscii(unsigned char data) {
+if(TX1IF == 1) {
+_delay((unsigned long)((200)*(16000000/4000000.0)));
+}
+data += 48;
+TXREG1 = data;
+while(TX1IF == 0);
 }
 
 unsigned char UartReceive(void) {
