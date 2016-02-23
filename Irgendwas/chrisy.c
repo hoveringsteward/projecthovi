@@ -3,23 +3,27 @@
 void ziffernAnalysieren(int zahl){
 		
 	int summe = 0, anzahl = 0, temp = 0;
+	int ganzezahl[6];
 	
 	while(zahl > 0){
 		
-		temp = zahl%100;
+		temp = zahl%10;
 		
 		summe = summe + temp;
 		
-		
-		printf("bin da drin \n, %d", temp);
+		ganzezahl[anzahl] = temp;
 		anzahl ++;
 		
 		
-		zahl = (zahl - temp)/100;
+		zahl = (zahl - temp)/10;
 	}
 	
-	printf("Die Summe ist: %d", summe);
-	printf("Die Anzahl ist: %d", anzahl);
+	for(int stelle = 0; stelle < anzahl; stelle++) {
+		printf("Stelle %d bin da drin, %d \n", stelle, ganzezahl[stelle]);
+	}
+	
+	printf("Die Summe ist: %d \n", summe);
+	printf("Die Anzahl ist: %d \n", anzahl);
 }
 	
 	
@@ -29,7 +33,7 @@ int	main(){
 		
 		while(1){
 			
-			printf("Gib eine zahl ein");
+			printf("Gib eine zahl ein: ");
 			scanf("%d", &eineZahl);
 			
 			if(eineZahl < 0){

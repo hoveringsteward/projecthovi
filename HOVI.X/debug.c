@@ -19,6 +19,6 @@ void SendDebugInfo(unsigned int debug_info) {
         unsigned char send = send_info[debug_send_counter];
         UartSendAscii(send);
     }
-        UartSend(';');
+    UartSend(';');
 }
 #endif
