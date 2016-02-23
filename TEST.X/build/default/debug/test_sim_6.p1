@@ -1,8 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"28 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -2757,60 +2754,36 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 184: extern unsigned char __resetbits;
 [; ;pic.h: 185: extern __bit __powerdown;
 [; ;pic.h: 186: extern __bit __timeout;
-"13 test_sim_6.c
+"11 test_sim_6.c
+[v _test `ui ~T0 @X0 1 e ]
+[i _test
+-> -> 10 `i `ui
+]
+[; ;test_sim_6.c: 11: unsigned int test = 10;
+"13
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [; ;test_sim_6.c: 13: void main(void) {
 [e :U _main ]
 [f ]
-[; ;test_sim_6.c: 14: __nop();
-"14
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 15: __nop();
+[; ;test_sim_6.c: 15: while(1) {
 "15
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 16: __nop();
-"16
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 17: NAME:
-"17
-[e :U 351 ]
-[; ;test_sim_6.c: 18: __nop();
-"18
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 19: __nop();
-"19
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 20: while(1) {
-"20
-[e :U 353 ]
-{
-[; ;test_sim_6.c: 21: __nop();
-"21
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 22: __nop();
-"22
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 23: goto NAME;
-"23
-[e $U 351  ]
-[; ;test_sim_6.c: 24: __nop();
-"24
-[e ( ___nop ..  ]
-[; ;test_sim_6.c: 25: __nop();
-"25
-[e ( ___nop ..  ]
-"26
-}
 [e :U 352 ]
-"20
-[e $U 353  ]
-[e :U 354 ]
-[; ;test_sim_6.c: 26: }
-[; ;test_sim_6.c: 27: return;
-"27
+{
+[; ;test_sim_6.c: 16: test -= 5;
+"16
+[e =- _test -> -> 5 `i `ui ]
+"17
+}
+[e :U 351 ]
+"15
+[e $U 352  ]
+[e :U 353 ]
+[; ;test_sim_6.c: 17: }
+[; ;test_sim_6.c: 18: return;
+"18
 [e $UE 350  ]
-[; ;test_sim_6.c: 28: }
-"28
+[; ;test_sim_6.c: 19: }
+"19
 [e :UE 350 ]
 }

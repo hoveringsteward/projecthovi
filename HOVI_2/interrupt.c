@@ -32,13 +32,13 @@ interrupt void Isr() {
     if(TMR3GIF == 1) {
         TMR3GIF = 0;
         ModeCheck();
-        StartHeightMeasure();
+        //StartHeightMeasure();
         //ReadObject(1,10,5);
         //CompareFrames();
-        ReadHeight();
-        CheckThrottle();
+        //ReadHeight();
+        //CheckThrottle();
         // Funktion für Ausgabe von Steuersignalen fehlt
-        SignalOut();
+        //SignalOut();
     }else if (TMR3IF == 1) {
         TMR3IF = 0;
     }

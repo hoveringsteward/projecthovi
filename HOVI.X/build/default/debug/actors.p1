@@ -7662,8 +7662,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 18: void CompareFrames(void);
 [; ;position.h: 19: void CheckAileron(void);
 [; ;position.h: 20: void CheckElevator(void);
-[; ;position.h: 21: void BeneathTable(void);
-[; ;position.h: 22: void BeneathFloor(void);
+[; ;position.h: 21: void AboveTable(void);
+[; ;position.h: 22: void AboveFloor(void);
 [; ;position.h: 23: void CheckThrottle(void);
 [; ;position.h: 24: void CheckRudderAhead(void);
 [; ;position.h: 25: void CheckRudderBack(void);

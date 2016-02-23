@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Thu Feb 18 18:35:49 2016
+                                                                                               Tue Feb 23 08:48:32 2016
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	18F46K22
@@ -1373,8 +1373,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1324                           ;UartSendAscii@data stored from wreg
   1325  000972  6E3F               	movwf	UartSendAscii@data,c
   1326                           
-  1327                           ;communication.c: 57: if(TX1IF == 1) {
-  1328  000974  A89E               	btfss	3998,4,c	;volatile
+  1327                           ;communication.c: 57: if(TX1IF == 0) {
+  1328  000974  B89E               	btfsc	3998,4,c	;volatile
   1329  000976  D004               	goto	l3327
   1330                           
   1331                           ;communication.c: 58: _delay((unsigned long)((200)*(16000000/4000000.0)));
@@ -1460,8 +1460,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1406                           ;UartSend@data stored from wreg
   1407  0009AA  6E3F               	movwf	UartSend@data,c
   1408                           
-  1409                           ;communication.c: 49: if(TX1IF == 1) {
-  1410  0009AC  A89E               	btfss	3998,4,c	;volatile
+  1409                           ;communication.c: 49: if(TX1IF == 0) {
+  1410  0009AC  B89E               	btfsc	3998,4,c	;volatile
   1411  0009AE  D004               	goto	l3321
   1412                           
   1413                           ;communication.c: 50: _delay((unsigned long)((200)*(16000000/4000000.0)));
@@ -1476,7 +1476,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1422                           ;communication.c: 52: TXREG1 = data;
   1423  0009B8  C03F  FFAD         	movff	UartSend@data,4013	;volatile
   1424  0009BC                     l921:
-  1425  0009BC  A89E               	btfss	3998,4,c	;volatile
+  1425  0009BC  B89E               	btfsc	3998,4,c	;volatile
   1426  0009BE  0012               	return	
   1427  0009C0  D7FD               	goto	l921
   1428  0009C2                     __end_of_UartSend:
@@ -2599,9 +2599,9 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   2480 ;; Hardware stack levels used:    1
   2481 ;; Hardware stack levels required when called:    5
   2482 ;; This function calls:
-  2483 ;;		_ActThrottle
-  2484 ;;		_BeneathFloor
-  2485 ;;		_BeneathTable
+  2483 ;;		_AboveFloor
+  2484 ;;		_AboveTable
+  2485 ;;		_ActThrottle
   2486 ;; This function is called by:
   2487 ;;		_main
   2488 ;; This function uses a non-reentrant model
@@ -2680,15 +2680,15 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   2561  0000E6  D003               	goto	l3461
   2562                           
   2563                           ; BSR set to: 0
-  2564                           ;position.c: 253: BeneathTable();
-  2565  0000E8  ECAD  F003         	call	_BeneathTable	;wreg free
+  2564                           ;position.c: 253: AboveTable();
+  2565  0000E8  ECAD  F003         	call	_AboveTable	;wreg free
   2566                           
   2567                           ;position.c: 254: } else {
   2568  0000EC  0012               	return	
   2569  0000EE                     l3461:
   2570                           
-  2571                           ;position.c: 255: BeneathFloor();
-  2572  0000EE  ECD7  F003         	call	_BeneathFloor	;wreg free
+  2571                           ;position.c: 255: AboveFloor();
+  2572  0000EE  ECD7  F003         	call	_AboveFloor	;wreg free
   2573                           
   2574                           ;position.c: 256: }
   2575                           ;position.c: 257: } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) {
@@ -2734,8 +2734,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   2615  000140  D003               	goto	l3469
   2616                           
   2617                           ; BSR set to: 0
-  2618                           ;position.c: 258: BeneathFloor();
-  2619  000142  ECD7  F003         	call	_BeneathFloor	;wreg free
+  2618                           ;position.c: 258: AboveFloor();
+  2619  000142  ECD7  F003         	call	_AboveFloor	;wreg free
   2620                           
   2621                           ;position.c: 259: } else if (id_current_cc == (c_path - 1)) {
   2622  000146  0012               	return	
@@ -2816,15 +2816,15 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   2697  0001A6  D003               	goto	l3479
   2698                           
   2699                           ; BSR set to: 0
-  2700                           ;position.c: 271: BeneathTable();
-  2701  0001A8  ECAD  F003         	call	_BeneathTable	;wreg free
+  2700                           ;position.c: 271: AboveTable();
+  2701  0001A8  ECAD  F003         	call	_AboveTable	;wreg free
   2702                           
   2703                           ;position.c: 272: } else {
   2704  0001AC  0012               	return	
   2705  0001AE                     l3479:
   2706                           
-  2707                           ;position.c: 273: BeneathFloor();
-  2708  0001AE  ECD7  F003         	call	_BeneathFloor	;wreg free
+  2707                           ;position.c: 273: AboveFloor();
+  2708  0001AE  ECD7  F003         	call	_AboveFloor	;wreg free
   2709                           
   2710                           ;position.c: 274: }
   2711                           ;position.c: 275: } else {
@@ -3230,7 +3230,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3111                           fsr2l	equ	0xFD9
   3112                           status	equ	0xFD8
   3113                           
-  3114 ;; *************** function _BeneathTable *****************
+  3114 ;; *************** function _AboveTable *****************
   3115 ;; Defined at:
   3116 ;;		line 198 in file "position.c"
   3117 ;; Parameters:    Size  Location     Type
@@ -3268,7 +3268,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3144                           	psect	text22
   3145  00075A                     __ptext22:
   3146                           	opt stack 0
-  3147  00075A                     _BeneathTable:
+  3147  00075A                     _AboveTable:
   3148                           	opt stack 25
   3149                           
   3150                           ;position.c: 199: if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) {
@@ -3335,7 +3335,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3211  0007A6  0EFD               	movlw	253
   3212  0007A8  EC01  F004         	call	_ActThrottle
   3213  0007AC  0012               	return	
-  3214  0007AE                     __end_of_BeneathTable:
+  3214  0007AE                     __end_of_AboveTable:
   3215                           	opt stack 0
   3216                           tblptru	equ	0xFF8
   3217                           tblptrh	equ	0xFF7
@@ -3357,7 +3357,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3233                           fsr2l	equ	0xFD9
   3234                           status	equ	0xFD8
   3235                           
-  3236 ;; *************** function _BeneathFloor *****************
+  3236 ;; *************** function _AboveFloor *****************
   3237 ;; Defined at:
   3238 ;;		line 218 in file "position.c"
   3239 ;; Parameters:    Size  Location     Type
@@ -3395,7 +3395,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3266                           	psect	text23
   3267  0007AE                     __ptext23:
   3268                           	opt stack 0
-  3269  0007AE                     _BeneathFloor:
+  3269  0007AE                     _AboveFloor:
   3270                           	opt stack 25
   3271                           
   3272                           ;position.c: 219: if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
@@ -3460,7 +3460,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3331  0007FA  0EFD               	movlw	253
   3332  0007FC  EC01  F004         	call	_ActThrottle
   3333  000800  0012               	return	
-  3334  000802                     __end_of_BeneathFloor:
+  3334  000802                     __end_of_AboveFloor:
   3335                           	opt stack 0
   3336                           tblptru	equ	0xFF8
   3337                           tblptrh	equ	0xFF7
@@ -3513,8 +3513,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3379 ;; This function calls:
   3380 ;;		Nothing
   3381 ;; This function is called by:
-  3382 ;;		_BeneathTable
-  3383 ;;		_BeneathFloor
+  3382 ;;		_AboveTable
+  3383 ;;		_AboveFloor
   3384 ;;		_CheckThrottle
   3385 ;; This function uses a non-reentrant model
   3386 ;;
@@ -3523,7 +3523,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3389  000802                     __ptext24:
   3390                           	opt stack 0
   3391  000802                     _ActThrottle:
-  3392                           	opt stack 25
+  3392                           	opt stack 26
   3393                           
   3394                           ;incstack = 0
   3395                           ;ActThrottle@change stored from wreg
@@ -4361,8 +4361,8 @@ Critical Paths under _main in COMRAM
     _SendDebugInfo->___lwmod
     _Init->_InitWlan
     _CheckThrottle->_ActThrottle
-    _BeneathTable->_ActThrottle
-    _BeneathFloor->_ActThrottle
+    _AboveTable->_ActThrottle
+    _AboveFloor->_ActThrottle
 
 Critical Paths under _Isr in COMRAM
 
@@ -4580,17 +4580,17 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (1) _CheckThrottle                                       13    13      0     703
                                               0 BANK0     13    13      0
-                        _ActThrottle
-                       _BeneathFloor
-                       _BeneathTable
- ---------------------------------------------------------------------------------
- (2) _BeneathTable                                         0     0      0      62
+                         _AboveFloor
+                         _AboveTable
                         _ActThrottle
  ---------------------------------------------------------------------------------
- (2) _BeneathFloor                                         0     0      0      62
+ (2) _AboveTable                                           0     0      0      62
                         _ActThrottle
  ---------------------------------------------------------------------------------
- (3) _ActThrottle                                          1     1      0      62
+ (2) _AboveFloor                                           0     0      0      62
+                        _ActThrottle
+ ---------------------------------------------------------------------------------
+ (2) _ActThrottle                                          1     1      0      62
                                              18 COMRAM     1     1      0
  ---------------------------------------------------------------------------------
  Estimated maximum stack depth 3
@@ -4621,11 +4621,11 @@ Call Graph Tables:
 
  _main (ROOT)
    _CheckThrottle
+     _AboveFloor
+       _ActThrottle
+     _AboveTable
+       _ActThrottle
      _ActThrottle
-     _BeneathFloor
-       _ActThrottle
-     _BeneathTable
-       _ActThrottle
    _Init
      _InitActors
      _InitAnsel
@@ -4704,7 +4704,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Thu Feb 18 18:35:49 2016
+Symbol Table                                                                                   Tue Feb 23 08:48:32 2016
 
                 _highpassallowed 0262                                _w 002A  
                              l96 0844                               _lw 0024  
@@ -4717,6 +4717,7 @@ Symbol Table                                                                    
                    __CFG_CPD$OFF 000000                              _Isr 0008  
               ActThrottle@change 003F                              prod 000FF3  
                             wreg 000FE8                       _TXSTA1bits 000FAC  
+                     _AboveFloor 07AE                       _AboveTable 075A  
                    __CFG_LVP$OFF 000000                             ?_Isr 002D  
                            l1105 0214                             l1107 02C0  
                            l1080 00E2                             l1081 00DE  
@@ -4786,7 +4787,6 @@ Symbol Table                                                                    
                           _frame 0261                            _table 0266  
              __CFG_MCLRE$EXTMCLR 000000                   __pbitbssCOMRAM 0260  
                           tablat 000FF5                 __end_of_CalcTime 0952  
-          __size_of_BeneathFloor 0054            __size_of_BeneathTable 0054  
                           status 000FD8                   __CFG_HFOFST$ON 000000  
           __end_of_UartSendAscii 098E                   __CFG_PBADEN$ON 000000  
                      _InitActors 0904                   ?_InitInterrupt 002D  
@@ -4798,8 +4798,8 @@ Symbol Table                                                                    
                          ??_Init 0040              ?_StartHeightMeasure 002D  
                          ??_main 0041                    __activetblptr 000002  
                  __CFG_PLLCFG$ON 000000                 __end_of_UartSend 09C2  
-                         ?_Delay 002D                     _BeneathFloor 07AE  
-                   _BeneathTable 075A                           _CCP1IE 007CEA  
+                         ?_Delay 002D                      ?_AboveFloor 002D  
+                    ?_AboveTable 002D                           _CCP1IE 007CEA  
                          _CCP1IF 007CF2                           _CCPR1H 000FBF  
                          _CCPR1L 000FBE                           _ANSELA 000F38  
                          _ANSELB 000F39                           _ANSELC 000F3A  
@@ -4824,7 +4824,8 @@ Symbol Table                                                                    
                      _StoreAsOld 08DA                  ??_InitInterrupt 003F  
                   ___rparam_used 000001                      ?_InitActors 002D  
                   __end_of_Delay 08DA                      ?_ReadHeight 002D  
-                 __pcstackCOMRAM 002D                     __pidataBANK0 0A5C  
+                 __pcstackCOMRAM 002D              __size_of_AboveFloor 0054  
+                   __pidataBANK0 0A5C              __size_of_AboveTable 0054  
               __end_of_InitAnsel 0972                       _a_path_old 0100  
                       ?_CalcTime 002D                __end_of_InitTimer 075A  
               __end_of_ModeCheck 0880                          ??_Delay 002F  
@@ -4857,11 +4858,13 @@ Symbol Table                                                                    
                         __ptext7 0972                          __ptext8 09AA  
                         __ptext9 0880                        _T1CONbits 000FCD  
                    __size_of_Isr 0094                        _T3CONbits 000FB1  
-                        _pin_out 004B                        _T5CONbits 000F4E  
+                        _pin_out 004B                     ??_AboveFloor 0040  
+                      _T5CONbits 000F4E                     ??_AboveTable 0040  
                         _set_ret 0264                 CheckThrottle@tmp 00E7  
            end_of_initialization 062A                    __Lmediumconst 0000  
                         postdec1 000FE5                          postdec2 000FDD  
                         postinc0 000FEE                          postinc2 000FDE  
+             __end_of_AboveFloor 0802               __end_of_AboveTable 07AE  
                       _PORTAbits 000F80                        _PORTBbits 000F81  
                       _PORTDbits 000F83              __size_of_StoreAsOld 002A  
          __size_of_UartSendAscii 001C              CheckThrottle@i_2142 00EB  
@@ -4888,13 +4891,11 @@ Symbol Table                                                                    
                       __pintcode 0008                         ?___lwdiv 00E0  
                        ?___lwmod 00E7                        _direction 0260  
              __end_of_StoreAsOld 0904                   __size_of_Delay 002C  
-                  ?_BeneathFloor 002D                    ?_BeneathTable 002D  
                ___lwdiv@quotient 00E5  SendDebugInfo@debug_send_counter 00EE  
                        Delay@del 002D                        _send_info 00D8  
                    UartSend@data 003F                 __CFG_WDTPS$32768 000000  
                       _time_gear 0026                         _SSP1CON1 000FC6  
                        _SSP1STAT 000FC7                         _CalcTime 092E  
-                 ??_BeneathFloor 0040                   ??_BeneathTable 0040  
                     ??_InitAnsel 003F                      ??_InitTimer 003F  
                     ??_ModeCheck 0031                    _id_current_cc 0022  
                       copy_data0 05FE                        copy_data1 061E  
@@ -4926,7 +4927,6 @@ Symbol Table                                                                    
                        _outgoing 001F                         _storedif 0265  
               SendDebugInfo@send 00ED                         intlevel2 0000  
                ___lwmod@dividend 00E7                       _RCSTA1bits 000FAB  
-           __end_of_BeneathFloor 0802             __end_of_BeneathTable 07AE  
             __end_of_ActThrottle 0848                      _time_height 0028  
                 ___lwmod@divisor 00E9                  ___lwmod@counter 003F  
               __CFG_T3CMX$PORTC0 000000           __size_of_InitInterrupt 000E  

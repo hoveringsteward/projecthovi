@@ -54,9 +54,9 @@ idataBANK0 CODE 0 A5C A5C 4 1
 dataBANK0 BANK0 1 F2 F2 4 1
 dataCOMRAM COMRAM 1 41 41 B 1
 bssCOMRAM COMRAM 1 1 1 2C 1
-$C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+$C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 idloc IDLOC 0 200000 200000 8 1
-reset_vec CODE 0 0 0 4 1
+reset_vec CODE 0 0 0 6 1
 end_init CODE 0 9C 9C 4 1
 config CONFIG 0 300000 300000 E 1
 # %UNUSED Section
@@ -67,7 +67,7 @@ config CONFIG 0 300000 300000 E 1
 %UNUSED
 RAM F6-FF 1
 RAM 12A-F37 1
-SFR F38-FFF 1
+SFR F38-FFC 1
 BANK0 F6-FF 1
 BANK1 12A-1FF 1
 BANK2 200-2FF 1
@@ -78,12 +78,12 @@ BANK6 600-6FF 1
 BANK7 700-7FF 1
 BANK8 800-8FF 1
 BANK9 900-9FF 1
-CONST 4-7 1
+CONST 6-7 1
 CONST A41-A41 1
 CONST A60-FFFF 1
 STACK 12A-F37 1
 SMALLCONST 1000-FFFF 1
-CODE 4-7 1
+CODE 6-7 1
 CODE A41-A41 1
 CODE A60-FFFF 1
 BANK10 A00-AFF 1
@@ -459,63 +459,63 @@ A26 text2 CODE >25:C:\projecthovi\HOVI.X\ultrasonic.c
 9CE text0 CODE >91:C:\projecthovi\HOVI.X\main.c
 9D2 text0 CODE >92:C:\projecthovi\HOVI.X\main.c
 9D6 text0 CODE >86:C:\projecthovi\HOVI.X\main.c
-5C4 cinit CODE >6511:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5C4 cinit CODE >6513:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5C4 cinit CODE >6516:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5C4 cinit CODE >6652:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5C8 cinit CODE >6653:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5CA cinit CODE >6654:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5CA cinit CODE >6655:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5CC cinit CODE >6656:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5CE cinit CODE >6657:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5D0 cinit CODE >6660:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5D4 cinit CODE >6661:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5D6 cinit CODE >6662:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5D6 cinit CODE >6663:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5D8 cinit CODE >6664:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5DA cinit CODE >6665:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5DC cinit CODE >6668:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5DE cinit CODE >6671:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5E2 cinit CODE >6672:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5E4 cinit CODE >6673:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5E4 cinit CODE >6674:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5E6 cinit CODE >6675:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5E8 cinit CODE >6676:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5EA cinit CODE >6681:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5EC cinit CODE >6682:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5EE cinit CODE >6683:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5F0 cinit CODE >6684:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5F2 cinit CODE >6685:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5F4 cinit CODE >6686:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5F6 cinit CODE >6687:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5FA cinit CODE >6688:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5FE cinit CODE >6689:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-5FE cinit CODE >6690:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-600 cinit CODE >6691:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-604 cinit CODE >6692:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-606 cinit CODE >6693:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-608 cinit CODE >6694:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-60A cinit CODE >6698:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-60C cinit CODE >6699:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-60E cinit CODE >6700:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-610 cinit CODE >6701:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-612 cinit CODE >6702:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-614 cinit CODE >6703:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-616 cinit CODE >6704:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-61A cinit CODE >6705:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-61E cinit CODE >6706:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-61E cinit CODE >6707:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-620 cinit CODE >6708:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-624 cinit CODE >6709:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-626 cinit CODE >6710:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-628 cinit CODE >6711:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-62A cinit CODE >6717:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-62A cinit CODE >6719:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-62C cinit CODE >6720:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-62E cinit CODE >6722:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-630 cinit CODE >6723:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-632 cinit CODE >6724:C:\Users\Lucas\AppData\Local\Temp\s5oo.
-634 cinit CODE >6725:C:\Users\Lucas\AppData\Local\Temp\s5oo.
+5C4 cinit CODE >6511:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5C4 cinit CODE >6513:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5C4 cinit CODE >6516:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5C4 cinit CODE >6652:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5C8 cinit CODE >6653:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5CA cinit CODE >6654:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5CA cinit CODE >6655:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5CC cinit CODE >6656:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5CE cinit CODE >6657:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5D0 cinit CODE >6660:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5D4 cinit CODE >6661:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5D6 cinit CODE >6662:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5D6 cinit CODE >6663:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5D8 cinit CODE >6664:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5DA cinit CODE >6665:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5DC cinit CODE >6668:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5DE cinit CODE >6671:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5E2 cinit CODE >6672:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5E4 cinit CODE >6673:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5E4 cinit CODE >6674:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5E6 cinit CODE >6675:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5E8 cinit CODE >6676:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5EA cinit CODE >6681:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5EC cinit CODE >6682:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5EE cinit CODE >6683:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5F0 cinit CODE >6684:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5F2 cinit CODE >6685:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5F4 cinit CODE >6686:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5F6 cinit CODE >6687:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5FA cinit CODE >6688:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5FE cinit CODE >6689:C:\Users\Lucas\AppData\Local\Temp\s8g.
+5FE cinit CODE >6690:C:\Users\Lucas\AppData\Local\Temp\s8g.
+600 cinit CODE >6691:C:\Users\Lucas\AppData\Local\Temp\s8g.
+604 cinit CODE >6692:C:\Users\Lucas\AppData\Local\Temp\s8g.
+606 cinit CODE >6693:C:\Users\Lucas\AppData\Local\Temp\s8g.
+608 cinit CODE >6694:C:\Users\Lucas\AppData\Local\Temp\s8g.
+60A cinit CODE >6698:C:\Users\Lucas\AppData\Local\Temp\s8g.
+60C cinit CODE >6699:C:\Users\Lucas\AppData\Local\Temp\s8g.
+60E cinit CODE >6700:C:\Users\Lucas\AppData\Local\Temp\s8g.
+610 cinit CODE >6701:C:\Users\Lucas\AppData\Local\Temp\s8g.
+612 cinit CODE >6702:C:\Users\Lucas\AppData\Local\Temp\s8g.
+614 cinit CODE >6703:C:\Users\Lucas\AppData\Local\Temp\s8g.
+616 cinit CODE >6704:C:\Users\Lucas\AppData\Local\Temp\s8g.
+61A cinit CODE >6705:C:\Users\Lucas\AppData\Local\Temp\s8g.
+61E cinit CODE >6706:C:\Users\Lucas\AppData\Local\Temp\s8g.
+61E cinit CODE >6707:C:\Users\Lucas\AppData\Local\Temp\s8g.
+620 cinit CODE >6708:C:\Users\Lucas\AppData\Local\Temp\s8g.
+624 cinit CODE >6709:C:\Users\Lucas\AppData\Local\Temp\s8g.
+626 cinit CODE >6710:C:\Users\Lucas\AppData\Local\Temp\s8g.
+628 cinit CODE >6711:C:\Users\Lucas\AppData\Local\Temp\s8g.
+62A cinit CODE >6717:C:\Users\Lucas\AppData\Local\Temp\s8g.
+62A cinit CODE >6719:C:\Users\Lucas\AppData\Local\Temp\s8g.
+62C cinit CODE >6720:C:\Users\Lucas\AppData\Local\Temp\s8g.
+62E cinit CODE >6722:C:\Users\Lucas\AppData\Local\Temp\s8g.
+630 cinit CODE >6723:C:\Users\Lucas\AppData\Local\Temp\s8g.
+632 cinit CODE >6724:C:\Users\Lucas\AppData\Local\Temp\s8g.
+634 cinit CODE >6725:C:\Users\Lucas\AppData\Local\Temp\s8g.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -538,8 +538,10 @@ __Hspace_2 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __CFG_IESO$OFF 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __HidataBANK0 0 0 ABS 0 idataBANK0 dist/default/debug\HOVI.X.debug.obj
 _InitActors 904 0 CODE 0 text20 dist/default/debug\HOVI.X.debug.obj
+__end_of_AboveFloor 802 0 CODE 0 text23 dist/default/debug\HOVI.X.debug.obj
+__end_of_AboveTable 7AE 0 CODE 0 text22 dist/default/debug\HOVI.X.debug.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/debug\HOVI.X.debug.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 __end_of_InitAnsel 972 0 CODE 0 text19 dist/default/debug\HOVI.X.debug.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\HOVI.X.debug.obj
 __end_of_InitTimer 75A 0 CODE 0 text13 dist/default/debug\HOVI.X.debug.obj
@@ -550,13 +552,13 @@ __size_of_InitTimer 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/debug\HOVI.X.debug.obj
 _Init 880 0 CODE 0 text9 dist/default/debug\HOVI.X.debug.obj
 _PEIE 7F96 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 _cm50 47 0 COMRAM 1 dataCOMRAM dist/default/debug\HOVI.X.debug.obj
 _cm80 49 0 COMRAM 1 dataCOMRAM dist/default/debug\HOVI.X.debug.obj
 _main 9C2 0 CODE 0 text0 dist/default/debug\HOVI.X.debug.obj
 btemp 4D 0 COMRAM 1 temp dist/default/debug\HOVI.X.debug.obj
 __size_of_CalcTime 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-start 9C 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+start 9C 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 __end_of_ReadHeight 6A2 0 CODE 0 text3 dist/default/debug\HOVI.X.debug.obj
 __size_of_Init 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __size_of_main 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
@@ -577,11 +579,11 @@ __pbitbssCOMRAM 260 -214 COMRAM 1 bitbssCOMRAM dist/default/debug\HOVI.X.debug.o
 _time_gear 26 0 COMRAM 1 bssCOMRAM dist/default/debug\HOVI.X.debug.obj
 __CFG_CCP3MX$PORTB5 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/debug\HOVI.X.debug.obj
-__accesstop 60 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
-intlevel0 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
-intlevel1 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
-intlevel2 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
-intlevel3 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+__accesstop 60 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s8g.obj
+intlevel0 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s8g.obj
+intlevel1 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s8g.obj
+intlevel2 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s8g.obj
+intlevel3 0 0 CODE 0 text C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/debug\HOVI.X.debug.obj
 __end_of_ModeCheck 880 0 CODE 0 text28 dist/default/debug\HOVI.X.debug.obj
 _InitOsc A56 0 CODE 0 text16 dist/default/debug\HOVI.X.debug.obj
@@ -605,8 +607,6 @@ _StoreAsOld 8DA 0 CODE 0 text1 dist/default/debug\HOVI.X.debug.obj
 __Hclrtext 0 0 ABS 0 clrtext dist/default/debug\HOVI.X.debug.obj
 _a_actors D0 0 BANK0 1 bssBANK0 dist/default/debug\HOVI.X.debug.obj
 __pidataCOMRAM A36 0 CODE 0 idataCOMRAM dist/default/debug\HOVI.X.debug.obj
-_BeneathFloor 7AE 0 CODE 0 text23 dist/default/debug\HOVI.X.debug.obj
-_BeneathTable 75A 0 CODE 0 text22 dist/default/debug\HOVI.X.debug.obj
 _CalcTime 92E 0 CODE 0 text29 dist/default/debug\HOVI.X.debug.obj
 _StartHeightMeasure A18 0 CODE 0 text2 dist/default/debug\HOVI.X.debug.obj
 __CFG_FOSC$INTIO67 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
@@ -616,8 +616,8 @@ _ANSELB F39 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _ANSELC F3A 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _ANSELD F3B 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _ANSELE F3C 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s8g.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/debug\HOVI.X.debug.obj
 _CCP1IE 7CEA 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _CCP1IF 7CF2 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
@@ -639,8 +639,6 @@ __end_of___lwdiv 5C4 0 CODE 0 text6 dist/default/debug\HOVI.X.debug.obj
 __end_of___lwmod 6FE 0 CODE 0 text5 dist/default/debug\HOVI.X.debug.obj
 _send_info D8 0 BANK0 1 bssBANK0 dist/default/debug\HOVI.X.debug.obj
 _T5GCONbits F4D 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__size_of_BeneathFloor 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__size_of_BeneathTable 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __size_of_Delay 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 ___lwdiv@quotient E5 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI.X.debug.obj
 __LidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/debug\HOVI.X.debug.obj
@@ -656,9 +654,9 @@ _OSCCON FD3 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/debug\HOVI.X.debug.obj
 SendDebugInfo@send ED 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI.X.debug.obj
 __size_of_SignalOut 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__end_of_BeneathFloor 802 0 CODE 0 text23 dist/default/debug\HOVI.X.debug.obj
+__size_of_AboveFloor 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
+__size_of_AboveTable 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __size_of_UartSendAscii 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
-__end_of_BeneathTable 7AE 0 CODE 0 text22 dist/default/debug\HOVI.X.debug.obj
 _direction 260 -214 COMRAM 1 bitbssCOMRAM dist/default/debug\HOVI.X.debug.obj
 ___rparam_used 1 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 _RCREG1 FAE 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
@@ -711,7 +709,7 @@ __Hbank14 0 0 ABS 0 bank14 dist/default/debug\HOVI.X.debug.obj
 __Hbank15 0 0 ABS 0 bank15 dist/default/debug\HOVI.X.debug.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/debug\HOVI.X.debug.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/debug\HOVI.X.debug.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 _CheckThrottle A0 0 CODE 0 text21 dist/default/debug\HOVI.X.debug.obj
 __Hcomram 0 0 ABS 0 comram dist/default/debug\HOVI.X.debug.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/debug\HOVI.X.debug.obj
@@ -874,8 +872,8 @@ _RCSTA1bits FAB 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/debug\HOVI.X.debug.obj
 ___lwdiv@divisor E2 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI.X.debug.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/default/debug\HOVI.X.debug.obj
-stackhi F37 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
-stacklo 12A 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+stackhi F37 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s8g.obj
+stacklo 12A 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 _SendDebugInfo 412 0 CODE 0 text4 dist/default/debug\HOVI.X.debug.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/debug\HOVI.X.debug.obj
 __Lintret 0 0 ABS 0 intret dist/default/debug\HOVI.X.debug.obj
@@ -902,7 +900,7 @@ __CFG_STVREN$ON 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 ___lwdiv@dividend E0 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI.X.debug.obj
 ?___lwdiv E0 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI.X.debug.obj
 ?___lwmod E7 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI.X.debug.obj
-__Hreset_vec 4 0 CODE 0 reset_vec dist/default/debug\HOVI.X.debug.obj
+__Hreset_vec 6 0 CODE 0 reset_vec dist/default/debug\HOVI.X.debug.obj
 __HbssBANK0 0 0 ABS 0 bssBANK0 dist/default/debug\HOVI.X.debug.obj
 __HbssBANK1 0 0 ABS 0 bssBANK1 dist/default/debug\HOVI.X.debug.obj
 __Lramtop 1000 0 RAM 0 ramtop dist/default/debug\HOVI.X.debug.obj
@@ -942,7 +940,7 @@ __Ltext26 0 0 ABS 0 text26 dist/default/debug\HOVI.X.debug.obj
 __Ltext27 0 0 ABS 0 text27 dist/default/debug\HOVI.X.debug.obj
 __Ltext28 0 0 ABS 0 text28 dist/default/debug\HOVI.X.debug.obj
 __Ltext29 0 0 ABS 0 text29 dist/default/debug\HOVI.X.debug.obj
-__ramtop 1000 0 RAM 0 ramtop C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+__ramtop 1000 0 RAM 0 ramtop C:\Users\Lucas\AppData\Local\Temp\s8g.obj
 __Lpowerup 9C 0 CODE 0 powerup dist/default/debug\HOVI.X.debug.obj
 _InitInterrupt A28 0 CODE 0 text17 dist/default/debug\HOVI.X.debug.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\HOVI.X.debug.obj
@@ -973,7 +971,9 @@ _outgoing 1F 0 COMRAM 1 bssCOMRAM dist/default/debug\HOVI.X.debug.obj
 __pcstackCOMRAM 2D 0 COMRAM 1 cstackCOMRAM dist/default/debug\HOVI.X.debug.obj
 __end_of_UartSend 9C2 0 CODE 0 text8 dist/default/debug\HOVI.X.debug.obj
 _T3CONbits FB1 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
+_AboveFloor 7AE 0 CODE 0 text23 dist/default/debug\HOVI.X.debug.obj
 _SSP1BUF FC9 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
+_AboveTable 75A 0 CODE 0 text22 dist/default/debug\HOVI.X.debug.obj
 __Hend_init A0 0 CODE 0 end_init dist/default/debug\HOVI.X.debug.obj
 __CFG_BOREN$SBORDIS 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 __end_of_Init 8AE 0 CODE 0 text9 dist/default/debug\HOVI.X.debug.obj
@@ -1065,7 +1065,7 @@ __size_of_InitInterrupt 0 0 ABS 0 - dist/default/debug\HOVI.X.debug.obj
 %SEGMENTS
 idloc 0 200000 200000 8 1
 text14 0 A42 A42 1E 1
-reset_vec 0 0 0 4 1
+reset_vec 0 0 0 6 1
 bssBANK0 1 60 60 96 1
 bssBANK1 1 100 100 2A 1
 intcode 0 8 8 A39 1

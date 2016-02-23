@@ -9435,6 +9435,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear_meas = 0;
 
 # 27 "init.h"
 void Init(void);
@@ -9547,11 +9548,11 @@ InitPort();
 InitTris();
 InitAnsel();
 InitOsc();
-InitUart();
-InitSpi();
+
+
 InitTimer();
 InitInterrupt();
-InitActors();
+
 }
 
 
@@ -9617,19 +9618,7 @@ T3CONbits.T3CKPS = 0b00;
 T3CONbits.nT3SYNC = 1;
 T3CONbits.TMR3ON = 1;
 
-
-
-T5GCONbits.TMR5GE = 1;
-T5GCONbits.T5GSPM = 0;
-T5GCONbits.T5GTM = 0;
-T5GCONbits.T5GPOL = 1;
-T5GCONbits.T5GSS = 0b00;
-
-T5CONbits.TMR5CS = 0b00;
-T5CONbits.T5CKPS = 0b00;
-T5CONbits.nT5SYNC = 1;
-T5CONbits.TMR5ON = 1;
-
+# 138
 }
 
 # 145

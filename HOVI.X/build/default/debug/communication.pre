@@ -9485,8 +9485,8 @@ unsigned int lw;
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckElevator(void);
-void BeneathTable(void);
-void BeneathFloor(void);
+void AboveTable(void);
+void AboveFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
@@ -9596,15 +9596,15 @@ return (SPI_word);
 
 
 void UartSend(unsigned char data) {
-if(TX1IF == 1) {
+if(TX1IF == 0) {
 _delay((unsigned long)((200)*(16000000/4000000.0)));
 }
 TXREG1 = data;
-while(TX1IF == 1);
+while(TX1IF == 0);
 }
 
 void UartSendAscii(unsigned char data) {
-if(TX1IF == 1) {
+if(TX1IF == 0) {
 _delay((unsigned long)((200)*(16000000/4000000.0)));
 }
 data += 48;

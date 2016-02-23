@@ -12,9 +12,13 @@
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
 $dist/default/debug\TEST.X.debug.obj
-cinit CODE 0 7FD 7FD 3 2
-maintext CODE 0 7F3 7F3 A 2
-$C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
+cinit CODE 0 7F4 7F4 C 2
+idataCOMMON CODE 0 7E2 7E2 2 2
+maintext CODE 0 7E4 7E4 10 2
+cstackCOMMON COMMON 1 74 74 2 1
+dataCOMMON COMMON 1 72 72 2 1
+bssCOMMON COMMON 1 70 70 2 1
+$C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
 reset_vec CODE 0 0 0 2 2
 end_init CODE 0 2 2 2 2
 # %UNUSED Section
@@ -33,9 +37,9 @@ BANK1 A0-EF 1
 BANK2 120-16F 1
 BANK3 1A0-1EF 1
 BANK4 220-24F 1
-CONST 4-7F2 2
+CONST 4-7E1 2
 CONST 800-FFF 2
-ENTRY 4-7F2 2
+ENTRY 4-7E1 2
 ENTRY 800-FFF 2
 IDLOC 8000-8003 2
 SFR10 500-56F 1
@@ -61,7 +65,7 @@ SFR29 E80-EEF 1
 SFR30 F00-F6F 1
 SFR31 F80-FEF 1
 STACK 2000-216F 1
-CODE 4-7F2 2
+CODE 4-7E1 2
 CODE 800-FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
@@ -74,12 +78,12 @@ SFR7 380-3EF 1
 SFR8 400-46F 1
 SFR9 480-4EF 1
 BIGRAM 2000-216F 1
-COMMON 70-7D 1
+COMMON 76-7D 1
 CONFIG 8007-8008 2
 EEDATA F000-F0FF 2
-STRCODE 4-7F2 2
+STRCODE 4-7E1 2
 STRCODE 800-FFF 2
-STRING 4-7F2 2
+STRING 4-7E1 2
 STRING 800-FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
@@ -95,23 +99,22 @@ STRING 800-FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/debug\TEST.X.debug.obj
-7FD cinit CODE >376:C:\Users\Lucas\AppData\Local\Temp\s1c8.
-7FD cinit CODE >379:C:\Users\Lucas\AppData\Local\Temp\s1c8.
-7FD cinit CODE >385:C:\Users\Lucas\AppData\Local\Temp\s1c8.
-7FD cinit CODE >387:C:\Users\Lucas\AppData\Local\Temp\s1c8.
-7FE cinit CODE >388:C:\Users\Lucas\AppData\Local\Temp\s1c8.
-7F3 maintext CODE >13:C:\projecthovi\TEST.X\test_sim_6.c
-7F3 maintext CODE >14:C:\projecthovi\TEST.X\test_sim_6.c
-7F4 maintext CODE >15:C:\projecthovi\TEST.X\test_sim_6.c
-7F5 maintext CODE >16:C:\projecthovi\TEST.X\test_sim_6.c
-7F6 maintext CODE >17:C:\projecthovi\TEST.X\test_sim_6.c
-7F6 maintext CODE >18:C:\projecthovi\TEST.X\test_sim_6.c
-7F7 maintext CODE >19:C:\projecthovi\TEST.X\test_sim_6.c
-7F8 maintext CODE >21:C:\projecthovi\TEST.X\test_sim_6.c
-7F9 maintext CODE >22:C:\projecthovi\TEST.X\test_sim_6.c
-7FA maintext CODE >23:C:\projecthovi\TEST.X\test_sim_6.c
-7FB maintext CODE >24:C:\projecthovi\TEST.X\test_sim_6.c
-7FC maintext CODE >25:C:\projecthovi\TEST.X\test_sim_6.c
+7F4 cinit CODE >388:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7F4 cinit CODE >391:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7F4 cinit CODE >414:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7F5 cinit CODE >415:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7F6 cinit CODE >420:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7F9 cinit CODE >421:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7FA cinit CODE >422:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7FC cinit CODE >423:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7FD cinit CODE >429:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7FD cinit CODE >431:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7FE cinit CODE >432:C:\Users\Lucas\AppData\Local\Temp\s4sk.
+7E4 maintext CODE >15:C:\projecthovi\TEST.X\sim_test8.c
+7E4 maintext CODE >16:C:\projecthovi\TEST.X\sim_test8.c
+7EA maintext CODE >17:C:\projecthovi\TEST.X\sim_test8.c
+7F1 maintext CODE >18:C:\projecthovi\TEST.X\sim_test8.c
+7F2 maintext CODE >21:C:\projecthovi\TEST.X\sim_test8.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -126,7 +129,7 @@ $dist/default/debug\TEST.X.debug.obj
 %SYMTAB
 ___latbits 1 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __Hspace_0 800 0 ABS 0 - -
-__Hspace_1 0 0 ABS 0 - -
+__Hspace_1 76 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
@@ -135,26 +138,30 @@ ltemp1 82 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ltemp2 86 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ltemp3 80 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
-_main FE6 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
+___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+_info 71 0 COMMON 1 bssCOMMON dist/default/debug\TEST.X.debug.obj
+_main FC8 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
 btemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ltemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
-start 4 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
+start 4 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
 ttemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 wtemp 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __size_of_main 0 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
+__HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
 ttemp0 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ttemp1 81 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ttemp2 84 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ttemp3 87 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 ttemp4 7F 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
-intlevel0 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
-intlevel1 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
-intlevel2 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
-intlevel3 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
-intlevel4 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
-intlevel5 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
+__HdataCOMMON 0 0 ABS 0 dataCOMMON -
+intlevel0 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+intlevel1 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+intlevel2 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+intlevel3 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+intlevel4 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+intlevel5 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+__LbssCOMMON 0 0 ABS 0 bssCOMMON -
 wtemp0 7E 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 wtemp1 80 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 wtemp2 82 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
@@ -164,9 +171,12 @@ wtemp5 88 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 wtemp6 7F 0 ABS 0 - dist/default/debug\TEST.X.debug.obj
 __Hfunctab 0 0 CODE 0 functab -
 __Hclrtext 0 0 ABS 0 clrtext -
+__pidataCOMMON FC4 0 CODE 0 idataCOMMON dist/default/debug\TEST.X.debug.obj
+__LdataCOMMON 0 0 ABS 0 dataCOMMON -
 __Lmaintext 0 0 ABS 0 maintext -
-start_initialization FFA 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
-___int_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
+__LidataCOMMON 0 0 ABS 0 idataCOMMON -
+start_initialization FE8 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
+___int_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -238,7 +248,7 @@ __Lbank6 0 0 BANK6 1 bank6 -
 __Lbank7 0 0 BANK7 1 bank7 -
 __Lbank8 0 0 BANK8 1 bank8 -
 __Lbank9 0 0 BANK9 1 bank9 -
-__Lcinit FFA 0 CODE 0 cinit -
+__Lcinit FE8 0 CODE 0 cinit -
 __Lidloc 0 0 IDLOC 0 idloc -
 __Lsfr10 0 0 ABS 0 sfr10 -
 __Lsfr11 0 0 ABS 0 sfr11 -
@@ -293,11 +303,13 @@ __Lsfr9 0 0 ABS 0 sfr9 -
 __Ltext 0 0 ABS 0 text -
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 __S0 800 0 ABS 0 - -
-__S1 0 0 ABS 0 - -
+__S1 76 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
+_var 72 0 COMMON 1 dataCOMMON dist/default/debug\TEST.X.debug.obj
+__HidataCOMMON 0 0 ABS 0 idataCOMMON -
 __Lintentry 4 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
 __Lbank10 0 0 BANK10 1 bank10 -
 __Lbank11 0 0 BANK11 1 bank11 -
 __Lbank12 0 0 BANK12 1 bank12 -
@@ -320,16 +332,17 @@ __Lbank28 0 0 BANK28 1 bank28 -
 __Lbank29 0 0 BANK29 1 bank29 -
 __Lbank30 0 0 BANK30 1 bank30 -
 __Lbank31 0 0 BANK31 1 bank31 -
-__pmaintext FE6 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
+__pmaintext FC8 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
 __Lbigram 0 0 ABS 0 bigram -
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 0 config -
-stackhi 216F 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
-stacklo 2000 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s1c8.obj
+stackhi 216F 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
+stacklo 2000 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s4sk.obj
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Lspace_2 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
+__pbssCOMMON 70 0 COMMON 1 bssCOMMON dist/default/debug\TEST.X.debug.obj
 __Lend_init 4 0 CODE 0 end_init -
 __LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 end_of_initialization FFA 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
@@ -342,12 +355,13 @@ __Lreset_vec 0 0 CODE 0 reset_vec -
 __end_of__initialization FFA 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
 __Lfunctab 0 0 CODE 0 functab -
 __Lclrtext 0 0 ABS 0 clrtext -
-__pcstackCOMMON 0 0 COMMON 1 cstackCOMMON dist/default/debug\TEST.X.debug.obj
+__pcstackCOMMON 74 0 COMMON 1 cstackCOMMON dist/default/debug\TEST.X.debug.obj
 __Hend_init 8 0 CODE 0 end_init -
-__end_of_main FFA 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
+__end_of_main FE8 0 CODE 0 maintext dist/default/debug\TEST.X.debug.obj
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
-__initialization FFA 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
+__initialization FE8 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
+__pdataCOMMON 72 0 COMMON 1 dataCOMMON dist/default/debug\TEST.X.debug.obj
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -373,6 +387,8 @@ __initialization FFA 0 CODE 0 cinit dist/default/debug\TEST.X.debug.obj
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-cinit 0 7FD FFA 3 2
-maintext 0 7F3 FE6 A 2
+cinit 0 7F4 FE8 C 2
+idataCOMMON 0 7E2 FC4 2 2
+maintext 0 7E4 FC8 10 2
 reset_vec 0 0 0 4 2
+bssCOMMON 1 70 70 6 1

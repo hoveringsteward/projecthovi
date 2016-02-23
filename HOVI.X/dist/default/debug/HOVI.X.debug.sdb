@@ -90,9 +90,9 @@
 "131
 [v _CheckElevator CheckElevator `(v  1 e 0 0 ]
 "198
-[v _BeneathTable BeneathTable `(v  1 e 0 0 ]
+[v _AboveTable AboveTable `(v  1 e 0 0 ]
 "218
-[v _BeneathFloor BeneathFloor `(v  1 e 0 0 ]
+[v _AboveFloor AboveFloor `(v  1 e 0 0 ]
 "239
 [v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
 "335
@@ -831,12 +831,12 @@
 "323
 } 0
 "198
-[v _BeneathTable BeneathTable `(v  1 e 0 0 ]
+[v _AboveTable AboveTable `(v  1 e 0 0 ]
 {
 "210
 } 0
 "218
-[v _BeneathFloor BeneathFloor `(v  1 e 0 0 ]
+[v _AboveFloor AboveFloor `(v  1 e 0 0 ]
 {
 "230
 } 0

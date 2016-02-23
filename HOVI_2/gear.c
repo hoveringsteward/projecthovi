@@ -28,13 +28,13 @@ unsigned int CalcTime(void) {
 /*      returns 0 for manual mode, gearswitch position 1 or 2                */
 /*      returns 1 for automatic mode, gearswitch position 0                  */
 bit ModeCheck(void) {
-    unsigned int time_gear = CalcTime();
-    if(time_gear < GEAR_TIME){
+    time_gear_meas = CalcTime();
+    if(time_gear_meas < GEAR_TIME){
         /* Manual Mode */
         LED = 0;
         ManNAut = 1;
         set_ret = 0;
-    }else if(time_gear >= GEAR_TIME) {
+    }else if(time_gear_meas >= GEAR_TIME) {
         LED = 1;
         ManNAut = 0;
         set_ret = 1;

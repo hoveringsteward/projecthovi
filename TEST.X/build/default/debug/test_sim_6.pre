@@ -3718,20 +3718,13 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 13 "test_sim_6.c"
+# 11 "test_sim_6.c"
+unsigned int test = 10;
+
 void main(void) {
-__nop();
-__nop();
-__nop();
-NAME:
-__nop();
-__nop();
+
 while(1) {
-__nop();
-__nop();
-goto NAME;
-__nop();
-__nop();
+test -= 5;
 }
 return;
 }

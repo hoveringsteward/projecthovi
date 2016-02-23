@@ -8,21 +8,12 @@
 #include <xc.h>
 
 
-
+unsigned int test = 10;
 
 void main(void) {
-    NOP();
-    NOP();
-    NOP();
-    NAME:
-    NOP();
-    NOP();
+    
     while(1) {
-        NOP();
-        NOP();
-        goto NAME;
-        NOP();
-        NOP();
+        test -= 5;
     }
     return;
 }

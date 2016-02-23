@@ -9497,6 +9497,7 @@ unsigned int ExchangeSpiWord(unsigned char byte1, unsigned char byte2);
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear_meas = 0;
 
 # 27 "init.h"
 void Init(void);

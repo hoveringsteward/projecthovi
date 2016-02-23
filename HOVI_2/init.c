@@ -32,11 +32,11 @@ void Init(void) {
     InitTris();
     InitAnsel();
     InitOsc();
-    InitUart();
-    InitSpi();
+//    InitUart();
+//    InitSpi();
     InitTimer();
     InitInterrupt();
-    InitActors();
+//    InitActors();
 }
 // </editor-fold>
 
@@ -124,16 +124,16 @@ void InitTimer(void) {
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="TMR5">
     //Timer 5 Gatecontrolregister
-    T5GCONbits.TMR5GE = 1;
-    T5GCONbits.T5GSPM = 0;
-    T5GCONbits.T5GTM =  0;
-    T5GCONbits.T5GPOL = 1;
-    T5GCONbits.T5GSS =  0b00;
-    //Timer 5 Controlregister
-    T5CONbits.TMR5CS =  0b00;
-    T5CONbits.T5CKPS =  0b00;
-    T5CONbits.nT5SYNC = 1;
-    T5CONbits.TMR5ON =  1;
+//    T5GCONbits.TMR5GE = 1;
+//    T5GCONbits.T5GSPM = 0;
+//    T5GCONbits.T5GTM =  0;
+//    T5GCONbits.T5GPOL = 1;
+//    T5GCONbits.T5GSS =  0b00;
+//    //Timer 5 Controlregister
+//    T5CONbits.TMR5CS =  0b00;
+//    T5CONbits.T5CKPS =  0b00;
+//    T5CONbits.nT5SYNC = 1;
+//    T5CONbits.TMR5ON =  1;
     // </editor-fold>
 }
 // </editor-fold>

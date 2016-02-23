@@ -21,14 +21,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3GIF `Vb ~T0 @X0 0 e@32033 ]
 "21 gear.h
 [v _ModeCheck `(b ~T0 @X0 0 ef ]
-"20 ultrasonic.h
-[v _StartHeightMeasure `(v ~T0 @X0 0 ef ]
-"21
-[v _ReadHeight `(v ~T0 @X0 0 ef ]
-"23 position.h
-[v _CheckThrottle `(v ~T0 @X0 0 ef ]
-"25 actors.h
-[v _SignalOut `(v ~T0 @X0 0 ef ]
 "20112 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
 [v _TMR3IF `Vb ~T0 @X0 0 e@32009 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
@@ -7546,6 +7538,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
 [; ;gear.h: 22: bit set_ret;
+"23
+[v _time_gear_meas `ui ~T0 @X0 1 e ]
+[i _time_gear_meas
+-> -> 0 `i `ui
+]
+[; ;gear.h: 23: unsigned int time_gear_meas = 0;
 [; ;init.h: 27: void Init(void);
 [; ;init.h: 28: void InitPort(void);
 [; ;init.h: 29: void InitTris(void);
@@ -7690,9 +7688,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _highpassallowed `b ~T0 @X0 1 e ]
 [; ;ultrasonic.h: 31: bit highpassallowed;
 [; ;main.h: 33: interrupt void Isr(void);
-[v F8088 `(v ~T0 @X0 1 tf ]
+[v F8089 `(v ~T0 @X0 1 tf ]
 "30 interrupt.c
-[v _Isr `IF8088 ~T0 @X0 1 e ]
+[v _Isr `IF8089 ~T0 @X0 1 e ]
 {
 [; ;interrupt.c: 30: interrupt void Isr() {
 [e :U _Isr ]
@@ -7710,18 +7708,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupt.c: 34: ModeCheck();
 "34
 [e ( _ModeCheck ..  ]
-[; ;interrupt.c: 35: StartHeightMeasure();
-"35
-[e ( _StartHeightMeasure ..  ]
-[; ;interrupt.c: 38: ReadHeight();
-"38
-[e ( _ReadHeight ..  ]
-[; ;interrupt.c: 39: CheckThrottle();
-"39
-[e ( _CheckThrottle ..  ]
-[; ;interrupt.c: 41: SignalOut();
-"41
-[e ( _SignalOut ..  ]
 "42
 }
 [; ;interrupt.c: 42: }else if (TMR3IF == 1) {
