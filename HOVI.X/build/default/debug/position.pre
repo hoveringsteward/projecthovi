@@ -9485,8 +9485,8 @@ unsigned int lw;
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckElevator(void);
-void BeneathTable(void);
-void BeneathFloor(void);
+void AboveTable(void);
+void AboveFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
@@ -9699,7 +9699,7 @@ ActElevator(-3);
 }
 
 # 198
-void BeneathTable(void) {
+void AboveTable(void) {
 if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) {
 ActThrottle(0);
 } else if (a_frame[0].height < cm80) {
@@ -9714,7 +9714,7 @@ ActThrottle(-3);
 }
 
 # 218
-void BeneathFloor(void) {
+void AboveFloor(void) {
 if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
 ActThrottle(0);
 } else if (a_frame[0].height < cm180) {
@@ -9743,12 +9743,12 @@ storedif = 1;
 storedif = 0;
 }
 if (table == 1) {
-BeneathTable();
+AboveTable();
 } else {
-BeneathFloor();
+AboveFloor();
 }
 } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) {
-BeneathFloor();
+AboveFloor();
 } else if (id_current_cc == (c_path - 1)) {
 
 if (a_frame_dif[0].dif_height > cm50) {
@@ -9761,9 +9761,9 @@ storedif = 1;
 storedif = 0;
 }
 if (table) {
-BeneathTable();
+AboveTable();
 } else {
-BeneathFloor();
+AboveFloor();
 }
 } else {
 

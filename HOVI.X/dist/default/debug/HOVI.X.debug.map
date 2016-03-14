@@ -5,7 +5,7 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.35\dat\en_msgs.txt -cs \
   -h+dist/default/debug\HOVI.X.debug.sym \
   --cmf=dist/default/debug\HOVI.X.debug.cmf -z -Q18F46K22 \
-  -oC:\Users\Lucas\AppData\Local\Temp\s5oo.2 \
+  -oC:\Users\Lucas\AppData\Local\Temp\s8g.2 \
   -Mdist/default/debug/HOVI.X.debug.map -E1 -ver=XC8 -ASTACK=012Ah-0f37h \
   -pstack=STACK -ACODE=00h-0FFFFh -ACONST=00h-0FFFFh \
   -ASMALLCONST=01000h-010FFhx240 -AMEDIUMCONST=01000h-0FFFFh \
@@ -16,7 +16,7 @@ Linker command line:
   -ABANK7=0700h-07FFh -ABANK8=0800h-08FFh -ABANK9=0900h-09FFh \
   -ABANK10=0A00h-0AFFh -ABANK11=0B00h-0BFFh -ABANK12=0C00h-0CFFh \
   -ABANK13=0D00h-0DFFh -ABANK14=0E00h-0EFFh -ABANK15=0F00h-0F37h \
-  -ASFR=0F38h-0F5Fh,0F60h-0FFFh \
+  -ASFR=0F38h-0F5Fh,0F60h-0FFCh \
   -preset_vec=00h,intcode=08h,intcodelo,powerup,init,end_init \
   -pramtop=01000h -psmallconst=SMALLCONST -pmediumconst=MEDIUMCONST \
   -pconst=CONST -AFARRAM=00h-00h -ACONFIG=0300000h-030000Dh -pconfig=CONFIG \
@@ -26,7 +26,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Lucas\AppData\Local\Temp\s5oo.obj \
+  C:\Users\Lucas\AppData\Local\Temp\s8g.obj \
   dist/default/debug\HOVI.X.debug.obj 
 
 Object code version is 3.11
@@ -39,9 +39,9 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Lucas\AppData\Local\Temp\s5oo.obj
+C:\Users\Lucas\AppData\Local\Temp\s8g.obj
                 end_init                             9C       9C        4        4       0
-                reset_vec                             0        0        4        0       0
+                reset_vec                             0        0        6        0       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
 dist/default/debug\HOVI.X.debug.obj
@@ -94,7 +94,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   CODE           
                 end_init                             9C       9C        4         0
                 intcode                               8        8       94         0
-                reset_vec                             0        0        4         0
+                reset_vec                             0        0        6         0
                 text29                              92E      92E       24         0
                 text28                              848      848       38         0
                 text27                              8AE      8AE       2C         0
@@ -199,7 +199,7 @@ TOTAL           Name                               Link     Load   Length     Sp
 
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
-                reset_vec                      000000  000004  000004         0       0  CODE    
+                reset_vec                      000000  000006  000006         0       0  CODE    
                 bssCOMRAM                      000001  00004D  00004E         1       1  COMRAM  
                 intcode                        000008  000A39  000A41         4       0  CODE    
                 bssBANK0                       000060  000096  0000F6        60       1  BANK0   
@@ -231,18 +231,18 @@ UNUSED ADDRESS RANGES
         BIGRAM           00004E-00005F               12
                          0000F6-0000FF                A
                          00012A-000F37              E0E
-        CODE             000004-000007                4
+        CODE             000006-000007                2
                          000A41-000A41                1
                          000A60-00FFFF             F5A0
         COMRAM           00004E-00005F               12
-        CONST            000004-000007                4
+        CONST            000006-000007                2
                          000A41-000A41                1
                          000A60-00FFFF             F5A0
         EEDATA           F00000-F003FF              400
         MEDIUMCONST      001000-00FFFF             F000
         RAM              0000F6-0000FF                A
                          00012A-000F37              100
-        SFR              000F38-000FFF               28
+        SFR              000F38-000FFC               28
         SMALLCONST       001000-00FFFF              100
         STACK            00012A-000F37              E0E
 
@@ -269,10 +269,10 @@ _ANSELB                          (abs)        000F39
 _ANSELC                          (abs)        000F3A
 _ANSELD                          (abs)        000F3B
 _ANSELE                          (abs)        000F3C
+_AboveFloor                      text23       0007AE
+_AboveTable                      text22       00075A
 _ActThrottle                     text24       000802
 _BAUDCON1bits                    (abs)        000FB8
-_BeneathFloor                    text23       0007AE
-_BeneathTable                    text22       00075A
 _CCP1CONbits                     (abs)        000FBD
 _CCP1IE                          (abs)        007CEA
 _CCP1IF                          (abs)        007CF2
@@ -447,7 +447,7 @@ __Hramtop                        ramtop       001000
 __Hrbit                          rbit         000000
 __Hrbss                          rbss         000000
 __Hrdata                         rdata        000000
-__Hreset_vec                     reset_vec    000004
+__Hreset_vec                     reset_vec    000006
 __Hrparam                        rparam       000000
 __Hsfr                           sfr          000000
 __Hsmallconst                    smallconst   000000
@@ -611,9 +611,9 @@ ___rparam_used                   (abs)        000001
 ___sp                            stack        000000
 __accesstop                      (abs)        000060
 __activetblptr                   (abs)        000002
+__end_of_AboveFloor              text23       000802
+__end_of_AboveTable              text22       0007AE
 __end_of_ActThrottle             text24       000848
-__end_of_BeneathFloor            text23       000802
-__end_of_BeneathTable            text22       0007AE
 __end_of_CalcTime                text29       000952
 __end_of_CheckThrottle           text21       000412
 __end_of_Delay                   text27       0008DA
@@ -686,9 +686,9 @@ __ptext7                         text7        000972
 __ptext8                         text8        0009AA
 __ptext9                         text9        000880
 __ramtop                         ramtop       001000
+__size_of_AboveFloor             (abs)        000000
+__size_of_AboveTable             (abs)        000000
 __size_of_ActThrottle            (abs)        000000
-__size_of_BeneathFloor           (abs)        000000
-__size_of_BeneathTable           (abs)        000000
 __size_of_CalcTime               (abs)        000000
 __size_of_CheckThrottle          (abs)        000000
 __size_of_Delay                  (abs)        000000
@@ -1441,15 +1441,15 @@ Total ram usage:       13 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    5
  This function calls:
+		_AboveFloor
+		_AboveTable
 		_ActThrottle
-		_BeneathFloor
-		_BeneathTable
  This function is called by:
 		_main
  This function uses a non-reentrant model
 
 
- *************** function _BeneathTable *****************
+ *************** function _AboveTable *****************
  Defined at:
 		line 198 in file "position.c"
  Parameters:    Size  Location     Type
@@ -1479,7 +1479,7 @@ Total ram usage:        0 bytes
  This function uses a non-reentrant model
 
 
- *************** function _BeneathFloor *****************
+ *************** function _AboveFloor *****************
  Defined at:
 		line 218 in file "position.c"
  Parameters:    Size  Location     Type
@@ -1535,8 +1535,8 @@ Total ram usage:        1 bytes
  This function calls:
 		Nothing
  This function is called by:
-		_BeneathTable
-		_BeneathFloor
+		_AboveTable
+		_AboveFloor
 		_CheckThrottle
  This function uses a non-reentrant model
 
@@ -1766,8 +1766,8 @@ communication.c
 communication.c estimated size: 54
 
 position.c
-		_BeneathTable  		CODE           	075A	0000	85
-		_BeneathFloor  		CODE           	07AE	0000	85
+		_AboveFloor    		CODE           	07AE	0000	85
+		_AboveTable    		CODE           	075A	0000	85
 		_CheckThrottle 		CODE           	00A0	0000	883
 		_StoreAsOld    		CODE           	08DA	0000	43
 

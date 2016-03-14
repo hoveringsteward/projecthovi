@@ -7607,8 +7607,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 18: void CompareFrames(void);
 [; ;position.h: 19: void CheckAileron(void);
 [; ;position.h: 20: void CheckElevator(void);
-[; ;position.h: 21: void BeneathTable(void);
-[; ;position.h: 22: void BeneathFloor(void);
+[; ;position.h: 21: void AboveTable(void);
+[; ;position.h: 22: void AboveFloor(void);
 [; ;position.h: 23: void CheckThrottle(void);
 [; ;position.h: 24: void CheckRudderAhead(void);
 [; ;position.h: 25: void CheckRudderBack(void);
@@ -8092,10 +8092,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 1174 ]
 }
 "198
-[v _BeneathTable `(v ~T0 @X0 1 ef ]
+[v _AboveTable `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 198: void BeneathTable(void) {
-[e :U _BeneathTable ]
+[; ;position.c: 198: void AboveTable(void) {
+[e :U _AboveTable ]
 [f ]
 [; ;position.c: 199: if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) {
 "199
@@ -8150,10 +8150,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 1191 ]
 }
 "218
-[v _BeneathFloor `(v ~T0 @X0 1 ef ]
+[v _AboveFloor `(v ~T0 @X0 1 ef ]
 {
-[; ;position.c: 218: void BeneathFloor(void) {
-[e :U _BeneathFloor ]
+[; ;position.c: 218: void AboveFloor(void) {
+[e :U _AboveFloor ]
 [f ]
 [; ;position.c: 219: if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
 "219
@@ -8258,18 +8258,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 "252
 [e $ ! == -> _table `i -> 1 `i 1211  ]
 {
-[; ;position.c: 253: BeneathTable();
+[; ;position.c: 253: AboveTable();
 "253
-[e ( _BeneathTable ..  ]
+[e ( _AboveTable ..  ]
 "254
 }
 [; ;position.c: 254: } else {
 [e $U 1212  ]
 [e :U 1211 ]
 {
-[; ;position.c: 255: BeneathFloor();
+[; ;position.c: 255: AboveFloor();
 "255
-[e ( _BeneathFloor ..  ]
+[e ( _AboveFloor ..  ]
 "256
 }
 [e :U 1212 ]
@@ -8281,9 +8281,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 1206 ]
 [e $ ! && > _id_current_cc -> 0 `i < _id_current_cc - _c_path -> 1 `i 1214  ]
 {
-[; ;position.c: 258: BeneathFloor();
+[; ;position.c: 258: AboveFloor();
 "258
-[e ( _BeneathFloor ..  ]
+[e ( _AboveFloor ..  ]
 "259
 }
 [; ;position.c: 259: } else if (id_current_cc == (c_path - 1)) {
@@ -8332,18 +8332,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 "270
 [e $ ! _table 1221  ]
 {
-[; ;position.c: 271: BeneathTable();
+[; ;position.c: 271: AboveTable();
 "271
-[e ( _BeneathTable ..  ]
+[e ( _AboveTable ..  ]
 "272
 }
 [; ;position.c: 272: } else {
 [e $U 1222  ]
 [e :U 1221 ]
 {
-[; ;position.c: 273: BeneathFloor();
+[; ;position.c: 273: AboveFloor();
 "273
-[e ( _BeneathFloor ..  ]
+[e ( _AboveFloor ..  ]
 "274
 }
 [e :U 1222 ]

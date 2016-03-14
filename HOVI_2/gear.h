@@ -20,6 +20,7 @@
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear_meas = 0;
 
 #endif	/* GEAR_H */
 

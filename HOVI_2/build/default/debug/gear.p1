@@ -7756,6 +7756,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "22 gear.h
 [v _set_ret `b ~T0 @X0 1 e ]
 [; ;gear.h: 22: bit set_ret;
+"23
+[v _time_gear_meas `ui ~T0 @X0 1 e ]
+[i _time_gear_meas
+-> -> 0 `i `ui
+]
+[; ;gear.h: 23: unsigned int time_gear_meas = 0;
 "16 gear.c
 [v _CalcTime `(ui ~T0 @X0 1 ef ]
 {
@@ -7795,13 +7801,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;gear.c: 30: bit ModeCheck(void) {
 [e :U _ModeCheck ]
 [f ]
+[; ;gear.c: 31: time_gear_meas = CalcTime();
 "31
-[v _time_gear `ui ~T0 @X0 1 a ]
-[; ;gear.c: 31: unsigned int time_gear = CalcTime();
-[e = _time_gear ( _CalcTime ..  ]
-[; ;gear.c: 32: if(time_gear < 6800){
+[e = _time_gear_meas ( _CalcTime ..  ]
+[; ;gear.c: 32: if(time_gear_meas < 6800){
 "32
-[e $ ! < _time_gear -> -> 6800 `i `ui 1154  ]
+[e $ ! < _time_gear_meas -> -> 6800 `i `ui 1154  ]
 {
 [; ;gear.c: 34: PORTBbits.RB2 = 0;
 "34
@@ -7814,10 +7819,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _set_ret -> -> 0 `i `b ]
 "37
 }
-[; ;gear.c: 37: }else if(time_gear >= 6800) {
+[; ;gear.c: 37: }else if(time_gear_meas >= 6800) {
 [e $U 1155  ]
 [e :U 1154 ]
-[e $ ! >= _time_gear -> -> 6800 `i `ui 1156  ]
+[e $ ! >= _time_gear_meas -> -> 6800 `i `ui 1156  ]
 {
 [; ;gear.c: 38: PORTBbits.RB2 = 1;
 "38

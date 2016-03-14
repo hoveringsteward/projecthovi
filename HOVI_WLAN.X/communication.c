@@ -10,7 +10,7 @@ void UartSend(unsigned char data) {
 }
 
 unsigned char UartReceive(void) {
-    if(RCSTA1bits.OERR == 1) {  //Error occured, restart
+    if(RCSTA1bits.OERR == 1) {  // Error occured, restart
         RCSTA1bits.CREN = 0;
         RCSTA1bits.CREN = 1;
     }

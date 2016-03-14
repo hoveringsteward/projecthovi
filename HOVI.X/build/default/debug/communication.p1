@@ -7630,8 +7630,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 18: void CompareFrames(void);
 [; ;position.h: 19: void CheckAileron(void);
 [; ;position.h: 20: void CheckElevator(void);
-[; ;position.h: 21: void BeneathTable(void);
-[; ;position.h: 22: void BeneathFloor(void);
+[; ;position.h: 21: void AboveTable(void);
+[; ;position.h: 22: void AboveFloor(void);
 [; ;position.h: 23: void CheckThrottle(void);
 [; ;position.h: 24: void CheckRudderAhead(void);
 [; ;position.h: 25: void CheckRudderBack(void);
@@ -7876,9 +7876,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _UartSend ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;communication.c: 49: if(TX1IF == 1) {
+[; ;communication.c: 49: if(TX1IF == 0) {
 "49
-[e $ ! == -> _TX1IF `i -> 1 `i 1166  ]
+[e $ ! == -> _TX1IF `i -> 0 `i 1166  ]
 {
 [; ;communication.c: 50: _delay((unsigned long)((200)*(16000000/4000000.0)));
 "50
@@ -7890,12 +7890,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;communication.c: 52: TXREG1 = data;
 "52
 [e = _TXREG1 _data ]
-[; ;communication.c: 53: while(TX1IF == 1);
+[; ;communication.c: 53: while(TX1IF == 0);
 "53
 [e $U 1167  ]
 [e :U 1168 ]
 [e :U 1167 ]
-[e $ == -> _TX1IF `i -> 1 `i 1168  ]
+[e $ == -> _TX1IF `i -> 0 `i 1168  ]
 [e :U 1169 ]
 [; ;communication.c: 54: }
 "54
@@ -7908,9 +7908,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _UartSendAscii ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;communication.c: 57: if(TX1IF == 1) {
+[; ;communication.c: 57: if(TX1IF == 0) {
 "57
-[e $ ! == -> _TX1IF `i -> 1 `i 1171  ]
+[e $ ! == -> _TX1IF `i -> 0 `i 1171  ]
 {
 [; ;communication.c: 58: _delay((unsigned long)((200)*(16000000/4000000.0)));
 "58

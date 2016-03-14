@@ -9540,6 +9540,7 @@ interrupt void Isr(void);
 unsigned int CalcTime(void);
 bit ModeCheck(void);
 bit set_ret;
+unsigned int time_gear_meas = 0;
 
 # 16 "gear.c"
 unsigned int CalcTime(void) {
@@ -9554,13 +9555,13 @@ return time_gear;
 
 # 30
 bit ModeCheck(void) {
-unsigned int time_gear = CalcTime();
-if(time_gear < 6800){
+time_gear_meas = CalcTime();
+if(time_gear_meas < 6800){
 
 PORTBbits.RB2 = 0;
 PORTAbits.RA5 = 1;
 set_ret = 0;
-}else if(time_gear >= 6800) {
+}else if(time_gear_meas >= 6800) {
 PORTBbits.RB2 = 1;
 PORTAbits.RA5 = 0;
 set_ret = 1;

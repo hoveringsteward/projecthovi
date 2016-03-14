@@ -11,9 +11,14 @@
 [v _eecpymem eecpymem `(v  1 e 0 0 ]
 "24
 [v _memcpyee memcpyee `(v  1 e 0 0 ]
-"13 C:\projecthovi\TEST.X\test_sim_6.c
+"15 C:\projecthovi\TEST.X\sim_test8.c
 [v _main main `(v  1 e 0 0 ]
+"11
+[v _var var `ui  1 e 2 0 ]
+"13
+[v _info info `uc  1 e 1 0 ]
+"15
 [v _main main `(v  1 e 0 0 ]
 {
-"28
+"21
 } 0
