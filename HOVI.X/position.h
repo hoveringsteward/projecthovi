@@ -87,8 +87,8 @@ t_path a_path[21], a_path_old[21];
 
 unsigned bit storedif = 0; // table / floor: if the difference was over 50cm the last time, it's 1
 unsigned bit table = 1; // 1 table; 0 floor
-unsigned int storeheight; // difference between the second last and the actuall height
-signed int seconddifference; // difference between storeheight and a_frame[0].height
+unsigned int storeheight = 0; // difference between the second last and the actuall height
+signed int seconddifference= 0; // difference between storeheight and a_frame[0].height
 
 // </editor-fold>
 #endif	/* POSITION_H */
