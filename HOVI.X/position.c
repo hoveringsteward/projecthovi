@@ -239,44 +239,72 @@ void AboveFloor(void) {
 void CheckThrottle(void) {
 
     if (id_current_cc == 0) { // Table: start
-        // check, if difference is more than 50cm, from table to floor
+        // check, if difference is more than 50cm, on the table
         if (a_frame_dif[0].dif_height < (-1 * cm50)) {
-            if (storedif) {
+            table = 1;
+            AboveTable();
+        }
+    } else if (id_current_cc == 1) { // cahnge between table and floor
+        seconddifference = storeheight - a_frame[0].height;
+        if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {
+
+            storeheight = a_frame_dif[1]; // storeheight is the difference between the second last and the actuall height
+
+            /* position.h:
+             * bit storedif; // table / floor: if the difference was higher than 50cm the last time, it's 1
+             * bit table = 0; // 1 table; 0 floor
+             */
+            if (storedif) { // if storedif is 1: it has detected the floor -> 2 times 50cm difference
                 table = 0;
-            } else {
+            } else { // if the difference is the first time higher than 50cm, it gets the value 1
                 storedif = 1;
             }
-        }else{
+        } else { // no difference higher than 
             storedif = 0;
+            storeheight = 0;
         }
         if (table == 1) {
             AboveTable();
         } else {
             AboveFloor();
         }
-    } else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
+        
+    } else if (id_current_cc > 1 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
         AboveFloor();
-    } else if (id_current_cc == (c_path - 1)) { // last CC/Obj in front of the table (pre-last CC)
-        // check, if difference is more than 50cm, from floor to table
-        if (a_frame_dif[0].dif_height > cm50) {
-            if (storedif) {
-                table = 1;  
-            } else {
-                storedif = 1;
-            }
-        }else{
-            storedif = 0;
-        }
-        if (table) {
-            AboveTable();
-        } else {
-            AboveFloor();
-        }
-    } else { // on the table -> last colorcode + landing
+    } else { // prove, if hexrotor is on the table
+        // -> last colorcode + landing
         /* Landing / Decreasing - has to check, if the height - difference is between
          * dec min and dec max
          * if landed: invert colorcodes, delay + fly back
          */
+        
+        // check, if difference is more than 50cm, from floor to table
+        seconddifference = storeheight - a_frame[0].height;
+        if (a_frame_dif[0].dif_height > cm50 || seconddifference > cm50) {
+
+            storeheight = a_frame_dif[1]; // storeheight is the difference between the second last and the actuall height
+
+            /* position.h:
+             * bit storedif; // table / floor: if the difference was higher than 50cm the last time, it's 1
+             * bit table = 0; // 1 table; 0 floor
+             */
+            if (storedif) { // if storedif is 1: it has detected the floor -> 2 times 50cm difference
+                table = 1;
+            } else { // if the difference is the first time higher than 50cm, it gets the value 1
+                storedif = 1;
+            }
+        } else { // no difference higher than 
+            storedif = 0;
+            storeheight = 0;
+        }
+        if (table == 1) {
+            AboveTable();
+        } else {
+            AboveFloor();
+        }
+        
+        
+        
         if (a_frame[0].height >= 30) { // higher than 30cm
             if (a_frame[1].height > a_frame[0].height) {
                 /* Old bigger than new, MC is decreasing */
@@ -299,9 +327,9 @@ void CheckThrottle(void) {
             /* old saves the path, which the hexrotor flied
              * the new way, is the old way reserved (=umgekehrte Reihenfolge)
              */
-            if(direction == 1){ // if it was on the way back to the base 
+            if (direction == 1) { // if it was on the way back to the base 
                 direction = 0; // outgoing flight = fly to table
-            }else{
+            } else {
                 direction = 1; // flies back to base
             }
             int tmp = c_path - 1;
@@ -333,51 +361,51 @@ void CheckThrottle(void) {
  * W_MIN; if W_MAX is too high, it should slow down
 /*------------------------------------------------------------*/
 void CheckRudderAhead(void) {
-   // <editor-fold defaultstate="collapsed" desc="centered">
-   if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
-       ActRudder(0);
-   }// </editor-fold>
-       // <editor-fold defaultstate="collapsed" desc="right side">
-   else if (a_frame[0].angle > 5) {
-       /* CC/Obj Rotation is on the right side */
-       if (a_frame[1].angle > a_frame[0].angle) {
-           /* good: Old bigger than new, moving right */
-           if (a_frame_dif[0].dif_angle <= W_MAX) { // if rotation difference is smaller than eg 2
-               if (a_frame_dif[0].dif_angle <= W_MIN) { // if rotation difference is smaller than eg 1
-                   ActRudder(-RUD_INC); // - to the right
-               } else {
-                   ActRudder(0); // good: Rudder is between W_MIN and W_MAX
-               }
-           } else {
-               // Omega (W -> W_MAX) is too high
-               ActRudder(RUD_INC); // slow down, less right
-           }
-       } else {
-           /* wrong rudder-direction, ... */
-           ActRudder(-RUD_INC); // - to the right
-       }
-   }// </editor-fold>
-       // <editor-fold defaultstate="collapsed" desc="left side">
-   else {
-       /* CC/Obj Rotation is on the left side -> everything is minus*/
-       if (a_frame[1].angle < a_frame[0].angle) {
-           /* good: old smaller than new, moving left */
-           if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -2
-               if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -1
-                   ActRudder(RUD_INC); // + to the left
-               } else {
-                   ActRudder(0); // good: Rudder is between W_MIN and W_MAX
-               }
-           } else {
-               // Omega is too low (minus side)
-               ActRudder(-RUD_INC); // slow down, less left
-           }
-       } else {
-           /* wrong rudder-direction, ... */
-           ActRudder(RUD_INC); // + to the left
-       }
-   }
-   // </editor-fold> 
+    // <editor-fold defaultstate="collapsed" desc="centered">
+    if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
+        ActRudder(0);
+    }// </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="right side">
+    else if (a_frame[0].angle > 5) {
+        /* CC/Obj Rotation is on the right side */
+        if (a_frame[1].angle > a_frame[0].angle) {
+            /* good: Old bigger than new, moving right */
+            if (a_frame_dif[0].dif_angle <= W_MAX) { // if rotation difference is smaller than eg 2
+                if (a_frame_dif[0].dif_angle <= W_MIN) { // if rotation difference is smaller than eg 1
+                    ActRudder(-RUD_INC); // - to the right
+                } else {
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
+                }
+            } else {
+                // Omega (W -> W_MAX) is too high
+                ActRudder(RUD_INC); // slow down, less right
+            }
+        } else {
+            /* wrong rudder-direction, ... */
+            ActRudder(-RUD_INC); // - to the right
+        }
+    }// </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="left side">
+    else {
+        /* CC/Obj Rotation is on the left side -> everything is minus*/
+        if (a_frame[1].angle < a_frame[0].angle) {
+            /* good: old smaller than new, moving left */
+            if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -2
+                if (a_frame_dif[0].dif_angle <= -W_MAX) { // if rotation difference is smaller than eg -1
+                    ActRudder(RUD_INC); // + to the left
+                } else {
+                    ActRudder(0); // good: Rudder is between W_MIN and W_MAX
+                }
+            } else {
+                // Omega is too low (minus side)
+                ActRudder(-RUD_INC); // slow down, less left
+            }
+        } else {
+            /* wrong rudder-direction, ... */
+            ActRudder(RUD_INC); // + to the left
+        }
+    }
+    // </editor-fold> 
 }
 // </editor-fold>
 
