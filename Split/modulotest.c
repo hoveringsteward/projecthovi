@@ -33,9 +33,20 @@ void SendDebugInfo(unsigned int debug_info) {
 
 int main() {
 	int time_height;
-		
+	int Zeichen[5];
+	Zeichen[0] = 'a';
+	Zeichen[1] = 'b';
+	Zeichen[2] = 'r';
+	Zeichen[3] = 'g';
+	Zeichen[4] = '6';
 		while(1){
+			int var1 = Zeichen[0];
+			int var2 = Zeichen[1];
+			int var3 = Zeichen[2];
 			
+			printf("%c\n", var1);
+			printf("%c\n", var2);
+			printf("%c\n", var3);
 			printf("Gib die time_height ein: ");
 			scanf("%d", &time_height);
 			//printf("\n");
