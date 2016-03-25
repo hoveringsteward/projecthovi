@@ -43,6 +43,8 @@
 [v ___fldiv __fldiv `(d  1 e 3 0 ]
 "8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "27 C:\projecthovi\HOVI.X\communication.c
@@ -95,11 +97,11 @@
 [v _AboveFloor AboveFloor `(v  1 e 0 0 ]
 "239
 [v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
-"363
+"361
 [v _CheckRudderAhead CheckRudderAhead `(v  1 e 0 0 ]
-"421
+"419
 [v _CheckRudderBack CheckRudderBack `(v  1 e 0 0 ]
-"477
+"475
 [v _StoreAsOld StoreAsOld `(v  1 e 0 0 ]
 "21 C:\projecthovi\HOVI.X\ultrasonic.c
 [v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
@@ -659,28 +661,28 @@
 "72
 [v _cm220 cm220 `ui  1 e 2 0 ]
 "73
-[v _cm100 cm100 `i  1 e 2 0 ]
-"74
-[v _cm120 cm120 `i  1 e 2 0 ]
+[v _cm100 cm100 `ui  1 e 2 0 ]
 "75
-[v _cm80 cm80 `i  1 e 2 0 ]
+[v _cm120 cm120 `ui  1 e 2 0 ]
 "76
-[v _cm50 cm50 `i  1 e 2 0 ]
-"79
-[v _c_path c_path `i  1 e 2 0 ]
+[v _cm80 cm80 `ui  1 e 2 0 ]
+"77
+[v _cm50 cm50 `ui  1 e 2 0 ]
 "80
+[v _c_path c_path `i  1 e 2 0 ]
+"81
 [v _id_current_cc id_current_cc `i  1 e 2 0 ]
 [s S46 nt_path 2 `uc 1 lower_cc 1 0 `uc 1 higher_cc 1 1 ]
-"86
+"87
 [v _a_path a_path `[21]S46  1 e 42 0 ]
 [v _a_path_old a_path_old `[21]S46  1 e 42 0 ]
-"88
-[v _storedif storedif `b  1 e 0 0 ]
 "89
-[v _table table `b  1 e 0 0 ]
+[v _storedif storedif `b  1 e 0 0 ]
 "90
-[v _storeheight storeheight `ui  1 e 2 0 ]
+[v _table table `b  1 e 0 0 ]
 "91
+[v _storeheight storeheight `ui  1 e 2 0 ]
+"92
 [v _seconddifference seconddifference `i  1 e 2 0 ]
 "28 C:\projecthovi\HOVI.X\ultrasonic.h
 [v _time_height time_height `ui  1 e 2 0 ]
@@ -695,10 +697,10 @@
 {
 "95
 } 0
-"477 C:\projecthovi\HOVI.X\position.c
+"475 C:\projecthovi\HOVI.X\position.c
 [v _StoreAsOld StoreAsOld `(v  1 e 0 0 ]
 {
-"483
+"481
 } 0
 "21 C:\projecthovi\HOVI.X\ultrasonic.c
 [v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
@@ -727,7 +729,7 @@
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
 {
 "11
-[v ___lwmod@counter counter `uc  1 a 1 4 ]
+[v ___lwmod@counter counter `uc  1 a 1 18 ]
 "8
 [v ___lwmod@dividend dividend `ui  1 p 2 0 ]
 [v ___lwmod@divisor divisor `ui  1 p 2 2 ]
@@ -750,7 +752,7 @@
 {
 [v UartSendAscii@data data `uc  1 a 1 wreg ]
 [v UartSendAscii@data data `uc  1 a 1 wreg ]
-[v UartSendAscii@data data `uc  1 a 1 0 ]
+[v UartSendAscii@data data `uc  1 a 1 18 ]
 "63
 } 0
 "48
@@ -758,7 +760,7 @@
 {
 [v UartSend@data data `uc  1 a 1 wreg ]
 [v UartSend@data data `uc  1 a 1 wreg ]
-[v UartSend@data data `uc  1 a 1 0 ]
+[v UartSend@data data `uc  1 a 1 18 ]
 "54
 } 0
 "30 C:\projecthovi\HOVI.X\init.c
@@ -824,17 +826,27 @@
 "239 C:\projecthovi\HOVI.X\position.c
 [v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
 {
-"345
-[v CheckThrottle@i_2165 i `i  1 a 2 6 ]
-"340
-[v CheckThrottle@i_2164 i `i  1 a 2 12 ]
-"336
-[v CheckThrottle@i i `i  1 a 2 10 ]
-"335
-[v CheckThrottle@tmp tmp `i  1 a 2 8 ]
-"351
+"343
+[v CheckThrottle@i_2165 i `i  1 a 2 11 ]
+"338
+[v CheckThrottle@i_2164 i `i  1 a 2 17 ]
+"334
+[v CheckThrottle@i i `i  1 a 2 15 ]
+"333
+[v CheckThrottle@tmp tmp `i  1 a 2 13 ]
+"349
 } 0
-"198
+"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"198 C:\projecthovi\HOVI.X\position.c
 [v _AboveTable AboveTable `(v  1 e 0 0 ]
 {
 "210
@@ -849,7 +861,7 @@
 {
 [v ActThrottle@change change `c  1 a 1 wreg ]
 [v ActThrottle@change change `c  1 a 1 wreg ]
-[v ActThrottle@change change `c  1 a 1 0 ]
+[v ActThrottle@change change `c  1 a 1 18 ]
 "93
 } 0
 "30 C:\projecthovi\HOVI.X\interrupt.c

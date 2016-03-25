@@ -82,7 +82,7 @@ void ActElevator(signed char change){
 /* Height                                                           */
 /*------------------------------------------------------------------*/
 void ActThrottle(signed char change) {
-    if(a_actors[0].thro <= 600 || change < 0) {
+    if(a_actors[0].thro <= 550 || change < 0) {
         a_actors[0].thro += change;
         if(a_actors[0].thro > 1050) {
             a_actors[0].thro = 0;

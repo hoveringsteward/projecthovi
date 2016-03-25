@@ -240,10 +240,8 @@ void CheckThrottle(void) {
 
     if (id_current_cc == 0) { // Table: start
         // check, if difference is more than 50cm, on the table
-        if (a_frame_dif[0].dif_height < (-1 * cm50)) {
             table = 1;
             AboveTable();
-        }
     } else if (id_current_cc == 1) { // cahnge between table and floor
         seconddifference = storeheight - a_frame[0].height;
         if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {

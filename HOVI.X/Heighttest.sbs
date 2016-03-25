@@ -1,0 +1,93 @@
+## SCL Builder Setup File: Do not edit!!
+
+## VERSION: MPLAB X
+## FORMAT:  v2.00.01
+## DEVICE:  PIC18F46K22
+
+## PINREGACTIONS
+cyc
+No Repeat
+--
+&
+## ADVPINREGACTIONS
+--
+&
+--
+COND1
+Any
+
+
+
+0
+cyc
+
+--
+&
+## CLOCK
+&
+## STIMULUSFILE
+&
+## RESPONSEFILE
+&
+## ASYNCH
+Pin
+T5G
+Pulse High
+6500 us
+Floor to high
+2
+--
+Pin
+T5G
+Pulse High
+6000 us
+Floor correct
+2
+--
+Pin
+T5G
+Pulse High
+5000 us
+Floor to low
+2
+--
+Pin
+T5G
+Pulse High
+7000 us
+Table to high
+2
+--
+Pin
+T5G
+Pulse High
+5000 us
+Table correct
+2
+--
+Pin
+T5G
+Pulse High
+4000 us
+Table to low
+2
+--
+Pin
+RD4
+Set High
+
+Connected
+-1
+--
+Pin
+RD6
+Set High
+
+Associated
+-1
+--
+&
+## ADVANCEDSCL
+
+0
+&

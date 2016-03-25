@@ -9522,10 +9522,11 @@ bit direction = 0;
 
 unsigned int cm180 = 20991;
 unsigned int cm220 = 25655;
-signed int cm100 = 23323;
-signed int cm120 = 27987;
-signed int cm80 = 18659;
-signed int cm50 = 11662;
+unsigned int cm100 = 23323;
+
+unsigned int cm120 = 26000;
+unsigned int cm80 = 18659;
+unsigned int cm50 = 11662;
 
 
 int c_path = 10;
@@ -9735,17 +9736,15 @@ void CheckThrottle(void) {
 
 if (id_current_cc == 0) {
 
-if (a_frame_dif[0].dif_height < (-1 * cm50)) {
 table = 1;
 AboveTable();
-}
 } else if (id_current_cc == 1) {
 seconddifference = storeheight - a_frame[0].height;
 if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {
 
 storeheight = a_frame_dif[0].dif_height;
 
-# 257
+# 255
 if (storedif) {
 table = 0;
 } else {
@@ -9765,13 +9764,13 @@ AboveFloor();
 AboveFloor();
 } else {
 
-# 282
+# 280
 seconddifference = storeheight - a_frame[0].height;
 if (a_frame_dif[0].dif_height > cm50 || seconddifference > cm50) {
 
 storeheight = a_frame_dif[0].dif_height;
 
-# 291
+# 289
 if (storedif) {
 table = 1;
 } else {
@@ -9808,7 +9807,7 @@ ActThrottle(-3);
 }
 } else {
 
-# 330
+# 328
 if (direction == 1) {
 direction = 0;
 } else {
@@ -9832,7 +9831,7 @@ _delay((unsigned long)((3)*(16000000/4000.0)));
 }
 }
 
-# 363
+# 361
 void CheckRudderAhead(void) {
 
 if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
@@ -9881,7 +9880,7 @@ ActRudder(3);
 
 }
 
-# 421
+# 419
 void CheckRudderBack(void) {
 
 
@@ -9933,7 +9932,7 @@ ActRudder(3);
 
 }
 
-# 477
+# 475
 void StoreAsOld(void) {
 a_frame[1].num = a_frame[0].num;
 a_frame[1].pos_x = a_frame[0].pos_x;

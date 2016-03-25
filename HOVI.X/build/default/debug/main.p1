@@ -11,7 +11,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "55
 [s S1150 `ui 1 `i 1 `i 1 `i 1 `i 1 ]
 [n S1150 nt_frame_dif num dif_pos_x dif_pos_y dif_height dif_angle ]
-"81
+"82
 [s S1151 `uc 1 `uc 1 ]
 [n S1151 nt_path lower_cc higher_cc ]
 [p mainexit ]
@@ -7721,67 +7721,67 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;position.h: 72: unsigned int cm220 = 25655;
 "73
-[v _cm100 `i ~T0 @X0 1 e ]
+[v _cm100 `ui ~T0 @X0 1 e ]
 [i _cm100
--> 23323 `i
+-> -> 23323 `i `ui
 ]
-[; ;position.h: 73: signed int cm100 = 23323;
-"74
-[v _cm120 `i ~T0 @X0 1 e ]
-[i _cm120
--> 27987 `i
-]
-[; ;position.h: 74: signed int cm120 = 27987;
+[; ;position.h: 73: unsigned int cm100 = 23323;
 "75
-[v _cm80 `i ~T0 @X0 1 e ]
-[i _cm80
--> 18659 `i
+[v _cm120 `ui ~T0 @X0 1 e ]
+[i _cm120
+-> -> 26000 `i `ui
 ]
-[; ;position.h: 75: signed int cm80 = 18659;
+[; ;position.h: 75: unsigned int cm120 = 26000;
 "76
-[v _cm50 `i ~T0 @X0 1 e ]
-[i _cm50
--> 11662 `i
+[v _cm80 `ui ~T0 @X0 1 e ]
+[i _cm80
+-> -> 18659 `i `ui
 ]
-[; ;position.h: 76: signed int cm50 = 11662;
-"79
+[; ;position.h: 76: unsigned int cm80 = 18659;
+"77
+[v _cm50 `ui ~T0 @X0 1 e ]
+[i _cm50
+-> -> 11662 `i `ui
+]
+[; ;position.h: 77: unsigned int cm50 = 11662;
+"80
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path
 -> 10 `i
 ]
-[; ;position.h: 79: int c_path = 10;
-"80
+[; ;position.h: 80: int c_path = 10;
+"81
 [v _id_current_cc `i ~T0 @X0 1 e ]
 [i _id_current_cc
 -> 0 `i
 ]
-[; ;position.h: 80: int id_current_cc = 0;
-[; ;position.h: 81: typedef struct nt_path{
-[; ;position.h: 82: unsigned char lower_cc;
-[; ;position.h: 83: unsigned char higher_cc;
-[; ;position.h: 84: } t_path;
-"86
+[; ;position.h: 81: int id_current_cc = 0;
+[; ;position.h: 82: typedef struct nt_path{
+[; ;position.h: 83: unsigned char lower_cc;
+[; ;position.h: 84: unsigned char higher_cc;
+[; ;position.h: 85: } t_path;
+"87
 [v _a_path `S1151 ~T0 @X0 -> 21 `i e ]
 [v _a_path_old `S1151 ~T0 @X0 -> 21 `i e ]
-[; ;position.h: 86: t_path a_path[21], a_path_old[21];
-"88
-[v _storedif `b ~T0 @X0 1 e ]
-[; ;position.h: 88: bit storedif;
+[; ;position.h: 87: t_path a_path[21], a_path_old[21];
 "89
-[v _table `b ~T0 @X0 1 e ]
-[; ;position.h: 89: bit table;
+[v _storedif `b ~T0 @X0 1 e ]
+[; ;position.h: 89: bit storedif;
 "90
+[v _table `b ~T0 @X0 1 e ]
+[; ;position.h: 90: bit table;
+"91
 [v _storeheight `ui ~T0 @X0 1 e ]
 [i _storeheight
 -> -> 0 `i `ui
 ]
-[; ;position.h: 90: unsigned int storeheight = 0;
-"91
+[; ;position.h: 91: unsigned int storeheight = 0;
+"92
 [v _seconddifference `i ~T0 @X0 1 e ]
 [i _seconddifference
 -> 0 `i
 ]
-[; ;position.h: 91: signed int seconddifference= 0;
+[; ;position.h: 92: signed int seconddifference= 0;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
