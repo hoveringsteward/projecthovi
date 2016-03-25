@@ -9538,7 +9538,9 @@ unsigned char higher_cc;
 t_path a_path[21], a_path_old[21];
 
 bit storedif;
-bit table = 0;
+bit table;
+unsigned int storeheight = 0;
+signed int seconddifference= 0;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9556,10 +9558,10 @@ void SendDebugInfo(unsigned int debug_info);
 # 26
 unsigned char send_info[5];
 
-# 40 "main.h"
+# 41 "main.h"
 interrupt void Isr();
 
-# 76
+# 77
 unsigned char pulsecounter = 0;
 
 # 33 "position.c"
@@ -9734,40 +9736,59 @@ void CheckThrottle(void) {
 if (id_current_cc == 0) {
 
 if (a_frame_dif[0].dif_height < (-1 * cm50)) {
+table = 1;
+AboveTable();
+}
+} else if (id_current_cc == 1) {
+seconddifference = storeheight - a_frame[0].height;
+if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {
+
+storeheight = a_frame_dif[0].dif_height;
+
+# 257
 if (storedif) {
 table = 0;
 } else {
 storedif = 1;
 }
-}else{
+} else {
 storedif = 0;
+storeheight = 0;
 }
 if (table == 1) {
 AboveTable();
 } else {
 AboveFloor();
 }
-} else if (id_current_cc > 0 && id_current_cc < (c_path - 1)) {
-AboveFloor();
-} else if (id_current_cc == (c_path - 1)) {
 
-if (a_frame_dif[0].dif_height > cm50) {
+} else if (id_current_cc > 1 && id_current_cc < (c_path - 1)) {
+AboveFloor();
+} else {
+
+# 282
+seconddifference = storeheight - a_frame[0].height;
+if (a_frame_dif[0].dif_height > cm50 || seconddifference > cm50) {
+
+storeheight = a_frame_dif[0].dif_height;
+
+# 291
 if (storedif) {
 table = 1;
 } else {
 storedif = 1;
 }
-}else{
+} else {
 storedif = 0;
+storeheight = 0;
 }
-if (table) {
+if (table == 1) {
 AboveTable();
 } else {
 AboveFloor();
 }
-} else {
 
-# 280
+
+
 if (a_frame[0].height >= 30) {
 if (a_frame[1].height > a_frame[0].height) {
 
@@ -9787,10 +9808,10 @@ ActThrottle(-3);
 }
 } else {
 
-# 302
-if(direction == 1){
+# 330
+if (direction == 1) {
 direction = 0;
-}else{
+} else {
 direction = 1;
 }
 int tmp = c_path - 1;
@@ -9811,7 +9832,7 @@ _delay((unsigned long)((3)*(16000000/4000.0)));
 }
 }
 
-# 335
+# 363
 void CheckRudderAhead(void) {
 
 if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
@@ -9860,7 +9881,7 @@ ActRudder(3);
 
 }
 
-# 393
+# 421
 void CheckRudderBack(void) {
 
 
@@ -9912,7 +9933,7 @@ ActRudder(3);
 
 }
 
-# 449
+# 477
 void StoreAsOld(void) {
 a_frame[1].num = a_frame[0].num;
 a_frame[1].pos_x = a_frame[0].pos_x;

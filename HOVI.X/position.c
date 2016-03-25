@@ -248,7 +248,7 @@ void CheckThrottle(void) {
         seconddifference = storeheight - a_frame[0].height;
         if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {
 
-            storeheight = a_frame_dif[1]; // storeheight is the difference between the second last and the actuall height
+            storeheight = a_frame_dif[0].dif_height; // storeheight is the difference between the second last and the actuall height
 
             /* position.h:
              * bit storedif; // table / floor: if the difference was higher than 50cm the last time, it's 1
@@ -282,7 +282,7 @@ void CheckThrottle(void) {
         seconddifference = storeheight - a_frame[0].height;
         if (a_frame_dif[0].dif_height > cm50 || seconddifference > cm50) {
 
-            storeheight = a_frame_dif[1]; // storeheight is the difference between the second last and the actuall height
+            storeheight = a_frame_dif[0].dif_height; // storeheight is the difference between the second last and the actuall height
 
             /* position.h:
              * bit storedif; // table / floor: if the difference was higher than 50cm the last time, it's 1

@@ -9538,7 +9538,9 @@ unsigned char higher_cc;
 t_path a_path[21], a_path_old[21];
 
 bit storedif;
-bit table = 0;
+bit table;
+unsigned int storeheight = 0;
+signed int seconddifference= 0;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9556,10 +9558,10 @@ void SendDebugInfo(unsigned int debug_info);
 # 26
 unsigned char send_info[5];
 
-# 40 "main.h"
+# 41 "main.h"
 interrupt void Isr();
 
-# 76
+# 77
 unsigned char pulsecounter = 0;
 
 # 30 "init.c"
@@ -9574,6 +9576,8 @@ InitTimer();
 InitComp();
 InitInterrupt();
 InitActors();
+storedif = 0;
+table = 1;
 
 InitWlan();
 
@@ -9614,10 +9618,10 @@ ANSELE = 0b00000000;
 void InitOsc(void) {
 OSCCON = 0b01110111;
 
-# 81
+# 83
 }
 
-# 91
+# 93
 void InitUart(void) {
 
 SPBRG1 = 68;
@@ -9634,13 +9638,13 @@ TX1IF = 0;
 RCSTA1bits.CREN = 1;
 }
 
-# 116
+# 118
 void InitSpi(void) {
 SSP1STAT = 0b00000000;
 SSP1CON1 = 0b00100001;
 }
 
-# 142
+# 144
 void InitTimer(void) {
 
 T1CONbits.TMR1CS = 0b00;
@@ -9678,12 +9682,12 @@ T5CONbits.TMR5ON = 1;
 
 }
 
-# 185
+# 187
 void InitComp(void) {
 CCP1CONbits.CCP1M = 0b1010;
 }
 
-# 195
+# 197
 void InitInterrupt(void) {
 
 TMR3GIE = 1;
@@ -9696,7 +9700,7 @@ PEIE = 1;
 GIE = 1;
 }
 
-# 211
+# 213
 void InitActors (void) {
 a_actors[0].aile = 500;
 a_actors[0].elev = 500;

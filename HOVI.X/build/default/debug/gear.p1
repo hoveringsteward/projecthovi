@@ -7752,10 +7752,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;position.h: 88: bit storedif;
 "89
 [v _table `b ~T0 @X0 1 e ]
-[i _table
+[; ;position.h: 89: bit table;
+"90
+[v _storeheight `ui ~T0 @X0 1 e ]
+[i _storeheight
+-> -> 0 `i `ui
+]
+[; ;position.h: 90: unsigned int storeheight = 0;
+"91
+[v _seconddifference `i ~T0 @X0 1 e ]
+[i _seconddifference
 -> 0 `i
 ]
-[; ;position.h: 89: bit table = 0;
+[; ;position.h: 91: signed int seconddifference= 0;
 [; ;ultrasonic.h: 20: void StartHeightMeasure(void);
 [; ;ultrasonic.h: 21: void ReadHeight(void);
 "28 ultrasonic.h
@@ -7774,13 +7783,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "26 debug.h
 [v _send_info `uc ~T0 @X0 -> 5 `i e ]
 [; ;debug.h: 26: unsigned char send_info[5];
-[; ;main.h: 40: interrupt void Isr();
-"76 main.h
+[; ;main.h: 41: interrupt void Isr();
+"77 main.h
 [v _pulsecounter `uc ~T0 @X0 1 e ]
 [i _pulsecounter
 -> -> 0 `i `uc
 ]
-[; ;main.h: 76: unsigned char pulsecounter = 0;
+[; ;main.h: 77: unsigned char pulsecounter = 0;
 [; ;gear.h: 20: unsigned int CalcTime(void);
 [; ;gear.h: 21: bit ModeCheck(void);
 "22 gear.h

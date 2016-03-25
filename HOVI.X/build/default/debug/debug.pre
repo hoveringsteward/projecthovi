@@ -9538,7 +9538,9 @@ unsigned char higher_cc;
 t_path a_path[21], a_path_old[21];
 
 bit storedif;
-bit table = 0;
+bit table;
+unsigned int storeheight = 0;
+signed int seconddifference= 0;
 
 # 20 "ultrasonic.h"
 void StartHeightMeasure(void);
@@ -9556,17 +9558,17 @@ void SendDebugInfo(unsigned int debug_info);
 # 26
 unsigned char send_info[5];
 
-# 40 "main.h"
+# 41 "main.h"
 interrupt void Isr();
 
-# 76
+# 77
 unsigned char pulsecounter = 0;
 
 # 13 "debug.c"
 void SendDebugInfo(unsigned int debug_info) {
 for(unsigned char debug_info_counter = 0; debug_info_counter < 5; debug_info_counter++) {
-send_info[debug_info_counter] = (debug_info / (10 * debug_info_counter)) % 10;
-debug_info -= send_info[debug_info_counter];
+send_info[debug_info_counter] = debug_info % 10;
+debug_info = ( debug_info - send_info[debug_info_counter]) / 10;
 }
 for(signed char debug_send_counter = 4; debug_send_counter >= 0; debug_send_counter--) {
 unsigned char send = send_info[debug_send_counter];

@@ -15,6 +15,7 @@
 /* Definitions for debugging and programm-options */
 #define DEBUG
 #define WLAN
+#define WLAN_INIT
 
 // <editor-fold defaultstate="collapsed" desc="Included Files">
 #include <stdlib.h>

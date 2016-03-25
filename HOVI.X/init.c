@@ -38,7 +38,9 @@ void Init(void) {
     InitComp();
     InitInterrupt();
     InitActors();
-#ifdef WLAN
+    storedif = 0;
+    table = 1;
+#ifdef WLAN_INIT
     InitWlan();
 #endif
 }
