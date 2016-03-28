@@ -73,7 +73,7 @@ unsigned int cm220 = 25655;       //110 Test    Floor max
 unsigned int cm180 = 20991;       //90 Test     Floor min
 unsigned int cm100 = 23323;       //until this value rise fast if above floor
 //unsigned int cm120 = 27987;       //Table max
-unsigned int cm120 = 13000; //26000;     //FOR TESTING!!!
+unsigned int cm120 = 11500; //26000;     //FOR TESTING!!!
 unsigned int cm80 = 10000; //18659;        //Table min
 unsigned int cm50 = 6000; // 11662; // 11661.5   until this value rise fast if above table
 

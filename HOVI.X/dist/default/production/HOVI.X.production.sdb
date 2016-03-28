@@ -13,7 +13,7 @@
 [v _ActElevator ActElevator `(v  1 e 0 0 ]
 "84
 [v _ActThrottle ActThrottle `(v  1 e 0 0 ]
-"100
+"101
 [v _ActRudder ActRudder `(v  1 e 0 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
@@ -87,21 +87,23 @@
 [v _Isr Isr `II(v  1 e 0 0 ]
 "84 C:\projecthovi\HOVI.X\main.c
 [v _main main `(v  1 e 0 0 ]
-"61 C:\projecthovi\HOVI.X\position.c
+"1028 C:\projecthovi\HOVI.X\position.c
 [v _CheckAileron CheckAileron `(v  1 e 0 0 ]
-"131
+"1098
 [v _CheckElevator CheckElevator `(v  1 e 0 0 ]
-"198
-[v _AboveTable AboveTable `(v  1 e 0 0 ]
-"218
+"1165
+[v _AboveTableStart AboveTableStart `(v  1 e 0 0 ]
+"1216
+[v _AboveTableLand AboveTableLand `(v  1 e 0 0 ]
+"1267
 [v _AboveFloor AboveFloor `(v  1 e 0 0 ]
-"239
+"1288
 [v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
-"361
+"1356
 [v _CheckRudderAhead CheckRudderAhead `(v  1 e 0 0 ]
-"419
+"1414
 [v _CheckRudderBack CheckRudderBack `(v  1 e 0 0 ]
-"475
+"1470
 [v _StoreAsOld StoreAsOld `(v  1 e 0 0 ]
 "21 C:\projecthovi\HOVI.X\ultrasonic.c
 [v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
@@ -649,40 +651,40 @@
 "43
 [v _lw lw `ui  1 e 2 0 ]
 [s S34 nt_frame 10 `ui 1 num 2 0 `ui 1 pos_x 2 2 `ui 1 pos_y 2 4 `ui 1 height 2 6 `i 1 angle 2 8 ]
-"42 C:\projecthovi\HOVI.X\position.h
+"43 C:\projecthovi\HOVI.X\position.h
 [v _a_frame a_frame `[2]S34  1 e 20 0 ]
 [s S40 nt_frame_dif 10 `ui 1 num 2 0 `i 1 dif_pos_x 2 2 `i 1 dif_pos_y 2 4 `i 1 dif_height 2 6 `i 1 dif_angle 2 8 ]
-"63
+"64
 [v _a_frame_dif a_frame_dif `[1]S40  1 e 10 0 ]
-"67
+"68
 [v _direction direction `b  1 e 0 0 ]
-"71
-[v _cm220 cm220 `ui  1 e 2 0 ]
 "72
-[v _cm180 cm180 `ui  1 e 2 0 ]
+[v _cm220 cm220 `ui  1 e 2 0 ]
 "73
+[v _cm180 cm180 `ui  1 e 2 0 ]
+"74
 [v _cm100 cm100 `ui  1 e 2 0 ]
-"75
-[v _cm120 cm120 `ui  1 e 2 0 ]
 "76
-[v _cm80 cm80 `ui  1 e 2 0 ]
+[v _cm120 cm120 `ui  1 e 2 0 ]
 "77
+[v _cm80 cm80 `ui  1 e 2 0 ]
+"78
 [v _cm50 cm50 `ui  1 e 2 0 ]
-"80
-[v _c_path c_path `i  1 e 2 0 ]
 "81
+[v _c_path c_path `i  1 e 2 0 ]
+"82
 [v _id_current_cc id_current_cc `i  1 e 2 0 ]
 [s S46 nt_path 2 `uc 1 lower_cc 1 0 `uc 1 higher_cc 1 1 ]
-"87
+"88
 [v _a_path a_path `[21]S46  1 e 42 0 ]
 [v _a_path_old a_path_old `[21]S46  1 e 42 0 ]
-"89
-[v _storedif storedif `b  1 e 0 0 ]
 "90
-[v _table table `b  1 e 0 0 ]
+[v _storedif storedif `b  1 e 0 0 ]
 "91
-[v _storeheight storeheight `ui  1 e 2 0 ]
+[v _table table `b  1 e 0 0 ]
 "92
+[v _storeheight storeheight `ui  1 e 2 0 ]
+"93
 [v _seconddifference seconddifference `i  1 e 2 0 ]
 "28 C:\projecthovi\HOVI.X\ultrasonic.h
 [v _time_height time_height `ui  1 e 2 0 ]
@@ -697,10 +699,10 @@
 {
 "95
 } 0
-"475 C:\projecthovi\HOVI.X\position.c
+"1470 C:\projecthovi\HOVI.X\position.c
 [v _StoreAsOld StoreAsOld `(v  1 e 0 0 ]
 {
-"481
+"1476
 } 0
 "21 C:\projecthovi\HOVI.X\ultrasonic.c
 [v _StartHeightMeasure StartHeightMeasure `(v  1 e 0 0 ]
@@ -823,18 +825,10 @@
 {
 "218
 } 0
-"239 C:\projecthovi\HOVI.X\position.c
+"1288 C:\projecthovi\HOVI.X\position.c
 [v _CheckThrottle CheckThrottle `(v  1 e 0 0 ]
 {
-"343
-[v CheckThrottle@i_2165 i `i  1 a 2 11 ]
-"338
-[v CheckThrottle@i_2164 i `i  1 a 2 17 ]
-"334
-[v CheckThrottle@i i `i  1 a 2 15 ]
-"333
-[v CheckThrottle@tmp tmp `i  1 a 2 13 ]
-"349
+"1344
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -846,15 +840,28 @@
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
-"198 C:\projecthovi\HOVI.X\position.c
-[v _AboveTable AboveTable `(v  1 e 0 0 ]
+"1165 C:\projecthovi\HOVI.X\position.c
+[v _AboveTableStart AboveTableStart `(v  1 e 0 0 ]
 {
-"210
+"1204
 } 0
-"218
+"1216
+[v _AboveTableLand AboveTableLand `(v  1 e 0 0 ]
+{
+"1254
+[v AboveTableLand@i_2162 i `i  1 a 2 4 ]
+"1249
+[v AboveTableLand@i_2161 i `i  1 a 2 10 ]
+"1245
+[v AboveTableLand@i i `i  1 a 2 8 ]
+"1244
+[v AboveTableLand@tmp tmp `i  1 a 2 6 ]
+"1258
+} 0
+"1267
 [v _AboveFloor AboveFloor `(v  1 e 0 0 ]
 {
-"230
+"1279
 } 0
 "84 C:\projecthovi\HOVI.X\actors.c
 [v _ActThrottle ActThrottle `(v  1 e 0 0 ]
@@ -862,7 +869,7 @@
 [v ActThrottle@change change `c  1 a 1 wreg ]
 [v ActThrottle@change change `c  1 a 1 wreg ]
 [v ActThrottle@change change `c  1 a 1 18 ]
-"93
+"94
 } 0
 "30 C:\projecthovi\HOVI.X\interrupt.c
 [v _Isr Isr `II(v  1 e 0 0 ]

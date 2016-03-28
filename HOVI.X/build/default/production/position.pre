@@ -9485,14 +9485,15 @@ unsigned int lw;
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckElevator(void);
-void AboveTable(void);
+void AboveTableStart(void);
+void AboveTableLand(void);
 void AboveFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 34
+# 35
 typedef struct nt_frame {
 unsigned int num;
 unsigned int pos_x;
@@ -9503,7 +9504,7 @@ int angle;
 
 t_frame a_frame[2];
 
-# 55
+# 56
 typedef struct nt_frame_dif {
 unsigned int num;
 signed int dif_pos_x;
@@ -9524,7 +9525,7 @@ unsigned int cm220 = 25655;
 unsigned int cm180 = 20991;
 unsigned int cm100 = 23323;
 
-unsigned int cm120 = 13000;
+unsigned int cm120 = 11500;
 unsigned int cm80 = 10000;
 unsigned int cm50 = 6000;
 
@@ -9565,7 +9566,7 @@ interrupt void Isr();
 # 77
 unsigned char pulsecounter = 0;
 
-# 33 "position.c"
+# 1000 "position.c"
 void CompareFrames(void) {
 
 a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
@@ -9587,7 +9588,7 @@ return;
 }
 }
 
-# 61
+# 1028
 void CheckAileron(void) {
 
 
@@ -9614,7 +9615,7 @@ ActAileron(3);
 }
 } else {
 
-# 91
+# 1058
 ActAileron(-3);
 }
 }
@@ -9637,7 +9638,7 @@ ActAileron(-3);
 }
 } else {
 
-# 117
+# 1084
 ActAileron(3);
 }
 }
@@ -9645,7 +9646,7 @@ ActAileron(3);
 return;
 }
 
-# 131
+# 1098
 void CheckElevator(void) {
 
 if (a_frame[0].pos_y >= 90 && a_frame[0].pos_y <= 110) {
@@ -9671,7 +9672,7 @@ ActElevator(-3);
 }
 } else {
 
-# 160
+# 1127
 ActElevator(3);
 }
 }
@@ -9694,105 +9695,62 @@ ActElevator(3);
 }
 } else {
 
-# 186
+# 1153
 ActElevator(-3);
 }
 }
 
 }
 
-# 198
-void AboveTable(void) {
+# 1165
+void AboveTableStart(void) {
+
 if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) {
 ActThrottle(0);
+
 } else if (a_frame[0].height < cm80) {
 if (a_frame[0].height < cm50) {
+if (a_frame_dif[0].dif_height >= - 46) {
+if (a_frame_dif[0].dif_height >= - 23) {
 ActThrottle(6);
 } else {
-ActThrottle(3);
-}
-} else {
-ActThrottle(-3);
-}
-}
-
-# 218
-void AboveFloor(void) {
-if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
 ActThrottle(0);
-} else if (a_frame[0].height < cm180) {
-if (a_frame[0].height < cm100) {
-ActThrottle(6);
+}
 } else {
+ActThrottle(-3);
+}
+} else {
+if (a_frame_dif[0].dif_height >= - 46) {
+if (a_frame_dif[0].dif_height >= - 23) {
 ActThrottle(3);
+} else {
+ActThrottle(0);
 }
 } else {
 ActThrottle(-3);
 }
 }
 
-# 239
-void CheckThrottle(void) {
-
-if (id_current_cc == 0) {
-
-table = 1;
-AboveTable();
-} else if (id_current_cc == 1) {
-seconddifference = storeheight - a_frame[0].height;
-if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {
-
-storeheight = a_frame_dif[0].dif_height;
-
-# 255
-if (storedif) {
-table = 0;
 } else {
-storedif = 1;
+if (a_frame_dif[0].dif_height <= 46) {
+if (a_frame_dif[0].dif_height <= 23) {
+ActThrottle(-3);
+} else {
+ActThrottle(0);
 }
 } else {
-storedif = 0;
-storeheight = 0;
+ActThrottle(3);
 }
-if (table == 1) {
-AboveTable();
-} else {
-AboveFloor();
+}
 }
 
-} else if (id_current_cc > 1 && id_current_cc < (c_path - 1)) {
-AboveFloor();
-} else {
-
-# 280
-seconddifference = storeheight - a_frame[0].height;
-if (a_frame_dif[0].dif_height > cm50 || seconddifference > cm50) {
-
-storeheight = a_frame_dif[0].dif_height;
-
-# 289
-if (storedif) {
-table = 1;
-} else {
-storedif = 1;
-}
-} else {
-storedif = 0;
-storeheight = 0;
-}
-if (table == 1) {
-AboveTable();
-} else {
-AboveFloor();
-}
-
-
-
+# 1216
+void AboveTableLand(void) {
 if (a_frame[0].height >= 30) {
 if (a_frame[1].height > a_frame[0].height) {
 
 if (a_frame_dif[0].dif_height <= 46) {
-if (a_frame_dif[0].dif_pos_x <= 23) {
+if (a_frame_dif[0].dif_height <= 23) {
 
 ActThrottle(-3);
 } else {
@@ -9807,7 +9765,7 @@ ActThrottle(-3);
 }
 } else {
 
-# 328
+# 1239
 if (direction == 1) {
 direction = 0;
 } else {
@@ -9826,12 +9784,81 @@ a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
 for (int i = 0; i <= 10000; i++) {
 _delay((unsigned long)((3)*(16000000/4000.0)));
 }
-
-}
 }
 }
 
-# 361
+# 1267
+void AboveFloor(void) {
+if (a_frame[0].height <= cm220 && a_frame[0].height >= cm180) {
+ActThrottle(0);
+} else if (a_frame[0].height < cm180) {
+if (a_frame[0].height < cm100) {
+ActThrottle(6);
+} else {
+ActThrottle(3);
+}
+} else {
+ActThrottle(-3);
+}
+}
+
+# 1288
+void CheckThrottle(void) {
+
+if (id_current_cc == 0) {
+
+table = 1;
+AboveTableStart();
+} else if (id_current_cc == 1) {
+seconddifference = storeheight - a_frame[0].height;
+if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {
+
+storeheight = a_frame_dif[0].dif_height;
+
+# 1304
+if (storedif) {
+table = 0;
+} else {
+storedif = 1;
+}
+} else {
+storedif = 0;
+storeheight = 0;
+}
+if (table == 1) {
+AboveTableStart();
+} else {
+AboveFloor();
+}
+
+} else if (id_current_cc > 1 && id_current_cc < (c_path - 1)) {
+AboveFloor();
+} else {
+
+seconddifference = storeheight - a_frame[0].height;
+if (a_frame_dif[0].dif_height > cm50 || seconddifference > cm50) {
+storeheight = a_frame_dif[0].dif_height;
+
+# 1328
+if (storedif) {
+table = 1;
+} else {
+storedif = 1;
+}
+} else {
+storedif = 0;
+storeheight = 0;
+}
+
+if (table == 1) {
+AboveTableLand();
+} else {
+AboveFloor();
+}
+}
+}
+
+# 1356
 void CheckRudderAhead(void) {
 
 if (a_frame[0].angle >= -5 && a_frame[0].angle <= 5) {
@@ -9880,7 +9907,7 @@ ActRudder(3);
 
 }
 
-# 419
+# 1414
 void CheckRudderBack(void) {
 
 
@@ -9932,7 +9959,7 @@ ActRudder(3);
 
 }
 
-# 475
+# 1470
 void StoreAsOld(void) {
 a_frame[1].num = a_frame[0].num;
 a_frame[1].pos_x = a_frame[0].pos_x;

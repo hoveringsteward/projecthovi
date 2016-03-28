@@ -9485,14 +9485,15 @@ unsigned int lw;
 void CompareFrames(void);
 void CheckAileron(void);
 void CheckElevator(void);
-void AboveTable(void);
+void AboveTableStart(void);
+void AboveTableLand(void);
 void AboveFloor(void);
 void CheckThrottle(void);
 void CheckRudderAhead(void);
 void CheckRudderBack(void);
 void StoreAsOld(void);
 
-# 34
+# 35
 typedef struct nt_frame {
 unsigned int num;
 unsigned int pos_x;
@@ -9503,7 +9504,7 @@ int angle;
 
 t_frame a_frame[2];
 
-# 55
+# 56
 typedef struct nt_frame_dif {
 unsigned int num;
 signed int dif_pos_x;
@@ -9524,7 +9525,7 @@ unsigned int cm220 = 25655;
 unsigned int cm180 = 20991;
 unsigned int cm100 = 23323;
 
-unsigned int cm120 = 13000;
+unsigned int cm120 = 11500;
 unsigned int cm80 = 10000;
 unsigned int cm50 = 6000;
 
