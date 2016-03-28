@@ -68,13 +68,13 @@ bit direction = 0;      /* Flightdirection, 0 == ahead, 1 == back */
 
 //unsigned int cm180 = 41982;
 //unsigned int cm220 = 51310;
-unsigned int cm180 = 20991;       //90 Test     Floor min
 unsigned int cm220 = 25655;       //110 Test    Floor max
+unsigned int cm180 = 20991;       //90 Test     Floor min
 unsigned int cm100 = 23323;       //until this value rise fast if above floor
 //unsigned int cm120 = 27987;       //Table max
-unsigned int cm120 = 26000;     //FOR TESTING!!!
-unsigned int cm80 = 18659;        //Table min
-unsigned int cm50 = 11662; // 11661.5   until this value rise fast if above table
+unsigned int cm120 = 13000; //26000;     //FOR TESTING!!!
+unsigned int cm80 = 10000; //18659;        //Table min
+unsigned int cm50 = 6000; // 11662; // 11661.5   until this value rise fast if above table
 
 // FÜRS WLAN !!!!!!!!!!!!!!! - gehört da nicht rein
 int c_path = 10; // 10 counter der farben

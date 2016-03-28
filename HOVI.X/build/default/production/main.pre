@@ -9582,13 +9582,13 @@ bit direction = 0;
 
 
 
-unsigned int cm180 = 20991;
 unsigned int cm220 = 25655;
+unsigned int cm180 = 20991;
 unsigned int cm100 = 23323;
 
-unsigned int cm120 = 26000;
-unsigned int cm80 = 18659;
-unsigned int cm50 = 11662;
+unsigned int cm120 = 13000;
+unsigned int cm80 = 9000;
+unsigned int cm50 = 6000;
 
 
 int c_path = 10;

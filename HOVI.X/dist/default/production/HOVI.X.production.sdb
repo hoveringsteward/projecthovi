@@ -657,9 +657,9 @@
 "67
 [v _direction direction `b  1 e 0 0 ]
 "71
-[v _cm180 cm180 `ui  1 e 2 0 ]
-"72
 [v _cm220 cm220 `ui  1 e 2 0 ]
+"72
+[v _cm180 cm180 `ui  1 e 2 0 ]
 "73
 [v _cm100 cm100 `ui  1 e 2 0 ]
 "75

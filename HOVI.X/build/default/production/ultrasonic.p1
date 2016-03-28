@@ -7657,17 +7657,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;position.h: 67: bit direction = 0;
 "71
-[v _cm180 `ui ~T0 @X0 1 e ]
-[i _cm180
--> -> 20991 `i `ui
-]
-[; ;position.h: 71: unsigned int cm180 = 20991;
-"72
 [v _cm220 `ui ~T0 @X0 1 e ]
 [i _cm220
 -> -> 25655 `i `ui
 ]
-[; ;position.h: 72: unsigned int cm220 = 25655;
+[; ;position.h: 71: unsigned int cm220 = 25655;
+"72
+[v _cm180 `ui ~T0 @X0 1 e ]
+[i _cm180
+-> -> 20991 `i `ui
+]
+[; ;position.h: 72: unsigned int cm180 = 20991;
 "73
 [v _cm100 `ui ~T0 @X0 1 e ]
 [i _cm100
@@ -7677,21 +7677,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 "75
 [v _cm120 `ui ~T0 @X0 1 e ]
 [i _cm120
--> -> 26000 `i `ui
+-> -> 13000 `i `ui
 ]
-[; ;position.h: 75: unsigned int cm120 = 26000;
+[; ;position.h: 75: unsigned int cm120 = 13000;
 "76
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
--> -> 18659 `i `ui
+-> -> 9000 `i `ui
 ]
-[; ;position.h: 76: unsigned int cm80 = 18659;
+[; ;position.h: 76: unsigned int cm80 = 9000;
 "77
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
--> -> 11662 `i `ui
+-> -> 6000 `i `ui
 ]
-[; ;position.h: 77: unsigned int cm50 = 11662;
+[; ;position.h: 77: unsigned int cm50 = 6000;
 "80
 [v _c_path `i ~T0 @X0 1 e ]
 [i _c_path

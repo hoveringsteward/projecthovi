@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Fri Mar 25 21:32:58 2016
+                                                                                               Sat Mar 26 17:26:02 2016
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	18F46K22
@@ -66,10 +66,10 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
     60  000B0A  51FF               	dw	20991
     61                           
     62                           ;initializer for _cm50
-    63  000B0C  2D8E               	dw	11662
+    63  000B0C  1770               	dw	6000
     64                           
     65                           ;initializer for _cm80
-    66  000B0E  48E3               	dw	18659
+    66  000B0E  2328               	dw	9000
     67                           
     68                           ;initializer for _pin_out
     69  000B10  41                 	db	65
@@ -82,7 +82,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
     76  000B11  5B1B               	dw	23323
     77                           
     78                           ;initializer for _cm120
-    79  000B13  6590               	dw	26000
+    79  000B13  32C8               	dw	13000
     80                           
     81                           ;initializer for _cm220
     82  000B15  6437               	dw	25655
@@ -3733,8 +3733,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3594                           ;ActThrottle@change stored from wreg
   3595  000886  6E41               	movwf	ActThrottle@change,c
   3596                           
-  3597                           ;actors.c: 85: if(a_actors[0].thro <= 550 || change < 0) {
-  3598  000888  0E27               	movlw	39
+  3597                           ;actors.c: 85: if(a_actors[0].thro <= 600 || change < 0) {
+  3598  000888  0E59               	movlw	89
   3599  00088A  0100               	movlb	0	; () banked
   3600  00088C  5DD4               	subwf	(_a_actors+4)& (0+255),w,b
   3601  00088E  0E02               	movlw	2
@@ -4909,7 +4909,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Fri Mar 25 21:32:58 2016
+Symbol Table                                                                                   Sat Mar 26 17:26:02 2016
 
                 _highpassallowed 025A                                _w 002C  
                              _lw 0024              ___wmul@multiplicand 00E4  
