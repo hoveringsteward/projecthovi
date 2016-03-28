@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Sat Mar 26 17:26:02 2016
+                                                                                               Mon Mar 28 11:37:18 2016
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	18F46K22
@@ -69,7 +69,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
     63  000B0C  1770               	dw	6000
     64                           
     65                           ;initializer for _cm80
-    66  000B0E  2328               	dw	9000
+    66  000B0E  2710               	dw	10000
     67                           
     68                           ;initializer for _pin_out
     69  000B10  41                 	db	65
@@ -846,12 +846,12 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    820  0006E8  C0E1  F008         	movff	_time_height+1,_a_frame+7
    821                           
    822                           ; BSR set to: 15
-   823                           ;ultrasonic.c: 38: SendDebugInfo(time_height);
-   824  0006EC  C0E0  F0E9         	movff	_time_height,SendDebugInfo@debug_info
-   825  0006F0  C0E1  F0EA         	movff	_time_height+1,SendDebugInfo@debug_info+1
+   823                           ;ultrasonic.c: 39: SendDebugInfo(a_actors[0].thro);
+   824  0006EC  C0D4  F0E9         	movff	_a_actors+4,SendDebugInfo@debug_info
+   825  0006F0  C0D5  F0EA         	movff	_a_actors+5,SendDebugInfo@debug_info+1
    826  0006F4  EC39  F002         	call	_SendDebugInfo	;wreg free
    827                           
-   828                           ;ultrasonic.c: 40: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
+   828                           ;ultrasonic.c: 41: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
    829  0006F8  EE20  F007         	lfsr	2,_a_frame+6
    830  0006FC  CFDE F0F0          	movff	postinc2,??_ReadHeight
    831  000700  CFDD F0F1          	movff	postdec2,??_ReadHeight+1
@@ -870,7 +870,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    844  00071C  6E1C               	movwf	_a_frame_dif+7,c
    845                           
    846                           ; BSR set to: 0
-   847                           ;ultrasonic.c: 41: PORTBbits.RB3 = 1;
+   847                           ;ultrasonic.c: 42: PORTBbits.RB3 = 1;
    848  00071E  8681               	bsf	3969,3,c	;volatile
    849                           
    850                           ; BSR set to: 0
@@ -3733,8 +3733,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   3594                           ;ActThrottle@change stored from wreg
   3595  000886  6E41               	movwf	ActThrottle@change,c
   3596                           
-  3597                           ;actors.c: 85: if(a_actors[0].thro <= 600 || change < 0) {
-  3598  000888  0E59               	movlw	89
+  3597                           ;actors.c: 85: if(a_actors[0].thro <= 550 || change < 0) {
+  3598  000888  0E27               	movlw	39
   3599  00088A  0100               	movlb	0	; () banked
   3600  00088C  5DD4               	subwf	(_a_actors+4)& (0+255),w,b
   3601  00088E  0E02               	movlw	2
@@ -4909,7 +4909,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Sat Mar 26 17:26:02 2016
+Symbol Table                                                                                   Mon Mar 28 11:37:18 2016
 
                 _highpassallowed 025A                                _w 002C  
                              _lw 0024              ___wmul@multiplicand 00E4  

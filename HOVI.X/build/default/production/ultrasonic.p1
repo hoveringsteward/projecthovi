@@ -7683,9 +7683,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "76
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
--> -> 9000 `i `ui
+-> -> 10000 `i `ui
 ]
-[; ;position.h: 76: unsigned int cm80 = 9000;
+[; ;position.h: 76: unsigned int cm80 = 10000;
 "77
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
@@ -7811,51 +7811,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ultrasonic.c: 36: a_frame[0].height = time_height;
 "36
 [e = . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 _time_height ]
-[; ;ultrasonic.c: 38: SendDebugInfo(time_height);
-"38
-[e ( _SendDebugInfo (1 _time_height ]
-[; ;ultrasonic.c: 40: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
-"40
-[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 3 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 `i ]
-[; ;ultrasonic.c: 41: PORTBbits.RB3 = 1;
+[; ;ultrasonic.c: 39: SendDebugInfo(a_actors[0].thro);
+"39
+[e ( _SendDebugInfo (1 . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 ]
+[; ;ultrasonic.c: 41: a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
 "41
-[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
-[; ;ultrasonic.c: 42: }
+[e = . *U + &U _a_frame_dif * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame_dif `ui `ux 3 -> - . *U + &U _a_frame * -> -> -> 1 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 . *U + &U _a_frame * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_frame `ui `ux 3 `i ]
+[; ;ultrasonic.c: 42: PORTBbits.RB3 = 1;
 "42
+[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
+[; ;ultrasonic.c: 43: }
+"43
 [e :UE 1153 ]
 }
-"47
+"48
 [v _Filter `(ui ~T0 @X0 1 ef1`ui ]
 {
-[; ;ultrasonic.c: 47: unsigned int Filter(unsigned int entry){
+[; ;ultrasonic.c: 48: unsigned int Filter(unsigned int entry){
 [e :U _Filter ]
 [v _entry `ui ~T0 @X0 1 r1 ]
 [f ]
-[; ;ultrasonic.c: 48: changerate = 0.2;
-"48
-[e = _changerate -> .0.2 `f ]
-[; ;ultrasonic.c: 49: if(highpassallowed){
+[; ;ultrasonic.c: 49: changerate = 0.2;
 "49
+[e = _changerate -> .0.2 `f ]
+[; ;ultrasonic.c: 50: if(highpassallowed){
+"50
 [e $ ! _highpassallowed 1158  ]
 {
-"51
+"52
 }
-[; ;ultrasonic.c: 51: }else{
+[; ;ultrasonic.c: 52: }else{
 [e $U 1159  ]
 [e :U 1158 ]
 {
-[; ;ultrasonic.c: 52: outgoing = outgoing + (entry - outgoing) * changerate;
-"52
-[e = _outgoing + _outgoing * - -> _entry `f _outgoing _changerate ]
+[; ;ultrasonic.c: 53: outgoing = outgoing + (entry - outgoing) * changerate;
 "53
+[e = _outgoing + _outgoing * - -> _entry `f _outgoing _changerate ]
+"54
 }
 [e :U 1159 ]
-[; ;ultrasonic.c: 53: }
-[; ;ultrasonic.c: 54: return (int) outgoing;
-"54
+[; ;ultrasonic.c: 54: }
+[; ;ultrasonic.c: 55: return (int) outgoing;
+"55
 [e ) -> -> _outgoing `i `ui ]
 [e $UE 1157  ]
-[; ;ultrasonic.c: 55: }
-"55
+[; ;ultrasonic.c: 56: }
+"56
 [e :UE 1157 ]
 }

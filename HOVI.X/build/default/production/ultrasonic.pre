@@ -9525,7 +9525,7 @@ unsigned int cm180 = 20991;
 unsigned int cm100 = 23323;
 
 unsigned int cm120 = 13000;
-unsigned int cm80 = 9000;
+unsigned int cm80 = 10000;
 unsigned int cm50 = 6000;
 
 
@@ -9583,13 +9583,14 @@ TMR5L = 0;
 TMR5H = 0;
 a_frame[0].height = time_height;
 
-SendDebugInfo(time_height);
+
+SendDebugInfo(a_actors[0].thro);
 
 a_frame_dif[0].dif_height = a_frame[1].height - a_frame[0].height;
 PORTBbits.RB3 = 1;
 }
 
-# 47
+# 48
 unsigned int Filter(unsigned int entry){
 changerate = 0.2;
 if(highpassallowed){

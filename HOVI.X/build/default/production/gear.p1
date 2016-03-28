@@ -7718,9 +7718,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "76
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
--> -> 9000 `i `ui
+-> -> 10000 `i `ui
 ]
-[; ;position.h: 76: unsigned int cm80 = 9000;
+[; ;position.h: 76: unsigned int cm80 = 10000;
 "77
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50

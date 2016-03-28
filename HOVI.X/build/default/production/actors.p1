@@ -7721,9 +7721,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "76
 [v _cm80 `ui ~T0 @X0 1 e ]
 [i _cm80
--> -> 9000 `i `ui
+-> -> 10000 `i `ui
 ]
-[; ;position.h: 76: unsigned int cm80 = 9000;
+[; ;position.h: 76: unsigned int cm80 = 10000;
 "77
 [v _cm50 `ui ~T0 @X0 1 e ]
 [i _cm50
@@ -7984,9 +7984,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _ActThrottle ]
 [v _change `c ~T0 @X0 1 r1 ]
 [f ]
-[; ;actors.c: 85: if(a_actors[0].thro <= 600 || change < 0) {
+[; ;actors.c: 85: if(a_actors[0].thro <= 550 || change < 0) {
 "85
-[e $ ! || <= . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 600 `i `ui < -> _change `i -> 0 `i 1164  ]
+[e $ ! || <= . *U + &U _a_actors * -> -> -> 0 `i `ui `ux -> -> # *U &U _a_actors `ui `ux 2 -> -> 550 `i `ui < -> _change `i -> 0 `i 1164  ]
 {
 [; ;actors.c: 86: a_actors[0].thro += change;
 "86
