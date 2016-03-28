@@ -190,25 +190,107 @@ void CheckElevator(void) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="AboveTable">
+// <editor-fold defaultstate="collapsed" desc="AboveTableStart">
 
 /* The Hexrotor flies above the table
  * the hexrotors height should be between 80 and 120cm
 /*-----------------------------------------------------------*/
-void AboveTable(void) {
+void AboveTableStart(void) {
+    // CENTERED
     if (a_frame[0].height <= cm120 && a_frame[0].height >= cm80) { // between 0.8 and 1.2
         ActThrottle(0);
+        // TO LOW
     } else if (a_frame[0].height < cm80) { // under 0.8
         if (a_frame[0].height < cm50) { // under 0.5
-            ActThrottle(THR_INC_MUCH); // increase much
+            if (a_frame_dif[0].dif_height >= - THR_MAX) {
+                if (a_frame_dif[0].dif_height >= - THR_MIN) {
+                    ActThrottle(THR_INC_MUCH); // increase much
+                } else {
+                    ActThrottle(0);
+                }
+            } else {
+                ActThrottle(-THR_INC); // decrease - too fast
+            }
         } else { // between 0.5m and 0.8m
-            ActThrottle(THR_INC); // increase
+            if (a_frame_dif[0].dif_height >= - THR_MAX) {
+                if (a_frame_dif[0].dif_height >= - THR_MIN) {
+                    ActThrottle(THR_INC); // increase
+                } else {
+                    ActThrottle(0);
+                }
+            } else {
+                ActThrottle(-THR_INC); // decrease - too fast
+            }
         }
+        // TO HIGH
     } else { // over 1.2
-        ActThrottle(-THR_INC); // decrease
+        if (a_frame_dif[0].dif_height <= THR_MAX) {
+            if (a_frame_dif[0].dif_height <= THR_MIN) {
+                ActThrottle(-THR_INC); // decrease
+            } else {
+                ActThrottle(0);
+            }
+        } else {
+            ActThrottle(THR_INC); // increase - too fast
+        }
     }
 }
 // </editor-fold>
+
+
+// <editor-fold defaultstate="collapsed" desc="AboveTableLand">
+
+/* The Hexrotor flies above the table
+ * -> last colorcode + landing
+ * Landing / Decreasing - has to check, if the height - difference is between
+ * dec min and dec max
+ * if landed: invert colorcodes, delay + fly back
+/*-----------------------------------------------------------*/
+void AboveTableLand(void) {
+    if (a_frame[0].height >= 30) { // higher than 30cm
+        if (a_frame[1].height > a_frame[0].height) {
+            /* Old bigger than new, MC is decreasing */
+            if (a_frame_dif[0].dif_height <= THR_MAX) {
+                if (a_frame_dif[0].dif_height <= THR_MIN) {
+                    /* Decrease is very slow, decrease more == increase less */
+                    ActThrottle(-THR_INC);
+                } else { /* Decrease is OK */
+                    ActThrottle(0);
+                }
+            } else {/* Decrease is too high */
+                ActThrottle(THR_INC); // slow down, decrease less == increase more
+            }
+        } else {
+            /* Old smaller than new, MC is not decreasing */
+            ActThrottle(-THR_INC); // decrease = increase less
+        }
+    } else { // good: lower than 30cm, landed - take a break
+        // change the path-colorcode-array for coming home
+        /* old saves the path, which the hexrotor flied
+         * the new way, is the old way reserved (=umgekehrte Reihenfolge)
+         */
+        if (direction == 1) { // if it was on the way back to the base 
+            direction = 0; // outgoing flight = fly to table
+        } else {
+            direction = 1; // flies back to base
+        }
+        int tmp = c_path - 1;
+        for (int i = 0; i <= tmp; i++) {
+            a_path_old[i].higher_cc = a_path[i].higher_cc;
+            a_path_old[i].lower_cc = a_path[i].lower_cc;
+        }
+        for (int i = 0; i <= tmp; i++) {
+            a_path[(tmp - i)].higher_cc = a_path_old[i].higher_cc;
+            a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
+        }
+        // waiting 30 seconds, break for getting the cupcake
+        for (int i = 0; i <= 10000; i++) {
+            __delay_ms(3);
+        }
+    }
+}
+// </editor-fold>
+
 
 // <editor-fold defaultstate="collapsed" desc="AboveFloor">
 
@@ -240,8 +322,8 @@ void CheckThrottle(void) {
 
     if (id_current_cc == 0) { // Table: start
         // check, if difference is more than 50cm, on the table
-            table = 1;
-            AboveTable();
+        table = 1;
+        AboveTableStart();
     } else if (id_current_cc == 1) { // cahnge between table and floor
         seconddifference = storeheight - a_frame[0].height;
         if (a_frame_dif[0].dif_height < (-1 * cm50) || seconddifference < (-1 * cm50)) {
@@ -262,30 +344,20 @@ void CheckThrottle(void) {
             storeheight = 0;
         }
         if (table == 1) {
-            AboveTable();
+            AboveTableStart();
         } else {
             AboveFloor();
         }
-        
+
     } else if (id_current_cc > 1 && id_current_cc < (c_path - 1)) { // Floor between 0 and n-1
         AboveFloor();
     } else { // prove, if hexrotor is on the table
-        // -> last colorcode + landing
-        /* Landing / Decreasing - has to check, if the height - difference is between
-         * dec min and dec max
-         * if landed: invert colorcodes, delay + fly back
-         */
-        
         // check, if difference is more than 50cm, from floor to table
         seconddifference = storeheight - a_frame[0].height;
         if (a_frame_dif[0].dif_height > cm50 || seconddifference > cm50) {
-
             storeheight = a_frame_dif[0].dif_height; // storeheight is the difference between the second last and the actuall height
-
-            /* position.h:
-             * bit storedif; // table / floor: if the difference was higher than 50cm the last time, it's 1
-             * bit table = 0; // 1 table; 0 floor
-             */
+            /* bit storedif; // table / floor: if the difference was higher than 50cm the last time, it's 1
+             * bit table; // 1 table; 0 floor */
             if (storedif) { // if storedif is 1: it has detected the floor -> 2 times 50cm difference
                 table = 1;
             } else { // if the difference is the first time higher than 50cm, it gets the value 1
@@ -295,55 +367,11 @@ void CheckThrottle(void) {
             storedif = 0;
             storeheight = 0;
         }
+
         if (table == 1) {
-            AboveTable();
+            AboveTableLand();
         } else {
             AboveFloor();
-        }
-        
-        
-        
-        if (a_frame[0].height >= 30) { // higher than 30cm
-            if (a_frame[1].height > a_frame[0].height) {
-                /* Old bigger than new, MC is decreasing */
-                if (a_frame_dif[0].dif_height <= THR_MAX) {
-                    if (a_frame_dif[0].dif_pos_x <= THR_MIN) {
-                        /* Decrease is very slow, decrease more == increase less */
-                        ActThrottle(-THR_INC);
-                    } else { /* Decrease is OK */
-                        ActThrottle(0);
-                    }
-                } else {/* Decrease is too high */
-                    ActThrottle(THR_INC); // slow down, decrease less == increase more
-                }
-            } else {
-                /* Old smaller than new, MC is not decreasing */
-                ActThrottle(-THR_INC); // decrease = increase less
-            }
-        } else { // good: lower than 30cm, landed - take a break
-            // change the path-colorcode-array for coming home
-            /* old saves the path, which the hexrotor flied
-             * the new way, is the old way reserved (=umgekehrte Reihenfolge)
-             */
-            if (direction == 1) { // if it was on the way back to the base 
-                direction = 0; // outgoing flight = fly to table
-            } else {
-                direction = 1; // flies back to base
-            }
-            int tmp = c_path - 1;
-            for (int i = 0; i <= tmp; i++) {
-                a_path_old[i].higher_cc = a_path[i].higher_cc;
-                a_path_old[i].lower_cc = a_path[i].lower_cc;
-            }
-            for (int i = 0; i <= tmp; i++) {
-                a_path[(tmp - i)].higher_cc = a_path_old[i].higher_cc;
-                a_path[(tmp - i)].lower_cc = a_path_old[i].lower_cc;
-            }
-            // waiting 30 seconds, break for getting the cupcake
-            for (int i = 0; i <= 10000; i++) {
-                __delay_ms(3);
-            }
-            // STARTEN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
     }
 }
