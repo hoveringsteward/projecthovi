@@ -46,7 +46,7 @@ void CompareFrames(void) {
             CheckRudderBack();
         }
     } else {
-        // Überprüfen ob das nächste Farbobjekt passt
+        // ÃœberprÃ¼fen ob das nÃ¤chste Farbobjekt passt
         return; // No changes should be taken on outputs
     }
 }

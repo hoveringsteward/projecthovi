@@ -4,6 +4,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1147 nt_path lower_cc higher_cc ]
 "14 communication.h
 [v _UartReceive `(uc ~T0 @X0 0 ef ]
+[v F7833 `(v ~T0 @X0 1 tf1`ul ]
+"152 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18.h
+[v __delay `JF7833 ~T0 @X0 0 e ]
+[p i __delay ]
+"19500 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f46k22.h
+[v _RC1IF `Vb ~T0 @X0 0 e@31989 ]
 "15 wlan.h
 [v _UartSendError `(v ~T0 @X0 0 ef ]
 "14
@@ -7641,172 +7647,216 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 1154 ]
 [e $ ! == -> _received `ui -> 62 `ui 1157  ]
 {
-[; ;wlan.c: 29: received = UartReceive();
 "29
-[e = _received ( _UartReceive ..  ]
-[; ;wlan.c: 30: if(received == '>'){
+[v _signreceivecounter `uc ~T0 @X0 1 a ]
+[; ;wlan.c: 29: unsigned char signreceivecounter = 0;
+[e = _signreceivecounter -> -> 0 `i `uc ]
+[; ;wlan.c: 30: while(RC1IF == 0 && signreceivecounter < 20) {
 "30
-[e $ ! == -> _received `ui -> 62 `ui 1158  ]
-{
-[; ;wlan.c: 32: numb_cc = c_path;
-"32
-[e = _numb_cc _c_path ]
-[; ;wlan.c: 33: receiving_ok = 0;
-"33
-[e = _receiving_ok -> -> 0 `i `b ]
-"34
-}
-[; ;wlan.c: 34: }else {
-[e $U 1159  ]
-[e :U 1158 ]
-{
-[; ;wlan.c: 35: UartSendError();
-"35
-[e ( _UartSendError ..  ]
-"36
-}
+[e $U 1158  ]
 [e :U 1159 ]
-"37
-}
-[; ;wlan.c: 36: }
-[; ;wlan.c: 37: }else if(received == 0x1D) {
-[e $U 1160  ]
-[e :U 1157 ]
-[e $ ! == -> _received `i -> 29 `i 1161  ]
 {
-[; ;wlan.c: 38: numb_cc_table = c_path;
+[; ;wlan.c: 31: signreceivecounter ++;
+"31
+[e ++ _signreceivecounter -> -> 1 `i `uc ]
+[; ;wlan.c: 32: _delay((unsigned long)((10)*(16000000/4000000.0)));
+"32
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+"33
+}
+[e :U 1158 ]
+"30
+[e $ && == -> _RC1IF `i -> 0 `i < -> _signreceivecounter `i -> 20 `i 1159  ]
+[e :U 1160 ]
+[; ;wlan.c: 33: }
+[; ;wlan.c: 34: received = UartReceive();
+"34
+[e = _received ( _UartReceive ..  ]
+[; ;wlan.c: 35: if(received == '>'){
+"35
+[e $ ! == -> _received `ui -> 62 `ui 1161  ]
+{
+[; ;wlan.c: 37: numb_cc = c_path;
+"37
+[e = _numb_cc _c_path ]
+[; ;wlan.c: 38: receiving_ok = 0;
 "38
-[e = _numb_cc_table _c_path ]
+[e = _receiving_ok -> -> 0 `i `b ]
 "39
 }
-[; ;wlan.c: 39: }else if(receiving_ok == 1){
+[; ;wlan.c: 39: }else {
 [e $U 1162  ]
 [e :U 1161 ]
-[e $ ! == -> _receiving_ok `i -> 1 `i 1163  ]
 {
-[; ;wlan.c: 40: if(path_name == 0) {
+[; ;wlan.c: 40: UartSendError();
 "40
-[e $ ! == -> _path_name `i -> 0 `i 1164  ]
-{
-[; ;wlan.c: 41: a_path[c_path].lower_cc = received;
+[e ( _UartSendError ..  ]
 "41
-[e = . *U + &U _a_path * -> _c_path `ux -> -> # *U &U _a_path `ui `ux 0 _received ]
-[; ;wlan.c: 42: received = UartReceive();
+}
+[e :U 1162 ]
 "42
-[e = _received ( _UartReceive ..  ]
-[; ;wlan.c: 43: a_path[c_path].higher_cc = received;
+}
+[; ;wlan.c: 41: }
+[; ;wlan.c: 42: }else if(received == 0x1D) {
+[e $U 1163  ]
+[e :U 1157 ]
+[e $ ! == -> _received `i -> 29 `i 1164  ]
+{
+[; ;wlan.c: 43: numb_cc_table = c_path;
 "43
-[e = . *U + &U _a_path * -> _c_path `ux -> -> # *U &U _a_path `ui `ux 1 _received ]
-[; ;wlan.c: 44: c_path++;
+[e = _numb_cc_table _c_path ]
 "44
-[e ++ _c_path -> -> 1 `i `uc ]
-[; ;wlan.c: 45: if(c_path > 20) {
-"45
-[e $ ! > -> _c_path `i -> 20 `i 1165  ]
-{
-[; ;wlan.c: 46: UartSendOverflow();
-"46
-[e ( _UartSendOverflow ..  ]
-[; ;wlan.c: 47: c_path = 0;
-"47
-[e = _c_path -> -> 0 `i `uc ]
-"48
 }
-[e :U 1165 ]
-"49
-}
-[; ;wlan.c: 48: }
-[; ;wlan.c: 49: }else if(path_name == 1) {
-[e $U 1166  ]
+[; ;wlan.c: 44: }else if(receiving_ok == 1){
+[e $U 1165  ]
 [e :U 1164 ]
-[e $ ! == -> _path_name `i -> 1 `i 1167  ]
+[e $ ! == -> _receiving_ok `i -> 1 `i 1166  ]
 {
-[; ;wlan.c: 50: a_name[c_name] = received;
+[; ;wlan.c: 45: if(path_name == 0) {
+"45
+[e $ ! == -> _path_name `i -> 0 `i 1167  ]
+{
+[; ;wlan.c: 46: a_path[c_path].lower_cc = received;
+"46
+[e = . *U + &U _a_path * -> _c_path `ux -> -> # *U &U _a_path `ui `ux 0 _received ]
+"47
+[v _pathreceivecounter `uc ~T0 @X0 1 a ]
+[; ;wlan.c: 47: unsigned char pathreceivecounter = 0;
+[e = _pathreceivecounter -> -> 0 `i `uc ]
+[; ;wlan.c: 48: while(RC1IF == 0 && pathreceivecounter < 20) {
+"48
+[e $U 1168  ]
+[e :U 1169 ]
+{
+[; ;wlan.c: 49: pathreceivecounter ++;
+"49
+[e ++ _pathreceivecounter -> -> 1 `i `uc ]
+[; ;wlan.c: 50: _delay((unsigned long)((10)*(16000000/4000000.0)));
 "50
-[e = *U + &U _a_name * -> _c_name `ux -> -> # *U &U _a_name `ui `ux _received ]
-[; ;wlan.c: 51: c_name++;
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
 "51
-[e ++ _c_name -> -> 1 `i `uc ]
-[; ;wlan.c: 52: if(c_name > 32) {
-"52
-[e $ ! > -> _c_name `i -> 32 `i 1168  ]
-{
-[; ;wlan.c: 53: UartSendOverflow();
-"53
-[e ( _UartSendOverflow ..  ]
-[; ;wlan.c: 54: c_name = 0;
-"54
-[e = _c_name -> -> 0 `i `uc ]
-"55
 }
 [e :U 1168 ]
-"56
-}
-[e :U 1167 ]
-"57
-[e :U 1166 ]
-}
-[; ;wlan.c: 55: }
-[; ;wlan.c: 56: }
-[; ;wlan.c: 57: }else {
-[e $U 1169  ]
-[e :U 1163 ]
+"48
+[e $ && == -> _RC1IF `i -> 0 `i < -> _pathreceivecounter `i -> 20 `i 1169  ]
+[e :U 1170 ]
+[; ;wlan.c: 51: }
+[; ;wlan.c: 52: received = UartReceive();
+"52
+[e = _received ( _UartReceive ..  ]
+[; ;wlan.c: 53: a_path[c_path].higher_cc = received;
+"53
+[e = . *U + &U _a_path * -> _c_path `ux -> -> # *U &U _a_path `ui `ux 1 _received ]
+[; ;wlan.c: 54: c_path++;
+"54
+[e ++ _c_path -> -> 1 `i `uc ]
+[; ;wlan.c: 55: if(c_path > 20) {
+"55
+[e $ ! > -> _c_path `i -> 20 `i 1171  ]
 {
-[; ;wlan.c: 58: UartDump();
+[; ;wlan.c: 56: UartSendOverflow();
+"56
+[e ( _UartSendOverflow ..  ]
+[; ;wlan.c: 57: c_path = 0;
+"57
+[e = _c_path -> -> 0 `i `uc ]
 "58
-[e ( _UartDump ..  ]
+}
+[e :U 1171 ]
 "59
 }
-[e :U 1169 ]
-[e :U 1162 ]
-[e :U 1160 ]
+[; ;wlan.c: 58: }
+[; ;wlan.c: 59: }else if(path_name == 1) {
+[e $U 1172  ]
+[e :U 1167 ]
+[e $ ! == -> _path_name `i -> 1 `i 1173  ]
+{
+[; ;wlan.c: 60: a_name[c_name] = received;
+"60
+[e = *U + &U _a_name * -> _c_name `ux -> -> # *U &U _a_name `ui `ux _received ]
+[; ;wlan.c: 61: c_name++;
+"61
+[e ++ _c_name -> -> 1 `i `uc ]
+[; ;wlan.c: 62: if(c_name > 32) {
+"62
+[e $ ! > -> _c_name `i -> 32 `i 1174  ]
+{
+[; ;wlan.c: 63: UartSendOverflow();
+"63
+[e ( _UartSendOverflow ..  ]
+[; ;wlan.c: 64: c_name = 0;
+"64
+[e = _c_name -> -> 0 `i `uc ]
+"65
+}
+[e :U 1174 ]
+"66
+}
+[e :U 1173 ]
+"67
+[e :U 1172 ]
+}
+[; ;wlan.c: 65: }
+[; ;wlan.c: 66: }
+[; ;wlan.c: 67: }else {
+[e $U 1175  ]
+[e :U 1166 ]
+{
+[; ;wlan.c: 68: UartDump();
+"68
+[e ( _UartDump ..  ]
+"69
+}
+[e :U 1175 ]
+[e :U 1165 ]
+[e :U 1163 ]
 [e :U 1156 ]
 [e :U 1153 ]
 [e :U 1151 ]
-[; ;wlan.c: 59: }
-[; ;wlan.c: 60: }
-"60
+[; ;wlan.c: 69: }
+[; ;wlan.c: 70: }
+"70
 [e :UE 1148 ]
 }
-"65
+"75
 [v _UartSendOverflow `(v ~T0 @X0 1 ef ]
 {
-[; ;wlan.c: 65: void UartSendOverflow(void) {
+[; ;wlan.c: 75: void UartSendOverflow(void) {
 [e :U _UartSendOverflow ]
 [f ]
-[; ;wlan.c: 66: UartSend(0x11);
-"66
-[e ( _UartSend (1 -> -> 17 `i `uc ]
-[; ;wlan.c: 67: }
-"67
-[e :UE 1170 ]
-}
-"69
-[v _UartSendError `(v ~T0 @X0 1 ef ]
-{
-[; ;wlan.c: 69: void UartSendError(void) {
-[e :U _UartSendError ]
-[f ]
-[; ;wlan.c: 70: UartSend(0x15);
-"70
-[e ( _UartSend (1 -> -> 21 `i `uc ]
-[; ;wlan.c: 72: }
-"72
-[e :UE 1171 ]
-}
-"74
-[v _UartDump `(v ~T0 @X0 1 ef ]
-{
-[; ;wlan.c: 74: void UartDump(void) {
-[e :U _UartDump ]
-[f ]
-"75
-[v _dumpdata `uc ~T0 @X0 1 a ]
-[; ;wlan.c: 75: unsigned char dumpdata;
-[; ;wlan.c: 76: dumpdata = UartReceive();
+[; ;wlan.c: 76: UartSend(0x11);
 "76
-[e = _dumpdata ( _UartReceive ..  ]
+[e ( _UartSend (1 -> -> 17 `i `uc ]
 [; ;wlan.c: 77: }
 "77
-[e :UE 1172 ]
+[e :UE 1176 ]
+}
+"79
+[v _UartSendError `(v ~T0 @X0 1 ef ]
+{
+[; ;wlan.c: 79: void UartSendError(void) {
+[e :U _UartSendError ]
+[f ]
+[; ;wlan.c: 80: UartSend(0x15);
+"80
+[e ( _UartSend (1 -> -> 21 `i `uc ]
+[; ;wlan.c: 82: }
+"82
+[e :UE 1177 ]
+}
+"84
+[v _UartDump `(v ~T0 @X0 1 ef ]
+{
+[; ;wlan.c: 84: void UartDump(void) {
+[e :U _UartDump ]
+[f ]
+"85
+[v _dumpdata `uc ~T0 @X0 1 a ]
+[; ;wlan.c: 85: unsigned char dumpdata;
+[; ;wlan.c: 86: dumpdata = UartReceive();
+"86
+[e = _dumpdata ( _UartReceive ..  ]
+[; ;wlan.c: 87: }
+"87
+[e :UE 1178 ]
 }
