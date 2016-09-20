@@ -26,6 +26,11 @@ void UartStore(void) {
         path_name = 1;
     }else if(received == '>') { /* entered if first ending of cc '>'
                                  * transmission is received */
+        unsigned char signreceivecounter = 0;
+        while(RC1IF == 0 && signreceivecounter < 20) {
+            signreceivecounter ++;
+            __delay_us(10);
+        }
         received = UartReceive();   // reading next byte
         if(received == '>'){    /* entered if second ending of cc '>'
                                  * transmission is received */
@@ -39,6 +44,11 @@ void UartStore(void) {
     }else if(receiving_ok == 1){    // receiving cc/path or name
         if(path_name == 0) {    // entered for storing path
             a_path[c_path].lower_cc = received;
+            unsigned char pathreceivecounter = 0;
+            while(RC1IF == 0 && pathreceivecounter < 20) {
+                pathreceivecounter ++;
+                __delay_us(10);
+            }
             received = UartReceive();
             a_path[c_path].higher_cc = received;
             c_path++;

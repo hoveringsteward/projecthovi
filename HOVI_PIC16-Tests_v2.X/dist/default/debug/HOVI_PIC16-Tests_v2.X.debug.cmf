@@ -23,7 +23,7 @@ maintext CODE 0 61C 61C 1F 2
 cstackCOMMON COMMON 1 70 70 E 1
 cstackBANK0 BANK0 1 20 20 29 1
 bssBANK0 BANK0 1 49 49 5 1
-$C:\Users\Lucas\AppData\Local\Temp\s684.obj
+$C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 3 3 2 2
 config CONFIG 0 8007 8007 2 2
@@ -103,16 +103,16 @@ STRING 800-FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
-7F8 cinit CODE >1081:C:\Users\Lucas\AppData\Local\Temp\s684.
-7F8 cinit CODE >1084:C:\Users\Lucas\AppData\Local\Temp\s684.
-7F8 cinit CODE >1102:C:\Users\Lucas\AppData\Local\Temp\s684.
-7F9 cinit CODE >1103:C:\Users\Lucas\AppData\Local\Temp\s684.
-7FA cinit CODE >1104:C:\Users\Lucas\AppData\Local\Temp\s684.
-7FB cinit CODE >1105:C:\Users\Lucas\AppData\Local\Temp\s684.
-7FC cinit CODE >1106:C:\Users\Lucas\AppData\Local\Temp\s684.
-7FD cinit CODE >1112:C:\Users\Lucas\AppData\Local\Temp\s684.
-7FD cinit CODE >1114:C:\Users\Lucas\AppData\Local\Temp\s684.
-7FE cinit CODE >1115:C:\Users\Lucas\AppData\Local\Temp\s684.
+7F8 cinit CODE >1081:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7F8 cinit CODE >1084:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7F8 cinit CODE >1102:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7F9 cinit CODE >1103:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7FA cinit CODE >1104:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7FB cinit CODE >1105:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7FC cinit CODE >1106:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7FD cinit CODE >1112:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7FD cinit CODE >1114:C:\Users\Lucas\AppData\Local\Temp\s2ag.
+7FE cinit CODE >1115:C:\Users\Lucas\AppData\Local\Temp\s2ag.
 63B text6 CODE >26:C:\projecthovi\HOVI_PIC16-Tests_v2.X\SPI_com_v2.c
 63C text6 CODE >27:C:\projecthovi\HOVI_PIC16-Tests_v2.X\SPI_com_v2.c
 63D text6 CODE >28:C:\projecthovi\HOVI_PIC16-Tests_v2.X\SPI_com_v2.c
@@ -254,12 +254,12 @@ ltemp1 82 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 ltemp2 86 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 ltemp3 80 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s684.obj
+___sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
 _init C0E 0 CODE 0 text1 dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 _main C38 0 CODE 0 maintext dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 btemp 7E 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 ltemp 7E 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
-start 6 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s684.obj
+start 6 0 CODE 0 init C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
 ttemp 7E 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 wtemp 7E 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 __CFG_BOREN$OFF 0 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
@@ -273,12 +273,12 @@ ttemp2 84 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 ttemp3 87 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 ttemp4 7F 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 ?_ExchangeSpi2char 70 0 COMMON 1 cstackCOMMON dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
-intlevel0 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s684.obj
-intlevel1 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s684.obj
-intlevel2 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s684.obj
-intlevel3 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s684.obj
-intlevel4 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s684.obj
-intlevel5 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s684.obj
+intlevel0 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
+intlevel1 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
+intlevel2 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
+intlevel3 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
+intlevel4 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
+intlevel5 0 0 CODE 0 functab C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
 ___bmul@multiplicand 70 0 COMMON 1 cstackCOMMON dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 _LedSignalling CF8 0 CODE 0 text5 dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 wtemp0 7E 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
@@ -306,7 +306,7 @@ __CFG_STVREN$OFF 0 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 _ProofObject BD2 0 CODE 0 text4 dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 _SSP1IF 8B 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
-___int_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s684.obj
+___int_sp 0 0 STACK 2 stack C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -451,7 +451,7 @@ ProofObject@des_obj 74 0 COMMON 1 cstackCOMMON dist/default/debug\HOVI_PIC16-Tes
 GetObject@obj_type 22 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 ExchangeSpi2char@SPI_word 75 0 COMMON 1 cstackCOMMON dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 __Lintentry 6 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\Lucas\AppData\Local\Temp\s684.obj
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
 __size_of___bmul 0 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 __Lbank10 0 0 BANK10 1 bank10 -
@@ -486,8 +486,8 @@ __CFG_CP$OFF 0 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 __CFG_WDTE$OFF 0 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 GetObject@max_obj 7A 0 COMMON 1 cstackCOMMON dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 GetObject@c 23 0 BANK0 1 cstackBANK0 dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
-stackhi 215F 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s684.obj
-stacklo 202E 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s684.obj
+stackhi 215F 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
+stacklo 202E 0 ABS 0 - C:\Users\Lucas\AppData\Local\Temp\s2ag.obj
 __CFG_LVP$OFF 0 0 ABS 0 - dist/default/debug\HOVI_PIC16-Tests_v2.X.debug.obj
 __Lspace_0 0 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
