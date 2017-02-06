@@ -52,6 +52,13 @@ void CompareFrames(void) {
 }
 // </editor-fold>
 
+
+// <editor-fold defaultstate="collapsed" desc="more beautiful code">
+
+
+
+// </editor-fold>
+
 // <editor-fold defaultstate="collapsed" desc="Check Aileron">
 
 /* This function checks the changes that happen in x-direction
@@ -237,7 +244,6 @@ void AboveTableStart(void) {
 }
 // </editor-fold>
 
-
 // <editor-fold defaultstate="collapsed" desc="AboveTableLand">
 
 /* The Hexrotor flies above the table
@@ -290,7 +296,6 @@ void AboveTableLand(void) {
     }
 }
 // </editor-fold>
-
 
 // <editor-fold defaultstate="collapsed" desc="AboveFloor">
 
