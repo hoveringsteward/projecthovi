@@ -28,6 +28,7 @@
 #include "position.h"
 #include "safety.h"
 #include "ultrasonic.h"
+#include "display.h"
 #ifdef DEBUG
 #include "debug.h"
 #endif

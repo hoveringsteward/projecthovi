@@ -83,13 +83,22 @@
 
 void main(void) {
     Init();
+    // Before Flight Starts:
+    // (1) Communication with iPad, get Colorcode-Information, the Guests Name and Start-Information
+    // -> read and interpretes Colorcode_Information
+    // -> Display shows "Guten Appetit GUEST"
     while(1) {
+        // (2) Height 
         StartHeightMeasure();
+        // (3) Colorcodes
 //        ReadObject(1, 10, 5); // colorcodes, obj I want, maximum number of read objects
 //        CompareFrames();
+        // (4) Height
         ReadHeight();
         CheckThrottle();
+        // (5) Storing old Data
         StoreAsOld();
+        // (6) Checking if something is wrong -> print on display 
     }
     return;
 }

@@ -1,8 +1,12 @@
-/*
- * File:   lcd_main.c
- * Author: Gaensebluemchen
- *
- * Created on 26. März 2016, 13:09
+/*-----------------------------------------------------------------*/
+/* Author: Chrisy                                                  */
+/*                                                                 */
+/* Created: 2017-02-06                                             */
+/* Project: HOVI.X                                                 */
+/*                                                                 */
+/* Display for error code and whishing "Guten Appetit" to the
+ * guests; Name is sent by the digital menu
+ * and for Error Messages
  */
 
 
@@ -11,10 +15,12 @@
 // 'C' source line config statements
 
 #include <xc.h>
+#include "main.h"
+
 
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
-
+/*
 // CONFIG1
 #pragma config FOSC = INTOSC    // Oscillator Selection (INTOSC oscillator: I/O function on CLKIN pin)
 #pragma config WDTE = OFF       // Watchdog Timer Enable (WDT disabled)
@@ -33,10 +39,10 @@
 #pragma config STVREN = OFF     // Stack Overflow/Underflow Reset Enable (Stack Overflow or Underflow will not cause a Reset)
 #pragma config BORV = LO        // Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
 #pragma config LVP = OFF        // Low-Voltage Programming Enable (High-voltage on MCLR/VPP must be used for programming)
-
-#define RS RA0
-#define R_W RA1
-#define E RA2
+*/
+#define RS_LCD RA0 // reset?
+#define R_W_LCD RA1 // read write?
+#define E_LCD RA2 // enable?
 
 #define DB0 RB0
 #define DB1 RB1
@@ -49,13 +55,13 @@
 
 #define _XTAL_FREQ 4000000
 
-// Prototypes
-void port_LCD(unsigned char a);
-void cmd_LCD(unsigned char a);
 
-void init_LCD() {
+void init_LCD(void) {
+    
+    clear_LCD(); // added new line, if problems with testing
+    
     port_LCD(0x00);
-    RS = 0;
+    RS_LCD = 0;
     __delay_ms(25);
     cmd_LCD(0x30);
     __delay_ms(5);
@@ -108,14 +114,14 @@ void port_LCD (unsigned char a) {
 }
 
 void cmd_LCD(unsigned char a) {
-    RS = 0; // => RS = 0
+    RS_LCD = 0; // => RS = 0
     port_LCD(a); //Data transfer
-    E = 1; // => E = 1
+    E_LCD = 1; // => E = 1
     __delay_ms(5);
-    E = 0; // => E = 0
+    E_LCD = 0; // => E = 0
 }
 
-void clear_LCD() {
+void clear_LCD(void) {
     cmd_LCD(1);
 }
 
@@ -129,9 +135,9 @@ void cursor_LCD(char a, char b) {
 void write_letter_LCD(char a) {
     RS = 1; // => RS = 1
     port_LCD(a); //Data transfer
-    E = 1; // => E = 1
+    E_LCD = 1; // => E = 1
     __delay_ms(4);
-    E = 0; // => E = 04
+    E_LCD = 0; // => E = 04
 }
 
 void write_words_LCD(char *a) {
@@ -142,20 +148,22 @@ void write_words_LCD(char *a) {
 
 //End LCD 8 Bit Interfacing Functions
 
-void displayPrinter(void) { // 'main'
+void displayPrinter(char message[30], char name[30]) { // 'main'
 
+    // message: Error message or Guten Appetit
+    // name: Name of error or Name of guest
     // init();
-    char name[100] = "Hovi";
     init_LCD();
 
     while (1) {
         cursor_LCD(1, 2);
-        write_words_LCD("Guten Appetit");
+        write_words_LCD(message);
         __delay_ms(2000);
         cursor_LCD(2, 4);
         write_words_LCD(name);
         __delay_ms(2000);
-    }
-    
+    }    
+    // break??
+    // if error message, maybe send code to admin interface
     return;
 }
