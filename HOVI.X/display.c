@@ -6,7 +6,6 @@
 /*                                                                 */
 /* Display for error code and whishing "Guten Appetit" to the
  * guests; Name is sent by the digital menu
- * and for Error Messages
  */
 
 
